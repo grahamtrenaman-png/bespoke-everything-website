@@ -23,12 +23,15 @@ export default function Footer() {
           <div className="grid gap-10 sm:grid-cols-2 lg:gap-16">
             <div>
               <p className="text-xs tracking-[0.2em] text-white/40 uppercase">
-                Products
+                Software
               </p>
               <ul className="mt-4 space-y-3">
                 <li>
+                  <span className="text-sm text-white/70">jalipi</span>
+                </li>
+                <li>
                   <a
-                    href="https://interestingjourneys.co.uk"
+                    href="https://interestingjourneys.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-white/70 transition-colors hover:text-gold"

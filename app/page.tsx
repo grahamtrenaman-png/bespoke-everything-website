@@ -1,51 +1,41 @@
 import Image from "next/image";
-import AtlasFrame from "./components/AtlasFrame";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import JourneysFrame from "./components/JourneysFrame";
-import ModularBlocks from "./components/ModularBlocks";
 import Reveal from "./components/Reveal";
 
 const capabilities = [
   {
-    id: "software",
     number: "01",
     title: "Software",
-    description: "Products and platforms designed to scale.",
-    examples: [
-      "Atlas Workforce Operations",
-      "Interesting Journeys",
-      "Future SaaS products",
-    ],
-    variant: "dark" as const,
+    description:
+      "Products and platforms that we build, operate and continuously improve.",
+    examples: ["jalipi", "Interesting Journeys", "Future software products"],
   },
   {
     id: "services",
     number: "02",
     title: "Services",
     description:
-      "Specialist expertise used to shape, build and improve software.",
+      "Specialist expertise used to shape, build and improve software and business operations.",
     examples: [
       "Product strategy",
       "Software architecture",
       "AI-enabled development",
       "Enterprise consulting",
     ],
-    variant: "light" as const,
   },
   {
     id: "solutions",
     number: "03",
     title: "Solutions",
     description:
-      "Bespoke software built around specific operational problems.",
+      "Bespoke software created around a specific organisation, workflow or operational problem.",
     examples: [
       "Internal business systems",
       "Customer portals",
       "Workflow automation",
       "Mobile and web applications",
     ],
-    variant: "accent" as const,
   },
 ];
 
@@ -64,13 +54,13 @@ const process = [
     number: "03",
     title: "Build",
     description:
-      "Use AI-first development to move quickly without compromising quality.",
+      "Develop with modern engineering practices to move quickly without compromising quality.",
   },
   {
     number: "04",
     title: "Evolve",
     description:
-      "Turn successful bespoke solutions into reusable products where appropriate.",
+      "Turn successful bespoke solutions into reusable software where appropriate.",
   },
 ];
 
@@ -92,71 +82,52 @@ export default function Home() {
           />
 
           <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 pt-24 pb-16 lg:px-10 lg:pt-28">
-            <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-              <div>
-                <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                  AI-First Software Company
-                </p>
+            <div className="max-w-3xl">
+              <Image
+                src="/logo/bespoke-everything-logo-dark.png"
+                alt="Bespoke Everything"
+                width={480}
+                height={320}
+                priority
+                className="h-auto w-full max-w-[14rem] sm:max-w-[16rem] lg:max-w-[18rem]"
+              />
 
-                <h1 className="mt-8 text-[2.75rem] leading-[1.05] font-semibold tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
-                  Software
-                  <span className="text-gold">.</span>
-                  <br />
-                  Services
-                  <span className="text-gold">.</span>
-                  <br />
-                  Solutions
-                  <span className="text-gold">.</span>
-                </h1>
+              <h1 className="mt-10 text-2xl leading-snug font-medium tracking-tight text-white/90 sm:text-3xl lg:text-4xl">
+                Software
+                <span className="text-gold">.</span>
+                <br />
+                Services
+                <span className="text-gold">.</span>
+                <br />
+                Solutions
+                <span className="text-gold">.</span>
+              </h1>
 
-                <p className="mt-8 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-                  Bespoke Everything creates software products, delivers expert
-                  technical services and builds bespoke solutions around the way
-                  organisations actually work.
-                </p>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+                Bespoke Everything creates software products, delivers expert
+                services and builds bespoke solutions around the way
+                organisations actually work.
+              </p>
 
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90"
-                  >
-                    Start a Conversation
-                  </a>
-                  <a
-                    href="#products"
-                    className="inline-flex items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold"
-                  >
-                    Explore Our Products
-                  </a>
-                </div>
-
-                <p className="mt-8 max-w-md text-sm leading-relaxed text-white/40">
-                  Products, platforms and partnerships built for real operational
-                  problems.
-                </p>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90"
+                >
+                  Start a Conversation
+                </a>
+                <a
+                  href="#software"
+                  className="inline-flex items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold"
+                >
+                  Explore Our Software
+                </a>
               </div>
 
-              <div className="flex justify-center lg:justify-end">
-                <div className="relative">
-                  <div
-                    className="absolute -inset-6 border border-gold/10"
-                    aria-hidden="true"
-                  />
-                  <div
-                    className="absolute -top-3 -right-3 h-12 w-12 border-t border-r border-gold/30"
-                    aria-hidden="true"
-                  />
-                  <Image
-                    src="/logo/bespoke-everything-logo-dark.png"
-                    alt=""
-                    width={480}
-                    height={320}
-                    priority
-                    className="relative h-auto w-full max-w-[18rem] sm:max-w-[23rem] lg:max-w-[26rem]"
-                    aria-hidden="true"
-                  />
-                </div>
-              </div>
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-white/40">
+                Products, platforms and partnerships built for real operational
+                problems.
+              </p>
             </div>
           </div>
         </section>
@@ -182,7 +153,7 @@ export default function Home() {
             <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
               {capabilities.map((item, index) => (
                 <Reveal
-                  key={item.id}
+                  key={item.title}
                   delay={index * 100}
                   className={`h-full min-w-0 ${
                     index === 2 ? "md:col-span-2 lg:col-span-1" : ""
@@ -190,38 +161,20 @@ export default function Home() {
                 >
                   <article
                     id={item.id}
-                    className={`panel-hover section-anchor flex h-full min-w-0 w-full flex-col justify-between p-8 lg:p-10 ${
-                      item.variant === "dark"
-                        ? "bg-black text-white"
-                        : item.variant === "light"
-                          ? "border border-black/8 bg-white text-black"
-                          : "border border-gold/30 bg-white text-black"
-                    }`}
+                    className={`panel-hover flex h-full min-w-0 w-full flex-col justify-between border border-black/8 bg-white p-8 lg:p-10${item.id ? " section-anchor" : ""}`}
                   >
                     <div>
-                      <span
-                        className={`text-xs tracking-[0.25em] uppercase ${
-                          item.variant === "dark"
-                            ? "text-gold"
-                            : "text-gold"
-                        }`}
-                      >
+                      <span className="text-xs tracking-[0.25em] text-gold uppercase">
                         {item.number}
                       </span>
-                      <h3 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
+                      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
                         {item.title}
                       </h3>
                       <div
                         className="mt-4 h-px w-12 bg-gold"
                         aria-hidden="true"
                       />
-                      <p
-                        className={`mt-6 text-base leading-relaxed ${
-                          item.variant === "dark"
-                            ? "text-white/60"
-                            : "text-muted"
-                        }`}
-                      >
+                      <p className="mt-6 text-base leading-relaxed text-muted">
                         {item.description}
                       </p>
                     </div>
@@ -229,11 +182,7 @@ export default function Home() {
                       {item.examples.map((example) => (
                         <li
                           key={example}
-                          className={`flex items-center gap-2 text-sm ${
-                            item.variant === "dark"
-                              ? "text-white/50"
-                              : "text-muted"
-                          }`}
+                          className="flex items-center gap-2 text-sm text-muted"
                         >
                           <span
                             className="h-1 w-1 shrink-0 rounded-full bg-gold"
@@ -256,50 +205,47 @@ export default function Home() {
           className="border-t border-black/5 bg-white"
           aria-labelledby="philosophy-heading"
         >
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-              <Reveal>
-                <div>
-                  <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                    Our philosophy
-                  </p>
-                  <h2
-                    id="philosophy-heading"
-                    className="mt-4 text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl lg:leading-[1.1]"
-                  >
-                    Software should adapt to businesses.
-                  </h2>
-                  <p className="mt-8 text-lg leading-relaxed text-muted">
-                    Traditional software often forces organisations to change the
-                    way they work. We believe the opposite.
-                  </p>
-                  <p className="mt-4 text-lg leading-relaxed text-muted">
-                    Bespoke Everything combines AI-first development, product
-                    thinking and operational expertise to build software around
-                    the customer.
-                  </p>
-                </div>
-              </Reveal>
-              <Reveal delay={150}>
-                <ModularBlocks />
-              </Reveal>
-            </div>
+          <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-10 lg:py-20">
+            <Reveal>
+              <p className="text-xs tracking-[0.3em] text-gold uppercase">
+                Our philosophy
+              </p>
+              <h2
+                id="philosophy-heading"
+                className="mt-4 text-2xl font-semibold tracking-tight text-black sm:text-3xl lg:text-4xl"
+              >
+                Software should adapt to businesses.
+              </h2>
+              <div
+                className="mx-auto mt-6 h-px w-16 bg-gold"
+                aria-hidden="true"
+              />
+              <p className="mt-6 text-base leading-relaxed text-muted sm:text-lg">
+                Traditional software often forces organisations to change the way
+                they work. We believe the opposite.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                We combine product thinking, modern software development and deep
+                operational expertise to create software around the customer
+                rather than forcing the customer around the software.
+              </p>
+            </Reveal>
           </div>
         </section>
 
-        {/* Featured Products */}
+        {/* Featured Software */}
         <section
-          id="products"
+          id="software"
           className="section-anchor border-t border-black/5 bg-off-white"
-          aria-labelledby="products-heading"
+          aria-labelledby="software-heading"
         >
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <Reveal>
               <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                Featured products
+                Featured software
               </p>
               <h2
-                id="products-heading"
+                id="software-heading"
                 className="mt-4 text-3xl font-semibold tracking-tight text-black sm:text-4xl"
               >
                 Software we build and operate.
@@ -307,36 +253,46 @@ export default function Home() {
             </Reveal>
 
             <div className="mt-12 space-y-6">
-              {/* Atlas */}
+              {/* jalipi */}
               <Reveal>
-                <article className="panel-hover grid overflow-hidden border border-black/8 bg-black text-white lg:grid-cols-2">
-                  <div className="flex flex-col justify-between p-8 lg:p-12">
-                    <div>
-                      <span className="inline-block border border-gold/40 px-3 py-1 text-xs tracking-[0.15em] text-gold uppercase">
+                <article className="panel-hover overflow-hidden border border-black/8 bg-white">
+                  <div className="grid lg:grid-cols-2">
+                    <div className="flex flex-col justify-between p-8 lg:p-12">
+                      <div>
+                        <span className="inline-block border border-[#7B5EA7]/30 bg-[#7B5EA7]/5 px-3 py-1 text-xs tracking-[0.15em] text-[#7B5EA7] uppercase">
+                          Currently in Development
+                        </span>
+                        <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+                          Workforce operations, brought together.
+                        </h3>
+                        <p className="mt-6 max-w-lg leading-relaxed text-muted">
+                          Jalipi is a modern workforce operations platform that
+                          brings forecasting, demand planning, scheduling, time
+                          and attendance, leave, exceptions and payroll readiness
+                          into one connected system.
+                        </p>
+                        <p className="mt-4 max-w-lg leading-relaxed text-muted">
+                          It is designed to support complex organisations without
+                          exposing users to unnecessary complexity, combining
+                          powerful configurable engines with a clear, modern
+                          operational experience.
+                        </p>
+                      </div>
+                      <span
+                        className="mt-8 inline-flex w-fit cursor-not-allowed items-center border border-black/15 px-6 py-3 text-sm tracking-wide text-muted"
+                        aria-disabled="true"
+                      >
                         Currently in Development
                       </span>
-                      <h3 className="mt-6 text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
-                        A modern workforce operations platform.
-                      </h3>
-                      <p className="mt-2 text-sm tracking-wide text-gold">
-                        Atlas
-                      </p>
-                      <p className="mt-6 max-w-lg leading-relaxed text-white/60">
-                        Atlas helps organisations forecast demand, schedule
-                        work, manage attendance, resolve exceptions and prepare
-                        payroll through a single operational platform.
-                      </p>
                     </div>
-                    <span
-                      className="mt-8 inline-flex w-fit cursor-not-allowed items-center border border-white/20 px-6 py-3 text-sm tracking-wide text-white/40"
-                      aria-disabled="true"
-                    >
-                      Coming soon
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-center bg-black/80 p-8 lg:p-12">
-                    <div className="w-full max-w-md">
-                      <AtlasFrame />
+                    <div className="flex items-center justify-center border-t border-black/5 bg-off-white p-8 lg:border-t-0 lg:border-l lg:p-12">
+                      <Image
+                        src="/logo/jalipi-logo.png"
+                        alt="jalipi"
+                        width={1774}
+                        height={887}
+                        className="h-auto w-full max-w-xs object-contain sm:max-w-sm lg:max-w-md"
+                      />
                     </div>
                   </div>
                 </article>
@@ -344,37 +300,48 @@ export default function Home() {
 
               {/* Interesting Journeys */}
               <Reveal delay={100}>
-                <article className="panel-hover grid overflow-hidden border border-black/8 bg-white lg:grid-cols-2">
-                  <div className="order-2 flex items-center justify-center bg-off-white p-8 lg:order-1 lg:p-12">
-                    <div className="w-full max-w-md">
-                      <JourneysFrame />
+                <article className="panel-hover overflow-hidden border border-black/8 bg-white">
+                  <div className="grid lg:grid-cols-2">
+                    <div className="order-2 flex items-center justify-center border-t border-black/5 bg-off-white p-8 lg:order-1 lg:border-t-0 lg:border-r lg:p-12">
+                      <Image
+                        src="/logo/interesting-journeys-logo.png"
+                        alt="Interesting Journeys"
+                        width={1024}
+                        height={1024}
+                        className="h-auto w-full max-w-[12rem] object-contain sm:max-w-[14rem] lg:max-w-[16rem]"
+                      />
                     </div>
-                  </div>
-                  <div className="order-1 flex flex-col justify-between p-8 lg:order-2 lg:p-12">
-                    <div>
-                      <span className="inline-block border border-gold/40 bg-gold/10 px-3 py-1 text-xs tracking-[0.15em] text-gold uppercase">
-                        Live
-                      </span>
-                      <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl lg:text-4xl">
-                        Discover journeys worth taking.
-                      </h3>
-                      <p className="mt-2 text-sm tracking-wide text-gold">
-                        Interesting Journeys
-                      </p>
-                      <p className="mt-6 max-w-lg leading-relaxed text-muted">
-                        A travel discovery product helping people explore
-                        distinctive destinations and personalised experiences.
-                      </p>
+                    <div className="order-1 flex flex-col justify-between p-8 lg:order-2 lg:p-12">
+                      <div>
+                        <span className="inline-block border border-gold/40 bg-gold/10 px-3 py-1 text-xs tracking-[0.15em] text-gold uppercase">
+                          Live
+                        </span>
+                        <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+                          Turn travel ideas into journeys worth taking.
+                        </h3>
+                        <p className="mt-6 max-w-lg leading-relaxed text-muted">
+                          Interesting Journeys helps people discover distinctive
+                          places and turn inspiration into personalised travel
+                          journeys.
+                        </p>
+                        <p className="mt-4 max-w-lg leading-relaxed text-muted">
+                          Rather than presenting another generic list of
+                          destinations, it brings together ideas, places and
+                          experiences in a way that helps each traveller explore
+                          what genuinely interests them and shape a journey around
+                          it.
+                        </p>
+                      </div>
+                      <a
+                        href="https://interestingjourneys.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-8 inline-flex w-fit items-center gap-2 bg-black px-6 py-3 text-sm tracking-wide text-white transition-colors hover:bg-black/85"
+                      >
+                        Visit Interesting Journeys
+                        <span aria-hidden="true">&rarr;</span>
+                      </a>
                     </div>
-                    <a
-                      href="https://interestingjourneys.co.uk"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-8 inline-flex w-fit items-center gap-2 bg-black px-6 py-3 text-sm tracking-wide text-white transition-colors hover:bg-black/85"
-                    >
-                      Visit Interesting Journeys
-                      <span aria-hidden="true">&rarr;</span>
-                    </a>
                   </div>
                 </article>
               </Reveal>
@@ -438,7 +405,7 @@ export default function Home() {
           aria-labelledby="contact-heading"
         >
           <div className="hero-grid absolute inset-0 opacity-40" />
-          <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+          <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <Reveal>
               <div className="max-w-3xl">
                 <p className="text-xs tracking-[0.3em] text-gold uppercase">
@@ -451,8 +418,8 @@ export default function Home() {
                   Let&rsquo;s build something exceptional.
                 </h2>
                 <p className="mt-8 text-lg leading-relaxed text-white/60">
-                  Whether you need a product, specialist expertise or a
-                  completely bespoke solution, start with a conversation.
+                  Whether you need a product, specialist expertise or a completely
+                  bespoke solution, start with a conversation.
                 </p>
                 <a
                   href="mailto:hello@bespoke-everything.com"

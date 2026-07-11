@@ -40,6 +40,16 @@ const capabilities = [
   },
 ];
 
+const experienceAreas = [
+  "Enterprise consulting",
+  "Software implementation",
+  "Product strategy",
+  "Technology delivery",
+  "Large transformation programmes",
+  "Operational improvement",
+  "Building software products",
+];
+
 const process = [
   {
     number: "01",
@@ -73,53 +83,59 @@ export default function Home() {
       <main>
         {/* Hero */}
         <section className="relative min-h-[85vh] overflow-hidden bg-black text-white">
-          <div className="hero-grid hero-grid-animated absolute inset-0" />
-          <div className="hero-radial absolute inset-0" />
+          <div className="hero-grid absolute inset-0 opacity-60" />
 
-          <div className="gold-line-pulse absolute top-1/4 left-0 h-px w-1/3 bg-gold/30" />
-          <div
-            className="gold-line-pulse absolute right-0 bottom-1/3 h-px w-1/4 bg-gold/20"
-            style={{ animationDelay: "2s" }}
-          />
-
-          <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 pt-24 pb-16 lg:px-10 lg:pt-28">
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-              <div className="min-w-0 text-center lg:text-left">
-                <div className="flex justify-center lg:justify-start">
-                  <Image
-                    src="/logo/bespoke-everything-logo-dark.png"
-                    alt="Bespoke Everything"
-                    width={1536}
-                    height={1024}
-                    priority
-                    className="h-auto w-full max-w-[20rem] object-contain sm:max-w-[24rem] lg:max-w-[26rem] xl:max-w-[30rem]"
-                  />
-                </div>
-
-                <h1 className="mt-10 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
-                  The software world is changing.
-                </h1>
-
-                <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg lg:mx-0">
-                  AI-enabled development is making it possible to build software
-                  around the way a business actually works.
-                </p>
-              </div>
-
-              <div className="min-w-0 border-t border-white/10 pt-10 text-center lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12 lg:text-left xl:pl-16">
-                <p className="text-lg leading-relaxed text-white/50 lg:text-xl">
-                  Organisations no longer need to choose between expensive bespoke
-                  development and rigid off-the-shelf software.
-                </p>
-                <div
-                  className="mx-auto mt-8 h-px w-12 bg-gold lg:mx-0"
-                  aria-hidden="true"
+          <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 pt-24 pb-20 lg:px-10 lg:pt-28 lg:pb-24">
+            <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+              <div className="flex justify-center lg:justify-start">
+                <Image
+                  src="/logo/bespoke-everything-logo-dark.png"
+                  alt="Bespoke Everything"
+                  width={1536}
+                  height={1024}
+                  priority
+                  className="h-auto w-full max-w-[20rem] object-contain sm:max-w-[24rem] lg:max-w-[26rem] xl:max-w-[28rem]"
                 />
-                <p className="mt-8 text-xl leading-snug font-medium text-white sm:text-2xl lg:text-[1.75rem] lg:leading-[1.3]">
-                  They can create their own software, tailor existing platforms
-                  and continuously evolve both as their business changes.
+              </div>
+
+              <h1 className="mt-10 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
+                Twenty years solving business problems.
+              </h1>
+              <p className="mt-3 text-xl leading-snug text-white/80 sm:text-2xl lg:text-[1.75rem]">
+                Now building software differently.
+              </p>
+
+              <div className="mx-auto mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-white/60 sm:text-lg lg:mx-0">
+                <p>
+                  For more than twenty years we&rsquo;ve helped organisations solve
+                  operational problems, deliver technology, implement enterprise
+                  software and build products that make businesses better.
+                </p>
+                <p>
+                  Today, AI-enabled development allows us to deliver those same
+                  outcomes faster, more flexibly and with software designed around
+                  the customer instead of the other way around.
                 </p>
               </div>
+
+              <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                <a
+                  href="#contact"
+                  className="inline-flex w-full items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90 sm:w-auto"
+                >
+                  Start a Conversation
+                </a>
+                <a
+                  href="#software"
+                  className="inline-flex w-full items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold sm:w-auto"
+                >
+                  Explore Our Software
+                </a>
+              </div>
+
+              <p className="mt-8 text-sm tracking-wide text-white/40">
+                Built on experience. Accelerated by AI.
+              </p>
             </div>
           </div>
         </section>
@@ -136,14 +152,10 @@ export default function Home() {
               </p>
               <h2
                 id="capabilities-heading"
-                className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl"
+                className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl"
               >
-                Three ways to build differently.
+                Three ways we help organisations build better software.
               </h2>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-                Software, expertise and bespoke delivery can now work together
-                rather than as separate choices.
-              </p>
             </Reveal>
 
             <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -201,7 +213,7 @@ export default function Home() {
           className="relative overflow-hidden bg-black text-white"
           aria-labelledby="philosophy-heading"
         >
-          <div className="hero-grid absolute inset-0 opacity-30" />
+          <div className="hero-grid absolute inset-0 opacity-25" />
           <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
             <Reveal>
               <p className="text-xs tracking-[0.3em] text-gold uppercase">
@@ -209,40 +221,126 @@ export default function Home() {
               </p>
               <h2
                 id="philosophy-heading"
-                className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl xl:leading-[1.1]"
+                className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl xl:leading-[1.1]"
               >
-                Traditional SaaS is no longer the only answer.
+                Software should adapt to businesses.
               </h2>
+              <p className="mt-2 max-w-4xl text-3xl font-semibold tracking-tight text-gold sm:text-4xl lg:text-5xl">
+                Not the other way around.
+              </p>
               <div className="mt-8 h-px w-16 bg-gold" aria-hidden="true" />
 
               <div className="mt-12 max-w-2xl space-y-6 text-base leading-relaxed text-white/60 sm:text-lg">
                 <p>
-                  For years, organisations have had to adapt their processes to
-                  fit the limitations of standard software.
-                </p>
-                <p className="text-white/80">That trade-off is changing.</p>
-                <p>
-                  AI-enabled development dramatically reduces the cost and time
-                  required to design, build and maintain software. Businesses can
-                  now create systems around their own operating model, add bespoke
-                  capability to the SaaS products they already use and evolve
-                  their software continuously as their needs change.
+                  For decades, organisations have adapted their processes to fit
+                  the limitations of off-the-shelf software.
                 </p>
                 <p>
-                  We believe the future is not one-size-fits-all software.
+                  That made sense when bespoke software was expensive, slow and
+                  difficult to maintain.
+                </p>
+                <p className="text-white/80">We believe that has fundamentally changed.</p>
+                <p>
+                  Modern AI-assisted development dramatically reduces the cost and
+                  time required to create, improve and maintain software.
                 </p>
                 <p>
-                  It is a world where every organisation can have software shaped
-                  around the way it actually works.
+                  Businesses no longer have to choose between rigid software and
+                  expensive custom development.
+                </p>
+                <p>They can build software around the way they actually operate.</p>
+                <p>They can enhance the SaaS platforms they already use.</p>
+                <p>
+                  They can evolve software continuously as their organisation
+                  changes.
                 </p>
               </div>
 
-              <div className="mt-16 border-t border-white/10 pt-12 lg:mt-24 lg:pt-16">
-                <p className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
-                  Software should adapt to the business.
+              <div className="mt-16 border-t border-white/10 pt-12 lg:mt-20 lg:pt-16">
+                <p className="max-w-3xl text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl lg:leading-[1.2]">
+                  The future isn&rsquo;t replacing SaaS.
                 </p>
-                <p className="mt-2 text-2xl font-semibold tracking-tight text-gold sm:text-3xl lg:text-4xl">
-                  Not the other way around.
+                <p className="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-gold sm:text-3xl lg:text-4xl lg:leading-[1.2]">
+                  It&rsquo;s making software adapt to every business.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Why Bespoke Everything */}
+        <section
+          id="why"
+          className="border-t border-black/5 bg-off-white"
+          aria-labelledby="why-heading"
+        >
+          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+            <Reveal>
+              <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+                <div>
+                  <p className="text-xs tracking-[0.3em] text-gold uppercase">
+                    Why Bespoke Everything
+                  </p>
+                  <h2
+                    id="why-heading"
+                    className="mt-4 text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl lg:leading-[1.1]"
+                  >
+                    Twenty years of experience.
+                  </h2>
+                  <p className="mt-2 text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl">
+                    A new way to deliver it.
+                  </p>
+                  <div className="mt-8 h-px w-16 bg-gold" aria-hidden="true" />
+                  <p className="mt-8 text-base leading-relaxed text-muted sm:text-lg">
+                    We&rsquo;ve spent more than two decades working with
+                    organisations to solve complex business problems.
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                    That experience is our biggest asset.
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                    AI doesn&rsquo;t replace it.
+                  </p>
+                  <p className="mt-1 text-base font-medium leading-relaxed text-black sm:text-lg">
+                    It amplifies it.
+                  </p>
+                </div>
+
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <p className="text-sm tracking-[0.15em] text-muted uppercase">
+                      That has included
+                    </p>
+                    <ul className="mt-6 space-y-3">
+                      {experienceAreas.map((area) => (
+                        <li
+                          key={area}
+                          className="flex items-start gap-3 text-base text-black"
+                        >
+                          <span
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
+                            aria-hidden="true"
+                          />
+                          {area}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <p className="mt-10 text-base leading-relaxed text-muted sm:text-lg lg:mt-0">
+                    The value we bring isn&rsquo;t simply writing software.
+                    It&rsquo;s understanding what should be built, why it matters
+                    and how technology can improve the way an organisation
+                    operates.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-16 border-t border-black/8 pt-12 lg:mt-20">
+                <p className="text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+                  Business expertise.
+                </p>
+                <p className="mt-1 text-2xl font-semibold tracking-tight text-gold sm:text-3xl">
+                  Modern software delivery.
                 </p>
               </div>
             </Reveal>
@@ -279,19 +377,13 @@ export default function Home() {
                           Currently in Development
                         </span>
                         <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                          Workforce operations, brought together.
+                          jalipi
                         </h3>
                         <p className="mt-6 max-w-lg leading-relaxed text-muted">
-                          Jalipi is a modern workforce operations platform that
-                          brings forecasting, demand planning, scheduling, time
-                          and attendance, leave, exceptions and payroll readiness
-                          into one connected system.
-                        </p>
-                        <p className="mt-4 max-w-lg leading-relaxed text-muted">
-                          It is designed to support complex organisations without
-                          exposing users to unnecessary complexity, combining
-                          powerful configurable engines with a clear, modern
-                          operational experience.
+                          A modern workforce operations platform that combines
+                          forecasting, scheduling, payroll preparation and
+                          operational insight into a single intelligent platform
+                          designed for modern organisations.
                         </p>
                       </div>
                       <span
@@ -333,23 +425,18 @@ export default function Home() {
                           Live
                         </span>
                         <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                          Discover the world through what interests you.
+                          Interesting Journeys
                         </h3>
                         <p className="mt-6 max-w-lg leading-relaxed text-muted">
-                          Interesting Journeys uses AI to create personalised
-                          journeys based on your interests, location and
-                          preferences. Whether you&rsquo;re exploring a new city,
-                          visiting somewhere familiar or simply looking for
-                          inspiration nearby, every journey is tailored
-                          specifically to you rather than generated from a generic
-                          list of attractions.
+                          Interesting Journeys helps people discover distinctive
+                          places and transform inspiration into personalised
+                          journeys.
                         </p>
                         <p className="mt-4 max-w-lg leading-relaxed text-muted">
-                          As you explore, the app brings each place to life with
-                          engaging stories, historical context and fascinating
-                          insights, helping you understand not just where to go,
-                          but why it matters. Every journey is unique, making
-                          travel more personal, memorable and rewarding.
+                          Rather than presenting another list of destinations, it
+                          helps travellers explore places, experiences and stories
+                          that genuinely match their interests and build memorable
+                          journeys around them.
                         </p>
                       </div>
                       <a

@@ -40,12 +40,12 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10 lg:py-5">
         <Link href="/" className="shrink-0" aria-label="Bespoke Everything home">
           <Image
-            src="/logo/bespoke-everything-logo-dark.png"
-            alt="Bespoke Everything"
-            width={280}
-            height={187}
+            src="/logo/BE-logo-compact-dark.png"
+            alt=""
+            width={410}
+            height={297}
             priority
-            className="h-12 w-auto sm:h-14 lg:h-16"
+            className="h-10 w-auto sm:h-11 lg:h-12"
           />
         </Link>
 

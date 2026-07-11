@@ -16,7 +16,7 @@ const capabilities = [
     number: "02",
     title: "Services",
     description:
-      "Specialist expertise used to shape, build and improve software and business operations.",
+      "Product, technology and operational expertise used to shape and improve software.",
     examples: [
       "Product strategy",
       "Software architecture",
@@ -29,12 +29,13 @@ const capabilities = [
     number: "03",
     title: "Solutions",
     description:
-      "Bespoke software created around a specific organisation, workflow or operational problem.",
+      "Bespoke applications and enhancements designed around a specific organisation, process or business problem.",
     examples: [
-      "Internal business systems",
-      "Customer portals",
+      "Entirely bespoke systems",
+      "Extensions to existing SaaS platforms",
+      "Integrations",
       "Workflow automation",
-      "Mobile and web applications",
+      "Customer and employee applications",
     ],
   },
 ];
@@ -82,52 +83,60 @@ export default function Home() {
           />
 
           <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 pt-24 pb-16 lg:px-10 lg:pt-28">
-            <div className="max-w-3xl">
-              <Image
-                src="/logo/bespoke-everything-logo-dark.png"
-                alt="Bespoke Everything"
-                width={480}
-                height={320}
-                priority
-                className="h-auto w-full max-w-[14rem] sm:max-w-[16rem] lg:max-w-[18rem]"
-              />
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+              <div className="min-w-0">
+                <Image
+                  src="/logo/bespoke-everything-logo-dark.png"
+                  alt="Bespoke Everything"
+                  width={1536}
+                  height={1024}
+                  priority
+                  className="h-auto w-full max-w-[16rem] object-contain sm:max-w-[20rem] lg:max-w-[22rem] xl:max-w-[26rem]"
+                />
 
-              <h1 className="mt-10 text-2xl leading-snug font-medium tracking-tight text-white/90 sm:text-3xl lg:text-4xl">
-                Software
-                <span className="text-gold">.</span>
-                <br />
-                Services
-                <span className="text-gold">.</span>
-                <br />
-                Solutions
-                <span className="text-gold">.</span>
-              </h1>
+                <h1 className="mt-10 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
+                  The software world is changing.
+                </h1>
 
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-                Bespoke Everything creates software products, delivers expert
-                services and builds bespoke solutions around the way
-                organisations actually work.
-              </p>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+                  AI-enabled development is making it possible to build software
+                  around the way a business actually works.
+                </p>
 
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90"
-                >
-                  Start a Conversation
-                </a>
-                <a
-                  href="#software"
-                  className="inline-flex items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold"
-                >
-                  Explore Our Software
-                </a>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90"
+                  >
+                    Start a Conversation
+                  </a>
+                  <a
+                    href="#software"
+                    className="inline-flex items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold"
+                  >
+                    Explore Our Software
+                  </a>
+                </div>
+
+                <p className="mt-6 max-w-md text-sm leading-relaxed text-white/40">
+                  Software built around real businesses, not generic assumptions.
+                </p>
               </div>
 
-              <p className="mt-6 max-w-md text-sm leading-relaxed text-white/40">
-                Products, platforms and partnerships built for real operational
-                problems.
-              </p>
+              <div className="min-w-0 border-t border-white/10 pt-10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12 xl:pl-16">
+                <p className="text-lg leading-relaxed text-white/50 lg:text-xl">
+                  Organisations no longer need to choose between expensive bespoke
+                  development and rigid off-the-shelf software.
+                </p>
+                <div
+                  className="mt-8 h-px w-12 bg-gold"
+                  aria-hidden="true"
+                />
+                <p className="mt-8 text-xl leading-snug font-medium text-white sm:text-2xl lg:text-[1.75rem] lg:leading-[1.3]">
+                  They can create their own software, tailor existing platforms
+                  and continuously evolve both as their business changes.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -140,14 +149,18 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <Reveal>
               <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                What we do
+                How we work with you
               </p>
               <h2
                 id="capabilities-heading"
                 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl"
               >
-                Built for organisations that need more than off-the-shelf.
+                Three ways to build differently.
               </h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+                Software, expertise and bespoke delivery can now work together
+                rather than as separate choices.
+              </p>
             </Reveal>
 
             <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
@@ -202,33 +215,53 @@ export default function Home() {
         {/* Philosophy */}
         <section
           id="philosophy"
-          className="border-t border-black/5 bg-white"
+          className="relative overflow-hidden bg-black text-white"
           aria-labelledby="philosophy-heading"
         >
-          <div className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-10 lg:py-20">
+          <div className="hero-grid absolute inset-0 opacity-30" />
+          <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
             <Reveal>
               <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                Our philosophy
+                What we believe
               </p>
               <h2
                 id="philosophy-heading"
-                className="mt-4 text-2xl font-semibold tracking-tight text-black sm:text-3xl lg:text-4xl"
+                className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl xl:leading-[1.1]"
               >
-                Software should adapt to businesses.
+                Traditional SaaS is no longer the only answer.
               </h2>
-              <div
-                className="mx-auto mt-6 h-px w-16 bg-gold"
-                aria-hidden="true"
-              />
-              <p className="mt-6 text-base leading-relaxed text-muted sm:text-lg">
-                Traditional software often forces organisations to change the way
-                they work. We believe the opposite.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-                We combine product thinking, modern software development and deep
-                operational expertise to create software around the customer
-                rather than forcing the customer around the software.
-              </p>
+              <div className="mt-8 h-px w-16 bg-gold" aria-hidden="true" />
+
+              <div className="mt-12 max-w-2xl space-y-6 text-base leading-relaxed text-white/60 sm:text-lg">
+                <p>
+                  For years, organisations have had to adapt their processes to
+                  fit the limitations of standard software.
+                </p>
+                <p className="text-white/80">That trade-off is changing.</p>
+                <p>
+                  AI-enabled development dramatically reduces the cost and time
+                  required to design, build and maintain software. Businesses can
+                  now create systems around their own operating model, add bespoke
+                  capability to the SaaS products they already use and evolve
+                  their software continuously as their needs change.
+                </p>
+                <p>
+                  We believe the future is not one-size-fits-all software.
+                </p>
+                <p>
+                  It is a world where every organisation can have software shaped
+                  around the way it actually works.
+                </p>
+              </div>
+
+              <div className="mt-16 border-t border-white/10 pt-12 lg:mt-24 lg:pt-16">
+                <p className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+                  Software should adapt to the business.
+                </p>
+                <p className="mt-2 text-2xl font-semibold tracking-tight text-gold sm:text-3xl lg:text-4xl">
+                  Not the other way around.
+                </p>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -317,19 +350,23 @@ export default function Home() {
                           Live
                         </span>
                         <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                          Turn travel ideas into journeys worth taking.
+                          Discover the world through what interests you.
                         </h3>
                         <p className="mt-6 max-w-lg leading-relaxed text-muted">
-                          Interesting Journeys helps people discover distinctive
-                          places and turn inspiration into personalised travel
-                          journeys.
+                          Interesting Journeys uses AI to create personalised
+                          journeys based on your interests, location and
+                          preferences. Whether you&rsquo;re exploring a new city,
+                          visiting somewhere familiar or simply looking for
+                          inspiration nearby, every journey is tailored
+                          specifically to you rather than generated from a generic
+                          list of attractions.
                         </p>
                         <p className="mt-4 max-w-lg leading-relaxed text-muted">
-                          Rather than presenting another generic list of
-                          destinations, it brings together ideas, places and
-                          experiences in a way that helps each traveller explore
-                          what genuinely interests them and shape a journey around
-                          it.
+                          As you explore, the app brings each place to life with
+                          engaging stories, historical context and fascinating
+                          insights, helping you understand not just where to go,
+                          but why it matters. Every journey is unique, making
+                          travel more personal, memorable and rewarding.
                         </p>
                       </div>
                       <a

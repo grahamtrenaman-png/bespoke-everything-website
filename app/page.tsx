@@ -84,52 +84,35 @@ export default function Home() {
 
           <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 pt-24 pb-16 lg:px-10 lg:pt-28">
             <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-              <div className="min-w-0">
-                <Image
-                  src="/logo/bespoke-everything-logo-dark.png"
-                  alt="Bespoke Everything"
-                  width={1536}
-                  height={1024}
-                  priority
-                  className="h-auto w-full max-w-[16rem] object-contain sm:max-w-[20rem] lg:max-w-[22rem] xl:max-w-[26rem]"
-                />
+              <div className="min-w-0 text-center lg:text-left">
+                <div className="flex justify-center lg:justify-start">
+                  <Image
+                    src="/logo/bespoke-everything-logo-dark.png"
+                    alt="Bespoke Everything"
+                    width={1536}
+                    height={1024}
+                    priority
+                    className="h-auto w-full max-w-[20rem] object-contain sm:max-w-[24rem] lg:max-w-[26rem] xl:max-w-[30rem]"
+                  />
+                </div>
 
                 <h1 className="mt-10 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
                   The software world is changing.
                 </h1>
 
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+                <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg lg:mx-0">
                   AI-enabled development is making it possible to build software
                   around the way a business actually works.
                 </p>
-
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90"
-                  >
-                    Start a Conversation
-                  </a>
-                  <a
-                    href="#software"
-                    className="inline-flex items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold"
-                  >
-                    Explore Our Software
-                  </a>
-                </div>
-
-                <p className="mt-6 max-w-md text-sm leading-relaxed text-white/40">
-                  Software built around real businesses, not generic assumptions.
-                </p>
               </div>
 
-              <div className="min-w-0 border-t border-white/10 pt-10 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12 xl:pl-16">
+              <div className="min-w-0 border-t border-white/10 pt-10 text-center lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12 lg:text-left xl:pl-16">
                 <p className="text-lg leading-relaxed text-white/50 lg:text-xl">
                   Organisations no longer need to choose between expensive bespoke
                   development and rigid off-the-shelf software.
                 </p>
                 <div
-                  className="mt-8 h-px w-12 bg-gold"
+                  className="mx-auto mt-8 h-px w-12 bg-gold lg:mx-0"
                   aria-hidden="true"
                 />
                 <p className="mt-8 text-xl leading-snug font-medium text-white sm:text-2xl lg:text-[1.75rem] lg:leading-[1.3]">

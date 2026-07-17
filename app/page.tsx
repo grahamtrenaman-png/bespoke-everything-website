@@ -373,7 +373,7 @@ export default function Home() {
                       customer — instead of forcing the customer to adapt to it.
                     </p>
                     <a
-                      href="https://jalipi.com"
+                      href="https://www.jalipi.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-secondary-light mt-8 w-fit"

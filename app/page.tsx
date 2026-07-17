@@ -372,12 +372,14 @@ export default function Home() {
                       together in one modern, AI-native platform that adapts to the
                       customer — instead of forcing the customer to adapt to it.
                     </p>
-                    <span
-                      className="btn-secondary-light mt-8 w-fit cursor-default opacity-60"
-                      aria-disabled="true"
+                    <a
+                      href="https://jalipi.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary-light mt-8 w-fit"
                     >
-                      Coming soon
-                    </span>
+                      Find out more
+                    </a>
                   </div>
                   <div className="flex items-center justify-center border-t border-ink/6 bg-off-white px-8 py-12 lg:px-9">
                     <JalipiWordmark

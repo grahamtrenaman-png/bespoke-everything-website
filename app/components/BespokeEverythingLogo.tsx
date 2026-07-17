@@ -1,6 +1,14 @@
 export const BESPOKE_GOLD = "#c5a059";
 
-function BespokeMark({ ink, gold }: { ink: string; gold: string }) {
+function BespokeMark({
+  ink,
+  gold,
+  large = false,
+}: {
+  ink: string;
+  gold: string;
+  large?: boolean;
+}) {
   const unit = 10;
   const gap = 4;
   const barW = 22;
@@ -13,7 +21,7 @@ function BespokeMark({ ink, gold }: { ink: string; gold: string }) {
       viewBox={`0 0 ${barX + barW} ${2 * (unit + gap) + unit}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="block h-[1.15em] w-auto"
+      className={`block w-auto ${large ? "h-[1.65em]" : "h-[1.15em]"}`}
       aria-hidden="true"
     >
       {rowYs.map((y) => (
@@ -58,9 +66,11 @@ export default function BespokeEverythingLogo({
     <span
       role="img"
       aria-label="Bespoke Everything"
-      className={`inline-flex leading-none ${inline ? "flex-row items-center gap-[0.5em] text-left" : "flex-col items-center gap-[0.55em] text-center"} ${className}`}
+      className={`inline-flex leading-none ${inline ? "flex-row items-center gap-[0.5em] text-left" : "flex-col items-center gap-[0.65em] text-center"} ${className}`}
     >
-      {showMark ? <BespokeMark ink={ink} gold={BESPOKE_GOLD} /> : null}
+      {showMark ? (
+        <BespokeMark ink={ink} gold={BESPOKE_GOLD} large={!inline} />
+      ) : null}
       {showWordmark ? (
         <span
           className="text-[1em] font-bold tracking-[0.22em]"

@@ -94,7 +94,7 @@ export default function Home() {
                 <BespokeEverythingLogo
                   variant="dark"
                   layout="stacked"
-                  className="hero-logo lg:!items-start lg:!text-left"
+                  className="hero-logo"
                 />
               </div>
 

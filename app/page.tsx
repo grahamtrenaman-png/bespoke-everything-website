@@ -1,6 +1,9 @@
 import Image from "next/image";
+import BespokeEverythingLogo from "./components/BespokeEverythingLogo";
+import BrandGrid from "./components/BrandGrid";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import JalipiWordmark from "./components/JalipiWordmark";
 import Reveal from "./components/Reveal";
 
 const capabilities = [
@@ -82,30 +85,27 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="relative min-h-[85vh] overflow-hidden bg-black text-white">
-          <div className="hero-grid absolute inset-0 opacity-60" />
+        <section className="relative min-h-[88vh] overflow-hidden bg-ink text-white">
+          <BrandGrid className="brand-grid-dark" />
 
-          <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 pt-24 pb-20 lg:px-10 lg:pt-28 lg:pb-24">
-            <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+          <div className="section-inner relative flex min-h-[88vh] flex-col justify-center pb-20 pt-28 lg:pb-24 lg:pt-32">
+            <div className="mx-auto w-full max-w-3xl text-center lg:mx-0 lg:max-w-4xl lg:text-left">
               <div className="flex justify-center lg:justify-start">
-                <Image
-                  src="/logo/bespoke-everything-logo-dark.png"
-                  alt="Bespoke Everything"
-                  width={1536}
-                  height={1024}
-                  priority
-                  className="h-auto w-full max-w-[20rem] object-contain sm:max-w-[24rem] lg:max-w-[26rem] xl:max-w-[28rem]"
+                <BespokeEverythingLogo
+                  variant="dark"
+                  layout="stacked"
+                  className="hero-logo lg:!items-start lg:!text-left"
                 />
               </div>
 
-              <h1 className="mt-10 text-3xl leading-tight font-semibold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
+              <h1 className="mt-10 text-[1.875rem] font-semibold leading-[1.12] tracking-tight sm:text-4xl lg:mt-12 lg:text-[2.625rem]">
                 Twenty years solving business problems.
               </h1>
-              <p className="mt-3 text-xl leading-snug text-white/80 sm:text-2xl lg:text-[1.75rem]">
+              <p className="mt-4 text-xl font-medium leading-snug text-white/75 sm:text-2xl lg:text-[1.625rem]">
                 Now building software differently.
               </p>
 
-              <div className="mx-auto mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-white/60 sm:text-lg lg:mx-0">
+              <div className="mx-auto mt-8 max-w-2xl space-y-5 text-base leading-[1.7] text-white/55 sm:text-[1.0625rem] lg:mx-0">
                 <p>
                   For more than twenty years we&rsquo;ve helped organisations solve
                   operational problems, deliver technology, implement enterprise
@@ -118,22 +118,19 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+              <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
                 <a
-                  href="#contact"
-                  className="inline-flex w-full items-center justify-center bg-gold px-8 py-3.5 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90 sm:w-auto"
+                  href="mailto:hello@bespoke-everything.com"
+                  className="btn-primary w-full sm:w-auto"
                 >
                   Start a Conversation
                 </a>
-                <a
-                  href="#software"
-                  className="inline-flex w-full items-center justify-center border border-white/20 px-8 py-3.5 text-sm tracking-wide text-white/80 transition-colors hover:border-gold/50 hover:text-gold sm:w-auto"
-                >
+                <a href="#software" className="btn-secondary w-full sm:w-auto">
                   Explore Our Software
                 </a>
               </div>
 
-              <p className="mt-8 text-sm tracking-wide text-white/40">
+              <p className="strapline mx-auto mt-10 lg:mx-0">
                 Built on experience. Accelerated by AI.
               </p>
             </div>
@@ -145,52 +142,45 @@ export default function Home() {
           className="bg-off-white section-anchor"
           aria-labelledby="capabilities-heading"
         >
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="section-inner section-pad">
             <Reveal>
-              <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                How we work with you
-              </p>
+              <p className="eyebrow">How we work with you</p>
               <h2
                 id="capabilities-heading"
-                className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl"
+                className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-[2.75rem] lg:leading-[1.12]"
               >
                 Three ways we help organisations build better software.
               </h2>
             </Reveal>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {capabilities.map((item, index) => (
                 <Reveal
                   key={item.title}
-                  delay={index * 100}
+                  delay={index * 80}
                   className={`h-full min-w-0 ${
                     index === 2 ? "md:col-span-2 lg:col-span-1" : ""
                   }`}
                 >
                   <article
                     id={item.id}
-                    className={`panel-hover flex h-full min-w-0 w-full flex-col justify-between border border-black/8 bg-white p-8 lg:p-10${item.id ? " section-anchor" : ""}`}
+                    className={`card flex h-full min-w-0 flex-col justify-between p-8 lg:p-9${item.id ? " section-anchor" : ""}`}
                   >
                     <div>
-                      <span className="text-xs tracking-[0.25em] text-gold uppercase">
-                        {item.number}
-                      </span>
-                      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+                      <span className="card-number">{item.number}</span>
+                      <h3 className="mt-5 text-2xl font-semibold tracking-tight text-ink">
                         {item.title}
                       </h3>
-                      <div
-                        className="mt-4 h-px w-12 bg-gold"
-                        aria-hidden="true"
-                      />
-                      <p className="mt-6 text-base leading-relaxed text-muted">
+                      <div className="gold-rule mt-5" aria-hidden="true" />
+                      <p className="mt-6 text-[0.9375rem] leading-relaxed text-muted">
                         {item.description}
                       </p>
                     </div>
-                    <ul className="mt-8 space-y-2">
+                    <ul className="mt-8 space-y-2.5 border-t border-ink/6 pt-6">
                       {item.examples.map((example) => (
                         <li
                           key={example}
-                          className="flex items-center gap-2 text-sm text-muted"
+                          className="flex items-center gap-2.5 text-sm text-muted"
                         >
                           <span
                             className="h-1 w-1 shrink-0 rounded-full bg-gold"
@@ -210,27 +200,25 @@ export default function Home() {
         {/* Philosophy */}
         <section
           id="philosophy"
-          className="relative overflow-hidden bg-black text-white"
+          className="relative overflow-hidden bg-ink text-white"
           aria-labelledby="philosophy-heading"
         >
-          <div className="hero-grid absolute inset-0 opacity-25" />
-          <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+          <BrandGrid className="brand-grid-dark" />
+          <div className="section-inner section-pad relative">
             <Reveal>
-              <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                What we believe
-              </p>
+              <p className="eyebrow">What we believe</p>
               <h2
                 id="philosophy-heading"
-                className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl xl:leading-[1.1]"
+                className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl lg:leading-[1.1]"
               >
                 Software should adapt to businesses.
               </h2>
               <p className="mt-2 max-w-4xl text-3xl font-semibold tracking-tight text-gold sm:text-4xl lg:text-5xl">
                 Not the other way around.
               </p>
-              <div className="mt-8 h-px w-16 bg-gold" aria-hidden="true" />
+              <div className="gold-rule-wide mt-8" aria-hidden="true" />
 
-              <div className="mt-12 max-w-2xl space-y-6 text-base leading-relaxed text-white/60 sm:text-lg">
+              <div className="prose-width mt-12 space-y-5 text-base leading-[1.7] text-white/55 sm:text-[1.0625rem]">
                 <p>
                   For decades, organisations have adapted their processes to fit
                   the limitations of off-the-shelf software.
@@ -239,7 +227,9 @@ export default function Home() {
                   That made sense when bespoke software was expensive, slow and
                   difficult to maintain.
                 </p>
-                <p className="text-white/80">We believe that has fundamentally changed.</p>
+                <p className="text-white/80">
+                  We believe that has fundamentally changed.
+                </p>
                 <p>
                   Modern AI-assisted development dramatically reduces the cost and
                   time required to create, improve and maintain software.
@@ -256,11 +246,11 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="mt-16 border-t border-white/10 pt-12 lg:mt-20 lg:pt-16">
-                <p className="max-w-3xl text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl lg:leading-[1.2]">
+              <div className="mt-16 border-t border-white/10 pt-12 lg:mt-20 lg:pt-14">
+                <p className="max-w-3xl text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl lg:leading-[1.15]">
                   The future isn&rsquo;t replacing SaaS.
                 </p>
-                <p className="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-gold sm:text-3xl lg:text-4xl lg:leading-[1.2]">
+                <p className="mt-3 max-w-3xl text-2xl font-semibold tracking-tight text-gold sm:text-3xl lg:text-4xl lg:leading-[1.15]">
                   It&rsquo;s making software adapt to every business.
                 </p>
               </div>
@@ -271,51 +261,49 @@ export default function Home() {
         {/* Why Bespoke Everything */}
         <section
           id="why"
-          className="border-t border-black/5 bg-off-white"
+          className="border-t border-ink/5 bg-white"
           aria-labelledby="why-heading"
         >
-          <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+          <div className="section-inner section-pad">
             <Reveal>
-              <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+              <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
                 <div>
-                  <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                    Why Bespoke Everything
-                  </p>
+                  <p className="eyebrow">Why Bespoke Everything</p>
                   <h2
                     id="why-heading"
-                    className="mt-4 text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl lg:leading-[1.1]"
+                    className="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl lg:leading-[1.1]"
                   >
                     Twenty years of experience.
                   </h2>
-                  <p className="mt-2 text-3xl font-semibold tracking-tight text-black sm:text-4xl lg:text-5xl">
+                  <p className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl lg:text-5xl">
                     A new way to deliver it.
                   </p>
-                  <div className="mt-8 h-px w-16 bg-gold" aria-hidden="true" />
-                  <p className="mt-8 text-base leading-relaxed text-muted sm:text-lg">
+                  <div className="gold-rule-wide mt-8" aria-hidden="true" />
+                  <p className="mt-8 text-base leading-[1.7] text-muted sm:text-[1.0625rem]">
                     We&rsquo;ve spent more than two decades working with
                     organisations to solve complex business problems.
                   </p>
-                  <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                  <p className="mt-4 text-base leading-[1.7] text-muted sm:text-[1.0625rem]">
                     That experience is our biggest asset.
                   </p>
-                  <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                  <p className="mt-4 text-base leading-[1.7] text-muted sm:text-[1.0625rem]">
                     AI doesn&rsquo;t replace it.
                   </p>
-                  <p className="mt-1 text-base font-medium leading-relaxed text-black sm:text-lg">
+                  <p className="mt-1 text-base font-medium leading-[1.7] text-ink sm:text-[1.0625rem]">
                     It amplifies it.
                   </p>
                 </div>
 
                 <div className="flex flex-col justify-between">
                   <div>
-                    <p className="text-sm tracking-[0.15em] text-muted uppercase">
+                    <p className="text-xs font-medium tracking-[0.2em] text-muted uppercase">
                       That has included
                     </p>
                     <ul className="mt-6 space-y-3">
                       {experienceAreas.map((area) => (
                         <li
                           key={area}
-                          className="flex items-start gap-3 text-base text-black"
+                          className="flex items-start gap-3 text-[0.9375rem] text-ink"
                         >
                           <span
                             className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"
@@ -326,7 +314,7 @@ export default function Home() {
                       ))}
                     </ul>
                   </div>
-                  <p className="mt-10 text-base leading-relaxed text-muted sm:text-lg lg:mt-0">
+                  <p className="mt-10 text-base leading-[1.7] text-muted sm:text-[1.0625rem] lg:mt-0">
                     The value we bring isn&rsquo;t simply writing software.
                     It&rsquo;s understanding what should be built, why it matters
                     and how technology can improve the way an organisation
@@ -335,8 +323,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="mt-16 border-t border-black/8 pt-12 lg:mt-20">
-                <p className="text-2xl font-semibold tracking-tight text-black sm:text-3xl">
+              <div className="mt-16 border-t border-ink/8 pt-12 lg:mt-20">
+                <p className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
                   Business expertise.
                 </p>
                 <p className="mt-1 text-2xl font-semibold tracking-tight text-gold sm:text-3xl">
@@ -350,105 +338,94 @@ export default function Home() {
         {/* Featured Software */}
         <section
           id="software"
-          className="section-anchor border-t border-black/5 bg-off-white"
+          className="section-anchor border-t border-ink/5 bg-off-white"
           aria-labelledby="software-heading"
         >
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="section-inner section-pad">
             <Reveal>
-              <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                Featured software
-              </p>
+              <p className="eyebrow">Featured software</p>
               <h2
                 id="software-heading"
-                className="mt-4 text-3xl font-semibold tracking-tight text-black sm:text-4xl"
+                className="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
               >
                 Software we build and operate.
               </h2>
             </Reveal>
 
-            <div className="mt-12 space-y-6">
+            <div className="mt-14 grid gap-5 lg:grid-cols-2 lg:gap-6">
               {/* jalipi */}
               <Reveal>
-                <article className="panel-hover overflow-hidden border border-black/8 bg-white">
-                  <div className="grid lg:grid-cols-2">
-                    <div className="flex flex-col justify-between p-8 lg:p-12">
-                      <div>
-                        <span className="inline-block border border-[#7B5EA7]/30 bg-[#7B5EA7]/5 px-3 py-1 text-xs tracking-[0.15em] text-[#7B5EA7] uppercase">
-                          Currently in Development
-                        </span>
-                        <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                          jalipi
-                        </h3>
-                        <p className="mt-6 max-w-lg leading-relaxed text-muted">
-                          A modern workforce operations platform that combines
-                          forecasting, scheduling, payroll preparation and
-                          operational insight into a single intelligent platform
-                          designed for modern organisations.
-                        </p>
-                      </div>
-                      <span
-                        className="mt-8 inline-flex w-fit cursor-not-allowed items-center border border-black/15 px-6 py-3 text-sm tracking-wide text-muted"
-                        aria-disabled="true"
-                      >
-                        Currently in Development
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center border-t border-black/5 bg-off-white p-8 lg:border-t-0 lg:border-l lg:p-12">
-                      <Image
-                        src="/logo/jalipi-logo.png"
-                        alt="jalipi"
-                        width={1774}
-                        height={887}
-                        className="h-auto w-full max-w-xs object-contain sm:max-w-sm lg:max-w-md"
-                      />
-                    </div>
+                <article id="jalipi" className="card flex h-full flex-col overflow-hidden">
+                  <div className="flex flex-1 flex-col p-8 lg:p-9">
+                    <span className="status-badge status-badge-dev w-fit">
+                      Currently in Development
+                    </span>
+                    <h3 className="mt-5 text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl">
+                      Enterprise workforce management, without compromise.
+                    </h3>
+                    <div className="gold-rule mt-5" aria-hidden="true" />
+                    <p className="mt-6 flex-1 text-[0.9375rem] leading-relaxed text-muted">
+                      A new kind of workforce management platform: enterprise-grade
+                      capability shaped around how each business actually operates,
+                      and delivered in a fraction of the usual time. Forecasting,
+                      scheduling, time &amp; attendance and pay preparation come
+                      together in one modern, AI-native platform that adapts to the
+                      customer — instead of forcing the customer to adapt to it.
+                    </p>
+                    <span
+                      className="btn-secondary-light mt-8 w-fit cursor-default opacity-60"
+                      aria-disabled="true"
+                    >
+                      Coming soon
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-center border-t border-ink/6 bg-off-white px-8 py-12 lg:px-9">
+                    <JalipiWordmark
+                      className="jalipi-wordmark"
+                      style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
+                    />
                   </div>
                 </article>
               </Reveal>
 
               {/* Interesting Journeys */}
-              <Reveal delay={100}>
-                <article className="panel-hover overflow-hidden border border-black/8 bg-white">
-                  <div className="grid lg:grid-cols-2">
-                    <div className="order-2 flex items-center justify-center border-t border-black/5 bg-off-white p-8 lg:order-1 lg:border-t-0 lg:border-r lg:p-12">
-                      <Image
-                        src="/logo/interesting-journeys-logo.png"
-                        alt="Interesting Journeys"
-                        width={1024}
-                        height={1024}
-                        className="h-auto w-full max-w-[12rem] object-contain sm:max-w-[14rem] lg:max-w-[16rem]"
-                      />
-                    </div>
-                    <div className="order-1 flex flex-col justify-between p-8 lg:order-2 lg:p-12">
-                      <div>
-                        <span className="inline-block border border-gold/40 bg-gold/10 px-3 py-1 text-xs tracking-[0.15em] text-gold uppercase">
-                          Live
-                        </span>
-                        <h3 className="mt-6 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                          Interesting Journeys
-                        </h3>
-                        <p className="mt-6 max-w-lg leading-relaxed text-muted">
-                          Interesting Journeys helps people discover distinctive
-                          places and transform inspiration into personalised
-                          journeys.
-                        </p>
-                        <p className="mt-4 max-w-lg leading-relaxed text-muted">
-                          Rather than presenting another list of destinations, it
-                          helps travellers explore places, experiences and stories
-                          that genuinely match their interests and build memorable
-                          journeys around them.
-                        </p>
-                      </div>
-                      <a
-                        href="https://interestingjourneys.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-8 inline-flex w-fit items-center gap-2 bg-black px-6 py-3 text-sm tracking-wide text-white transition-colors hover:bg-black/85"
-                      >
-                        Visit Interesting Journeys
-                        <span aria-hidden="true">&rarr;</span>
-                      </a>
-                    </div>
+              <Reveal delay={80}>
+                <article className="card flex h-full flex-col overflow-hidden">
+                  <div className="flex flex-1 flex-col p-8 lg:p-9">
+                    <span className="status-badge status-badge-live w-fit">
+                      Live
+                    </span>
+                    <h3 className="mt-5 text-2xl font-semibold tracking-tight text-ink">
+                      Interesting Journeys
+                    </h3>
+                    <div className="gold-rule mt-5" aria-hidden="true" />
+                    <p className="mt-6 text-[0.9375rem] leading-relaxed text-muted">
+                      Interesting Journeys helps people discover distinctive
+                      places and transform inspiration into personalised journeys.
+                    </p>
+                    <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-muted">
+                      Rather than presenting another list of destinations, it
+                      helps travellers explore places, experiences and stories that
+                      genuinely match their interests and build memorable journeys
+                      around them.
+                    </p>
+                    <a
+                      href="https://interestingjourneys.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-dark mt-8 w-fit"
+                    >
+                      Visit Interesting Journeys
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-center border-t border-ink/6 bg-off-white px-8 py-10 lg:px-9">
+                    <Image
+                      src="/logo/interesting-journeys-logo.png"
+                      alt="Interesting Journeys logo"
+                      width={1024}
+                      height={1024}
+                      className="h-auto w-full max-w-[10rem] object-contain sm:max-w-[12rem]"
+                    />
                   </div>
                 </article>
               </Reveal>
@@ -459,37 +436,29 @@ export default function Home() {
         {/* How We Work */}
         <section
           id="process"
-          className="border-t border-black/5 bg-white"
+          className="border-t border-ink/5 bg-white"
           aria-labelledby="process-heading"
         >
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="section-inner section-pad">
             <Reveal>
-              <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                How we work
-              </p>
+              <p className="eyebrow">How we work</p>
               <h2
                 id="process-heading"
-                className="mt-4 text-3xl font-semibold tracking-tight text-black sm:text-4xl"
+                className="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
               >
                 From problem to product.
               </h2>
             </Reveal>
 
-            <div className="relative mt-12">
-              <div
-                className="timeline-line absolute top-8 right-0 left-0 hidden h-px lg:block"
-                aria-hidden="true"
-              />
+            <div className="process-stepper relative mt-14">
               <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
                 {process.map((step, index) => (
-                  <Reveal key={step.number} delay={index * 80}>
+                  <Reveal key={step.number} delay={index * 70}>
                     <li className="relative">
-                      <div className="flex items-center gap-4 lg:flex-col lg:items-start">
-                        <span className="flex h-16 w-16 shrink-0 items-center justify-center border border-gold/30 bg-off-white text-sm tracking-[0.15em] text-gold">
-                          {step.number}
-                        </span>
-                        <div className="lg:mt-6">
-                          <h3 className="text-lg font-semibold tracking-tight text-black">
+                      <div className="flex items-start gap-4 lg:flex-col lg:items-start">
+                        <span className="process-step-num">{step.number}</span>
+                        <div className="lg:mt-5">
+                          <h3 className="text-lg font-semibold tracking-tight text-ink">
                             {step.title}
                           </h3>
                           <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -508,29 +477,27 @@ export default function Home() {
         {/* Contact */}
         <section
           id="contact"
-          className="section-anchor relative overflow-hidden bg-black text-white"
+          className="section-anchor relative overflow-hidden bg-ink text-white"
           aria-labelledby="contact-heading"
         >
-          <div className="hero-grid absolute inset-0 opacity-40" />
-          <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <BrandGrid className="brand-grid-dark" />
+          <div className="section-inner section-pad relative">
             <Reveal>
               <div className="max-w-3xl">
-                <p className="text-xs tracking-[0.3em] text-gold uppercase">
-                  Get in touch
-                </p>
+                <p className="eyebrow">Get in touch</p>
                 <h2
                   id="contact-heading"
                   className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl lg:leading-[1.1]"
                 >
                   Let&rsquo;s build something exceptional.
                 </h2>
-                <p className="mt-8 text-lg leading-relaxed text-white/60">
+                <p className="mt-8 text-lg leading-[1.7] text-white/55">
                   Whether you need a product, specialist expertise or a completely
                   bespoke solution, start with a conversation.
                 </p>
                 <a
                   href="mailto:hello@bespoke-everything.com"
-                  className="mt-10 inline-flex items-center justify-center bg-gold px-10 py-4 text-sm font-medium tracking-wide text-black transition-colors hover:bg-gold/90"
+                  className="btn-primary mt-10"
                 >
                   hello@bespoke-everything.com
                 </a>

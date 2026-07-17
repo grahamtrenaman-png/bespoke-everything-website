@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import BespokeEverythingLogo from "./BespokeEverythingLogo";
 
 const navLinks = [
   { href: "#software", label: "Software" },
@@ -31,40 +31,42 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 bg-black/50 backdrop-blur-sm transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 bg-ink/55 backdrop-blur-sm transition-all duration-300 ${
         scrolled || menuOpen
-          ? "border-b border-white/10 bg-black/80 backdrop-blur-md"
+          ? "border-b border-white/10 bg-ink/90 backdrop-blur-md"
           : "border-b border-white/5"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10 lg:py-5">
-        <Link href="/" className="shrink-0" aria-label="Bespoke Everything home">
-          <Image
-            src="/logo/BE-logo-compact-dark.png"
-            alt=""
-            width={410}
-            height={297}
-            priority
-            className="h-11 w-auto sm:h-12 lg:h-14"
+      <div className="section-inner flex items-center justify-between py-4 lg:py-5">
+        <Link
+          href="/"
+          className="shrink-0 rounded-sm"
+          aria-label="Bespoke Everything home"
+        >
+          <BespokeEverythingLogo
+            variant="dark"
+            layout="inline"
+            showTagline={false}
+            className="text-[10px] sm:text-[11px] lg:text-xs"
           />
         </Link>
 
         <nav
-          className="hidden items-center gap-7 lg:flex"
+          className="hidden items-center gap-8 lg:flex"
           aria-label="Main navigation"
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-[13px] tracking-wide text-white/70 transition-colors hover:text-white"
+              className="text-[13px] tracking-wide text-white/65 transition-colors hover:text-white"
             >
               {link.label}
             </a>
           ))}
           <a
-            href="#contact"
-            className="ml-2 inline-flex items-center justify-center border border-gold/60 bg-gold/10 px-5 py-2 text-[13px] tracking-wide text-gold transition-colors hover:border-gold hover:bg-gold/20"
+            href="mailto:hello@bespoke-everything.com"
+            className="ml-1 inline-flex items-center justify-center border border-gold/50 px-5 py-2 text-[13px] tracking-wide text-gold transition-colors hover:border-gold hover:bg-gold/10"
           >
             Start a Conversation
           </a>
@@ -72,7 +74,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center text-white lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-sm text-white lg:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -106,7 +108,7 @@ export default function Header() {
       {menuOpen && (
         <nav
           id="mobile-menu"
-          className="border-t border-white/10 bg-black/95 px-6 py-8 backdrop-blur-md lg:hidden"
+          className="border-t border-white/10 bg-ink/95 px-6 py-8 backdrop-blur-md lg:hidden"
           aria-label="Mobile navigation"
         >
           <ul className="flex flex-col gap-5">
@@ -123,8 +125,8 @@ export default function Header() {
             ))}
             <li className="pt-2">
               <a
-                href="#contact"
-                className="inline-flex w-full items-center justify-center border border-gold/60 bg-gold/10 px-5 py-3 text-sm tracking-wide text-gold transition-colors hover:border-gold hover:bg-gold/20"
+                href="mailto:hello@bespoke-everything.com"
+                className="inline-flex w-full items-center justify-center border border-gold/50 px-5 py-3 text-sm tracking-wide text-gold transition-colors hover:border-gold hover:bg-gold/10"
                 onClick={() => setMenuOpen(false)}
               >
                 Start a Conversation

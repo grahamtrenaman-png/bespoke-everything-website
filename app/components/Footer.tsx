@@ -1,40 +1,38 @@
-import Image from "next/image";
+import BespokeEverythingLogo from "./BespokeEverythingLogo";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/8 bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
+    <footer className="border-t border-white/8 bg-ink text-white">
+      <div className="section-inner section-pad !pt-16 !pb-12">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-sm">
-            <Image
-              src="/logo/bespoke-everything-logo-dark.png"
-              alt="Bespoke Everything"
-              width={320}
-              height={213}
-              className="h-16 w-auto sm:h-20"
+          <div>
+            <BespokeEverythingLogo
+              variant="dark"
+              layout="stacked"
+              className="text-[11px] sm:text-xs"
             />
-            <p className="mt-6 text-xs tracking-[0.25em] text-gold uppercase">
-              Software • Services • Solutions
-            </p>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:gap-16">
+          <div className="grid gap-10 sm:grid-cols-2 lg:gap-20">
             <div>
-              <p className="text-xs tracking-[0.2em] text-white/40 uppercase">
-                Software
-              </p>
+              <p className="eyebrow !text-white/40">Software</p>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <span className="text-sm text-white/70">jalipi</span>
+                  <a
+                    href="#jalipi"
+                    className="text-sm text-white/65 transition-colors hover:text-gold"
+                  >
+                    jalipi
+                  </a>
                 </li>
                 <li>
                   <a
                     href="https://interestingjourneys.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-white/70 transition-colors hover:text-gold"
+                    className="text-sm text-white/65 transition-colors hover:text-gold"
                   >
                     Interesting Journeys
                   </a>
@@ -42,20 +40,18 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-              <p className="text-xs tracking-[0.2em] text-white/40 uppercase">
-                Contact
-              </p>
+              <p className="eyebrow !text-white/40">Contact</p>
               <ul className="mt-4 space-y-3">
                 <li>
                   <a
                     href="mailto:hello@bespoke-everything.com"
-                    className="text-sm text-white/70 transition-colors hover:text-gold"
+                    className="text-sm text-white/65 transition-colors hover:text-gold"
                   >
                     hello@bespoke-everything.com
                   </a>
                 </li>
                 <li>
-                  <span className="text-sm text-white/50">
+                  <span className="text-sm text-white/45">
                     Bespoke Everything Ltd
                   </span>
                 </li>
@@ -64,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/8 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 border-t border-white/8 pt-6">
           <p className="text-xs text-white/40">
             &copy; {year} Bespoke Everything Ltd. All rights reserved.
           </p>

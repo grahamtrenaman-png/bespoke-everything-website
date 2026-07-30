@@ -120,7 +120,7 @@ export default function Home() {
 
               <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
                 <a
-                  href="mailto:hello@bespoke-everything.com"
+                  href="mailto:graham@bespoke-everything.com"
                   className="btn-primary w-full sm:w-auto"
                 >
                   Start a Conversation
@@ -498,10 +498,10 @@ export default function Home() {
                   bespoke solution, start with a conversation.
                 </p>
                 <a
-                  href="mailto:hello@bespoke-everything.com"
+                  href="mailto:graham@bespoke-everything.com"
                   className="btn-primary mt-10"
                 >
-                  hello@bespoke-everything.com
+                  graham@bespoke-everything.com
                 </a>
                 <p className="mt-8 text-sm text-white/40">
                   Bespoke Everything Ltd

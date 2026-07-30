@@ -44,10 +44,10 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 <li>
                   <a
-                    href="mailto:hello@bespoke-everything.com"
+                    href="mailto:graham@bespoke-everything.com"
                     className="text-sm text-white/65 transition-colors hover:text-gold"
                   >
-                    hello@bespoke-everything.com
+                    graham@bespoke-everything.com
                   </a>
                 </li>
                 <li>

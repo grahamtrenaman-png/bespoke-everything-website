@@ -65,7 +65,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="mailto:hello@bespoke-everything.com"
+            href="mailto:graham@bespoke-everything.com"
             className="ml-1 inline-flex items-center justify-center border border-gold/50 px-5 py-2 text-[13px] tracking-wide text-gold transition-colors hover:border-gold hover:bg-gold/10"
           >
             Start a Conversation
@@ -125,7 +125,7 @@ export default function Header() {
             ))}
             <li className="pt-2">
               <a
-                href="mailto:hello@bespoke-everything.com"
+                href="mailto:graham@bespoke-everything.com"
                 className="inline-flex w-full items-center justify-center border border-gold/50 px-5 py-3 text-sm tracking-wide text-gold transition-colors hover:border-gold hover:bg-gold/10"
                 onClick={() => setMenuOpen(false)}
               >

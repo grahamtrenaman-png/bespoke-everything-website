@@ -1,10 +1,20 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { isValidPreviewSession, PREVIEW_COOKIE } from "@/lib/preview-auth";
 import BespokeEverythingLogo from "./components/BespokeEverythingLogo";
 import BrandGrid from "./components/BrandGrid";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import JalipiWordmark from "./components/JalipiWordmark";
 import Reveal from "./components/Reveal";
+
+export const metadata: Metadata = {
+  title: "Bespoke Everything | Software • Services • Solutions",
+  description:
+    "Twenty years solving business problems. Bespoke Everything builds software, delivers expert services and creates bespoke solutions designed around the way organisations actually work.",
+};
 
 const capabilities = [
   {
@@ -78,7 +88,12 @@ const process = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const session = (await cookies()).get(PREVIEW_COOKIE)?.value;
+  if (!(await isValidPreviewSession(session))) {
+    redirect("/login");
+  }
+
   return (
     <>
       <Header />

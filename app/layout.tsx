@@ -17,23 +17,17 @@ const siteUrl = "https://bespoke-everything.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Bespoke Everything | Software • Services • Solutions",
-  description:
-    "Twenty years solving business problems. Bespoke Everything builds software, delivers expert services and creates bespoke solutions designed around the way organisations actually work.",
-  openGraph: {
-    title: "Bespoke Everything | Software • Services • Solutions",
-    description:
-      "Twenty years solving business problems. Built on experience. Accelerated by AI.",
-    url: siteUrl,
-    siteName: "Bespoke Everything",
-    locale: "en_GB",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Bespoke Everything | Software • Services • Solutions",
-    description:
-      "Twenty years solving business problems. Built on experience. Accelerated by AI.",
+  title: "Preview",
+  description: "Private preview.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
   },
 };
 

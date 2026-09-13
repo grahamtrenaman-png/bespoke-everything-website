@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local U9 shared state
+/data/oldbs-state.json
+
 # vercel
 .vercel
 

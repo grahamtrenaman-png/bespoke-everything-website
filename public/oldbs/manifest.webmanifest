@@ -1,0 +1,16 @@
+{
+  "name": "Old Bristolians U9",
+  "short_name": "OBRFC U9",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b1f14",
+  "theme_color": "#0b1f14",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ const PUBLIC_PATHS = new Set([
 ]);
 
 function isPublicPath(pathname: string) {
-  if (PUBLIC_PATHS.has(pathname)) {
+  if (PUBLIC_PATHS.has(pathname) || pathname === "/oldbs" || pathname.startsWith("/oldbs/")) {
     return true;
   }
 

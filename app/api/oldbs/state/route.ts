@@ -1,8 +1,26 @@
+import { timingSafeEqual } from "node:crypto";
 import { readOldbsState, writeOldbsState } from "@/lib/oldbs-state";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+const KEY_HEADER = "x-oldbs-key";
+
+/** Shared coaches' passcode. Fails closed if not configured. */
+function authorised(request: Request): boolean {
+  const expected = process.env.OLDBS_PASSCODE ?? "";
+  const given = request.headers.get(KEY_HEADER) ?? "";
+  if (!expected || !given) return false;
+  const a = Buffer.from(expected);
+  const b = Buffer.from(given);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
+function denied() {
+  return Response.json({ error: "Passcode needed" }, { status: 401 });
+}
+
+export async function GET(request: Request) {
+  if (!authorised(request)) return denied();
   try {
     const state = await readOldbsState();
     if (!state) return new Response(null, { status: 204 });
@@ -14,6 +32,7 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  if (!authorised(request)) return denied();
   try {
     const state = await request.json();
     if (!state || typeof state !== "object" || !Array.isArray((state as { players?: unknown }).players)) {

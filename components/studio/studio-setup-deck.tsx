@@ -25,8 +25,6 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
-import { TimelineSlide as BespokometreSlide } from "@/components/studio/bespokometre";
-import { ERAS, type Era } from "@/components/studio/eras";
 import {
   DECK_CHROME_SAFE_BOTTOM,
   DECK_CHROME_SAFE_TOP,
@@ -722,12 +720,6 @@ function TimelineSlide() {
 // Slide assembly + deck shell
 // ---------------------------------------------------------------------------
 
-/** Same curve as the Why jalipi deck, but the recovery point is the studio, not the product. */
-const STUDIO_ERAS: Era[] = [
-  ...ERAS.filter((era) => !era.brand),
-  { year: "Now", label: "Bespoke Everything", bespoke: 100, dot: "#14b8a6", brand: true },
-];
-
 function buildSlides(): DeckSlide[] {
   return [
     {
@@ -735,29 +727,6 @@ function buildSlides(): DeckSlide[] {
       section: "Open",
       gradient: "from-teal-500 via-teal-500 to-emerald-500",
       node: <TitleSlide />,
-    },
-    {
-      id: "bespokometre",
-      section: "The studio",
-      gradient: "from-amber-500 via-slate-400 to-emerald-500",
-      node: (
-        <BespokometreSlide
-          eyebrow="Why the studio"
-          eras={STUDIO_ERAS}
-          closing={
-            <>
-              SaaS made the customer fit the product. The sick-pay rule, the union agreement, the report
-              the region actually uses: a workaround, or a change request that never came.
-            </>
-          }
-          closingEmphasis={
-            <>
-              The platforms have opened. Build inside the one they already run, in weeks. The workflow,
-              the screen, the rule. The software they wanted, without replacing it.
-            </>
-          }
-        />
-      ),
     },
     {
       id: "thesis",

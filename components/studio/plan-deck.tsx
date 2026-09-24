@@ -647,7 +647,7 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
     group: "Selling",
     items: [
       "A build is one to two weeks. Platform extensions £40 to 120k, modelled at a mid £55k. Vendor-agnostic jobs at a mid £25k.",
-      "Builds a year: 14, 32, 63, 104. One job is lined up before I join. A settled builder ships eight or nine a year. Capacity at 1.5 weeks each is about twenty.",
+      "Builds a year: 14, 32, 63, 104. One job is lined up before we start. A settled builder ships eight or nine a year. Capacity at 1.5 weeks each is about twenty.",
       "Support at 20 to 25% of the build, from the quarter after go-live. 90% renew.",
       "Licences from year two on Dayforce, later Workday. £15 to 30k per tenant per year.",
       "jalipi: extensions invoiced to the customer. A kickback to the sales originator, FXP, Bespoke Everything or another TCN company. Not yet agreed, and not in the revenue.",

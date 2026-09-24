@@ -114,9 +114,9 @@ function TitleSlide() {
           className="deck-rise mt-8 text-5xl font-black leading-tight tracking-tight"
           style={{ animationDelay: "0.55s" }}
         >
-          I&rsquo;m in.{" "}
+          We start in January.{" "}
           <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-            Here is how I would set it up.
+            Here is how we set it up.
           </span>
         </h1>
         <p
@@ -125,7 +125,7 @@ function TitleSlide() {
         >
           Full time from January. The three months before that are a clean jalipi handover and a
           look at how the vendors extend. Which platforms we build on first, how the studio plugs
-          into FrontlineXP, who runs it, and what the first year looks like once I have joined.
+          into FrontlineXP, who runs it, and what the first year looks like once we have started.
         </p>
         <p
           className="deck-rise mx-auto mt-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40"
@@ -303,7 +303,7 @@ const PLATFORMS: PlatformRow[] = [
     wave: "Second",
     mechanism:
       "RELEX Open: plugins for data models, algorithms, workflows and screens, plus MCP and a Data API. Customers are in pilot.",
-    partnerRoute: "Solution extension partner tier. Register on the Developer Portal once I have joined.",
+    partnerRoute: "Solution extension partner tier. Register on the Developer Portal once we have started.",
     doorOpener: "Val, through Chris. Inference Group first.",
     note: "Same buyers as our WFM work. Inference Group may see AI here as theirs; we agree the line first.",
   },
@@ -338,7 +338,7 @@ const PLATFORMS: PlatformRow[] = [
     wave: "With QTC",
     mechanism:
       "A platform QuickThink Cloud develop and harden. We extend it for each engagement.",
-    partnerRoute: "Not a vendor programme. QTC own it; I keep a stake.",
+    partnerRoute: "Not a vendor programme. QTC own it; Graham keeps a stake.",
     doorOpener: "QTC bring the work and pay BE. FXP implements.",
     note: "From January any jalipi time is billed to QTC. Nothing on the side.",
   },
@@ -397,7 +397,7 @@ function PlatformsSlide() {
           </table>
         </div>
         <p className="deck-rise mt-2 text-center text-[9.5px] text-white/40" style={{ animationDelay: "0.4s" }}>
-          Vendor detail from their own developer and partner pages, checked 23 Sep 2026. jalipi is QuickThink Cloud’s platform: they develop and harden it, I keep a stake, and FXP implements it as they would any vendor.
+          Vendor detail from their own developer and partner pages, checked 23 Sep 2026. jalipi is QuickThink Cloud’s platform: they develop and harden it, Graham keeps a stake, and FXP implements it as they would any vendor.
         </p>
       </div>
     </BespokeBrandedSlide>
@@ -570,7 +570,7 @@ const UKG: VendorDetail = {
     },
   ],
   door: "Chris, and FrontlineXP’s live UKG projects. Sick pay is the shape of the work.",
-  first: "One named gap, fixed price, once I have joined.",
+  first: "One named gap, fixed price, once we have started.",
 };
 
 const RELEX: VendorDetail = {
@@ -584,7 +584,7 @@ const RELEX: VendorDetail = {
     },
     {
       label: "Where it actually is",
-      body: "Customers are piloting extensibility. It is a product still being piloted, with partners yet to ship apps. We register on the Developer Portal once I have joined, and a native app waits until we have built one inside a pilot.",
+      body: "Customers are piloting extensibility. It is a product still being piloted, with partners yet to ship apps. We register on the Developer Portal once we have started, and a native app waits until we have built one inside a pilot.",
     },
     {
       label: "Which list we join",
@@ -592,7 +592,7 @@ const RELEX: VendorDetail = {
     },
   ],
   door: "Val, through Chris, after Inference Group.",
-  first: "A pilot extension in Q3. Registration once I have joined.",
+  first: "A pilot extension in Q3. Registration once we have started.",
 };
 
 function KnownEstatesSlide() {
@@ -921,7 +921,7 @@ const CHANNELS: {
     share: "From Q2",
     bar: "from-amber-500 to-amber-300",
     body:
-      "One named offer per platform, backed by two case studies and a demonstrator app. Doug and I sell it with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
+      "One named offer per platform, backed by two case studies and a demonstrator app. Doug and Graham sell it with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
     proof: "Demonstrators beat slideware. Every meeting starts with a working app.",
   },
 ];
@@ -1041,7 +1041,7 @@ const NOTICE: Phase[] = [
     window: "Mid Oct → mid Jan",
     tone: "notice",
     items: [
-      "Hand jalipi to QuickThink Cloud. Their developer hardens it; I keep a stake. FXP implements it as they would any vendor.",
+      "Hand jalipi to QuickThink Cloud. Their developer hardens it; Graham keeps a stake. FXP implements it as they would any vendor.",
       "From January, any jalipi time is billed by Bespoke Everything to QTC, and none is anticipated. Nothing on the side.",
     ],
     measure: "A clean handover, written down.",
@@ -1062,7 +1062,7 @@ const NOTICE: Phase[] = [
     tone: "notice",
     items: [
       "The model: cash, headcount, when revenue lands. The builder profile and a first shortlist. Doug’s seat, and the sales seat.",
-      "I may be working my notice. Applications, builds, proposals and customer meetings wait until I join.",
+      "Graham may be working his notice. Applications, builds, proposals and customer meetings wait until we start.",
     ],
     measure: "Numbers Chris and Thomas can poke at before day one.",
   },
@@ -1202,13 +1202,13 @@ function TimelineSlide() {
       <div className="relative mx-auto w-full max-w-5xl">
         <SlideHeading
           kicker="The plan"
-          title="Before I join,"
+          title="Before we start,"
           highlight="jalipi, and a look at the vendors."
         />
         <div className="mt-4 space-y-4">
           <PhaseTrack
             phases={NOTICE}
-            heading="Before I join · mid October to mid January"
+            heading="Before we start · mid October to mid January"
             tone="notice"
             delay={0.15}
           />
@@ -1514,7 +1514,7 @@ const CALL_VENDORS: CallVendor[] = [
     vendor: "jalipi",
     wave: "With QTC",
     shape: "Partner platform",
-    extend: "A platform QuickThink Cloud develop and harden. I keep a stake.",
+    extend: "A platform QuickThink Cloud develop and harden. Graham keeps a stake.",
     door: "QTC. They bring the engagement and pay BE for the work. FXP implements.",
     first: "A bespoke extension on each engagement, delivered by us.",
   },
@@ -1622,7 +1622,7 @@ function CallVendorsSlide() {
           kicker="Each vendor · proposed"
           title="How they extend."
           highlight="How we show up."
-          lede="Who opens the door, and what the first job looks like. Everything starts once I have joined."
+          lede="Who opens the door, and what the first job looks like. Everything starts once we have started."
         />
         <div className="mt-3 grid grid-cols-3 gap-3">
           {CALL_VENDORS.map((vendor, index) => (
@@ -1692,8 +1692,8 @@ const CALL_CHANNELS: { icon: LucideIcon; title: string; when: string; line: stri
 const CALL_YEAR: { when: string; title: string; lines: string[]; tone: "notice" | "year" }[] = [
   {
     when: "Oct → Jan",
-    title: "Before I join",
-    lines: ["Hand jalipi to QTC, cleanly. I keep a stake.", "Read how the vendors extend.", "Build the model and the hiring plan with Chris.", "I may be working my notice."],
+    title: "Before we start",
+    lines: ["Hand jalipi to QTC, cleanly. Graham keeps a stake.", "Read how the vendors extend.", "Build the model and the hiring plan with Chris.", "Graham may be working his notice."],
     tone: "notice",
   },
   {

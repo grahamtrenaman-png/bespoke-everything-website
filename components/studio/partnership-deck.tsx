@@ -27,7 +27,7 @@ const PARTIES: {
     does: [
       "Develop and harden jalipi. Host it, wrap it, carry the indemnities.",
       "Bring the engagement. Public sector is theirs to open.",
-      "Pay Bespoke Everything for any extension work. None is anticipated after January.",
+      "Sell the licence to the customer. They do not sit between FXP or BE and that invoice.",
     ],
     gets: "A product they can sell, extended without hiring a studio.",
   },
@@ -36,11 +36,11 @@ const PARTIES: {
     name: "Bespoke Everything",
     tone: "border-teal-400/30 bg-teal-500/[0.07]",
     does: [
-      "Build the thing jalipi will not do, billed to QTC, fixed price.",
+      "Build the thing jalipi will not do. Fixed price, invoiced to the customer.",
       "The same studio builds on Dayforce, UKG and the rest. jalipi is one platform.",
-      "Nothing on the side. jalipi time after January is a QTC invoice, or it does not happen.",
+      "Nothing on the side. Product time for QTC, if any, is a separate invoice, and none is anticipated.",
     ],
-    gets: "Paid work when QTC has a customer, and a founder who keeps a stake in the product.",
+    gets: "A customer invoice for the extension, and a founder who keeps a stake in the product.",
   },
   {
     role: "The investors",
@@ -57,29 +57,29 @@ const PARTIES: {
 
 const FLOW: { step: string; who: string; line: string }[] = [
   { step: "01", who: "QTC", line: "Brings the customer and sells jalipi as the platform." },
-  { step: "02", who: "FXP", line: "Implements it. Discovery, configuration, go-live. Their fee." },
-  { step: "03", who: "BE", line: "Builds the extension the product will not do. Fixed price, invoiced to QTC." },
-  { step: "04", who: "QTC", line: "Hosts and supports the core. A small kickback to BE is proposed, and not agreed." },
+  { step: "02", who: "FXP", line: "Implements it and invoices the customer for the services." },
+  { step: "03", who: "BE", line: "Builds the extension the product will not do. Fixed price, invoiced to the customer." },
+  { step: "04", who: "QTC", line: "Hosts and supports the core. A kickback, not yet agreed, goes to whoever brought the deal." },
 ];
 
 const AGREED: string[] = [
-  "QTC develop and harden jalipi. I keep a stake. The size of that stake is still to write down.",
-  "FXP implements. Bespoke Everything does not implement jalipi.",
-  "From January, jalipi time is billed by Bespoke Everything to QTC. None is anticipated.",
+  "QTC develop and harden jalipi. Graham keeps a stake. The size of that stake is still to write down.",
+  "FXP invoices the customer for implementation. Bespoke Everything invoices the customer for extensions.",
+  "Product time for QTC, after January, would be a separate invoice. None is anticipated.",
   "The studio’s year does not depend on jalipi. Dayforce and UKG are the work.",
 ];
 
 const OPEN: string[] = [
   "The stake: how much, in what, vesting, and what happens if QTC sells jalipi.",
-  "The kickback: a low single-digit share of QTC’s jalipi deals. Proposed, not agreed.",
-  "Heads of terms before I join, so the handover is a document and not a conversation.",
+  "The kickback: paid to the sales originator. That can be FXP, Bespoke Everything, or another TCN company. Rate not agreed.",
+  "Heads of terms before Graham joins, so the handover is a document and not a conversation.",
   "Who owns an extension built for one jalipi customer, and whether it can be licensed again.",
 ];
 
 const PRINCIPLES: { icon: LucideIcon; text: string }[] = [
-  { icon: Lock, text: "jalipi stays QTC’s platform. My stake is in that, not a second product company." },
+  { icon: Lock, text: "jalipi stays QTC’s platform. Graham’s stake is in that, not a second product company." },
   { icon: Puzzle, text: "Extensions are Bespoke Everything work. Always invoiced. Never on the side." },
-  { icon: Handshake, text: "FXP implements. We build. QTC sells and hosts." },
+  { icon: Handshake, text: "FXP implements. Bespoke Everything builds. QTC sells and hosts." },
   { icon: CircleDollarSign, text: "A jalipi win pays three parties in three different ways." },
 ];
 
@@ -111,8 +111,8 @@ function TitleSlide() {
           className="deck-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65"
           style={{ animationDelay: "0.85s" }}
         >
-          QuickThink Cloud develop and harden jalipi. I keep a stake. FrontlineXP implements it.
-          Bespoke Everything builds the extensions and invoices QTC. TCN owns the studio, not the
+          QuickThink Cloud develop and harden jalipi. Graham keeps a stake. FrontlineXP implements it.
+          Bespoke Everything builds the extensions and invoices the customer. TCN owns the studio, not the
           product. This is the shape to agree before January.
         </p>
       </div>
@@ -179,7 +179,7 @@ function FlowSlide() {
           kicker="A jalipi deal"
           title="Four steps."
           highlight="Three invoices."
-          lede="QTC sells the platform. FXP implements it. Bespoke Everything builds the gap and bills QTC. Nobody does two of those jobs."
+          lede="QTC sells the platform. FXP invoices the customer for services. Bespoke Everything invoices the customer for the extension. Nobody does two of those jobs."
         />
         <div className="relative mt-8 grid grid-cols-4 gap-4">
           <span className="pointer-events-none absolute left-[12%] right-[12%] top-[1.35rem] h-px bg-gradient-to-r from-sky-400/50 via-teal-400/50 to-amber-400/50" />
@@ -200,8 +200,7 @@ function FlowSlide() {
           ))}
         </div>
         <p className="deck-rise mt-8 text-center text-[12px] leading-relaxed text-white/55" style={{ animationDelay: "0.6s" }}>
-          The kickback, if agreed, is a low single-digit share of QTC’s jalipi deal. It is not in the
-          studio plan as committed revenue. The extension invoice is.
+          The kickback, if agreed, is paid to the sales originator: FXP if they found it, Bespoke Everything, or another TCN company. It is not committed revenue. The extension invoice, to the customer, is.
         </p>
       </div>
     </BespokeBrandedSlide>
@@ -250,19 +249,19 @@ function TermsSlide() {
 
 function HandoverSlide() {
   const rows = [
-    { when: "Now → mid Jan", line: "Hand jalipi to QTC. Their developer hardens it. Write down the stake and the kickback, or write down that the kickback waits." },
-    { when: "January", line: "I join Bespoke Everything. Any jalipi hour after that is an invoice from the studio to QTC. Nothing on the side." },
-    { when: "After that", line: "FXP implements jalipi as a vendor product. We extend it when QTC asks, the same way we extend Dayforce when Chris asks." },
+    { when: "Now → mid Jan", line: "jalipi is handed to QTC. Their developer hardens it. The stake and the kickback are written down, or the kickback is written down as waiting." },
+    { when: "January", line: "Graham joins Bespoke Everything. Customer work is invoiced to the customer. Nothing on the side." },
+    { when: "After that", line: "FXP implements and invoices for services. Bespoke Everything extends and invoices the customer, the same way it invoices a Dayforce customer." },
   ];
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-5xl">
         <SlideHeading
-          kicker="Before I join"
+          kicker="Before Graham joins"
           title="A clean handover."
           highlight="Then a commercial relationship."
-          lede="The three months are for this, and for reading how the other vendors extend. Not for building jalipi on the side."
+          lede="The three months are for this, and for Graham to read how the other vendors extend. Not for building jalipi on the side."
         />
         <div className="mt-6 space-y-3">
           {rows.map((row, index) => (

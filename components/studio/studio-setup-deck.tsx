@@ -763,7 +763,7 @@ const SEATS: Seat[] = [
     status: "From mid January",
     tone: "filled",
     body:
-      "Scopes the gap, prices it, builds it, and owns the pattern on each platform until it is proven enough to hand to a skilled builder.",
+      "Scopes the gap, prices it, and builds the first job himself. Owns the pattern on each platform until it is proven enough to hand to a skilled builder.",
     measure: "Two builds live by the end of Q1.",
   },
   {
@@ -812,7 +812,7 @@ function TeamSlide() {
           kicker="Who runs it"
           title="Two operating founders."
           highlight="One seat held open."
-          lede="Chris and Thomas as the investors. No hunter on day one: the pipeline is warm. The sales seat is the open question, decided on the work."
+          lede="Chris and Thomas fund it and open the doors. No hunter on day one: the pipeline is warm. The sales seat is decided on the work. Full role by role detail, including TCN’s part, is in the roles deck."
         />
         <div className="relative mt-5 grid gap-6 grid-cols-3">
           <span className="pointer-events-none absolute left-[16%] right-[16%] top-[2.6rem] h-px bg-gradient-to-r from-teal-400/60 via-amber-400/50 to-white/20" />
@@ -1074,11 +1074,11 @@ const YEAR: Phase[] = [
     window: "Jan → Mar",
     tone: "year",
     items: [
-      "First two paid builds delivered off FXP projects.",
+      "The one job lined up before we start, built by Graham. A second sold in January off the network.",
       "Partner applications filed on Dayforce, UKG and RELEX.",
       "Contract, support and pricing templates settled with TCN shared ops.",
     ],
-    measure: "Two builds live. First support line signed.",
+    measure: "Two builds live by the end of Q1. First support line signed.",
   },
   {
     label: "Q2",
@@ -1087,7 +1087,7 @@ const YEAR: Phase[] = [
     items: [
       "Direct channel opens with two case studies. The third seat is still open.",
       "First vendor-referred job. First Logile or Legion build live through an FXP account.",
-      "First skilled builder hired, UK or South Africa, against signed work, not a forecast.",
+      "First skilled builder hired, UK or South Africa, once there is pipeline behind the first job. Not on a forecast.",
     ],
     measure: "Four builds live. One vendor referral closed.",
   },

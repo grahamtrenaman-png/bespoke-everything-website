@@ -92,7 +92,7 @@ const GRAHAM: SeatSpec = {
     "Choose the platforms we build on, and what we will not build.",
     "Hold quality until a builder owns the line: tenant, handover, support renewal.",
     "Price with Doug, and later with the seller. Hold the scope line in the room.",
-    "Hire and coach the builders. The first hire is against the one signed job.",
+    "Build the first job himself. Hire and coach the builders once there is pipeline behind it.",
     "Hand jalipi to QTC. Keep a stake. No solutions work on the side.",
   ],
   good: [
@@ -149,8 +149,8 @@ const DOUG: SeatSpec = {
     "Available from January, and wants this.",
   ],
   terms: [
-    "Co-founder stake in Bespoke Everything. Vesting still to write down.",
-    "Salary £100k, proposed against the cash model and agreed with Chris and Thomas.",
+    "Co-founder stake of 13.3% in Bespoke Everything, the figure agreed when this was the ADP partnership. Vesting still to write down.",
+    "Salary £100k, agreed at the same time and carried into the cash model.",
     "Based in South Africa, selling into UK and South African accounts. Travel when a deal needs a room.",
   ],
   trigger: "Starts when we start, mid January, alongside Graham.",
@@ -206,7 +206,7 @@ const BUILDER: SeatSpec = {
   kicker: "Skilled builder · hire · against signed work",
   title: "The builder.",
   highlight: "Ship the pattern again.",
-  lede: "Hired once a job is signed to pay for them. UK or South Africa. The first against the one job lined up before we start.",
+  lede: "Graham builds the first job. The builder is hired once there is pipeline behind it, not on a forecast. UK or South Africa.",
   summary:
     "The builder ships fixed-scope extensions on other people’s platforms, taking a pattern Graham has proven and delivering it on a new customer in one to two weeks. Senior, end to end and AI-assisted: data, integration, screens, tenant, handover. They own the support line for what they built and write it down so the next builder does not start again.",
   owns: [
@@ -237,7 +237,7 @@ const BUILDER: SeatSpec = {
     "A small bonus on support renewals for what they built.",
     "Not a co-founder seat. A hire, on a path to leading a platform.",
   ],
-  trigger: "First hire against the signed job. Further hires only when the next job, or the support line, can carry them.",
+  trigger: "First hire once there is pipeline behind the first job, around Q2. Further hires only when the next job, or the support line, can carry them.",
   not: "Not a bench. Not a contractor on a day rate. Not implementation that belongs to FXP. Not pricing.",
 };
 
@@ -288,7 +288,7 @@ const OVERVIEW: { spec: SeatSpec; seat: string; who: string; fills: string }[] =
   { spec: GRAHAM, seat: "Solutions and delivery", who: "Graham", fills: "From January. Scopes, prices, builds the first pattern." },
   { spec: DOUG, seat: "Vendors and accounts", who: "Doug", fills: "From January. The partner programmes and the network." },
   { spec: SELLER, seat: "Direct channel", who: "Open", fills: "When support covers a salary, or the network is thin by end of Q2." },
-  { spec: BUILDER, seat: "Build", who: "Open", fills: "Against the signed job. Further hires only when the work pays for them." },
+  { spec: BUILDER, seat: "Build", who: "Open", fills: "Once there is pipeline behind the first job. Further hires only when the work pays for them." },
   { spec: TCN, seat: "Capital, doors, coaching", who: "Chris and Thomas", fills: "To discuss. The facility, the introductions, and how hands-on they are." },
 ];
 
@@ -508,7 +508,7 @@ function HandoffSlide() {
 }
 
 const GROWTH: { year: string; people: string; seats: string; changes: string }[] = [
-  { year: "Year one", people: "4", seats: "Graham · Doug · 2 SA builders", changes: "Two founders sell and build. The first builder against the signed job, the second once support carries them." },
+  { year: "Year one", people: "4", seats: "Graham · Doug · 2 SA builders", changes: "Two founders sell and build. Graham ships the first job. The first builder once there is pipeline, the second once support carries them." },
   { year: "Year two", people: "8", seats: "+ seller · UK builder · 2 SA builders", changes: "The direct channel opens. Graham stops building day to day and holds price and pattern." },
   { year: "Year three", people: "14", seats: "+ 2 UK · 2 SA builders · support", changes: "A pair of builders per lead platform. A support role takes the live builds off the builders." },
   { year: "Year four", people: "20", seats: "+ 3 UK · 3 SA builders · solutions lead", changes: "Workday and the licensed apps. A solutions lead owns what we sell to many tenants." },

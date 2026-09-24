@@ -133,7 +133,7 @@ const SHAPE: {
     title: "Sell from day one",
     tone: "year",
     lines: [
-      "Graham and Doug at £100k. First SA builder in Q2, against that job.",
+      "Graham and Doug at £100k. Graham builds the first job. First SA builder in Q2, once there is pipeline.",
       "14 builds. Listed on Dayforce and UKG.",
       "Draw peaks at about £45k in January. Flat by the end of Q1.",
     ],
@@ -230,7 +230,7 @@ type Hire = { when: string; who: string; cost: string; why: string; tone: "found
 
 const HIRES: Hire[] = [
   { when: "Y1 Q1", who: "Graham and Doug", cost: "£100k each", why: "Co-founders. Build, and vendors and accounts. Selling from January.", tone: "founder" },
-  { when: "Y1 Q2", who: "Builder 1 · SA", cost: "£65k", why: "Against the one job already signed. Not before.", tone: "sa" },
+  { when: "Y1 Q2", who: "Builder 1 · SA", cost: "£65k", why: "Once there is pipeline behind the first job. Graham builds that one himself.", tone: "sa" },
   { when: "Y1 Q4", who: "Builder 2 · SA", cost: "£65k", why: "Once support and a second signed job can carry them.", tone: "sa" },
   { when: "Y2", who: "Seller · potential co-founder. Builder · UK", cost: "£100k · £90k", why: "The direct channel, and Dayforce Studio work inside the product.", tone: "founder" },
   { when: "Y2 – Y3", who: "Builders 3 to 6 · UK 2, SA 2. Support · SA", cost: "£90k · £65k · £45k", why: "A pair per lead platform. Support for the live builds.", tone: "uk" },

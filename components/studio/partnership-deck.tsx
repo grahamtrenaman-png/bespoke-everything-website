@@ -72,7 +72,7 @@ const AGREED: string[] = [
 const OPEN: string[] = [
   "The stake: how much, in what, vesting, and what happens if QTC sells jalipi.",
   "The kickback: paid to the sales originator. That can be FXP, Bespoke Everything, or another TCN company. Rate not agreed.",
-  "Heads of terms before Graham joins, so the handover is a document and not a conversation.",
+  "The heads of terms signed in principle before Graham starts. A draft is on the next slide.",
   "Who owns an extension built for one jalipi customer, and whether it can be licensed again.",
 ];
 
@@ -319,6 +319,107 @@ function TermsSlide() {
   );
 }
 
+const HEADS: { n: string; head: string; lines: string[] }[] = [
+  {
+    n: "01",
+    head: "Parties",
+    lines: ["QuickThink Cloud. Graham Trenaman. Bespoke Everything, a TCN company. FrontlineXP where it implements."],
+  },
+  {
+    n: "02",
+    head: "jalipi",
+    lines: [
+      "QTC own, develop, harden, host and sell jalipi. Handover complete by mid January.",
+      "Graham holds a stake of ___% in ___ (QTC, or a jalipi entity), vesting ___. On a sale of jalipi: ___.",
+    ],
+  },
+  {
+    n: "03",
+    head: "Extensions",
+    lines: [
+      "Bespoke Everything builds extensions for jalipi customers. Fixed price, invoiced to the customer.",
+      "Product time for QTC is a separate invoice at £___ a day. None anticipated.",
+    ],
+  },
+  {
+    n: "04",
+    head: "Implementation",
+    lines: ["FXP implements jalipi as it would any vendor, and invoices the customer for the services."],
+  },
+  {
+    n: "05",
+    head: "Kickback",
+    lines: [
+      "QTC pay ___% of ___ (first-year licence, or ___) to the sales originator: FXP, Bespoke Everything, or another TCN company.",
+      "Paid within ___ days of the customer paying QTC.",
+    ],
+  },
+  {
+    n: "06",
+    head: "Extension IP",
+    lines: ["An extension built for one jalipi customer is owned by ___. It may be licensed again by ___, on ___."],
+  },
+  {
+    n: "07",
+    head: "The wider relationship",
+    lines: [
+      "QTC introduces TCN companies into public sector accounts. TCN companies identify opportunities for jalipi and QTC’s other products.",
+      "Non-exclusive. Any fee is agreed per deal.",
+    ],
+  },
+  {
+    n: "08",
+    head: "Term and exit",
+    lines: ["Reviewed annually. What happens to the stake and the kickback if QTC is sold, or if Graham leaves Bespoke Everything: ___."],
+  },
+];
+
+function HeadsOfTermsSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-4 w-full max-w-6xl">
+        <SlideHeading
+          kicker="Heads of terms"
+          title="A draft."
+          highlight="The blanks are the conversation."
+          lede="One page, not a contract. Everything that is settled is written in. Everything that is not has a blank, so the QTC conversation is about filling them, not about whether to write them."
+        />
+        <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2">
+          {HEADS.map((clause, index) => (
+            <div
+              key={clause.n}
+              className="deck-rise flex gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5"
+              style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+            >
+              <span className="w-5 shrink-0 text-[11px] font-black text-amber-300/80">{clause.n}</span>
+              <div className="min-w-0">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/55">{clause.head}</p>
+                {clause.lines.map((line) => (
+                  <p key={line} className="mt-0.5 text-[10.5px] leading-snug text-white/80">
+                    {line.split(/(___)/).map((part, i) =>
+                      part === "___" ? (
+                        <span key={i} className="mx-0.5 inline-block min-w-[2.2rem] rounded border-b border-amber-300/70 align-baseline text-amber-200">
+                          &nbsp;
+                        </span>
+                      ) : (
+                        <span key={i}>{part}</span>
+                      ),
+                    )}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="deck-rise mt-2.5 text-center text-[10.5px] text-white/50" style={{ animationDelay: "0.55s" }}>
+          Signed in principle before Graham starts. The blanks are the stake, the kickback, the IP and the exit. Nothing else is open.
+        </p>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
 function HandoverSlide() {
   const rows = [
     { when: "Now → mid Jan", line: "The partnership shape is written down. jalipi is handed to QTC. Their developer hardens it. The stake and the kickback are agreed, or the kickback is written down as waiting." },
@@ -359,6 +460,7 @@ function buildPartnershipSlides(): DeckSlide[] {
     { id: "partner-wider", section: "Wider", gradient: "from-sky-400 via-amber-400 to-teal-400", node: <WiderSlide /> },
     { id: "partner-flow", section: "jalipi", gradient: "from-teal-400 via-emerald-400 to-sky-400", node: <FlowSlide /> },
     { id: "partner-terms", section: "Terms", gradient: "from-teal-400 via-amber-400 to-amber-300", node: <TermsSlide /> },
+    { id: "partner-heads", section: "Heads", gradient: "from-amber-400 via-amber-300 to-teal-400", node: <HeadsOfTermsSlide /> },
     { id: "partner-handover", section: "Handover", gradient: "from-amber-400 via-teal-400 to-emerald-400", node: <HandoverSlide /> },
   ];
 }

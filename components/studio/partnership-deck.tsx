@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Handshake, Lock, Puzzle, CircleDollarSign, type LucideIcon } from "lucide-react";
+import { Handshake, Lock, Puzzle, CircleDollarSign, DoorOpen, Search, type LucideIcon } from "lucide-react";
 
 import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
 import { BespokeBrandedSlide } from "@/components/studio/slide-chrome";
@@ -207,6 +207,77 @@ function FlowSlide() {
   );
 }
 
+function WiderSlide() {
+  const sides: { icon: LucideIcon; way: string; who: string; tone: string; lines: string[] }[] = [
+    {
+      icon: DoorOpen,
+      way: "QTC opens doors",
+      who: "For the TCN companies",
+      tone: "border-sky-400/25 bg-sky-500/[0.07]",
+      lines: [
+        "Public sector is a market QTC already sits in.",
+        "They can open those doors for FrontlineXP, and for the other TCN companies.",
+        "An introduction, where QTC has the relationship and a TCN company has the service.",
+      ],
+    },
+    {
+      icon: Search,
+      way: "TCN finds the work",
+      who: "For QTC",
+      tone: "border-amber-400/25 bg-amber-500/[0.07]",
+      lines: [
+        "FrontlineXP, Bespoke Everything and the other TCN companies sit with customers QTC does not.",
+        "They can identify opportunities for jalipi.",
+        "The same conversations can surface work for QTC’s other products.",
+      ],
+    },
+  ];
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-6 w-full max-w-5xl">
+        <SlideHeading
+          kicker="Beyond one product"
+          title="A wider relationship."
+          highlight="Both ways."
+          lede="jalipi is the reason to write this down. The working relationship between QTC and TCN can be larger than one platform."
+        />
+        <div className="mt-5 grid grid-cols-2 gap-4">
+          {sides.map((side, index) => {
+            const Icon = side.icon;
+            return (
+              <div
+                key={side.way}
+                className={cn("deck-rise rounded-2xl border px-5 py-4", side.tone)}
+                style={{ animationDelay: `${0.15 + index * 0.12}s` }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Icon className="h-4 w-4 shrink-0 text-white/70" />
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/45">{side.who}</p>
+                    <h3 className="text-[18px] font-black leading-tight tracking-tight">{side.way}</h3>
+                  </div>
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {side.lines.map((line) => (
+                    <li key={line} className="flex gap-2 text-[13px] leading-snug text-white/80">
+                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-white/40" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+        <p className="deck-rise mt-4 text-center text-[12px] leading-relaxed text-white/55" style={{ animationDelay: "0.45s" }}>
+          Possible. It belongs in the same conversation as the heads of terms.
+        </p>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
 function TermsSlide() {
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
@@ -285,6 +356,7 @@ function buildPartnershipSlides(): DeckSlide[] {
     { id: "partner-title", section: "Open", gradient: "from-sky-400 via-teal-400 to-amber-400", node: <TitleSlide /> },
     { id: "partner-parties", section: "Who", gradient: "from-sky-400 via-teal-400 to-amber-400", node: <PartiesSlide /> },
     { id: "partner-flow", section: "A deal", gradient: "from-teal-400 via-emerald-400 to-sky-400", node: <FlowSlide /> },
+    { id: "partner-wider", section: "Wider", gradient: "from-sky-400 via-amber-400 to-teal-400", node: <WiderSlide /> },
     { id: "partner-terms", section: "Terms", gradient: "from-teal-400 via-amber-400 to-amber-300", node: <TermsSlide /> },
     { id: "partner-handover", section: "Handover", gradient: "from-amber-400 via-teal-400 to-emerald-400", node: <HandoverSlide /> },
   ];

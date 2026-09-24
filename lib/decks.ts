@@ -38,6 +38,6 @@ export const STUDIO_DECKS: DeckEntry[] = [
     href: "/studio/partnership",
     kicker: "For QTC and TCN",
     title: "The partnership.",
-    body: "QuickThink Cloud, Bespoke Everything and TCN on jalipi. Who does what, how a deal is invoiced, the stake and the kickback still to agree, and the handover before January.",
+    body: "QuickThink Cloud, Bespoke Everything and TCN on jalipi. Who does what, how a deal is invoiced, a wider two-way relationship, the stake and the kickback still to agree, and the handover before January.",
   },
 ];

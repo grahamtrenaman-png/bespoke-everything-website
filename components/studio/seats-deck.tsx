@@ -106,7 +106,7 @@ const GRAHAM: SeatSpec = {
     "Comfortable letting go of the build once the pattern is proven.",
   ],
   terms: [
-    "Co-founder from January. Salary £100k, the same figure proposed for Doug.",
+    "Co-founder from January. Salary about £100k, the same figure proposed for Doug.",
     "A stake in Bespoke Everything. Size and vesting still to write down.",
     "The jalipi stake sits with Graham, not in the studio’s P&L. Size still to write down with QTC.",
   ],
@@ -149,8 +149,8 @@ const DOUG: SeatSpec = {
     "Available from January, and wants this.",
   ],
   terms: [
-    "Co-founder stake of 13.3% in Bespoke Everything, the figure agreed when this was the ADP partnership. Vesting still to write down.",
-    "Salary £100k, agreed at the same time and carried into the cash model.",
+    "Co-founder stake in Bespoke Everything, on the terms agreed when this was the ADP partnership. Vesting still to write down.",
+    "Salary about £100k, agreed at the same time and carried into the cash model.",
     "Based in South Africa, selling into UK and South African accounts. Travel when a deal needs a room.",
   ],
   trigger: "Starts when we start, mid January, alongside Graham.",

@@ -133,7 +133,7 @@ const SHAPE: {
     title: "Sell from day one",
     tone: "year",
     lines: [
-      "Graham and Doug at £100k. Graham builds the first job. First SA builder in Q2, once there is pipeline.",
+      "Graham and Doug at about £100k. Graham builds the first job. First SA builder in Q2, once there is pipeline.",
       "14 builds. Listed on Dayforce and UKG.",
       "Draw peaks at about £45k in January. Flat by the end of Q1.",
     ],
@@ -229,10 +229,10 @@ function ShapeSlide() {
 type Hire = { when: string; who: string; cost: string; why: string; tone: "founder" | "uk" | "sa" | "ops" };
 
 const HIRES: Hire[] = [
-  { when: "Y1 Q1", who: "Graham and Doug", cost: "£100k each", why: "Co-founders. Build, and vendors and accounts. Selling from January.", tone: "founder" },
+  { when: "Y1 Q1", who: "Graham and Doug", cost: "~£100k each", why: "Co-founders. Build, and vendors and accounts. Selling from January.", tone: "founder" },
   { when: "Y1 Q2", who: "Builder 1 · SA", cost: "£65k", why: "Once there is pipeline behind the first job. Graham builds that one himself.", tone: "sa" },
   { when: "Y1 Q4", who: "Builder 2 · SA", cost: "£65k", why: "Once support and a second signed job can carry them.", tone: "sa" },
-  { when: "Y2", who: "Seller · potential co-founder. Builder · UK", cost: "£100k · £90k", why: "The direct channel, and Dayforce Studio work inside the product.", tone: "founder" },
+  { when: "Y2", who: "Seller · potential co-founder. Builder · UK", cost: "~£100k · £90k", why: "The direct channel, and Dayforce Studio work inside the product.", tone: "founder" },
   { when: "Y2 – Y3", who: "Builders 3 to 6 · UK 2, SA 2. Support · SA", cost: "£90k · £65k · £45k", why: "A pair per lead platform. Support for the live builds.", tone: "uk" },
   { when: "Y4", who: "Builders 7 to 12 · UK 3, SA 3. Product lead · UK", cost: "£90k · £65k · £90k", why: "Workday and the licensed apps. Twenty people by year end.", tone: "ops" },
 ];
@@ -656,7 +656,7 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
   {
     group: "Spending",
     items: [
-      "Two co-founders at £100k from January. A third, the seller, on the same from year two if they take the stake.",
+      "Two co-founders at about £100k from January. A third, the seller, on the same from year two if they take the stake.",
       "Builders fully loaded: £90k UK, £65k South Africa. Support and ops seats £45 to 60k, in SA.",
       "Cost base £0.55m, £1.2m, £2.2m, £3.9m. People are about half of it; the rest is contractors for peaks, commission, marketplace fees, tenants, travel and TCN shared ops.",
       "EBITDA 20%, 25%, 31%, 35%. Debtors at 45 days.",

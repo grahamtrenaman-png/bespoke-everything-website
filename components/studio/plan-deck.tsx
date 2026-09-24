@@ -124,7 +124,7 @@ const SHAPE: {
     lines: [
       "Hand jalipi to QTC. Agree the kickback in principle.",
       "One build scoped and priced, ready to sign in January. No more than that.",
-      "Tenants, registrations, the model. About £25k spent.",
+      "Heads of terms with QTC, and the company set up. No cash out before January.",
     ],
     end: "Two founders, one job, day one.",
   },
@@ -467,7 +467,7 @@ function MarketsSlide() {
 
 /** Cumulative cash, £k. Negative is drawn on the Chris and Thomas overdraft, limit £200k. */
 const CASH: { when: string; cumulative: number; note: string }[] = [
-  { when: "Pre Jan", cumulative: -25, note: "Tenants, registrations, legal." },
+  { when: "Pre Jan", cumulative: 0, note: "Heads of terms. One job lined up. No cash out." },
   { when: "Y1 Q1", cumulative: -45, note: "The peak, in January. Two salaries, then the first invoice." },
   { when: "Y1", cumulative: 40, note: "One job was lined up. The rest sold after joining." },
   { when: "Y2", cumulative: 280, note: "Seller and the UK builder. Eight people." },
@@ -486,7 +486,7 @@ function CashSlide() {
           kicker="Cash"
           title="About £45k drawn at the peak, in January."
           highlight="Cleared inside the first quarter."
-          lede="Indicative, £k, cumulative. Q1 cost is two salaries, about £50k, plus the £25k of setup already spent. The first invoices land in the same quarter. The £200k overdraft is the limit, not the plan."
+          lede="Indicative, £k, cumulative. Nothing is spent before January. Q1 cost is two salaries, about £50k, and the first invoices land in the same quarter. The £200k overdraft is the limit, not the plan."
         />
         <div className="mt-4 grid grid-cols-[1fr_19rem] gap-4">
           <div className="deck-rise rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5" style={{ animationDelay: "0.15s" }}>
@@ -525,9 +525,11 @@ function CashSlide() {
                             : { top: `calc(62% + ${(height * 38) / 100}% + 2px)` }
                         }
                       >
-                        {point.cumulative >= 1000
-                          ? `+£${(point.cumulative / 1000).toFixed(1)}m`
-                          : `${point.cumulative > 0 ? "+" : "−"}£${Math.abs(point.cumulative)}k`}
+                        {point.cumulative === 0
+                          ? "£0"
+                          : point.cumulative >= 1000
+                            ? `+£${(point.cumulative / 1000).toFixed(1)}m`
+                            : `${point.cumulative > 0 ? "+" : "−"}£${Math.abs(point.cumulative)}k`}
                       </span>
                     </div>
                     <p className="mt-1.5 text-[9.5px] leading-snug text-white/60">{point.note}</p>

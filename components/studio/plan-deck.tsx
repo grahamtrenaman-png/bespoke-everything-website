@@ -20,48 +20,47 @@ import { cn } from "@/lib/cn";
 // a year in the model; capacity at 1.5 weeks each is about twenty.
 // ---------------------------------------------------------------------------
 
-type YearKey = "y1" | "y2" | "y3";
+type YearKey = "y1" | "y2" | "y3" | "y4";
 
 const YEARS: { key: YearKey; label: string }[] = [
   { key: "y1", label: "Year one" },
   { key: "y2", label: "Year two" },
   { key: "y3", label: "Year three" },
+  { key: "y4", label: "Year four" },
 ];
 
-/** Revenue by line, £k. */
+/** Revenue by line, £k. The year-three shape, given one more year to get there. */
 const REVENUE = {
-  platform: { y1: 715, y2: 2090, y3: 3630 },
-  agnostic: { y1: 300, y2: 650, y3: 1100 },
-  support: { y1: 60, y2: 250, y3: 900 },
-  licences: { y1: 0, y2: 50, y3: 450 },
-  jalipi: { y1: 125, y2: 160, y3: 420 },
+  platform: { y1: 385, y2: 900, y3: 1900, y4: 3300 },
+  agnostic: { y1: 175, y2: 400, y3: 700, y4: 1100 },
+  support: { y1: 40, y2: 150, y3: 420, y4: 800 },
+  licences: { y1: 0, y2: 0, y3: 80, y4: 400 },
+  jalipi: { y1: 100, y2: 150, y3: 100, y4: 400 },
 } as const;
 
-const TOTAL = { y1: 1200, y2: 3200, y3: 6500 } as const;
+const TOTAL = { y1: 700, y2: 1600, y3: 3200, y4: 6000 } as const;
 const BUILDS = {
-  platform: { y1: 13, y2: 38, y3: 66 },
-  agnostic: { y1: 12, y2: 26, y3: 44 },
+  platform: { y1: 7, y2: 16, y3: 35, y4: 60 },
+  agnostic: { y1: 7, y2: 16, y3: 28, y4: 44 },
 } as const;
-const HEADCOUNT = { y1: 8, y2: 14, y3: 20 } as const;
-// Cost base £0.9m / £2.0m / £3.9m. EBITDA £0.3m / £1.2m / £2.6m. ARR £0.2m / £0.8m / £1.8m.
-// Carried as strings on the value and assumptions slides.
+const HEADCOUNT = { y1: 4, y2: 8, y3: 14, y4: 20 } as const;
 
 /** Share of the year's revenue by platform. Percentages, sum to 100. */
-const BY_PLATFORM: { name: string; tone: string; y1: number; y2: number; y3: number }[] = [
-  { name: "Dayforce", tone: "bg-teal-400", y1: 28, y2: 25, y3: 22 },
-  { name: "UKG", tone: "bg-teal-300", y1: 24, y2: 20, y3: 16 },
-  { name: "Logile · Legion", tone: "bg-emerald-400", y1: 10, y2: 10, y3: 8 },
-  { name: "RELEX", tone: "bg-amber-400", y1: 3, y2: 10, y3: 14 },
-  { name: "jalipi · QTC", tone: "bg-sky-400", y1: 10, y2: 5, y3: 8 },
-  { name: "Workday · SAP · Oracle · ADP", tone: "bg-white/40", y1: 0, y2: 5, y3: 10 },
-  { name: "Vendor agnostic", tone: "bg-fuchsia-400", y1: 25, y2: 25, y3: 22 },
+const BY_PLATFORM: { name: string; tone: string; y1: number; y2: number; y3: number; y4: number }[] = [
+  { name: "Dayforce", tone: "bg-teal-400", y1: 30, y2: 26, y3: 24, y4: 22 },
+  { name: "UKG", tone: "bg-teal-300", y1: 22, y2: 20, y3: 18, y4: 16 },
+  { name: "Logile · Legion", tone: "bg-emerald-400", y1: 8, y2: 10, y3: 10, y4: 8 },
+  { name: "RELEX", tone: "bg-amber-400", y1: 0, y2: 6, y3: 10, y4: 14 },
+  { name: "jalipi · QTC", tone: "bg-sky-400", y1: 14, y2: 9, y3: 6, y4: 7 },
+  { name: "Workday · SAP · Oracle · ADP", tone: "bg-white/40", y1: 0, y2: 2, y3: 6, y4: 11 },
+  { name: "Vendor agnostic", tone: "bg-fuchsia-400", y1: 26, y2: 27, y3: 26, y4: 22 },
 ];
 
-const BY_MARKET: { name: string; y1: number; y2: number; y3: number; line: string }[] = [
-  { name: "UK · the network", y1: 60, y2: 40, y3: 30, line: "TCN, FXP and REPL alumni. Warm, and where January’s builds come from." },
-  { name: "UK · vendor referred", y1: 5, y2: 15, y3: 20, line: "Account teams send the gap once we are a name they can refer." },
-  { name: "UK · direct", y1: 10, y2: 15, y3: 20, line: "One named offer per platform. A seller behind it from Q3 of year one." },
-  { name: "South Africa", y1: 25, y2: 30, y3: 30, line: "Doug’s accounts and retailers. Delivered from the SA seats, sold in rand and in sterling." },
+const BY_MARKET: { name: string; y1: number; y2: number; y3: number; y4: number; line: string }[] = [
+  { name: "UK · the network", y1: 70, y2: 50, y3: 40, y4: 30, line: "TCN, FXP and REPL alumni. Warm, and where the first build comes from." },
+  { name: "UK · vendor referred", y1: 0, y2: 10, y3: 15, y4: 20, line: "Account teams send the gap once we are a name they can refer." },
+  { name: "UK · direct", y1: 5, y2: 10, y3: 15, y4: 20, line: "One named offer per platform. A seller behind it from year two." },
+  { name: "South Africa", y1: 25, y2: 30, y3: 30, y4: 30, line: "Doug’s accounts and retailers. Delivered from the SA seats, sold in rand and in sterling." },
 ];
 
 // ---------------------------------------------------------------------------
@@ -80,14 +79,14 @@ function TitleSlide() {
         <div className="deck-rise flex flex-col items-center gap-3" style={{ animationDelay: "0.2s" }}>
           <BespokeEverythingLogo variant="dark" showTagline={false} className="text-lg" />
           <p className="text-sm font-semibold uppercase tracking-[0.35em] text-white/50">
-            The three-year plan · for Chris and Thomas
+            The four-year plan · for Chris and Thomas
           </p>
         </div>
         <h1
           className="deck-rise mt-8 text-5xl font-black leading-tight tracking-tight"
           style={{ animationDelay: "0.55s" }}
         >
-          Three years to a choice.{" "}
+          Four years to a choice.{" "}
           <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
             Sell it, or double down.
           </span>
@@ -96,16 +95,15 @@ function TitleSlide() {
           className="deck-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65"
           style={{ animationDelay: "0.85s" }}
         >
-          Revenue from January. Twenty people by the end of year three. A studio worth ten to fifteen
-          million at the end of it, built on a £200k overdraft that is never fully drawn. Who we hire and
-          when, where the money comes from, and what it is worth at each year end. Indicative
-          throughout. The assumptions are on one slide so they can be argued with.
+          Revenue from January, from one job already lined up. Twenty people by the end of year four.
+          A studio worth ten to fifteen million at the end of it, on a £200k overdraft that is barely
+          used. Who we hire and when, where the money comes from, and what it is worth at each year end.
         </p>
         <p
           className="deck-rise mx-auto mt-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40"
           style={{ animationDelay: "1.05s" }}
         >
-          £1.2m · £3.2m · £6.5m. Paid back inside year one.
+          £0.7m · £1.6m · £3.2m · £6m. Paid back inside year one.
         </p>
       </div>
     </div>
@@ -125,43 +123,43 @@ const SHAPE: {
     tone: "notice",
     lines: [
       "Hand jalipi to QTC. Agree the kickback in principle.",
-      "The first four builds scoped and priced, ready to sign in January.",
+      "One build scoped and priced, ready to sign in January. No more than that.",
       "Tenants, registrations, the model. About £25k spent.",
     ],
-    end: "Two founders, four jobs, day one.",
+    end: "Two founders, one job, day one.",
   },
   {
     when: "Year one",
     title: "Sell from day one",
     tone: "year",
     lines: [
-      "Graham and Doug at £100k. First SA builder in February.",
-      "25 builds. Listed on Dayforce, UKG and RELEX. Seller joins Q3.",
+      "Graham and Doug at £100k. First SA builder in Q2, against that job.",
+      "14 builds. Listed on Dayforce and UKG.",
       "Draw peaks at about £45k in January. Flat by the end of Q1.",
     ],
-    end: "£1.2m revenue · 8 people · £0.2m ARR",
+    end: "£0.7m · 4 people",
   },
   {
     when: "Year two",
     title: "Repeat it",
     tone: "year",
     lines: [
-      "Two builder pairs per lead platform. RELEX live.",
-      "64 builds. First licensed app on a second tenant.",
-      "£1.2m EBITDA. South Africa a third of the work.",
+      "The seller joins. A UK builder against signed work.",
+      "32 builds. RELEX opens, on the agreed line.",
+      "South Africa about a third of the work.",
     ],
-    end: "£3.2m revenue · 14 people · £0.8m ARR",
+    end: "£1.6m · 8 people · £0.3m ARR",
   },
   {
-    when: "Year three",
-    title: "Choose",
+    when: "Years three and four",
+    title: "Then choose",
     tone: "year",
     lines: [
-      "Twenty people across UK and SA. A product lead on the licensed apps.",
-      "110 builds. Support and licences at £1.8m recurring.",
-      "A business someone would buy for £10 to 15m, or one worth keeping.",
+      "Year three is the repeat at scale: 14 people, £3.2m.",
+      "Year four is twenty people and the licensed apps.",
+      "Worth £10 to 15m, or worth keeping.",
     ],
-    end: "£6.5m revenue · 20 people · £1.8m ARR",
+    end: "£6m · 20 people · £1.6m ARR",
   },
 ];
 
@@ -174,7 +172,7 @@ function ShapeSlide() {
           kicker="The shape of it"
           title="Sell from day one, repeat it,"
           highlight="then choose."
-          lede="A studio that pays its way inside year one and is worth a decision by year three. The numbers are indicative and rounded."
+          lede="A studio that pays its way inside year one and is worth a decision by year four. The numbers are indicative and rounded."
         />
         <div className="relative mt-6 grid grid-cols-4 gap-4">
           <span className="pointer-events-none absolute left-[12%] right-[12%] top-[0.55rem] h-px bg-gradient-to-r from-amber-400/60 via-teal-400/60 to-emerald-400/60" />
@@ -232,12 +230,11 @@ type Hire = { when: string; who: string; cost: string; why: string; tone: "found
 
 const HIRES: Hire[] = [
   { when: "Y1 Q1", who: "Graham and Doug", cost: "£100k each", why: "Co-founders. Build, and vendors and accounts. Selling from January.", tone: "founder" },
-  { when: "Y1 Q1", who: "Builder 1 · SA", cost: "£65k", why: "February, against the first signed builds.", tone: "sa" },
-  { when: "Y1 Q2", who: "Builder 2 · UK", cost: "£90k", why: "Dayforce Studio work inside the product.", tone: "uk" },
-  { when: "Y1 Q3", who: "Seller · potential co-founder", cost: "£100k", why: "The direct channel. Same terms as the founders if they take the stake.", tone: "founder" },
-  { when: "Y1 Q3 – Q4", who: "Builders 3 and 4 · SA. Support desk · SA", cost: "£65k · £65k · £45k", why: "Two more SA seats and a support desk for the live builds.", tone: "sa" },
-  { when: "Y2", who: "Builders 5 to 8 · UK 2, SA 2. Sales support · SA", cost: "£90k · £65k · £45k", why: "A pair per lead platform. One UK seat leads RELEX.", tone: "uk" },
-  { when: "Y3", who: "Builders 9 to 13 · UK 3, SA 2. Product lead · UK. Ops", cost: "£90k · £65k · £60k", why: "Workday and the second platform. A product lead for the licensed apps.", tone: "ops" },
+  { when: "Y1 Q2", who: "Builder 1 · SA", cost: "£65k", why: "Against the one job already signed. Not before.", tone: "sa" },
+  { when: "Y1 Q4", who: "Builder 2 · SA", cost: "£65k", why: "Once support and a second signed job can carry them.", tone: "sa" },
+  { when: "Y2", who: "Seller · potential co-founder. Builder · UK", cost: "£100k · £90k", why: "The direct channel, and Dayforce Studio work inside the product.", tone: "founder" },
+  { when: "Y2 – Y3", who: "Builders 3 to 6 · UK 2, SA 2. Support · SA", cost: "£90k · £65k · £45k", why: "A pair per lead platform. Support for the live builds.", tone: "uk" },
+  { when: "Y4", who: "Builders 7 to 12 · UK 3, SA 3. Product lead · UK", cost: "£90k · £65k · £90k", why: "Workday and the licensed apps. Twenty people by year end.", tone: "ops" },
 ];
 
 const HIRE_TONE: Record<Hire["tone"], string> = {
@@ -254,8 +251,8 @@ function PeopleSlide() {
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-6xl">
         <SlideHeading
           kicker="People"
-          title="Two, then eight,"
-          highlight="then fourteen, then twenty."
+          title="Two, then four,"
+          highlight="then eight, fourteen, twenty."
           lede="Every hire follows the work. Builders arrive against a signed job. South Africa carries more of the seats because a builder there costs £65k against £90k in the UK, and the work is there too."
         />
         <div className="mt-4 grid grid-cols-[1fr_16rem] gap-4">
@@ -298,9 +295,10 @@ function PeopleSlide() {
                   <span className="text-[11px] text-white/60">people</span>
                 </div>
                 <p className="mt-1 text-[10px] leading-snug text-white/65">
-                  {year.key === "y1" && "3 founders · 1 UK · 3 SA · 1 support"}
-                  {year.key === "y2" && "3 founders · 4 UK · 5 SA · 2 ops"}
-                  {year.key === "y3" && "3 founders · 8 UK · 7 SA · 2 ops"}
+                  {year.key === "y1" && "2 founders · 2 SA"}
+                  {year.key === "y2" && "3 founders · 1 UK · 4 SA"}
+                  {year.key === "y3" && "3 founders · 4 UK · 6 SA · 1 support"}
+                  {year.key === "y4" && "3 founders · 8 UK · 8 SA · 1 product"}
                 </p>
               </div>
             ))}
@@ -322,7 +320,7 @@ function RevenueSlide() {
     { key: "licences", label: "Licensed apps", tone: "bg-amber-400" },
     { key: "jalipi", label: "jalipi · QTC", tone: "bg-sky-400" },
   ];
-  const max = TOTAL.y3;
+  const max = TOTAL.y4;
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
@@ -330,12 +328,12 @@ function RevenueSlide() {
         <SlideHeading
           kicker="Revenue"
           title="Builds pay the bills."
-          highlight="Support, licences and jalipi make it worth something."
+          highlight="Support and licences make it worth something."
           lede="Indicative, £k. A build is one to two weeks of work: platform extensions at a mid £55k, vendor-agnostic jobs at a mid £25k. Support at 20 to 25% of the build. Licences where a platform lets us sell one app to many tenants."
         />
         <div className="mt-4 grid grid-cols-[1fr_21rem] gap-4">
           <div className="deck-rise rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5" style={{ animationDelay: "0.15s" }}>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-4 gap-4">
               {YEARS.map((year) => (
                 <div key={year.key} className="flex flex-col">
                   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">{year.label}</p>
@@ -358,9 +356,10 @@ function RevenueSlide() {
                   </div>
                   <p className="mt-2 text-[10px] leading-snug text-white/65">
                     {BUILDS.platform[year.key]} platform builds and {BUILDS.agnostic[year.key]} smaller jobs.{" "}
-                    {year.key === "y1" && "Support starts in Q2. jalipi extensions from January."}
-                    {year.key === "y2" && "First licences. Support on 60 live builds."}
-                    {year.key === "y3" && "Licences on two platforms. Support on 170."}
+                    {year.key === "y1" && "Support starts in Q2. One job was lined up."}
+                    {year.key === "y2" && "Support on the first year’s builds."}
+                    {year.key === "y3" && "First licences. Support compounding."}
+                    {year.key === "y4" && "Licences on two platforms."}
                   </p>
                 </div>
               ))}
@@ -383,6 +382,7 @@ function RevenueSlide() {
                   <th className="w-10 py-0.5 text-right">Y1</th>
                   <th className="w-10 py-0.5 text-right">Y2</th>
                   <th className="w-10 py-0.5 text-right">Y3</th>
+                  <th className="w-10 py-0.5 text-right">Y4</th>
                 </tr>
               </thead>
               <tbody>
@@ -397,6 +397,7 @@ function RevenueSlide() {
                     <td className="py-1 text-right text-[10px] tabular-nums text-white/70">{row.y1 ? `${row.y1}%` : "·"}</td>
                     <td className="py-1 text-right text-[10px] tabular-nums text-white/70">{row.y2}%</td>
                     <td className="py-1 text-right text-[10px] tabular-nums text-white/70">{row.y3}%</td>
+                    <td className="py-1 text-right text-[10px] tabular-nums text-white/70">{row.y4 ? `${row.y4}%` : "·"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -433,7 +434,7 @@ function MarketsSlide() {
               <div>
                 <h3 className="text-[15px] font-black leading-tight tracking-tight">{row.name}</h3>
               </div>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-4 gap-2">
                 {YEARS.map((year) => {
                   const value = row[year.key];
                   return (
@@ -467,18 +468,16 @@ function MarketsSlide() {
 /** Cumulative cash, £k. Negative is drawn on the Chris and Thomas overdraft, limit £200k. */
 const CASH: { when: string; cumulative: number; note: string }[] = [
   { when: "Pre Jan", cumulative: -25, note: "Tenants, registrations, legal." },
-  { when: "Y1 Q1", cumulative: -45, note: "The peak, in January. Two salaries, then the first invoices." },
-  { when: "Y1 Q2", cumulative: 40, note: "Builds invoiced. The UK builder joins against signed work." },
-  { when: "Y1 Q3", cumulative: 80, note: "Seller and two SA builders. Revenue is already ahead of them." },
-  { when: "Y1 Q4", cumulative: 125, note: "Paid back. Eight people." },
-  { when: "Y2 H1", cumulative: 450, note: "Fourteen people by mid-year." },
-  { when: "Y2 H2", cumulative: 1000, note: "£1.2m EBITDA for the year." },
-  { when: "Y3 H2", cumulative: 3200, note: "Before any dividend or reinvestment." },
+  { when: "Y1 Q1", cumulative: -45, note: "The peak, in January. Two salaries, then the first invoice." },
+  { when: "Y1", cumulative: 40, note: "One job was lined up. The rest sold after joining." },
+  { when: "Y2", cumulative: 280, note: "Seller and the UK builder. Eight people." },
+  { when: "Y3", cumulative: 1100, note: "Fourteen people. Licences start." },
+  { when: "Y4", cumulative: 2800, note: "Before any dividend or reinvestment." },
 ];
 
 function CashSlide() {
   const negScale = 200;
-  const posScale = 3200;
+  const posScale = 2800;
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
@@ -491,7 +490,7 @@ function CashSlide() {
         />
         <div className="mt-4 grid grid-cols-[1fr_19rem] gap-4">
           <div className="deck-rise rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5" style={{ animationDelay: "0.15s" }}>
-            <div className="grid grid-cols-8 gap-2">
+            <div className="grid grid-cols-6 gap-3">
               {CASH.map((point) => {
                 const positive = point.cumulative >= 0;
                 const height = positive
@@ -545,7 +544,7 @@ function CashSlide() {
             {[
               { label: "Peak draw", value: "£45k", note: "Late January, before the first invoice. £155k of headroom on the £200k limit." },
               { label: "Payback", value: "End of Q1", note: "The first invoices bring cumulative cash back to roughly flat inside the quarter." },
-              { label: "Cash at end of Y3", value: "+£3.2m", note: "Cumulative EBITDA less debtors. Before tax, dividends or a round." },
+              { label: "Cash at end of Y4", value: "+£2.8m", note: "Cumulative EBITDA less debtors. Before tax, dividends or a round." },
             ].map((item, index) => (
               <div
                 key={item.label}
@@ -574,9 +573,10 @@ const VALUE: {
   recurring: string;
   blended: string;
 }[] = [
-  { key: "y1", revenue: "£1.2m", arr: "£0.2m", ebitda: "£0.3m · 25%", services: "£1.8 – 2.4m", ebitdaMult: "£1.5 – 1.8m", recurring: "£1.3 – 1.8m", blended: "£1.5 – 2m" },
-  { key: "y2", revenue: "£3.2m", arr: "£0.8m", ebitda: "£1.2m · 37%", services: "£4.8 – 6.4m", ebitdaMult: "£6 – 7.2m", recurring: "£4.8 – 6.4m", blended: "£5 – 7m" },
-  { key: "y3", revenue: "£6.5m", arr: "£1.8m", ebitda: "£2.6m · 40%", services: "£9.8 – 13m", ebitdaMult: "£13 – 15.6m", recurring: "£10.8 – 14.4m", blended: "£10 – 15m" },
+  { key: "y1", revenue: "£0.7m", arr: "£0.1m", ebitda: "£0.15m · 20%", services: "£1.1 – 1.4m", ebitdaMult: "£0.8 – 0.9m", recurring: "£0.6 – 0.8m", blended: "£0.8 – 1.2m" },
+  { key: "y2", revenue: "£1.6m", arr: "£0.3m", ebitda: "£0.4m · 25%", services: "£2.4 – 3.2m", ebitdaMult: "£2 – 2.4m", recurring: "£1.8 – 2.4m", blended: "£2 – 3m" },
+  { key: "y3", revenue: "£3.2m", arr: "£0.8m", ebitda: "£1.0m · 31%", services: "£4.8 – 6.4m", ebitdaMult: "£5 – 6m", recurring: "£4.8 – 6.4m", blended: "£5 – 7m" },
+  { key: "y4", revenue: "£6m", arr: "£1.6m", ebitda: "£2.1m · 35%", services: "£9 – 12m", ebitdaMult: "£10.5 – 12.6m", recurring: "£9.6 – 12.8m", blended: "£10 – 15m" },
 ];
 
 function ValueSlide() {
@@ -588,7 +588,7 @@ function ValueSlide() {
           kicker="What it is worth"
           title="Three lenses on the same studio."
           highlight="They land in the same place."
-          lede="Services firms sell at 1.5 to 2 times revenue, or 5 to 6 times EBITDA. Recurring software sells at 6 to 8 times ARR. By year three all three point at £10 to 15m. The recurring line is what lets a buyer use the higher lens."
+          lede="Services firms sell at 1.5 to 2 times revenue, or 5 to 6 times EBITDA. Recurring software sells at 6 to 8 times ARR. By year four all three point at £10 to 15m. The recurring line is what lets a buyer use the higher lens."
         />
         <div className="deck-rise mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5" style={{ animationDelay: "0.15s" }}>
           <table className="w-full table-fixed border-collapse text-left">
@@ -625,9 +625,9 @@ function ValueSlide() {
         </div>
         <div className="deck-rise mt-3.5 grid grid-cols-3 gap-4" style={{ animationDelay: "0.35s" }}>
           {[
-            { title: "Why the margin is high", body: "A build is one to two weeks of work priced as a build, not a day rate. Twenty people producing £6.5m is £325k a head. The multiples assume a buyer believes that holds." },
-            { title: "Why ARR matters", body: "Support, licences and the jalipi kickback are sold every year. £1.8m recurring at 6 to 8 times is the whole of the low case on its own. Without it, we are a services firm at 1.5 times." },
-            { title: "The sensitivity", body: "Halve the margin and the EBITDA lens gives £6.5 to 8m. Halve the recurring and the ARR lens gives £5 to 7m. The revenue lens still gives £10m. Three lenses is the point." },
+            { title: "Why the margin is high", body: "A build is one to two weeks of work priced as a build, not a day rate. Twenty people producing £6m is £300k a head. The multiples assume a buyer believes that holds." },
+            { title: "Why ARR matters", body: "Support and licences are sold every year. £1.6m recurring at 6 to 8 times is most of the low case on its own. Without it, we are a services firm at 1.5 times." },
+            { title: "The sensitivity", body: "Halve the margin and the EBITDA lens gives £5 to 6m. Halve the recurring and the ARR lens gives £5 to 6m. The revenue lens still gives £9m. Three lenses is the point." },
           ].map((item) => (
             <div key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2.5">
               <p className="text-[9.5px] font-black uppercase tracking-[0.2em] text-white/45">{item.title}</p>
@@ -645,7 +645,7 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
     group: "Selling",
     items: [
       "A build is one to two weeks. Platform extensions £40 to 120k, modelled at a mid £55k. Vendor-agnostic jobs at a mid £25k.",
-      "Builds a year: 25, 64, 110. A settled builder ships eight or nine a year in the model. Capacity at 1.5 weeks each is about twenty.",
+      "Builds a year: 14, 32, 63, 104. One job is lined up before I join. A settled builder ships eight or nine a year. Capacity at 1.5 weeks each is about twenty.",
       "Support at 20 to 25% of the build, from the quarter after go-live. 90% renew.",
       "Licences from year two on Dayforce, later Workday. £15 to 30k per tenant per year.",
       "jalipi: extensions billed to QTC, plus a 5% kickback on QTC’s jalipi deals. Not yet agreed.",
@@ -654,10 +654,10 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
   {
     group: "Spending",
     items: [
-      "Two co-founders at £100k from January. A third, the seller, on the same from Q3 if they take the stake.",
+      "Two co-founders at £100k from January. A third, the seller, on the same from year two if they take the stake.",
       "Builders fully loaded: £90k UK, £65k South Africa. Support and ops seats £45 to 60k, in SA.",
-      "Cost base £0.9m, £2.0m, £3.9m. People are under half of it; the rest is contractors for peaks, commission, marketplace fees, tenants, travel and TCN shared ops.",
-      "EBITDA 25%, 37%, 40%. Debtors at 45 days.",
+      "Cost base £0.55m, £1.2m, £2.2m, £3.9m. People are about half of it; the rest is contractors for peaks, commission, marketplace fees, tenants, travel and TCN shared ops.",
+      "EBITDA 20%, 25%, 31%, 35%. Debtors at 45 days.",
       "Overdraft limit £200k. Peak draw about £45k in January: two salaries plus the setup already spent. Cleared inside Q1.",
     ],
   },
@@ -718,19 +718,19 @@ function ChoiceSlide() {
       label: "text-amber-200/80",
       value: "£10 – 15m",
       lines: [
-        "Twenty people, £6.5m revenue, £2.6m EBITDA, £1.8m recurring, referenceable customers on Dayforce, UKG and RELEX in two countries.",
+        "Twenty people, £6m revenue, £2.1m EBITDA, £1.6m recurring, referenceable customers on Dayforce, UKG and RELEX in two countries.",
         "Buyers: a systems integrator wanting a build capability, a vendor wanting a partner in house, a private equity roll-up, or TCN consolidating it.",
         "Founders and Chris and Thomas take the return. Doug’s stake, the seller’s stake and any builder bonus vest into it.",
       ],
-      good: "A clean exit in year three at ten to fifteen million.",
+      good: "A clean exit in year four at ten to fifteen million.",
     },
     {
       title: "Double down",
       tone: "border-teal-400/30 bg-teal-500/[0.08]",
       label: "text-teal-200/80",
-      value: "£1.8m ARR → £5m+",
+      value: "£1.6m ARR → £5m+",
       lines: [
-        "Turn the licensed apps into the business. Products sold per tenant on Dayforce and Workday, with builds as the front door and £3m of year-three cash to fund it.",
+        "Turn the licensed apps into the business. Products sold per tenant on Dayforce and Workday, with builds as the front door and the year-four cash to fund it.",
         "Hire product, not more builders. Open a third market. Take a round only if the ARR growth justifies one.",
         "Aim for recurring at half of revenue by year five, and a valuation on ARR rather than revenue.",
       ],
@@ -742,10 +742,10 @@ function ChoiceSlide() {
       <Glows />
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-6xl">
         <SlideHeading
-          kicker="Year three"
+          kicker="Year four"
           title="Sell it,"
           highlight="or double down."
-          lede="The plan is built so both are real choices at the end of year three. The overdraft is long repaid. The studio stands up without any one of us. What is left is a decision about what to do with it."
+          lede="The plan is built so both are real choices at the end of year four. The overdraft is long repaid. The studio stands up without any one of us. What is left is a decision about what to do with it."
         />
         <div className="mt-5 grid grid-cols-2 gap-5">
           {paths.map((path, index) => (
@@ -771,7 +771,7 @@ function ChoiceSlide() {
           ))}
         </div>
         <p className="deck-rise mt-4 text-center text-[10.5px] text-white/50" style={{ animationDelay: "0.5s" }}>
-          We decide at the end of year two which way to lean, so year three is spent building towards it.
+          We decide at the end of year three which way to lean, so year four is spent building towards it.
         </p>
       </div>
     </BespokeBrandedSlide>

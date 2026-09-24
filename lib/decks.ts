@@ -31,7 +31,7 @@ export const STUDIO_DECKS: DeckEntry[] = [
   {
     href: "/studio/plan",
     kicker: "For TCN · the plan",
-    title: "Three years to a choice.",
-    body: "Now to January, then three years. Revenue from day one, twenty people by year three, a £200k overdraft never fully drawn, and a studio worth £10 to 15m at the end. Who we hire and when, revenue by platform and market, ARR, EBITDA and valuation. Indicative.",
+    title: "Four years to a choice.",
+    body: "Now to January, then four years. One job lined up before I join, twenty people by year four, a £200k overdraft barely used, and a studio worth £10 to 15m at the end. Indicative.",
   },
 ];

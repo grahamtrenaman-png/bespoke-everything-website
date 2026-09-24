@@ -746,14 +746,14 @@ function buildSlides(): DeckSlide[] {
           eras={STUDIO_ERAS}
           closing={
             <>
-              Vanilla won because building was slow. The customer fitted their process to the system, or
-              waited on a change request. The platforms have opened up, and a build inside them now takes weeks.
+              SaaS made the customer fit the product. The sick-pay rule, the union agreement, the report
+              the region actually uses: a workaround, or a change request that never came.
             </>
           }
           closingEmphasis={
             <>
-              That is the studio. The workflow, the screen and the rule, on the system they already run.
-              Everything they want from the software, without replacing it.
+              The platforms have opened. Build inside the one they already run, in weeks. The workflow,
+              the screen, the rule. The software they wanted, without replacing it.
             </>
           }
         />

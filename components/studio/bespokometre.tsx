@@ -54,7 +54,7 @@ export function TimelineSlide({
           <h2 className="mt-3 text-4xl font-bold tracking-tight">
             The industry went vanilla.{" "}
             <span className="bg-gradient-to-r from-amber-400 via-slate-300 to-emerald-400 bg-clip-text text-transparent">
-              Customers can have what they want.
+              Bespoke is back.
             </span>
           </h2>
         </div>

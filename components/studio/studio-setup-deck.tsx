@@ -43,14 +43,14 @@ import {
 import { BespokeBrandedSlide } from "@/components/studio/slide-chrome";
 import { cn } from "@/lib/cn";
 
-type DeckSlide = {
+export type DeckSlide = {
   id: string;
   section: string;
   gradient: string;
   node: ReactNode;
 };
 
-function Glows() {
+export function Glows() {
   return (
     <>
       <div className="deck-drift pointer-events-none absolute -left-40 top-1/4 h-[32rem] w-[32rem] rounded-full bg-teal-600/15 blur-3xl" />
@@ -62,7 +62,7 @@ function Glows() {
   );
 }
 
-function SlideHeading({
+export function SlideHeading({
   kicker,
   title,
   highlight,

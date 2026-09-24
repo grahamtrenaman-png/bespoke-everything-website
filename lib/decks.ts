@@ -22,4 +22,10 @@ export const STUDIO_DECKS: DeckEntry[] = [
     title: "The studio in four slides.",
     body: "The idea, where we build, each vendor and how we show up, and how the studio runs. The talk-track version of the deck above.",
   },
+  {
+    href: "/studio/seats",
+    kicker: "For TCN · the seats",
+    title: "Three seats. Three job specs.",
+    body: "Doug as co-founder on vendors and accounts, the seller who may become a co-founder, and the skilled builder. The job, what good looks like, who fits, and the terms we propose.",
+  },
 ];

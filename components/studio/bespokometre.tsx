@@ -51,15 +51,15 @@ export function TimelineSlide({
             <History className="h-3.5 w-3.5" />
             {eyebrow}
           </span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight">
+          <h2 className="mt-3 text-4xl font-bold tracking-tight">
             The industry went vanilla.{" "}
             <span className="bg-gradient-to-r from-amber-400 via-slate-300 to-emerald-400 bg-clip-text text-transparent">
-              Bespoke is back.
+              Customers can have what they want.
             </span>
           </h2>
         </div>
 
-        <div className="deck-rise mt-8 overflow-x-auto pb-1" style={{ animationDelay: "0.2s" }}>
+        <div className="deck-rise mt-5 overflow-x-auto pb-1" style={{ animationDelay: "0.2s" }}>
           <div className="mx-auto min-w-[640px] max-w-4xl">
             <div className="mb-3">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500/25 to-emerald-500/25 px-3 py-1 text-xs font-black uppercase tracking-wide text-white">
@@ -67,7 +67,7 @@ export function TimelineSlide({
                 Bespokometre
               </span>
             </div>
-            <div className="relative h-64">
+            <div className="relative h-52">
               <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
                 <defs>
                   <linearGradient id={lineGradientId} x1="0" y1="0" x2="1" y2="0">
@@ -167,13 +167,13 @@ export function TimelineSlide({
         </div>
 
         <p
-          className="deck-rise mx-auto mt-6 max-w-3xl text-center text-lg leading-relaxed text-white/70"
+          className="deck-rise mx-auto mt-4 max-w-3xl text-center text-[15px] leading-relaxed text-white/70"
           style={{ animationDelay: "0.4s" }}
         >
           {closing}
         </p>
         <p
-          className="deck-rise mx-auto mt-4 max-w-3xl text-center text-lg font-semibold leading-relaxed text-white/90"
+          className="deck-rise mx-auto mt-2 max-w-3xl text-center text-[15px] font-semibold leading-relaxed text-white/90"
           style={{ animationDelay: "0.55s" }}
         >
           {closingEmphasis}

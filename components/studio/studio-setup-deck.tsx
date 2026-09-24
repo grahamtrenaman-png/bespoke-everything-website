@@ -1248,18 +1248,18 @@ function buildSlides(): DeckSlide[] {
       gradient: "from-amber-500 via-slate-400 to-emerald-500",
       node: (
         <BespokometreSlide
-          eyebrow="The SaaS decade"
+          eyebrow="Why the studio"
           eras={STUDIO_ERAS}
           closing={
             <>
-              Every move up the stack took bespoke away from the customer. SaaS finished the job:
-              fit your process to the system, or file a change request and wait.
+              Vanilla won because building was slow. The customer fitted their process to the system, or
+              waited on a change request. The platforms have opened up, and a build inside them now takes weeks.
             </>
           }
           closingEmphasis={
             <>
-              The platforms have now opened the door to build inside them. The studio walks
-              through it.
+              That is the studio. The workflow, the screen and the rule, on the system they already run.
+              Everything they want from the software, without replacing it.
             </>
           }
         />

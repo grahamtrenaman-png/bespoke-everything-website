@@ -21,14 +21,6 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 <li>
                   <a
-                    href="#jalipi"
-                    className="text-sm text-white/65 transition-colors hover:text-gold"
-                  >
-                    jalipi
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="https://interestingjourneys.com"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 800" width="1240" height="800" role="img" aria-labelledby="title desc">
+  <title id="title">How Bespoke Everything works: Services, Solutions and Software</title>
+  <desc id="desc">A continuous loop. Services is where every engagement starts: understanding and solving operational problems, often with traditional methods and sometimes by building something bespoke. Bespoke Solutions that prove stable and are needed by other customers become reusable Software: an extension, a pack, or a product, licensed by Bespoke Everything or by a partner. Software, whether Bespoke Everything's own products, partner platforms it builds on, or third-party systems it extends, brings new customers and new problems, and the cycle starts again.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
+      <path d="M1.5 1.5 L8 5 L1.5 8.5" fill="none" stroke="#c5a059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <g font-family="Geist, 'Geist Sans', -apple-system, 'SF Pro Text', system-ui, sans-serif">
+
+    <!-- Faint continuous ring, for continuity behind the nodes -->
+    <circle cx="620" cy="450" r="230" fill="none" stroke="#111111" stroke-opacity="0.08" stroke-width="1"/>
+
+    <!-- Flow arcs, clockwise: Services -> Solutions -> Software -> Services -->
+    <g fill="none" stroke="#c5a059" stroke-width="2.25" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M 694.9 232.5 A 230 230 0 0 1 845.4 495.9"/>
+      <path d="M 770.9 623.6 A 230 230 0 0 1 467.6 622.3"/>
+      <path d="M 394.2 493.9 A 230 230 0 0 1 547.0 231.9"/>
+    </g>
+
+    <!-- Centre: brand mark, wordmark and belief -->
+    <g transform="translate(590 380) scale(1.2)">
+      <rect x="0" y="0" width="10" height="10" rx="2.5" fill="#111111"/>
+      <rect x="14" y="0" width="10" height="10" rx="2.5" fill="#111111"/>
+      <rect x="28" y="0" width="22" height="10" rx="2.5" fill="#c5a059"/>
+      <rect x="0" y="14" width="10" height="10" rx="2.5" fill="#111111"/>
+      <rect x="14" y="14" width="10" height="10" rx="2.5" fill="#111111"/>
+      <rect x="28" y="14" width="22" height="10" rx="2.5" fill="#c5a059"/>
+      <rect x="0" y="28" width="10" height="10" rx="2.5" fill="#111111"/>
+      <rect x="14" y="28" width="10" height="10" rx="2.5" fill="#111111"/>
+      <rect x="28" y="28" width="22" height="10" rx="2.5" fill="#c5a059"/>
+    </g>
+    <text x="620" y="464" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="2.9" fill="#111111">BESPOKE EVERYTHING</text>
+    <text x="620" y="492" text-anchor="middle" font-size="11.5" fill="#6b6b6b">Software should adapt to businesses.</text>
+    <text x="620" y="510" text-anchor="middle" font-size="11.5" fill="#c5a059">Not the other way around.</text>
+
+    <!-- Node 01: Services (top) -->
+    <circle cx="620" cy="220" r="62" fill="#111111" stroke="#111111" stroke-width="1.25"/>
+    <text x="620" y="210" text-anchor="middle" font-size="10.5" font-weight="500" letter-spacing="2.5" fill="#c5a059">01</text>
+    <text x="620" y="234" text-anchor="middle" font-size="19" font-weight="600" letter-spacing="-0.2" fill="#ffffff">Services</text>
+
+    <g text-anchor="middle" font-size="13.5" fill="#6b6b6b">
+      <text x="620" y="62">Where every engagement starts. We get to know the real</text>
+      <text x="620" y="82">operational problem and solve it &#8212; often with traditional</text>
+      <text x="620" y="102">methods, sometimes by building something bespoke.</text>
+    </g>
+    <text x="620" y="130" text-anchor="middle" font-size="10" font-weight="500" letter-spacing="1.6" fill="#c5a059">CONSULTING  &#8226;  STRATEGY  &#8226;  DELIVERY</text>
+
+    <!-- Node 02: Solutions (lower right) -->
+    <circle cx="819" cy="565" r="62" fill="#ffffff" stroke="#111111" stroke-width="1.25"/>
+    <text x="819" y="555" text-anchor="middle" font-size="10.5" font-weight="500" letter-spacing="2.5" fill="#c5a059">02</text>
+    <text x="819" y="579" text-anchor="middle" font-size="19" font-weight="600" letter-spacing="-0.2" fill="#111111">Solutions</text>
+
+    <g font-size="13.5" fill="#6b6b6b">
+      <text x="910" y="535">Bespoke applications and</text>
+      <text x="910" y="555">enhancements designed around</text>
+      <text x="910" y="575">a specific organisation,</text>
+      <text x="910" y="595">process or business problem.</text>
+    </g>
+    <text x="910" y="625" font-size="10" font-weight="500" letter-spacing="1.6" fill="#c5a059">BESPOKE SYSTEMS  &#8226;  INTEGRATIONS</text>
+
+    <!-- Node 03: Software (lower left) -->
+    <circle cx="421" cy="565" r="62" fill="#ffffff" stroke="#111111" stroke-width="1.25"/>
+    <text x="421" y="555" text-anchor="middle" font-size="10.5" font-weight="500" letter-spacing="2.5" fill="#c5a059">03</text>
+    <text x="421" y="579" text-anchor="middle" font-size="19" font-weight="600" letter-spacing="-0.2" fill="#111111">Software</text>
+
+    <g text-anchor="end" font-size="13.5" fill="#6b6b6b">
+      <text x="330" y="535">The platforms the work runs on:</text>
+      <text x="330" y="555">products we or our partners</text>
+      <text x="330" y="575">license, and the third-party</text>
+      <text x="330" y="595">systems customers already use.</text>
+    </g>
+    <text x="330" y="625" text-anchor="end" font-size="10" font-weight="500" letter-spacing="1.6" fill="#c5a059">PRODUCTS  &#8226;  PLATFORMS WE EXTEND</text>
+
+    <!-- Transition: Services -> Solutions (upper right) -->
+    <line x1="870" y1="286" x2="894" y2="286" stroke="#c5a059" stroke-width="1"/>
+    <g font-size="13" fill="#111111">
+      <text x="870" y="308">When traditional methods</text>
+      <text x="870" y="328">aren&#8217;t enough, we build</text>
+      <text x="870" y="348">something bespoke.</text>
+    </g>
+
+    <!-- Transition: Solutions -> Software (bottom) -->
+    <line x1="608" y1="712" x2="632" y2="712" stroke="#c5a059" stroke-width="1"/>
+    <g text-anchor="middle" font-size="13" fill="#111111">
+      <text x="620" y="736">Where a bespoke solution proves stable and other customers need it,</text>
+      <text x="620" y="756">it becomes reusable software &#8212; an extension, a pack, or a product.</text>
+    </g>
+
+    <!-- Transition: Software -> Services (upper left) -->
+    <line x1="346" y1="286" x2="370" y2="286" stroke="#c5a059" stroke-width="1"/>
+    <g text-anchor="end" font-size="13" fill="#111111">
+      <text x="370" y="308">New software, ours, a partner&#8217;s or third party,</text>
+      <text x="370" y="328">brings new problems to understand</text>
+      <text x="370" y="348">&#8212; and the cycle starts again.</text>
+    </g>
+
+  </g>
+</svg>

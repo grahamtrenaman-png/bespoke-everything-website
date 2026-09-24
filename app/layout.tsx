@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Baloo_2, Geist } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
-const baloo2 = Baloo_2({
-  variable: "--font-baloo-2",
-  subsets: ["latin"],
-  weight: ["600"],
 });
 
 const siteUrl = "https://bespoke-everything.com";
@@ -37,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${baloo2.variable} antialiased`}>
+    <html lang="en" className={`${geistSans.variable} antialiased`}>
       <body>{children}</body>
     </html>
   );

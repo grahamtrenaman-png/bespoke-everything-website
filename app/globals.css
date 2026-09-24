@@ -308,10 +308,6 @@ button:focus-visible {
   color: var(--gold);
 }
 
-.jalipi-wordmark {
-  font-family: var(--font-baloo-2), "Baloo 2", system-ui, sans-serif;
-}
-
 .hero-logo {
   font-size: clamp(1.625rem, 3.5vw + 0.75rem, 2.875rem);
 }

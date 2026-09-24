@@ -7,7 +7,6 @@ import BespokeEverythingLogo from "./components/BespokeEverythingLogo";
 import BrandGrid from "./components/BrandGrid";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import JalipiWordmark from "./components/JalipiWordmark";
 import Reveal from "./components/Reveal";
 
 export const metadata: Metadata = {
@@ -21,8 +20,8 @@ const capabilities = [
     number: "01",
     title: "Software",
     description:
-      "Products and platforms that we build, operate and continuously improve.",
-    examples: ["jalipi", "Interesting Journeys", "Future software products"],
+      "Products and platforms we build, extend or run on — our own, our partners', and the systems customers already use.",
+    examples: ["Interesting Journeys", "Partner platforms", "Third-party extensions"],
   },
   {
     id: "services",
@@ -368,45 +367,8 @@ export default async function Home() {
             </Reveal>
 
             <div className="mt-14 grid gap-5 lg:grid-cols-2 lg:gap-6">
-              {/* jalipi */}
-              <Reveal>
-                <article id="jalipi" className="card flex h-full flex-col overflow-hidden">
-                  <div className="flex flex-1 flex-col p-8 lg:p-9">
-                    <span className="status-badge status-badge-dev w-fit">
-                      Currently in Development
-                    </span>
-                    <h3 className="mt-5 text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl">
-                      Enterprise workforce management, without compromise.
-                    </h3>
-                    <div className="gold-rule mt-5" aria-hidden="true" />
-                    <p className="mt-6 flex-1 text-[0.9375rem] leading-relaxed text-muted">
-                      A new kind of workforce management platform: enterprise-grade
-                      capability shaped around how each business actually operates,
-                      and delivered in a fraction of the usual time. Forecasting,
-                      scheduling, time &amp; attendance and pay preparation come
-                      together in one modern, AI-native platform that adapts to the
-                      customer — instead of forcing the customer to adapt to it.
-                    </p>
-                    <a
-                      href="https://jalipi.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary-light mt-8 w-fit"
-                    >
-                      Find out more
-                    </a>
-                  </div>
-                  <div className="flex items-center justify-center border-t border-ink/6 bg-off-white px-8 py-12 lg:px-9">
-                    <JalipiWordmark
-                      className="jalipi-wordmark"
-                      style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
-                    />
-                  </div>
-                </article>
-              </Reveal>
-
               {/* Interesting Journeys */}
-              <Reveal delay={80}>
+              <Reveal>
                 <article className="card flex h-full flex-col overflow-hidden">
                   <div className="flex flex-1 flex-col p-8 lg:p-9">
                     <span className="status-badge status-badge-live w-fit">

@@ -75,16 +75,16 @@ const GRAHAM: SeatSpec = {
   id: "graham",
   icon: Compass,
   tone: "cofounder",
-  kicker: "Co-founder · product and delivery · from January",
+  kicker: "Co-founder · solutions and delivery · from January",
   title: "Graham.",
   highlight: "What we build, and what it costs.",
   lede: "Scopes, prices and builds. Proves the first pattern on a platform, then hands the repeat to a builder.",
   summary:
-    "Graham runs product and delivery. He decides what the studio builds and on which platforms, scopes and prices every job, builds the first version of each pattern himself, then hires and coaches the builders who ship it again. He also hands jalipi to QTC and keeps a stake in it, with no product work on the side.",
+    "Graham runs solutions and delivery. He decides what the studio builds and on which platforms, scopes and prices every job, builds the first version of each pattern himself, then hires and coaches the builders who ship it again. He also hands jalipi to QTC and keeps a stake in it, with no solutions work on the side.",
   owns: [
     "The scope and the price of every build.",
     "Whether a pattern is good enough to ship again.",
-    "The jalipi handover, and the stake in that product.",
+    "The jalipi handover, and the stake in that solution.",
   ],
   job: [
     "Scope and price every engagement. Fixed price, invoiced to the customer.",
@@ -93,7 +93,7 @@ const GRAHAM: SeatSpec = {
     "Hold quality until a builder owns the line: tenant, handover, support renewal.",
     "Price with Doug, and later with the seller. Hold the scope line in the room.",
     "Hire and coach the builders. The first hire is against the one signed job.",
-    "Hand jalipi to QTC. Keep a stake. No product work on the side.",
+    "Hand jalipi to QTC. Keep a stake. No solutions work on the side.",
   ],
   good: [
     "The first job live inside the first quarter, on price.",
@@ -102,7 +102,7 @@ const GRAHAM: SeatSpec = {
   ],
   fits: [
     "Has built and shipped enterprise software, and priced it.",
-    "Has done this before on jalipi, from product to a paying customer.",
+    "Has done this before on jalipi, from solution to a paying customer.",
     "Comfortable letting go of the build once the pattern is proven.",
   ],
   terms: [
@@ -228,7 +228,7 @@ const BUILDER: SeatSpec = {
     "Support closed inside the SLA, and the customer renewing.",
   ],
   fits: [
-    "A senior full-stack engineer who has built inside or beside an enterprise SaaS product.",
+    "A senior full-stack engineer who has built inside or beside an enterprise SaaS platform.",
     "Uses AI tooling to ship faster, and still understands what shipped.",
     "Has sat with a customer. Dayforce or UKG a bonus, not a requirement.",
   ],
@@ -247,20 +247,19 @@ const TCN: SeatSpec = {
   tone: "discuss",
   kicker: "Not a seat inside the studio · to discuss",
   title: "TCN.",
-  highlight: "Capital, doors, and FXP.",
-  lede: "Proposed so it can be argued. Chris and Thomas fund the studio and open the doors. FXP implements. None of this is agreed as a job description yet.",
+  highlight: "Capital, doors, and coaching.",
+  lede: "Proposed so it can be argued. Chris and Thomas fund the studio and open the doors. None of this is agreed as a job description yet.",
   summary:
-    "TCN provides the £200k facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. FXP implements the platforms we extend and invoices the customer for the services; we build beside them. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
+    "TCN provides the £200k facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
   owns: [
     "The £200k facility, and whether it is used.",
     "The Dayforce and UKG doors.",
-    "FXP’s implementation, invoiced to the customer.",
+    "Introductions from the network, warm only.",
   ],
   job: [
     "Provide the facility. The plan draws about £45k at the January peak, and clears it inside the first quarter.",
     "Open Dayforce and UKG. Chris in the room for the first offers.",
     "Coach the founders on price, hiring, and which accounts are worth chasing.",
-    "FXP implements the platforms we extend, and invoices the customer for the services. We build beside them, and invoice the customer for the build.",
     "Introduce work from the network. Warm only. Every note to someone who already knows the sender.",
     "Hold the founders to the plan: cash, hires against signed work, and the choice at the end of year four.",
   ],
@@ -272,7 +271,7 @@ const TCN: SeatSpec = {
   fits: [
     "Chris: the doors, the accounts, and the coaching.",
     "Thomas: the cash model, the terms, and the discipline.",
-    "FXP: implementation, invoiced to the customer.",
+    "The wider TCN companies: warm introductions from their own accounts.",
   ],
   terms: [
     "How hands-on Chris and Thomas are, week to week.",
@@ -280,17 +279,17 @@ const TCN: SeatSpec = {
     "Whether other TCN companies originate work, and on what terms. Reporting: what they see, and how often.",
   ],
   trigger: "In the room now. The facility and the doors are what make January possible.",
-  not: "Not delivery. Not between FXP or Bespoke Everything and the customer invoice. Not the jalipi product. That stake sits with Graham.",
+  not: "Not delivery. Not between Bespoke Everything and the customer invoice. Not the jalipi solution. That stake sits with Graham.",
 };
 
 const SEATS = [GRAHAM, DOUG, SELLER, BUILDER, TCN];
 
 const OVERVIEW: { spec: SeatSpec; seat: string; who: string; fills: string }[] = [
-  { spec: GRAHAM, seat: "Product and delivery", who: "Graham", fills: "From January. Scopes, prices, builds the first pattern." },
+  { spec: GRAHAM, seat: "Solutions and delivery", who: "Graham", fills: "From January. Scopes, prices, builds the first pattern." },
   { spec: DOUG, seat: "Vendors and accounts", who: "Doug", fills: "From January. The partner programmes and the network." },
   { spec: SELLER, seat: "Direct channel", who: "Open", fills: "When support covers a salary, or the network is thin by end of Q2." },
   { spec: BUILDER, seat: "Build", who: "Open", fills: "Against the signed job. Further hires only when the work pays for them." },
-  { spec: TCN, seat: "Capital, doors, FXP", who: "Chris and Thomas", fills: "To discuss. The facility, the introductions, and implementation." },
+  { spec: TCN, seat: "Capital, doors, coaching", who: "Chris and Thomas", fills: "To discuss. The facility, the introductions, and how hands-on they are." },
 ];
 
 function SeatsTitleSlide() {
@@ -321,7 +320,7 @@ function SeatsTitleSlide() {
           className="deck-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65"
           style={{ animationDelay: "0.85s" }}
         >
-          Graham on product and delivery. Doug on vendors and accounts. A seller when the numbers say so.
+          Graham on solutions and delivery. Doug on vendors and accounts. A seller when the numbers say so.
           A builder against signed work. And the role TCN plays, written down so it can be discussed rather
           than assumed.
         </p>
@@ -512,7 +511,7 @@ const GROWTH: { year: string; people: string; seats: string; changes: string }[]
   { year: "Year one", people: "4", seats: "Graham · Doug · 2 SA builders", changes: "Two founders sell and build. The first builder against the signed job, the second once support carries them." },
   { year: "Year two", people: "8", seats: "+ seller · UK builder · 2 SA builders", changes: "The direct channel opens. Graham stops building day to day and holds price and pattern." },
   { year: "Year three", people: "14", seats: "+ 2 UK · 2 SA builders · support", changes: "A pair of builders per lead platform. A support role takes the live builds off the builders." },
-  { year: "Year four", people: "20", seats: "+ 3 UK · 3 SA builders · product lead", changes: "Workday and the licensed apps. A product lead owns what we sell to many tenants." },
+  { year: "Year four", people: "20", seats: "+ 3 UK · 3 SA builders · solutions lead", changes: "Workday and the licensed apps. A solutions lead owns what we sell to many tenants." },
 ];
 
 function GrowthSlide() {

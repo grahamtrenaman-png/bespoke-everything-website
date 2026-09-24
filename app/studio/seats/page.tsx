@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { SeatsDeck } from "@/components/studio/seats-deck";
 
 export const metadata: Metadata = {
-  title: "The seats · Bespoke Everything",
+  title: "The roles · Bespoke Everything",
   description:
-    "Job specs for the three seats: Doug as co-founder on vendors and accounts, the seller, and the builder.",
+    "Roles and responsibilities: Graham, Doug, the seller, the builder, and the part TCN plays.",
   robots: { index: false, follow: false },
 };
 

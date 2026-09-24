@@ -250,7 +250,7 @@ const TCN: SeatSpec = {
   highlight: "Capital, doors, and FXP.",
   lede: "Proposed so it can be argued. Chris and Thomas fund the studio and open the doors. FXP implements. None of this is agreed as a job description yet.",
   summary:
-    "TCN provides the £200k facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. FXP implements the platforms we extend and invoices the customer for the services. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
+    "TCN provides the £200k facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. FXP implements the platforms we extend and invoices the customer for the services; we build beside them. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
   owns: [
     "The £200k facility, and whether it is used.",
     "The Dayforce and UKG doors.",
@@ -260,7 +260,7 @@ const TCN: SeatSpec = {
     "Provide the facility. The plan draws about £45k at the January peak, and clears it inside the first quarter.",
     "Open Dayforce and UKG. Chris in the room for the first offers.",
     "Coach the founders on price, hiring, and which accounts are worth chasing.",
-    "FXP implements jalipi and the other vendors the way they implement anyone, and invoices the customer for the services.",
+    "FXP implements the platforms we extend, and invoices the customer for the services. We build beside them, and invoice the customer for the build.",
     "Introduce work from the network. Warm only. Every note to someone who already knows the sender.",
     "Hold the founders to the plan: cash, hires against signed work, and the choice at the end of year four.",
   ],

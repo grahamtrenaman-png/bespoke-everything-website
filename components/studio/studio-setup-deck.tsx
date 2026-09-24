@@ -339,8 +339,8 @@ const PLATFORMS: PlatformRow[] = [
     mechanism:
       "A platform QuickThink Cloud develop and harden. We extend it for each engagement.",
     partnerRoute: "Not a vendor programme. QTC own it; Graham keeps a stake.",
-    doorOpener: "QTC bring the work and pay BE. FXP implements.",
-    note: "From January any jalipi time is billed to QTC. Nothing on the side.",
+    doorOpener: "QTC bring the customer. We build the extension and invoice the customer.",
+    note: "From January, extensions are invoiced to the customer. Any product time for QTC is a separate invoice, and none is anticipated. Nothing on the side.",
   },
 ];
 
@@ -397,7 +397,7 @@ function PlatformsSlide() {
           </table>
         </div>
         <p className="deck-rise mt-2 text-center text-[9.5px] text-white/40" style={{ animationDelay: "0.4s" }}>
-          Vendor detail from their own developer and partner pages, checked 23 Sep 2026. jalipi is QuickThink Cloud’s platform: they develop and harden it, Graham keeps a stake, and FXP implements it as they would any vendor.
+          Vendor detail from their own developer and partner pages, checked 23 Sep 2026. jalipi is QuickThink Cloud’s platform: they develop and harden it, and Graham keeps a stake. We extend it as we would any other platform.
         </p>
       </div>
     </BespokeBrandedSlide>
@@ -1041,7 +1041,7 @@ const NOTICE: Phase[] = [
     window: "Mid Oct → mid Jan",
     tone: "notice",
     items: [
-      "Hand jalipi to QuickThink Cloud. Their developer hardens it; Graham keeps a stake. FXP implements it as they would any vendor.",
+      "Hand jalipi to QuickThink Cloud. Their developer hardens it; Graham keeps a stake. From January it is one more platform we extend.",
       "From January, any jalipi time is billed by Bespoke Everything to QTC, and none is anticipated. Nothing on the side.",
     ],
     measure: "A clean handover, written down.",
@@ -1515,7 +1515,7 @@ const CALL_VENDORS: CallVendor[] = [
     wave: "With QTC",
     shape: "Partner platform",
     extend: "A platform QuickThink Cloud develop and harden. Graham keeps a stake.",
-    door: "QTC. They bring the engagement and pay BE for the work. FXP implements.",
+    door: "QTC. They bring the customer. We build the extension and invoice the customer.",
     first: "A bespoke extension on each engagement, delivered by us.",
   },
 ];

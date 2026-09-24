@@ -404,7 +404,7 @@ function RevenueSlide() {
             </table>
             <p className="mt-2 text-[9.5px] leading-snug text-white/50">
               A quarter of every year is vendor-agnostic: spreadsheets, small apps, consulting. jalipi is
-              extensions billed to QTC. A kickback to the sales originator is proposed, and not yet agreed.
+              extensions invoiced to the customer. A kickback to the sales originator is proposed, and not yet agreed.
             </p>
           </div>
         </div>

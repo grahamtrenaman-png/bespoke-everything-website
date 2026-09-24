@@ -137,7 +137,7 @@ const SHAPE: {
     lines: [
       "Graham and Doug at £100k. First SA builder in February.",
       "25 builds. Listed on Dayforce, UKG and RELEX. Seller joins Q3.",
-      "Draw peaks at £165k in Q1. Back to zero by Q4.",
+      "Draw peaks at about £45k in January. Flat by the end of Q1.",
     ],
     end: "£1.2m revenue · 8 people · £0.2m ARR",
   },
@@ -467,9 +467,9 @@ function MarketsSlide() {
 /** Cumulative cash, £k. Negative is drawn on the Chris and Thomas overdraft, limit £200k. */
 const CASH: { when: string; cumulative: number; note: string }[] = [
   { when: "Pre Jan", cumulative: -25, note: "Tenants, registrations, legal." },
-  { when: "Y1 Q1", cumulative: -165, note: "The peak. Salaries and setup before the first invoices land." },
-  { when: "Y1 Q2", cumulative: -140, note: "Six builds invoiced. Support starts." },
-  { when: "Y1 Q3", cumulative: -30, note: "Seller and two SA builders join." },
+  { when: "Y1 Q1", cumulative: -45, note: "The peak, in January. Two salaries, then the first invoices." },
+  { when: "Y1 Q2", cumulative: 40, note: "Builds invoiced. The UK builder joins against signed work." },
+  { when: "Y1 Q3", cumulative: 80, note: "Seller and two SA builders. Revenue is already ahead of them." },
   { when: "Y1 Q4", cumulative: 125, note: "Paid back. Eight people." },
   { when: "Y2 H1", cumulative: 450, note: "Fourteen people by mid-year." },
   { when: "Y2 H2", cumulative: 1000, note: "£1.2m EBITDA for the year." },
@@ -485,9 +485,9 @@ function CashSlide() {
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-6xl">
         <SlideHeading
           kicker="Cash"
-          title="£165k drawn at the peak, in Q1."
-          highlight="Back to zero inside year one."
-          lede="Indicative, £k, cumulative. The draw is a £200k overdraft from Chris and Thomas, not a round. Revenue from January keeps it inside the limit, and it is repaid by Q4 of year one."
+          title="About £45k drawn at the peak, in January."
+          highlight="Cleared inside the first quarter."
+          lede="Indicative, £k, cumulative. Q1 cost is two salaries, about £50k, plus the £25k of setup already spent. The first invoices land in the same quarter. The £200k overdraft is the limit, not the plan."
         />
         <div className="mt-4 grid grid-cols-[1fr_19rem] gap-4">
           <div className="deck-rise rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5" style={{ animationDelay: "0.15s" }}>
@@ -543,8 +543,8 @@ function CashSlide() {
           </div>
           <div className="flex flex-col gap-2.5">
             {[
-              { label: "Peak draw", value: "£165k", note: "Q1 of year one, against a £200k limit. £35k of headroom." },
-              { label: "Payback", value: "Y1 Q4", note: "Cumulative cash back above zero before the first anniversary." },
+              { label: "Peak draw", value: "£45k", note: "Late January, before the first invoice. £155k of headroom on the £200k limit." },
+              { label: "Payback", value: "End of Q1", note: "The first invoices bring cumulative cash back to roughly flat inside the quarter." },
               { label: "Cash at end of Y3", value: "+£3.2m", note: "Cumulative EBITDA less debtors. Before tax, dividends or a round." },
             ].map((item, index) => (
               <div
@@ -658,7 +658,7 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
       "Builders fully loaded: £90k UK, £65k South Africa. Support and ops seats £45 to 60k, in SA.",
       "Cost base £0.9m, £2.0m, £3.9m. People are under half of it; the rest is contractors for peaks, commission, marketplace fees, tenants, travel and TCN shared ops.",
       "EBITDA 25%, 37%, 40%. Debtors at 45 days.",
-      "Overdraft limit £200k. Peak draw £165k in Q1 of year one.",
+      "Overdraft limit £200k. Peak draw about £45k in January: two salaries plus the setup already spent. Cleared inside Q1.",
     ],
   },
   {

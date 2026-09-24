@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { isValidPreviewSession, PREVIEW_COOKIE } from "@/lib/preview-auth";
 import { isJalipiDecksPath, JALIPI_APP_ORIGIN } from "@/lib/jalipi-zone";
+import { safeReturnPath } from "@/lib/return-path";
 
 const PUBLIC_PATHS = new Set([
   "/login",
@@ -37,17 +38,20 @@ function rewriteToJalipiZone(request: NextRequest) {
 }
 
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
   const hasSession = await isValidPreviewSession(
     request.cookies.get(PREVIEW_COOKIE)?.value,
   );
 
   if (pathname === "/login" && hasSession) {
-    return NextResponse.redirect(new URL("/", request.url));
+    const next = safeReturnPath(request.nextUrl.searchParams.get("next"));
+    return NextResponse.redirect(new URL(next, request.url));
   }
 
   if (!isPublicPath(pathname) && !hasSession) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const login = new URL("/login", request.url);
+    login.searchParams.set("next", `${pathname}${search}`);
+    return NextResponse.redirect(login);
   }
 
   const response = isJalipiDecksPath(pathname)

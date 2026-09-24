@@ -7,6 +7,7 @@ import {
   previewCredentialsMatch,
   previewSessionToken,
 } from "@/lib/preview-auth";
+import { safeReturnPath } from "@/lib/return-path";
 
 export type LoginState = {
   error?: string;
@@ -18,6 +19,7 @@ export async function loginAction(
 ): Promise<LoginState> {
   const username = String(formData.get("username") ?? "");
   const password = String(formData.get("password") ?? "");
+  const next = safeReturnPath(String(formData.get("next") ?? ""));
 
   if (!previewCredentialsMatch(username, password)) {
     return { error: "Invalid username or password." };
@@ -32,5 +34,5 @@ export async function loginAction(
     maxAge: 60 * 60 * 24 * 30,
   });
 
-  redirect("/");
+  redirect(next);
 }

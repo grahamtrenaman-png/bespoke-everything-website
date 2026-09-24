@@ -4,9 +4,9 @@ import { Suspense } from "react";
 import { StudioCallDeck } from "@/components/studio/studio-setup-deck";
 
 export const metadata: Metadata = {
-  title: "The studio · short version · Bespoke Everything",
+  title: "The studio · Bespoke Everything",
   description:
-    "Four slides: the idea, where we build, each vendor, and how the studio runs.",
+    "The idea, where we build, each vendor, who runs it, how work arrives, and the year from January.",
   robots: { index: false, follow: false },
 };
 

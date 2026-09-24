@@ -24,7 +24,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
 import {
   DECK_CHROME_SAFE_BOTTOM,
   DECK_CHROME_SAFE_TOP,
@@ -85,152 +84,6 @@ export function SlideHeading({
         <p className="mx-auto mt-2 max-w-3xl text-[12px] leading-relaxed text-white/65">{lede}</p>
       ) : null}
     </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// 1. Title
-// ---------------------------------------------------------------------------
-
-function TitleSlide() {
-  return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-neutral-950 text-white">
-      <div className="deck-drift pointer-events-none absolute -left-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-teal-600/20 blur-3xl" />
-      <div
-        className="deck-drift pointer-events-none absolute -right-40 bottom-1/5 h-[34rem] w-[34rem] rounded-full bg-amber-600/15 blur-3xl"
-        style={{ animationDelay: "-7s" }}
-      />
-      <div className="relative max-w-4xl px-8 text-center">
-        <div className="deck-rise flex flex-col items-center gap-3" style={{ animationDelay: "0.2s" }}>
-          <BespokeEverythingLogo variant="dark" showTagline={false} className="text-lg" />
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-white/50">
-            Setting up the studio · for Chris and Thomas
-          </p>
-        </div>
-        <h1
-          className="deck-rise mt-8 text-5xl font-black leading-tight tracking-tight"
-          style={{ animationDelay: "0.55s" }}
-        >
-          We start in January.{" "}
-          <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-            Here is how we set it up.
-          </span>
-        </h1>
-        <p
-          className="deck-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65"
-          style={{ animationDelay: "0.85s" }}
-        >
-          Full time from January. The months before that are studio prep: the platforms, how it plugs
-          into FrontlineXP, who runs it, and one job ready to sign. jalipi is handed across in the same
-          window.
-        </p>
-        <p
-          className="deck-rise mx-auto mt-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40"
-          style={{ animationDelay: "1.05s" }}
-        >
-          The software world is changing. Bespoke is back.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// 2. What the studio sells
-// ---------------------------------------------------------------------------
-
-const THESIS: { icon: LucideIcon; title: string; body: string; accent: string }[] = [
-  {
-    icon: Radar,
-    title: "The gap is on every project",
-    body:
-      "Every enterprise workforce or planning programme ends with a list the product will not do: a sick-pay scheme, a union rule, a regional report, a system it must talk to. For twenty-five years the answer was a workaround or a change request that never came.",
-    accent: "from-teal-500 to-emerald-500",
-  },
-  {
-    icon: Blocks,
-    title: "The vendors have opened the door",
-    body:
-      "Dayforce Studio, Workday Extend and Built on Workday, the UKG Developer Hub, RELEX Open. The incumbents now ship the tools to build inside their platform. What they do not ship is a team that knows the operation and can build in weeks.",
-    accent: "from-emerald-500 to-teal-500",
-  },
-  {
-    icon: Wrench,
-    title: "What we sell",
-    body:
-      "A fixed-scope extension, built as a native app on the customer’s own platform, delivered in weeks, with an annual support line behind it. Priced as a build, not a day rate. One senior builder with AI tooling does what a squad did a quarter ago.",
-    accent: "from-amber-500 to-orange-500",
-  },
-];
-
-function ThesisSlide() {
-  return (
-    <BespokeBrandedSlide className="bg-neutral-950">
-      <Glows />
-      <div className="relative mx-auto mb-auto mt-5 w-full max-w-6xl">
-        <div className="deck-rise text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
-            What the studio is
-          </p>
-          <h2 className="mt-2 text-[2.4rem] font-black leading-tight tracking-tight">
-            Build the thing the platform{" "}
-            <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-              will not do.
-            </span>
-          </h2>
-          <p className="mx-auto mt-2 max-w-3xl text-[13px] leading-relaxed text-white/70">
-            A studio that fixes the gap on someone else’s platform, for a fixed price, and keeps the
-            customer on their upgrade path. On Dayforce the app lives in their product. On UKG, Logile and
-            Legion there is no Studio, so we host it, and the support line is what keeps it alive.
-          </p>
-        </div>
-
-        <ol className="mt-4 grid grid-cols-3 gap-3">
-          {THESIS.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <li
-                key={item.title}
-                className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5"
-                style={{ animationDelay: `${0.15 + index * 0.1}s` }}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={cn(
-                      "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-lg",
-                      item.accent,
-                    )}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <span className="text-[10px] font-black tabular-nums tracking-[0.2em] text-white/35">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 className="mt-3 text-[15px] font-black leading-tight tracking-tight">{item.title}</h3>
-                <p className="mt-1.5 text-[12px] leading-snug text-white/70">{item.body}</p>
-              </li>
-            );
-          })}
-        </ol>
-
-        <div
-          className="deck-rise mt-3 grid grid-cols-3 gap-6 border-t border-white/10 pt-3"
-          style={{ animationDelay: "0.5s" }}
-        >
-          {[
-            ["Who buys", "Programme leads mid-implementation. Operators with a gap they now feel. Vendor account teams with a deal to close."],
-            ["What it costs", "Tens of thousands, against a change request measured in years or a second system in millions."],
-            ["Why TCN wins", "REPL in the room. FXP already on the project. Vendors who shortlist us before the RFP."],
-          ].map(([label, body]) => (
-            <div key={label}>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">{label}</p>
-              <p className="mt-1.5 text-[11.5px] leading-snug text-white/65">{body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </BespokeBrandedSlide>
   );
 }
 
@@ -720,47 +573,6 @@ function TimelineSlide() {
 // Slide assembly + deck shell
 // ---------------------------------------------------------------------------
 
-function buildSlides(): DeckSlide[] {
-  return [
-    {
-      id: "title",
-      section: "Open",
-      gradient: "from-teal-500 via-teal-500 to-emerald-500",
-      node: <TitleSlide />,
-    },
-    {
-      id: "thesis",
-      section: "The studio",
-      gradient: "from-teal-500 via-emerald-500 to-amber-500",
-      node: <ThesisSlide />,
-    },
-    {
-      id: "platforms",
-      section: "Platforms",
-      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-      node: <CallVendorsSlide />,
-    },
-    {
-      id: "team",
-      section: "Team",
-      gradient: "from-emerald-500 via-amber-500 to-orange-500",
-      node: <TeamSlide />,
-    },
-    {
-      id: "new-business",
-      section: "New business",
-      gradient: "from-amber-500 via-orange-500 to-rose-500",
-      node: <NewBusinessSlide />,
-    },
-    {
-      id: "timeline",
-      section: "Timeline",
-      gradient: "from-rose-500 via-amber-500 to-teal-500",
-      node: <TimelineSlide />,
-    },
-  ];
-}
-
 function deriveSections(slides: DeckSlide[]) {
   const sections: { label: string; start: number }[] = [];
   slides.forEach((slide, index) => {
@@ -1116,163 +928,6 @@ function CallPlatformsSlide() {
   );
 }
 
-const CALL_SEATS: { icon: LucideIcon; who: string; seat: string; line: string; tone: "filled" | "proposed" | "open" }[] = [
-  { icon: Wrench, who: "Graham", seat: "Build", line: "Scopes it, prices it, builds it.", tone: "filled" },
-  { icon: Handshake, who: "Doug", seat: "Vendors and accounts", line: "The person the account teams already call.", tone: "proposed" },
-  { icon: Radar, who: "Open", seat: "Third seat", line: "Where a seller goes, once the work shows it.", tone: "open" },
-];
-
-const CALL_CHANNELS: { icon: LucideIcon; title: string; when: string; line: string; bar: string }[] = [
-  { icon: Handshake, title: "The network", when: "Most of year one", line: "FXP gaps. People we already know.", bar: "from-teal-500 to-teal-400" },
-  { icon: Blocks, title: "The vendors", when: "Once we are a name they can refer", line: "An account team with a gap in a deal sends it to us.", bar: "from-emerald-500 to-emerald-400" },
-  { icon: Megaphone, title: "Direct", when: "Last", line: "One named offer per platform. Nothing goes out cold.", bar: "from-amber-500 to-amber-300" },
-];
-
-const CALL_YEAR: { when: string; title: string; lines: string[]; tone: "notice" | "year" }[] = [
-  {
-    when: "Oct → Jan",
-    title: "Before we start",
-    lines: ["The platforms, the partner routes, and one job scoped and priced.", "The model and the hiring plan with Chris.", "The company set up. Graham may be working his notice.", "jalipi handed to QTC in the same window. Graham keeps a stake."],
-    tone: "notice",
-  },
-  {
-    when: "Mid January",
-    title: "Day one",
-    lines: ["The studio starts. Applications, conversations, first gaps."],
-    tone: "year",
-  },
-  {
-    when: "Then",
-    title: "The year",
-    lines: ["A handful of paid builds.", "A support line that starts to carry the studio.", "Skilled builders, UK or South Africa, against signed work."],
-    tone: "year",
-  },
-];
-
-function CallRunSlide() {
-  return (
-    <BespokeBrandedSlide className="bg-neutral-950">
-      <Glows />
-      <div className="relative mx-auto w-full max-w-6xl">
-        <p className="deck-rise text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
-          How it runs
-        </p>
-        <h2 className="deck-rise mt-2 text-[2.4rem] font-black leading-tight tracking-tight">
-          A small studio.{" "}
-          <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-            Warm work first.
-          </span>
-        </h2>
-        <div className="mt-6 grid grid-cols-[1fr_1.05fr_1.1fr] gap-8">
-          {/* Who */}
-          <div className="deck-rise" style={{ animationDelay: "0.15s" }}>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">Who</p>
-            <ul className="mt-3 space-y-2.5">
-              {CALL_SEATS.map((seat) => {
-                const Icon = seat.icon;
-                const open = seat.tone === "open";
-                return (
-                  <li
-                    key={seat.who}
-                    className={cn(
-                      "flex items-center gap-3 rounded-2xl border px-3 py-2.5",
-                      seat.tone === "filled" && "border-teal-400/25 bg-teal-500/10",
-                      seat.tone === "proposed" && "border-amber-400/25 bg-amber-500/10",
-                      open && "border-dashed border-white/20 bg-white/[0.03]",
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
-                        seat.tone === "filled" && "bg-gradient-to-br from-teal-500 to-emerald-500 text-white",
-                        seat.tone === "proposed" && "bg-gradient-to-br from-amber-500 to-orange-400 text-white",
-                        open && "border-2 border-dashed border-white/30 text-white/50",
-                      )}
-                    >
-                      {open ? <span className="text-lg font-black leading-none">?</span> : <Icon className="h-4.5 w-4.5" />}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-[9px] font-black uppercase tracking-[0.18em] text-white/45">{seat.seat}</p>
-                      <p className="text-[15px] font-black leading-tight tracking-tight">{seat.who}</p>
-                      <p className="text-[11px] leading-snug text-white/65">{seat.line}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-            <p className="mt-3 text-[11px] leading-snug text-white/55">
-              Then a few skilled builders, UK or South Africa, once a job is signed.
-            </p>
-          </div>
-
-          {/* Where the work comes from */}
-          <div className="deck-rise" style={{ animationDelay: "0.3s" }}>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">Where the work comes from</p>
-            <ol className="relative mt-3 space-y-4">
-              <span className="pointer-events-none absolute bottom-3 left-[15px] top-3 w-px bg-gradient-to-b from-teal-400/60 via-emerald-400/40 to-amber-400/40" />
-              {CALL_CHANNELS.map((channel, index) => {
-                const Icon = channel.icon;
-                return (
-                  <li key={channel.title} className="relative flex items-start gap-3.5">
-                    <span
-                      className={cn(
-                        "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white ring-4 ring-neutral-950",
-                        channel.bar,
-                      )}
-                    >
-                      <Icon className="h-3.5 w-3.5" />
-                    </span>
-                    <div className="min-w-0 pt-0.5">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-[10px] font-black tabular-nums text-white/40">0{index + 1}</span>
-                        <p className="text-[15px] font-black leading-tight tracking-tight">{channel.title}</p>
-                      </div>
-                      <p className="text-[9.5px] font-bold uppercase tracking-[0.15em] text-amber-200/80">{channel.when}</p>
-                      <p className="mt-0.5 text-[11px] leading-snug text-white/65">{channel.line}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-
-          {/* The year */}
-          <div className="deck-rise" style={{ animationDelay: "0.45s" }}>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">The year</p>
-            <ol className="relative mt-3 space-y-3.5">
-              <span className="pointer-events-none absolute bottom-3 left-[5px] top-3 w-px bg-gradient-to-b from-amber-400/60 via-teal-400/50 to-teal-400/20" />
-              {CALL_YEAR.map((phase) => {
-                const notice = phase.tone === "notice";
-                return (
-                  <li key={phase.title} className="relative pl-6">
-                    <span
-                      className={cn(
-                        "absolute left-0 top-[5px] h-[11px] w-[11px] rounded-full ring-4 ring-neutral-950",
-                        notice ? "bg-amber-300" : "bg-teal-300",
-                      )}
-                    />
-                    <p className={cn("text-[9.5px] font-semibold uppercase tracking-[0.15em]", notice ? "text-amber-200/80" : "text-teal-200/80")}>
-                      {phase.when}
-                    </p>
-                    <p className="text-[15px] font-black leading-tight tracking-tight">{phase.title}</p>
-                    <ul className="mt-1 space-y-0.5">
-                      {phase.lines.map((line) => (
-                        <li key={line} className="text-[11px] leading-snug text-white/65">
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-        </div>
-      </div>
-    </BespokeBrandedSlide>
-  );
-}
-
 function buildCallSlides(): DeckSlide[] {
   return [
     {
@@ -1294,10 +949,22 @@ function buildCallSlides(): DeckSlide[] {
       node: <CallVendorsSlide />,
     },
     {
-      id: "call-run",
-      section: "How",
-      gradient: "from-amber-500 via-teal-500 to-emerald-500",
-      node: <CallRunSlide />,
+      id: "call-team",
+      section: "Team",
+      gradient: "from-emerald-500 via-amber-500 to-orange-500",
+      node: <TeamSlide />,
+    },
+    {
+      id: "call-business",
+      section: "New business",
+      gradient: "from-amber-500 via-orange-500 to-rose-500",
+      node: <NewBusinessSlide />,
+    },
+    {
+      id: "call-timeline",
+      section: "Timeline",
+      gradient: "from-rose-500 via-amber-500 to-teal-500",
+      node: <TimelineSlide />,
     },
   ];
 }
@@ -1307,7 +974,7 @@ export function StudioCallDeck() {
   return <StudioSetupDeck slides={slides} />;
 }
 
-export function StudioSetupDeck({ slides: slidesOverride }: { slides?: DeckSlide[] } = {}) {
+export function StudioSetupDeck({ slides }: { slides: DeckSlide[] }) {
   const [current, setCurrent] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenMode, setFullscreenMode] = useState<FullscreenMode | null>(null);
@@ -1317,7 +984,6 @@ export function StudioSetupDeck({ slides: slidesOverride }: { slides?: DeckSlide
     fullscreenModeRef.current = fullscreenMode;
   }, [fullscreenMode]);
 
-  const slides = useMemo(() => slidesOverride ?? buildSlides(), [slidesOverride]);
   const sections = useMemo(() => deriveSections(slides), [slides]);
   const total = slides.length;
   const slide = slides[current]!;

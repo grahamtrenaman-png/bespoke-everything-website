@@ -8,7 +8,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import Link from "next/link";
 import {
+  ArrowLeft,
   ArrowRight,
   Blocks,
   ChevronLeft,
@@ -252,7 +254,7 @@ function ThesisSlide() {
 
 type PlatformRow = {
   vendor: string;
-  wave: "First" | "Second" | "With FXP" | "When pulled";
+  wave: "First" | "Second" | "With FXP" | "With QTC" | "When pulled";
   mechanism: string;
   partnerRoute: string;
   doorOpener: string;
@@ -331,12 +333,22 @@ const PLATFORMS: PlatformRow[] = [
     doorOpener: "Payroll-adjacent gaps on FXP projects.",
     note: "Integration work, and often what the customer needs first.",
   },
+  {
+    vendor: "jalipi",
+    wave: "With QTC",
+    mechanism:
+      "A platform QuickThink Cloud develop and harden. We extend it for each engagement.",
+    partnerRoute: "Not a vendor programme. QTC own it; I keep a stake.",
+    doorOpener: "QTC bring the work and pay BE. FXP implements.",
+    note: "From January any jalipi time is billed to QTC. Nothing on the side.",
+  },
 ];
 
 const WAVE_STYLE: Record<PlatformRow["wave"], string> = {
   First: "border-teal-400/40 bg-teal-500/20 text-teal-100",
   Second: "border-amber-400/40 bg-amber-500/20 text-amber-100",
   "With FXP": "border-emerald-400/40 bg-emerald-500/15 text-emerald-100",
+  "With QTC": "border-sky-400/40 bg-sky-500/15 text-sky-100",
   "When pulled": "border-white/20 bg-white/10 text-white/70",
 };
 
@@ -347,25 +359,25 @@ function PlatformsSlide() {
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-6xl">
         <SlideHeading
           kicker="Where we build"
-          title="Eight platforms."
-          highlight="Two first. Two with FXP. One next. Three when pulled."
+          title="Nine platforms."
+          highlight="Two first. Two with FXP. One next. jalipi with QTC. Three when pulled."
         />
-        <div className="deck-rise mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur" style={{ animationDelay: "0.2s" }}>
+        <div className="deck-rise mt-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur" style={{ animationDelay: "0.2s" }}>
           <table className="w-full table-fixed border-collapse text-left">
             <thead>
-              <tr className="text-[9.5px] font-black uppercase tracking-[0.18em] text-white/45">
-                <th className="w-[13%] px-3 py-1.5">Platform</th>
-                <th className="w-[32%] px-3 py-1.5">How you build on it</th>
-                <th className="w-[20%] px-3 py-1.5">Partner route</th>
-                <th className="w-[15%] px-3 py-1.5">Who opens the door</th>
-                <th className="w-[20%] px-3 py-1.5">Why this wave</th>
+              <tr className="text-[9px] font-black uppercase tracking-[0.16em] text-white/45">
+                <th className="w-[13%] px-3 py-1">Platform</th>
+                <th className="w-[32%] px-3 py-1">How you build on it</th>
+                <th className="w-[20%] px-3 py-1">Partner route</th>
+                <th className="w-[15%] px-3 py-1">Who opens the door</th>
+                <th className="w-[20%] px-3 py-1">Why this wave</th>
               </tr>
             </thead>
             <tbody>
               {PLATFORMS.map((row) => (
                 <tr key={row.vendor} className="border-t border-white/10 align-top">
-                  <td className="px-3 py-1.5">
-                    <p className="text-[12px] font-black leading-tight tracking-tight text-white">{row.vendor}</p>
+                  <td className="px-3 py-1">
+                    <p className="text-[11.5px] font-black leading-tight tracking-tight text-white">{row.vendor}</p>
                     <span
                       className={cn(
                         "mt-0.5 block w-fit rounded-full border px-1.5 text-[8px] font-bold uppercase leading-[14px] tracking-[0.15em]",
@@ -375,18 +387,17 @@ function PlatformsSlide() {
                       {row.wave}
                     </span>
                   </td>
-                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.mechanism}</td>
-                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.partnerRoute}</td>
-                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.doorOpener}</td>
-                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.note}</td>
+                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.mechanism}</td>
+                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.partnerRoute}</td>
+                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.doorOpener}</td>
+                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.note}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="deck-rise mt-2.5 text-center text-[9.5px] text-white/40" style={{ animationDelay: "0.4s" }}>
-          Detail from the vendors’ own developer and partner pages, checked 23 Sep 2026. jalipi is not on the list:
-          through January I hand it over with a developer from QuickThink Cloud, and after that QTC pays Bespoke Everything for jalipi work.
+        <p className="deck-rise mt-2 text-center text-[9.5px] text-white/40" style={{ animationDelay: "0.4s" }}>
+          Vendor detail from their own developer and partner pages, checked 23 Sep 2026. jalipi is QuickThink Cloud’s platform: they develop and harden it, I keep a stake, and FXP implements it as they would any vendor.
         </p>
       </div>
     </BespokeBrandedSlide>
@@ -1988,6 +1999,16 @@ export function StudioSetupDeck({ slides: slidesOverride }: { slides?: DeckSlide
             </div>
           </SlideStage>
 
+          <Link
+            href="/studio"
+            className={cn(
+              "absolute left-4 top-4 z-30 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/30 px-3 py-1.5 text-xs font-semibold text-white/90 backdrop-blur transition hover:bg-black/50",
+              "pl-[max(0.75rem,env(safe-area-inset-left))] pt-[max(0.4rem,env(safe-area-inset-top))]",
+            )}
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Decks
+          </Link>
           <div
             className={cn(
               "absolute right-4 top-4 z-30 flex items-center gap-2",

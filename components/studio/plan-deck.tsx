@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 
 import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
 import { BespokeBrandedSlide } from "@/components/studio/slide-chrome";
@@ -10,6 +10,7 @@ import {
   StudioSetupDeck,
   type DeckSlide,
 } from "@/components/studio/studio-setup-deck";
+import { IndicativeWatermark } from "@/components/studio/indicative-watermark";
 import { cn } from "@/lib/cn";
 
 // ---------------------------------------------------------------------------
@@ -784,17 +785,26 @@ function ChoiceSlide() {
 // Deck
 // ---------------------------------------------------------------------------
 
+function mark(node: ReactNode) {
+  return (
+    <div className="relative h-full w-full">
+      {node}
+      <IndicativeWatermark />
+    </div>
+  );
+}
+
 function buildPlanSlides(): DeckSlide[] {
   return [
-    { id: "plan-title", section: "Open", gradient: "from-teal-500 via-emerald-500 to-amber-500", node: <TitleSlide /> },
-    { id: "plan-shape", section: "Shape", gradient: "from-amber-500 via-teal-500 to-emerald-500", node: <ShapeSlide /> },
-    { id: "plan-people", section: "People", gradient: "from-teal-500 via-sky-500 to-emerald-500", node: <PeopleSlide /> },
-    { id: "plan-revenue", section: "Revenue", gradient: "from-teal-500 via-emerald-500 to-amber-500", node: <RevenueSlide /> },
-    { id: "plan-markets", section: "Markets", gradient: "from-emerald-500 via-teal-500 to-cyan-500", node: <MarketsSlide /> },
-    { id: "plan-cash", section: "Cash", gradient: "from-amber-500 via-orange-400 to-teal-500", node: <CashSlide /> },
-    { id: "plan-value", section: "Value", gradient: "from-emerald-500 via-amber-400 to-amber-300", node: <ValueSlide /> },
-    { id: "plan-assumptions", section: "Assumptions", gradient: "from-white/60 via-teal-400 to-emerald-400", node: <AssumptionsSlide /> },
-    { id: "plan-choice", section: "The choice", gradient: "from-amber-500 via-teal-500 to-emerald-500", node: <ChoiceSlide /> },
+    { id: "plan-title", section: "Open", gradient: "from-teal-500 via-emerald-500 to-amber-500", node: mark(<TitleSlide />) },
+    { id: "plan-shape", section: "Shape", gradient: "from-amber-500 via-teal-500 to-emerald-500", node: mark(<ShapeSlide />) },
+    { id: "plan-people", section: "People", gradient: "from-teal-500 via-sky-500 to-emerald-500", node: mark(<PeopleSlide />) },
+    { id: "plan-revenue", section: "Revenue", gradient: "from-teal-500 via-emerald-500 to-amber-500", node: mark(<RevenueSlide />) },
+    { id: "plan-markets", section: "Markets", gradient: "from-emerald-500 via-teal-500 to-cyan-500", node: mark(<MarketsSlide />) },
+    { id: "plan-cash", section: "Cash", gradient: "from-amber-500 via-orange-400 to-teal-500", node: mark(<CashSlide />) },
+    { id: "plan-value", section: "Value", gradient: "from-emerald-500 via-amber-400 to-amber-300", node: mark(<ValueSlide />) },
+    { id: "plan-assumptions", section: "Assumptions", gradient: "from-white/60 via-teal-400 to-emerald-400", node: mark(<AssumptionsSlide />) },
+    { id: "plan-choice", section: "The choice", gradient: "from-amber-500 via-teal-500 to-emerald-500", node: mark(<ChoiceSlide />) },
   ];
 }
 

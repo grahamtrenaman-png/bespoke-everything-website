@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { IndicativeWatermark } from "@/components/studio/indicative-watermark";
+
 import {
   DECK_CHROME_SAFE_BOTTOM,
   DECK_CHROME_SAFE_TOP,
@@ -365,6 +367,7 @@ function NewBusinessSlide() {
           </div>
         </div>
       </div>
+      <IndicativeWatermark />
     </BespokeBrandedSlide>
   );
 }

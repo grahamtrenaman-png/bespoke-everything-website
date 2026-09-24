@@ -1,0 +1,2103 @@
+"use client";
+
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  ArrowRight,
+  Blocks,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Handshake,
+  Maximize2,
+  Megaphone,
+  Minimize2,
+  Radar,
+  Wrench,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
+import { TimelineSlide as BespokometreSlide } from "@/components/studio/bespokometre";
+import { ERAS, type Era } from "@/components/studio/eras";
+import {
+  DECK_CHROME_SAFE_BOTTOM,
+  DECK_CHROME_SAFE_TOP,
+  enterNativeFullscreen,
+  getNativeFullscreenElement,
+  leaveNativeFullscreen,
+  SlideStage,
+  STAGE_HEIGHT,
+  STAGE_WIDTH,
+  unlockOrientation,
+  useDeckBrowseLayout,
+  useDeckSwipeNavigation,
+  type FullscreenMode,
+} from "@/components/studio/slide-stage";
+import { BespokeBrandedSlide } from "@/components/studio/slide-chrome";
+import { cn } from "@/lib/cn";
+
+type DeckSlide = {
+  id: string;
+  section: string;
+  gradient: string;
+  node: ReactNode;
+};
+
+function Glows() {
+  return (
+    <>
+      <div className="deck-drift pointer-events-none absolute -left-40 top-1/4 h-[32rem] w-[32rem] rounded-full bg-teal-600/15 blur-3xl" />
+      <div
+        className="deck-drift pointer-events-none absolute -right-40 bottom-1/5 h-[32rem] w-[32rem] rounded-full bg-amber-600/15 blur-3xl"
+        style={{ animationDelay: "-7s" }}
+      />
+    </>
+  );
+}
+
+function SlideHeading({
+  kicker,
+  title,
+  highlight,
+  lede,
+}: {
+  kicker: string;
+  title: string;
+  highlight: string;
+  lede?: string;
+}) {
+  return (
+    <div className="deck-rise text-center">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">{kicker}</p>
+      <h2 className="mt-1.5 text-[2rem] font-black leading-tight tracking-tight">
+        {title}{" "}
+        <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+          {highlight}
+        </span>
+      </h2>
+      {lede ? (
+        <p className="mx-auto mt-2 max-w-3xl text-[12px] leading-relaxed text-white/65">{lede}</p>
+      ) : null}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 1. Title
+// ---------------------------------------------------------------------------
+
+function TitleSlide() {
+  return (
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-neutral-950 text-white">
+      <div className="deck-drift pointer-events-none absolute -left-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-teal-600/20 blur-3xl" />
+      <div
+        className="deck-drift pointer-events-none absolute -right-40 bottom-1/5 h-[34rem] w-[34rem] rounded-full bg-amber-600/15 blur-3xl"
+        style={{ animationDelay: "-7s" }}
+      />
+      <div className="relative max-w-4xl px-8 text-center">
+        <div className="deck-rise flex flex-col items-center gap-3" style={{ animationDelay: "0.2s" }}>
+          <BespokeEverythingLogo variant="dark" showTagline={false} className="text-lg" />
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-white/50">
+            Setting up the studio · for Chris and Thomas
+          </p>
+        </div>
+        <h1
+          className="deck-rise mt-8 text-5xl font-black leading-tight tracking-tight"
+          style={{ animationDelay: "0.55s" }}
+        >
+          I&rsquo;m in.{" "}
+          <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+            Here is how I would set it up.
+          </span>
+        </h1>
+        <p
+          className="deck-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65"
+          style={{ animationDelay: "0.85s" }}
+        >
+          Full time from January. The three months before that are a clean jalipi handover and a
+          look at how the vendors extend. Which platforms we build on first, how the studio plugs
+          into FrontlineXP, who runs it, and what the first year looks like once I have joined.
+        </p>
+        <p
+          className="deck-rise mx-auto mt-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40"
+          style={{ animationDelay: "1.05s" }}
+        >
+          The software world is changing. Bespoke is back.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 2. What the studio sells
+// ---------------------------------------------------------------------------
+
+const THESIS: { icon: LucideIcon; title: string; body: string; accent: string }[] = [
+  {
+    icon: Radar,
+    title: "The gap is on every project",
+    body:
+      "Every enterprise workforce or planning programme ends with a list the product will not do: a sick-pay scheme, a union rule, a regional report, a system it must talk to. For twenty-five years the answer was a workaround or a change request that never came.",
+    accent: "from-teal-500 to-emerald-500",
+  },
+  {
+    icon: Blocks,
+    title: "The vendors have opened the door",
+    body:
+      "Dayforce Studio, Workday Extend and Built on Workday, the UKG Developer Hub, RELEX Open. The incumbents now ship the tools to build inside their platform. What they do not ship is a team that knows the operation and can build in weeks.",
+    accent: "from-emerald-500 to-teal-500",
+  },
+  {
+    icon: Wrench,
+    title: "What we sell",
+    body:
+      "A fixed-scope extension, built as a native app on the customer’s own platform, delivered in weeks, with an annual support line behind it. Priced as a build, not a day rate. One senior builder with AI tooling does what a squad did a quarter ago.",
+    accent: "from-amber-500 to-orange-500",
+  },
+];
+
+function ThesisSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto flex w-full max-w-5xl flex-col">
+        <div className="grid grid-cols-[24rem_1fr] gap-12">
+          <div className="deck-rise flex flex-col justify-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
+              What the studio is
+            </p>
+            <h2 className="mt-3 text-[2.75rem] font-black leading-[1.02] tracking-tight">
+              Build the thing
+              <br />
+              the platform
+              <br />
+              <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+                will not do.
+              </span>
+            </h2>
+            <p className="mt-5 text-[13.5px] leading-relaxed text-white/75">
+              Not a consultancy with a bench. Not a product company. A studio that fixes the gap on
+              someone else’s platform, for a fixed price, and keeps the customer on their upgrade
+              path.
+            </p>
+            <p className="mt-3 border-l-2 border-amber-400/50 pl-3 text-[12px] leading-relaxed text-white/60">
+              On Dayforce the app lives in their product. On UKG, Logile and Legion there is no Studio, so
+              we host it, and the support line is what keeps it alive.
+            </p>
+          </div>
+
+          <ol className="flex flex-col justify-center divide-y divide-white/10">
+            {THESIS.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <li
+                  key={item.title}
+                  className="deck-rise grid grid-cols-[3.25rem_1fr] items-start gap-5 py-4 first:pt-0 last:pb-0"
+                  style={{ animationDelay: `${0.25 + index * 0.15}s` }}
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    <span
+                      className={cn(
+                        "inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg",
+                        item.accent,
+                      )}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="text-[10px] font-black tabular-nums tracking-[0.2em] text-white/35">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-[17px] font-black tracking-tight">{item.title}</h3>
+                    <p className="mt-1.5 text-[12.5px] leading-relaxed text-white/70">{item.body}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+
+        <div
+          className="deck-rise mt-7 grid grid-cols-3 gap-6 border-t border-white/10 pt-4"
+          style={{ animationDelay: "0.7s" }}
+        >
+          {[
+            ["Who buys", "Programme leads mid-implementation. Operators with a gap they now feel. Vendor account teams with a deal to close."],
+            ["What it costs", "Tens of thousands, against a change request measured in years or a second system in millions."],
+            ["Why TCN wins", "REPL in the room. FXP already on the project. Vendors who shortlist us before the RFP."],
+          ].map(([label, body]) => (
+            <div key={label}>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">{label}</p>
+              <p className="mt-1.5 text-[11.5px] leading-snug text-white/65">{body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 3. Platforms
+// ---------------------------------------------------------------------------
+
+type PlatformRow = {
+  vendor: string;
+  wave: "First" | "Second" | "With FXP" | "When pulled";
+  mechanism: string;
+  partnerRoute: string;
+  doorOpener: string;
+  note: string;
+};
+
+const PLATFORMS: PlatformRow[] = [
+  {
+    vendor: "Dayforce",
+    wave: "First",
+    mechanism:
+      "Dayforce Studio: pages, workflows and logic inside the Dayforce UI, moved between tenants through the metadata API.",
+    partnerRoute: "Dayforce partner programme; extensibility access is licensed to the tenant.",
+    doorOpener: "Chris, from January.",
+    note: "Native apps inside the product. The cleanest fit for what we sell.",
+  },
+  {
+    vendor: "UKG Pro WFM",
+    wave: "First",
+    mechanism:
+      "Developer Hub: REST APIs, webhooks and events. No in-product builder, so extensions are side-by-side apps on the API.",
+    partnerRoute: "UKG Technology Marketplace listing and the partner network.",
+    doorOpener: "Chris and FrontlineXP’s live UKG projects.",
+    note: "The largest estate of known gaps. The sick-pay case is one of them.",
+  },
+  {
+    vendor: "Logile",
+    wave: "With FXP",
+    mechanism:
+      "REST API, sandboxes, an event framework. No in-product builder, so a side-by-side app we host for scheduling.",
+    partnerRoute: "LogileONE. FrontlineXP is already a named implementation partner.",
+    doorOpener: "FrontlineXP. The conversation is warm.",
+    note: "Same shape as UKG. The door is already open.",
+  },
+  {
+    vendor: "Legion",
+    wave: "With FXP",
+    mechanism:
+      "APIs and webhooks for HR, demand, payroll and schedules, plus the Integration Center. No page builder inside the product.",
+    partnerRoute: "Strategic partners. The build route is the API, not a marketplace.",
+    doorOpener: "FrontlineXP’s live Legion work.",
+    note: "Integration and side-by-side apps. FXP is already in the account.",
+  },
+  {
+    vendor: "RELEX",
+    wave: "Second",
+    mechanism:
+      "RELEX Open: plugins for data models, algorithms, workflows and screens, plus MCP and a Data API. Customers are in pilot.",
+    partnerRoute: "Solution extension partner tier. Register on the Developer Portal once I have joined.",
+    doorOpener: "Val, through Chris. Inference Group first.",
+    note: "Same buyers as our WFM work. Inference Group may see AI here as theirs; we agree the line first.",
+  },
+  {
+    vendor: "Workday",
+    wave: "When pulled",
+    mechanism:
+      "Workday Extend on one tenant. Built on Workday lets a partner build once and license one app to many tenants through the Marketplace.",
+    partnerRoute: "Built on Workday producer status. We apply when a project justifies it.",
+    doorOpener: "A named project. We have no warm door today.",
+    note: "HR first, so outside our niche. The licensing upside is real, and it waits for a project.",
+  },
+  {
+    vendor: "SAP SF · Oracle HCM",
+    wave: "When pulled",
+    mechanism:
+      "Side-by-side apps on SAP BTP; Redwood extensions in Oracle Visual Builder Studio. Both mature, both with a crowded partner field.",
+    partnerRoute: "Follow a TCN client in. No cold entry.",
+    doorOpener: "A live project only.",
+    note: "Real money, and we would be one of fifty. Take it when it lands.",
+  },
+  {
+    vendor: "ADP",
+    wave: "When pulled",
+    mechanism: "API Central and Marketplace for integrations. No application surface inside the product.",
+    partnerRoute: "Marketplace partner, integrations only.",
+    doorOpener: "Payroll-adjacent gaps on FXP projects.",
+    note: "Integration work, and often what the customer needs first.",
+  },
+];
+
+const WAVE_STYLE: Record<PlatformRow["wave"], string> = {
+  First: "border-teal-400/40 bg-teal-500/20 text-teal-100",
+  Second: "border-amber-400/40 bg-amber-500/20 text-amber-100",
+  "With FXP": "border-emerald-400/40 bg-emerald-500/15 text-emerald-100",
+  "When pulled": "border-white/20 bg-white/10 text-white/70",
+};
+
+function PlatformsSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-6 w-full max-w-6xl">
+        <SlideHeading
+          kicker="Where we build"
+          title="Eight platforms."
+          highlight="Two first. Two with FXP. One next. Three when pulled."
+        />
+        <div className="deck-rise mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur" style={{ animationDelay: "0.2s" }}>
+          <table className="w-full table-fixed border-collapse text-left">
+            <thead>
+              <tr className="text-[9.5px] font-black uppercase tracking-[0.18em] text-white/45">
+                <th className="w-[13%] px-3 py-1.5">Platform</th>
+                <th className="w-[32%] px-3 py-1.5">How you build on it</th>
+                <th className="w-[20%] px-3 py-1.5">Partner route</th>
+                <th className="w-[15%] px-3 py-1.5">Who opens the door</th>
+                <th className="w-[20%] px-3 py-1.5">Why this wave</th>
+              </tr>
+            </thead>
+            <tbody>
+              {PLATFORMS.map((row) => (
+                <tr key={row.vendor} className="border-t border-white/10 align-top">
+                  <td className="px-3 py-1.5">
+                    <p className="text-[12px] font-black leading-tight tracking-tight text-white">{row.vendor}</p>
+                    <span
+                      className={cn(
+                        "mt-0.5 block w-fit rounded-full border px-1.5 text-[8px] font-bold uppercase leading-[14px] tracking-[0.15em]",
+                        WAVE_STYLE[row.wave],
+                      )}
+                    >
+                      {row.wave}
+                    </span>
+                  </td>
+                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.mechanism}</td>
+                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.partnerRoute}</td>
+                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.doorOpener}</td>
+                  <td className="px-3 py-1.5 text-[10.5px] leading-snug text-white/75">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="deck-rise mt-2.5 text-center text-[9.5px] text-white/40" style={{ animationDelay: "0.4s" }}>
+          Detail from the vendors’ own developer and partner pages, checked 23 Sep 2026. jalipi is not on the list:
+          through January I hand it over with a developer from QuickThink Cloud, and after that QTC pays Bespoke Everything for jalipi work.
+        </p>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+type VendorDetail = {
+  name: string;
+  wave: PlatformRow["wave"];
+  thesis: string;
+  points: { label: string; body: string }[];
+  door: string;
+  first: string;
+};
+
+function VendorBand({ vendor, delay }: { vendor: VendorDetail; delay: number }) {
+  const first = vendor.wave === "First" || vendor.wave === "With FXP";
+  const waveLabel = vendor.wave === "First" || vendor.wave === "Second" ? `${vendor.wave} wave` : vendor.wave;
+  return (
+    <div
+      className={cn(
+        "deck-rise grid gap-5 rounded-2xl border p-4 backdrop-blur grid-cols-[17rem_1fr]",
+        first ? "border-teal-400/20 bg-teal-500/[0.07]" : "border-amber-400/20 bg-amber-500/[0.07]",
+      )}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <div className="flex flex-col border-white/10 border-r pr-5">
+        <span
+          className={cn(
+            "self-start rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.15em]",
+            WAVE_STYLE[vendor.wave],
+          )}
+        >
+          {waveLabel}
+        </span>
+        <h3 className="mt-1.5 text-[22px] font-black leading-none tracking-tight">{vendor.name}</h3>
+        <p className="mt-1.5 text-[11.5px] font-medium leading-snug text-white/85">{vendor.thesis}</p>
+        <div className="mt-2 space-y-1 text-[10.5px] leading-snug">
+          <p className="text-white/65">
+            <span className="font-black text-white/90">Door · </span>
+            {vendor.door}
+          </p>
+          <p className={first ? "text-teal-200/90" : "text-amber-100/90"}>
+            <span className="font-black">First build · </span>
+            {vendor.first}
+          </p>
+        </div>
+      </div>
+      <dl className="grid gap-4 grid-cols-3">
+        {vendor.points.map((point, index) => (
+          <div key={point.label} className="min-w-0">
+            <dt className="flex items-baseline gap-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-white/40">
+              <span className={first ? "text-teal-300" : "text-amber-300"}>0{index + 1}</span>
+              {point.label}
+            </dt>
+            <dd className="mt-1.5 text-[11px] leading-relaxed text-white/75">{point.body}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+function VendorPairSlide({
+  kicker,
+  title,
+  highlight,
+  vendors,
+  foot,
+}: {
+  kicker: string;
+  title: string;
+  highlight: string;
+  vendors: [VendorDetail, VendorDetail];
+  foot: string;
+}) {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-8 flex w-full max-w-6xl flex-col">
+        <SlideHeading kicker={kicker} title={title} highlight={highlight} />
+        <div className="mt-4 space-y-3">
+          {vendors.map((vendor, index) => (
+            <VendorBand key={vendor.name} vendor={vendor} delay={0.15 + index * 0.15} />
+          ))}
+        </div>
+        <p
+          className="deck-rise mt-3 text-center text-[11.5px] font-medium leading-snug text-white/70"
+          style={{ animationDelay: "0.45s" }}
+        >
+          {foot}
+        </p>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+const DAYFORCE: VendorDetail = {
+  name: "Dayforce",
+  wave: "First",
+  thesis: "The app is a page inside Dayforce. The customer never leaves the product they already pay for.",
+  points: [
+    {
+      label: "What we build",
+      body: "Dayforce Studio apps: pages, workflows and logic on Dayforce’s own data model and security. Integration Studio sits beside it when the gap is a system Dayforce has to talk to.",
+    },
+    {
+      label: "How a second customer gets it",
+      body: "An app is a package, moved between that customer’s own environments through the metadata API. A second customer is a second build on the same pattern. Dayforce does not give us a marketplace to license it.",
+    },
+    {
+      label: "The gate",
+      body: "Extensibility is a licence on the tenant. We cannot turn it on. The partner programme is how we get a development tenant and a name their account teams recognise.",
+    },
+  ],
+  door: "Chris, from January.",
+  first: "One gap off a live Dayforce project, opened in a real tenant.",
+};
+
+const WORKDAY: VendorDetail = {
+  name: "Workday",
+  wave: "When pulled",
+  thesis: "Two motions. A custom app on one tenant, or one app licensed to many. HR first, so it waits for a project.",
+  points: [
+    {
+      label: "What we build",
+      body: "Extend and Orchestrate for an app on that customer’s tenant. Built on Workday when the same app should be sold again: we build it once, Workday distributes it, and the customer does not need an Extend licence.",
+    },
+    {
+      label: "How a second customer gets it",
+      body: "They contract with us. Workday installs the released app. Non-breaking updates reach every tenant that has it. Breaking changes are not allowed after the first release, so it has to be right before it ships.",
+    },
+    {
+      label: "The gate",
+      body: "Producer approval, and a door. Workday is HR first; our niche is workforce management, and nobody in the network is inside a Workday account today. We apply when a named project makes it worth the wait.",
+    },
+  ],
+  door: "A named project. There is no warm door today, and we say so.",
+  first: "A proposal when a project asks. If the gap repeats, the producer application follows.",
+};
+
+function InsideProductSlide() {
+  return (
+    <VendorPairSlide
+      kicker="Inside the product · in detail"
+      title="Dayforce now."
+      highlight="Workday when a project asks."
+      vendors={[DAYFORCE, WORKDAY]}
+      foot="Both let the app live inside the product, and both could become a repeatable app. Dayforce has a door. Workday is HR first and waits for a named project."
+    />
+  );
+}
+
+const UKG: VendorDetail = {
+  name: "UKG Pro WFM",
+  wave: "First",
+  thesis: "There is no Studio. We build beside UKG and connect through the API.",
+  points: [
+    {
+      label: "What we build",
+      body: "A side-by-side application on the Developer Hub. REST for people, punches, shifts, scheduling, accruals and time. Webhooks, so we react when a record changes instead of polling for it.",
+    },
+    {
+      label: "What we own that they do not",
+      body: "Hosting, security, and the work when UKG changes an API. Nothing in their platform keeps our app on their upgrade path. That is what the support line is for.",
+    },
+    {
+      label: "How an account team finds us",
+      body: "A Technology Marketplace listing. A few APIs, benefits and background checks among them, are only open to partners, so the listing is also how we get the access a cold developer does not.",
+    },
+  ],
+  door: "Chris, and FrontlineXP’s live UKG projects. Sick pay is the shape of the work.",
+  first: "One named gap, fixed price, once I have joined.",
+};
+
+const RELEX: VendorDetail = {
+  name: "RELEX",
+  wave: "Second",
+  thesis: "The platform is opening. The partner route is real. The app builder is still in pilot.",
+  points: [
+    {
+      label: "What we build",
+      body: "RELEX Open has three doors. Deploy what they already sell. Connect other systems and agents, including over MCP. Extend, with a plugin framework for data models, algorithms, workflows and screens.",
+    },
+    {
+      label: "Where it actually is",
+      body: "Customers are piloting extensibility. It is a product still being piloted, with partners yet to ship apps. We register on the Developer Portal once I have joined, and a native app waits until we have built one inside a pilot.",
+    },
+    {
+      label: "Which list we join",
+      body: "Solution extension partners, the ones who add capability. Inference Group already build AI for RELEX customers and may see this as theirs, so we agree the line with them before we go to Val. WFM extensions on the platform is the line we propose.",
+    },
+  ],
+  door: "Val, through Chris, after Inference Group.",
+  first: "A pilot extension in Q3. Registration once I have joined.",
+};
+
+function KnownEstatesSlide() {
+  return (
+    <VendorPairSlide
+      kicker="First and second · in detail"
+      title="UKG now."
+      highlight="RELEX as it opens."
+      vendors={[UKG, RELEX]}
+      foot="UKG is a job we can quote in January. RELEX is a seat we earn this year, and not before we have been inside a pilot."
+    />
+  );
+}
+
+const LOGILE: VendorDetail = {
+  name: "Logile",
+  wave: "With FXP",
+  thesis: "FrontlineXP is already a LogileONE partner. There is no Studio. We build beside it.",
+  points: [
+    {
+      label: "What we build",
+      body: "A side-by-side app on the published REST API. What is public covers scheduling, including whether someone can be scheduled, and employee messaging. Sandboxes and an event-driven framework, so a build is proven before it touches a live store.",
+    },
+    {
+      label: "What we own",
+      body: "Hosting, and the work when an API changes. Nothing in Logile keeps our app on their upgrade path. The support line is the product, the same shape as UKG.",
+    },
+    {
+      label: "The list FXP is already on",
+      body: "LogileONE, launched June 2026, names FrontlineXP as an implementation partner. A separate technology tier is for firms that build integrations and extend the platform. The first conversation does not start cold.",
+    },
+  ],
+  door: "FrontlineXP. Already inside LogileONE.",
+  first: "One gap off a live Logile project, fixed price, against the published API.",
+};
+
+const LEGION: VendorDetail = {
+  name: "Legion",
+  wave: "With FXP",
+  thesis: "The product is the API. Partners extend it from outside. There is no page inside Legion to ship.",
+  points: [
+    {
+      label: "What we build",
+      body: "APIs for HR, demand and payroll, in and out. Webhooks when a shift is swapped or a schedule is published. The Integration Center maps the flow and shows whether it is healthy. OAuth 2.0 on the API, files where a customer still moves data that way.",
+    },
+    {
+      label: "What a partner build looks like",
+      body: "Rebus, announced January 2026, keeps a warehouse labour system in step with Legion’s forecast and schedule. That is the shape: a gap FXP already sees, answered by a feed, a rule, or a screen Legion will not grow.",
+    },
+    {
+      label: "What we do not get",
+      body: "No marketplace, and no in-product page builder. Low-code orchestration through Workato or SAP BTP is Legion’s own route. Ours is a fixed-price build we host, with a support line behind it.",
+    },
+  ],
+  door: "FrontlineXP’s live Legion projects.",
+  first: "One integration or side-by-side app on a Legion estate FXP is already in.",
+};
+
+function FxpSystemsSlide() {
+  return (
+    <VendorPairSlide
+      kicker="Where FrontlineXP already is"
+      title="Logile and Legion."
+      highlight="The door is open. The app sits beside them."
+      vendors={[LOGILE, LEGION]}
+      foot="Both are the UKG shape, not the Dayforce shape. What they have that UKG does not is FrontlineXP already in the account."
+    />
+  );
+}
+
+const PULLED: {
+  name: string;
+  body: string;
+  take: string;
+}[] = [
+  {
+    name: "SAP SuccessFactors",
+    body: "Apps sit beside the suite on SAP BTP, so the customer’s SuccessFactors stays upgradeable. The route is mature. So is the partner field: established firms have been building these extensions for years.",
+    take: "A proposal when a TCN client already on SuccessFactors has a gap. No development tenant before January.",
+  },
+  {
+    name: "Oracle HCM",
+    body: "Redwood extensions in Visual Builder Studio: new pages and workflows inside Fusion, on their data. Same shape as SAP, and the same crowd of partners who have been doing it longer than we have.",
+    take: "A live project, or we do not staff it.",
+  },
+  {
+    name: "ADP",
+    body: "API Central and the Marketplace, against Workforce Now. Integrations, not screens inside ADP. Often the first thing a payroll gap needs, and often what a project needs before anyone will pay for an application.",
+    take: "Integration work attached to a job we already have. Not a platform we lead with.",
+  },
+];
+
+function WhenPulledSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-5xl">
+        <SlideHeading
+          kicker="When a client pulls us in"
+          title="SAP, Oracle, ADP."
+          highlight="Real money. Not a cold start."
+          lede="Year one capacity is Dayforce, UKG, Logile, Legion and RELEX. These three, and Workday, get a proposal when a named project asks."
+        />
+        <div
+          className="deck-rise mx-auto mt-4 flex items-center gap-2 text-[10.5px] font-semibold text-white/80"
+          style={{ animationDelay: "0.15s" }}
+        >
+          {["A named project asks", "Scoped in a week", "Fixed-price proposal", "Build"].map((step, index, all) => (
+            <div key={step} className="flex items-center gap-2">
+              <span
+                className={cn(
+                  "rounded-full border px-3 py-1",
+                  index === 0
+                    ? "border-amber-400/40 bg-amber-500/20 text-amber-100"
+                    : "border-white/15 bg-white/5",
+                )}
+              >
+                {step}
+              </span>
+              {index < all.length - 1 ? <ArrowRight className="h-3.5 w-3.5 text-white/40" /> : null}
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur">
+          {PULLED.map((item, index) => (
+            <div
+              key={item.name}
+              className="deck-rise grid gap-5 px-5 py-3.5 grid-cols-[11rem_1fr_16rem]"
+              style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+            >
+              <div>
+                <h3 className="text-[15px] font-black leading-tight tracking-tight">{item.name}</h3>
+                <span className="mt-1.5 inline-block rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.15em] text-white/60">
+                  When pulled
+                </span>
+              </div>
+              <p className="text-[11.5px] leading-relaxed text-white/72">{item.body}</p>
+              <p className="border-white/10 text-[11.5px] font-medium leading-snug text-teal-200/90 border-l pl-4">
+                {item.take}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 4. Who runs it
+// ---------------------------------------------------------------------------
+
+type Seat = {
+  icon: LucideIcon;
+  seat: string;
+  who: string;
+  status: string;
+  tone: "filled" | "proposed" | "open";
+  body: string;
+  measure: string;
+};
+
+const SEATS: Seat[] = [
+  {
+    icon: Wrench,
+    seat: "Build",
+    who: "Graham",
+    status: "From mid January",
+    tone: "filled",
+    body:
+      "Scopes the gap, prices it, builds it, and owns the pattern on each platform until it is proven enough to hand to a skilled builder.",
+    measure: "Two builds live by the end of Q1.",
+  },
+  {
+    icon: Handshake,
+    seat: "Vendors and accounts",
+    who: "Doug",
+    status: "Proposed · available January",
+    tone: "proposed",
+    body:
+      "The vendor and account seat. Account managers refer a stuck deal to a person they trust, and Doug is that person. Available from January. The FXP timing missed, so he is free, and he wants this.",
+    measure: "The person the account teams already call.",
+  },
+  {
+    icon: Radar,
+    seat: "Third seat",
+    who: "Open",
+    status: "Held open",
+    tone: "open",
+    body:
+      "Held for a seller, or a production engineer, whichever the work shows we need first. A seller at the level we would want joins when the margin pays commission, or sooner if the network runs short.",
+    measure: "Decided on the numbers by mid-year.",
+  },
+];
+
+const SEAT_TONE: Record<Seat["tone"], { card: string; pill: string }> = {
+  filled: {
+    card: "border-teal-400/25 bg-teal-500/10",
+    pill: "border-teal-400/40 bg-teal-500/20 text-teal-100",
+  },
+  proposed: {
+    card: "border-amber-400/25 bg-amber-500/10",
+    pill: "border-amber-400/40 bg-amber-500/20 text-amber-100",
+  },
+  open: {
+    card: "border-white/10 bg-white/5",
+    pill: "border-white/20 bg-white/10 text-white/70",
+  },
+};
+
+function TeamSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-5xl">
+        <SlideHeading
+          kicker="Who runs it"
+          title="Two operating founders."
+          highlight="One seat held open."
+          lede="Chris and Thomas as the investors. No hunter on day one: the pipeline is warm. The sales seat is the open question, decided on the work."
+        />
+        <div className="relative mt-5 grid gap-6 grid-cols-3">
+          <span className="pointer-events-none absolute left-[16%] right-[16%] top-[2.6rem] h-px bg-gradient-to-r from-teal-400/60 via-amber-400/50 to-white/20" />
+          {SEATS.map((seat, index) => {
+            const Icon = seat.icon;
+            const tone = SEAT_TONE[seat.tone];
+            const open = seat.tone === "open";
+            return (
+              <div
+                key={seat.seat}
+                className="deck-rise flex flex-col items-center text-center"
+                style={{ animationDelay: `${0.15 + index * 0.12}s` }}
+              >
+                <div
+                  className={cn(
+                    "relative z-10 flex h-[5.25rem] w-[5.25rem] items-center justify-center rounded-full ring-8 ring-neutral-950",
+                    seat.tone === "filled" && "bg-gradient-to-br from-teal-500 to-emerald-500 text-white shadow-2xl deck-loop-glow",
+                    seat.tone === "proposed" && "bg-gradient-to-br from-amber-500 to-orange-400 text-white shadow-2xl",
+                    open && "border-2 border-dashed border-white/30 bg-white/[0.03] text-white/50",
+                  )}
+                >
+                  {open ? (
+                    <span className="text-3xl font-black leading-none">?</span>
+                  ) : (
+                    <Icon className="h-7 w-7" />
+                  )}
+                </div>
+                <span
+                  className={cn(
+                    "mt-3 rounded-full border px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.15em]",
+                    tone.pill,
+                  )}
+                >
+                  {seat.status}
+                </span>
+                <p className="mt-2.5 text-[10px] font-black uppercase tracking-[0.2em] text-white/45">
+                  {seat.seat}
+                </p>
+                <h3 className="text-[22px] font-black leading-tight tracking-tight">{seat.who}</h3>
+                <p className="mt-2 max-w-[19rem] text-[11px] leading-relaxed text-white/70">{seat.body}</p>
+                <p className="mt-2 text-[11px] font-semibold leading-snug text-teal-200/90">{seat.measure}</p>
+              </div>
+            );
+          })}
+        </div>
+        <div
+          className="deck-rise mt-3.5 grid gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 grid-cols-[1fr_1fr]"
+          style={{ animationDelay: "0.5s" }}
+        >
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">
+              What replaces a hunter in year one
+            </p>
+            <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+              Research runs overnight: who moved into which role, which programmes are in trouble. Doug
+              sends the note, and only to someone who already knows him. Nothing goes out cold.
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">The sales question</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+              Managing partners and creating a market are different jobs. Doug’s seat is the first. The third
+              seat is where a seller goes: once support covers a salary, or sooner if the network is under two
+              builds by end of Q2.
+            </p>
+          </div>
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 5. New business
+// ---------------------------------------------------------------------------
+
+const CHANNELS: {
+  icon: LucideIcon;
+  title: string;
+  share: string;
+  bar: string;
+  body: string;
+  proof: string;
+}[] = [
+  {
+    icon: Handshake,
+    title: "The network",
+    share: "Most of year one",
+    bar: "from-teal-500 to-teal-400",
+    body:
+      "FXP project gap lists. Chris’s Dayforce and UKG relationships. REPL alumni now running operations and HR technology at retailers and manufacturers. Every one of them has a list.",
+    proof: "Warm. Priced per gap. Closes in weeks, not procurement cycles.",
+  },
+  {
+    icon: Blocks,
+    title: "The vendors",
+    share: "Builds through year one",
+    bar: "from-emerald-500 to-emerald-400",
+    body:
+      "Listed on the Dayforce partner programme, on the UKG Technology Marketplace, inside LogileONE through FXP, a RELEX solution-extension partner. A vendor account team with a gap in a deal refers it rather than losing the deal.",
+    proof: "Slow to earn, then compounding. The vendor sells for us.",
+  },
+  {
+    icon: Megaphone,
+    title: "Direct",
+    share: "From Q2",
+    bar: "from-amber-500 to-amber-300",
+    body:
+      "One named offer per platform, backed by two case studies and a demonstrator app. Doug and I sell it with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
+    proof: "Demonstrators beat slideware. Every meeting starts with a working app.",
+  },
+];
+
+function NewBusinessSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-5xl">
+        <SlideHeading
+          kicker="How the work arrives"
+          title="Three channels,"
+          highlight="in the order they pay."
+        />
+        <div className="mt-4 grid gap-5 grid-cols-3">
+          {CHANNELS.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className="deck-rise relative min-w-0"
+                style={{ animationDelay: `${0.3 + index * 0.12}s` }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className={cn("inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-white shadow-lg", item.bar)}>
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="text-[14px] font-black leading-tight tracking-tight">{item.title}</h3>
+                    <p className="text-[9.5px] font-bold uppercase tracking-[0.15em] text-amber-200/80">{item.share}</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-[11px] leading-relaxed text-white/72">{item.body}</p>
+                <p className="mt-1.5 text-[10.5px] font-semibold leading-snug text-teal-200/90">{item.proof}</p>
+              </div>
+            );
+          })}
+        </div>
+        <div
+          className="deck-rise mt-4 rounded-2xl border border-amber-400/20 bg-amber-500/[0.07] px-5 py-3"
+          style={{ animationDelay: "0.55s" }}
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-100/80">
+            How the year pays for itself · worked at the middle of the range
+          </p>
+          <div className="mt-2 grid gap-3 grid-cols-3">
+            <div>
+              <p className="text-[13px] font-black tracking-tight">What goes out</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+                The studio spends nothing before January. Those months are the jalipi handover, and reading
+                how the vendors extend. From January, two people. Then a small number of skilled builders,
+                UK or South Africa, and only once a job is signed.
+              </p>
+            </div>
+            <div>
+              <p className="text-[13px] font-black tracking-tight">What comes in</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+                At £80k, the middle of the £40–120k range: two builds in the first half is about £160k
+                invoiced. Four across the year is about £320k of build fees, before support.
+              </p>
+            </div>
+            <div>
+              <p className="text-[13px] font-black tracking-tight">Where the overdraft sits</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+                Support at 20% starts the quarter after go-live. Cash goes out ahead of that, so the
+                draw peaks in the first half and the plan has it falling by Q4.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="deck-rise mt-3 grid gap-3 border-t border-white/10 pt-3 grid-cols-[1.1fr_1fr_1fr]"
+          style={{ animationDelay: "0.7s" }}
+        >
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">How we price</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+              Fixed-scope build, £40k to £120k by size. Annual support at 20 to 25% of the build. Licensed
+              apps per tenant per year where a platform allows it. Illustrative, not a rate card.
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">What good looks like</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+              Two builds live by end of Q1. Four concurrent by Q3. A support base that covers a builder&rsquo;s
+              salary by Q4. Case studies with named customers.
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">What we say no to</p>
+            <p className="mt-1 text-[11px] leading-relaxed text-white/75">
+              Body-shopping. Implementation work that belongs to FXP. Building a product of our own. Anything
+              a customer could configure themselves in an afternoon.
+            </p>
+          </div>
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 6. Timeline
+// ---------------------------------------------------------------------------
+
+type Phase = {
+  label: string;
+  window: string;
+  tone: "notice" | "year";
+  items: string[];
+  measure: string;
+};
+
+const NOTICE: Phase[] = [
+  {
+    label: "jalipi",
+    window: "Mid Oct → mid Jan",
+    tone: "notice",
+    items: [
+      "Hand jalipi to QuickThink Cloud. Their developer hardens it; I keep a stake. FXP implements it as they would any vendor.",
+      "From January, any jalipi time is billed by Bespoke Everything to QTC, and none is anticipated. Nothing on the side.",
+    ],
+    measure: "A clean handover, written down.",
+  },
+  {
+    label: "The vendors",
+    window: "Alongside the handover",
+    tone: "notice",
+    items: [
+      "How Dayforce, Workday, UKG, Logile, Legion and RELEX actually support this kind of extension.",
+      "Partner routes, sandboxes, what lives in the product, and what we would host.",
+    ],
+    measure: "Enough detail to start properly in January.",
+  },
+  {
+    label: "The plan, with Chris",
+    window: "From the 29th",
+    tone: "notice",
+    items: [
+      "The model: cash, headcount, when revenue lands. The builder profile and a first shortlist. Doug’s seat, and the sales seat.",
+      "I may be working my notice. Applications, builds, proposals and customer meetings wait until I join.",
+    ],
+    measure: "Numbers Chris and Thomas can poke at before day one.",
+  },
+];
+
+const YEAR: Phase[] = [
+  {
+    label: "Q1",
+    window: "Jan → Mar",
+    tone: "year",
+    items: [
+      "First two paid builds delivered off FXP projects.",
+      "Partner applications filed on Dayforce, UKG and RELEX.",
+      "Contract, support and pricing templates settled with TCN shared ops.",
+    ],
+    measure: "Two builds live. First support line signed.",
+  },
+  {
+    label: "Q2",
+    window: "Apr → Jun",
+    tone: "year",
+    items: [
+      "Direct channel opens with two case studies. The third seat is still open.",
+      "First vendor-referred job. First Logile or Legion build live through an FXP account.",
+      "First skilled builder hired, UK or South Africa, against signed work, not a forecast.",
+    ],
+    measure: "Four builds live. One vendor referral closed.",
+  },
+  {
+    label: "Q3",
+    window: "Jul → Sep",
+    tone: "year",
+    items: [
+      "Four jobs running at once. A second skilled builder, once the support line can carry them.",
+      "RELEX pilot with a Val-introduced customer.",
+      "First pattern reused on a second customer without a rebuild.",
+    ],
+    measure: "Support base covers a builder’s salary.",
+  },
+  {
+    label: "Q4",
+    window: "Oct → Dec",
+    tone: "year",
+    items: [
+      "Studio at four or five people. Recurring support and licensed apps on the books.",
+      "Year two takes shape: the next platform, whether the margin pays for a senior seller, where the overdraft sits.",
+      "Every first-year customer referenceable.",
+    ],
+    measure: "Overdraft drawdown falling, not rising.",
+  },
+];
+
+function PhaseTrack({
+  phases,
+  heading,
+  tone,
+  delay,
+}: {
+  phases: Phase[];
+  heading: string;
+  tone: "notice" | "year";
+  delay: number;
+}) {
+  const notice = tone === "notice";
+  return (
+    <div>
+      <div className="flex items-center gap-3">
+        <p
+          className={cn(
+            "shrink-0 text-[10px] font-black uppercase tracking-[0.2em]",
+            notice ? "text-amber-200/80" : "text-teal-200/80",
+          )}
+        >
+          {heading}
+        </p>
+        <span
+          className={cn(
+            "h-px flex-1 bg-gradient-to-r",
+            notice ? "from-amber-400/60 to-amber-400/10" : "from-teal-400/60 to-teal-400/10",
+          )}
+        />
+      </div>
+      <div
+        className="relative mt-2.5 grid gap-4"
+        style={{ gridTemplateColumns: `repeat(${phases.length}, minmax(0, 1fr))` }}
+      >
+        <span
+          className={cn(
+            "pointer-events-none absolute left-0 right-0 top-[5px] h-px",
+            notice ? "bg-amber-400/40" : "bg-teal-400/40",
+          )}
+        />
+        {phases.map((phase, index) => (
+          <div
+            key={phase.label}
+            className="deck-rise relative min-w-0"
+            style={{ animationDelay: `${delay + index * 0.08}s` }}
+          >
+            <span
+              className={cn(
+                "absolute left-0 top-0 h-[11px] w-[11px] rounded-full ring-4 ring-neutral-950",
+                notice ? "bg-amber-300" : "bg-teal-300",
+              )}
+            />
+            <div className="pt-4">
+              <p className="text-[9.5px] font-semibold uppercase tracking-[0.15em] text-white/45">
+                {phase.window}
+              </p>
+              <h3 className="text-[13.5px] font-black tracking-tight text-white">{phase.label}</h3>
+              <ul className="mt-1.5 space-y-1">
+                {phase.items.map((item) => (
+                  <li key={item} className="text-[10.5px] leading-snug text-white/72">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p
+                className={cn(
+                  "mt-2 text-[10.5px] font-semibold leading-snug",
+                  notice ? "text-amber-100" : "text-teal-100",
+                )}
+              >
+                → {phase.measure}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TimelineSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-5xl">
+        <SlideHeading
+          kicker="The plan"
+          title="Before I join,"
+          highlight="jalipi, and a look at the vendors."
+        />
+        <div className="mt-4 space-y-4">
+          <PhaseTrack
+            phases={NOTICE}
+            heading="Before I join · mid October to mid January"
+            tone="notice"
+            delay={0.15}
+          />
+          <PhaseTrack
+            phases={YEAR}
+            heading="Year one · from mid January · full time"
+            tone="year"
+            delay={0.45}
+          />
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Slide assembly + deck shell
+// ---------------------------------------------------------------------------
+
+/** Same curve as the Why jalipi deck, but the recovery point is the studio, not the product. */
+const STUDIO_ERAS: Era[] = [
+  ...ERAS.filter((era) => !era.brand),
+  { year: "Now", label: "Bespoke Everything", bespoke: 100, dot: "#14b8a6", brand: true },
+];
+
+function buildSlides(): DeckSlide[] {
+  return [
+    {
+      id: "title",
+      section: "Open",
+      gradient: "from-teal-500 via-teal-500 to-emerald-500",
+      node: <TitleSlide />,
+    },
+    {
+      id: "bespokometre",
+      section: "The studio",
+      gradient: "from-amber-500 via-slate-400 to-emerald-500",
+      node: (
+        <BespokometreSlide
+          eyebrow="The SaaS decade"
+          eras={STUDIO_ERAS}
+          closing={
+            <>
+              Every move up the stack took bespoke away from the customer. SaaS finished the job:
+              fit your process to the system, or file a change request and wait.
+            </>
+          }
+          closingEmphasis={
+            <>
+              The platforms have now opened the door to build inside them. The studio walks
+              through it.
+            </>
+          }
+        />
+      ),
+    },
+    {
+      id: "thesis",
+      section: "The studio",
+      gradient: "from-teal-500 via-emerald-500 to-amber-500",
+      node: <ThesisSlide />,
+    },
+    {
+      id: "platforms",
+      section: "Platforms",
+      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+      node: <PlatformsSlide />,
+    },
+    {
+      id: "platforms-inside",
+      section: "Platforms",
+      gradient: "from-teal-500 via-emerald-500 to-cyan-500",
+      node: <InsideProductSlide />,
+    },
+    {
+      id: "platforms-estates",
+      section: "Platforms",
+      gradient: "from-cyan-500 via-teal-500 to-amber-500",
+      node: <KnownEstatesSlide />,
+    },
+    {
+      id: "platforms-fxp",
+      section: "Platforms",
+      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+      node: <FxpSystemsSlide />,
+    },
+    {
+      id: "platforms-pulled",
+      section: "Platforms",
+      gradient: "from-amber-500 via-teal-500 to-emerald-500",
+      node: <WhenPulledSlide />,
+    },
+    {
+      id: "team",
+      section: "Team",
+      gradient: "from-emerald-500 via-amber-500 to-orange-500",
+      node: <TeamSlide />,
+    },
+    {
+      id: "new-business",
+      section: "New business",
+      gradient: "from-amber-500 via-orange-500 to-rose-500",
+      node: <NewBusinessSlide />,
+    },
+    {
+      id: "timeline",
+      section: "Timeline",
+      gradient: "from-rose-500 via-amber-500 to-teal-500",
+      node: <TimelineSlide />,
+    },
+  ];
+}
+
+function deriveSections(slides: DeckSlide[]) {
+  const sections: { label: string; start: number }[] = [];
+  slides.forEach((slide, index) => {
+    if (sections.length === 0 || sections[sections.length - 1]!.label !== slide.section) {
+      sections.push({ label: slide.section, start: index });
+    }
+  });
+  return sections;
+}
+
+function CallIdeaSlide() {
+  const beats = [
+    ["01", "The gap is on every project."],
+    ["02", "The vendors now let you build inside."],
+    ["03", "We sell a fixed-price build, and a support line."],
+  ];
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1.15fr_1fr] items-center gap-16">
+        <div className="deck-rise">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
+            For Chris
+          </p>
+          <h2 className="mt-4 text-[3.4rem] font-black leading-[0.98] tracking-tight">
+            Build the thing
+            <br />
+            the platform
+            <br />
+            <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+              will not do.
+            </span>
+          </h2>
+        </div>
+        <div className="deck-rise" style={{ animationDelay: "0.2s" }}>
+          <ul className="space-y-6">
+            {beats.map(([n, line]) => (
+              <li key={n} className="flex items-baseline gap-4">
+                <span className="text-[13px] font-black tabular-nums text-teal-300/80">{n}</span>
+                <span className="text-[22px] font-black leading-snug tracking-tight">{line}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 border-t border-white/10 pt-5 text-[15px] leading-relaxed text-white/60">
+            Not a bench. Not a product company. The customer stays on their upgrade path.
+          </p>
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+const CALL_GROUPS: { kicker: string; names: string[]; line: string; tone: string }[] = [
+  {
+    kicker: "Inside the product",
+    names: ["Dayforce", "jalipi"],
+    line: "The app is a page in what they already pay for. jalipi is QuickThink Cloud’s platform, extended for each engagement.",
+    tone: "text-teal-200",
+  },
+  {
+    kicker: "Beside it, where FXP is",
+    names: ["UKG", "Logile", "Legion"],
+    line: "No studio. We host the build. The support line is what keeps it alive.",
+    tone: "text-emerald-200",
+  },
+  {
+    kicker: "Later",
+    names: ["RELEX", "Workday", "SAP · Oracle · ADP"],
+    line: "RELEX as it opens, on a line agreed with Inference Group. Workday is HR first, outside our niche, and waits for a project. The others only when one asks.",
+    tone: "text-amber-200",
+  },
+];
+
+type CallWave = PlatformRow["wave"] | "With QTC" | "Any platform";
+
+const CALL_CARD_TONE: Record<CallWave, { card: string; pill: string; label: string; bar: string }> = {
+  First: {
+    card: "border-teal-400/25 bg-teal-500/[0.08]",
+    pill: "border-teal-400/40 bg-teal-500/20 text-teal-100",
+    label: "text-teal-200/80",
+    bar: "from-teal-400 to-emerald-400",
+  },
+  "With FXP": {
+    card: "border-emerald-400/25 bg-emerald-500/[0.07]",
+    pill: "border-emerald-400/40 bg-emerald-500/15 text-emerald-100",
+    label: "text-emerald-200/80",
+    bar: "from-emerald-400 to-teal-300",
+  },
+  Second: {
+    card: "border-amber-400/25 bg-amber-500/[0.07]",
+    pill: "border-amber-400/40 bg-amber-500/20 text-amber-100",
+    label: "text-amber-200/80",
+    bar: "from-amber-400 to-orange-300",
+  },
+  "When pulled": {
+    card: "border-white/10 bg-white/[0.04]",
+    pill: "border-white/20 bg-white/10 text-white/70",
+    label: "text-white/50",
+    bar: "from-white/40 to-white/10",
+  },
+  "With QTC": {
+    card: "border-sky-400/25 bg-sky-500/[0.07]",
+    pill: "border-sky-400/40 bg-sky-500/15 text-sky-100",
+    label: "text-sky-200/80",
+    bar: "from-sky-400 to-cyan-300",
+  },
+  "Any platform": {
+    card: "border-fuchsia-400/25 bg-fuchsia-500/[0.06]",
+    pill: "border-fuchsia-400/40 bg-fuchsia-500/15 text-fuchsia-100",
+    label: "text-fuchsia-200/80",
+    bar: "from-fuchsia-400 to-violet-300",
+  },
+};
+
+type CallVendor = {
+  vendor: string;
+  wave: CallWave;
+  shape: string;
+  extend: string;
+  door: string;
+  first: string;
+};
+
+const CALL_VENDORS: CallVendor[] = [
+  {
+    vendor: "Dayforce",
+    wave: "First",
+    shape: "Inside the product",
+    extend: "Dayforce Studio. Pages, workflows and logic inside the product.",
+    door: "Chris. Partner programme from January.",
+    first: "A gap off a live Dayforce project, in a real tenant.",
+  },
+  {
+    vendor: "UKG Pro WFM",
+    wave: "First",
+    shape: "Beside the product",
+    extend: "Developer Hub APIs and webhooks. No studio, so we host the app.",
+    door: "Chris, and FrontlineXP’s live UKG projects.",
+    first: "A named gap, fixed price. Sick pay is the shape of it.",
+  },
+  {
+    vendor: "Logile",
+    wave: "With FXP",
+    shape: "Beside the product",
+    extend: "REST API, sandboxes, an event framework. The app sits beside it.",
+    door: "FrontlineXP, already a LogileONE partner.",
+    first: "One gap off a project they are already on.",
+  },
+  {
+    vendor: "Legion",
+    wave: "With FXP",
+    shape: "Beside the product",
+    extend: "APIs, webhooks and the Integration Center. Extended from outside.",
+    door: "FrontlineXP’s live Legion work.",
+    first: "A feed, a rule, or a screen Legion will not grow.",
+  },
+  {
+    vendor: "RELEX",
+    wave: "Second",
+    shape: "Opening up",
+    extend: "RELEX Open: plugins for screens and logic. Still in pilot.",
+    door: "Inference Group first, then Val through Chris. They may see AI for RELEX customers as theirs.",
+    first: "A pilot extension, on a line Inference Group agree.",
+  },
+  {
+    vendor: "Workday",
+    wave: "When pulled",
+    shape: "Inside the product · HR first",
+    extend: "Extend on one tenant. Built on Workday licenses one app to many.",
+    door: "No warm door today. HR first; our niche is WFM.",
+    first: "A proposal when a named project asks.",
+  },
+  {
+    vendor: "SAP · Oracle",
+    wave: "When pulled",
+    shape: "Mature, crowded",
+    extend: "Side-by-side apps on SAP BTP. Redwood pages inside Oracle.",
+    door: "A named client already on the suite.",
+    first: "A proposal when a project asks. No cold entry.",
+  },
+  {
+    vendor: "ADP",
+    wave: "When pulled",
+    shape: "Integrations only",
+    extend: "API Central and the Marketplace. Feeds in and out, no screens.",
+    door: "Payroll gaps on jobs we already have.",
+    first: "The payroll feed that has to move before anything else.",
+  },
+  {
+    vendor: "jalipi",
+    wave: "With QTC",
+    shape: "Partner platform",
+    extend: "A platform QuickThink Cloud develop and harden. I keep a stake.",
+    door: "QTC. They bring the engagement and pay BE for the work. FXP implements.",
+    first: "A bespoke extension on each engagement, delivered by us.",
+  },
+];
+
+const CALL_AGNOSTIC: CallVendor = {
+  vendor: "No platform",
+  wave: "Any platform",
+  shape: "Vendor agnostic",
+  extend:
+    "Problems that are not system problems. A manager’s spreadsheet, a small app, a new solution nobody sells yet, or plain consulting.",
+  door: "Every project has some. Chris, FXP and the network see them first.",
+  first: "Fixed price, like everything else. Often the quickest job we do.",
+};
+
+function CallAgnosticStrip({ delay }: { delay: number }) {
+  const tone = CALL_CARD_TONE[CALL_AGNOSTIC.wave];
+  const rows: [string, string][] = [
+    ["What", CALL_AGNOSTIC.extend],
+    ["Door", CALL_AGNOSTIC.door],
+    ["First", CALL_AGNOSTIC.first],
+  ];
+  return (
+    <div
+      className={cn(
+        "deck-rise relative grid grid-cols-[14.5rem_2fr_1fr_1fr] items-start gap-4 overflow-hidden rounded-2xl border px-3 py-2.5",
+        tone.card,
+      )}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <span className={cn("absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r", tone.bar)} />
+      <div className="flex min-w-0 items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h3 className="text-[14px] font-black leading-tight tracking-tight">{CALL_AGNOSTIC.vendor}</h3>
+          <p className="whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.15em] text-white/45">
+            {CALL_AGNOSTIC.shape}
+          </p>
+        </div>
+        <span
+          className={cn(
+            "shrink-0 whitespace-nowrap rounded-full border px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.15em]",
+            tone.pill,
+          )}
+        >
+          {CALL_AGNOSTIC.wave}
+        </span>
+      </div>
+      {rows.map(([label, body]) => (
+        <p key={label} className="text-[10px] leading-[1.3] text-white/78">
+          <span className={cn("mr-1.5 text-[8px] font-black uppercase tracking-[0.18em]", tone.label)}>{label}</span>
+          {body}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function CallVendorCard({ vendor, delay }: { vendor: CallVendor; delay: number }) {
+  const tone = CALL_CARD_TONE[vendor.wave];
+  const rows: [string, string][] = [
+    ["Extend", vendor.extend],
+    ["Door", vendor.door],
+    ["First", vendor.first],
+  ];
+  return (
+    <div
+      className={cn("deck-rise relative min-w-0 overflow-hidden rounded-2xl border p-3", tone.card)}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <span className={cn("absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r", tone.bar)} />
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h3 className="text-[14px] font-black leading-tight tracking-tight">{vendor.vendor}</h3>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-white/45">{vendor.shape}</p>
+        </div>
+        <span
+          className={cn(
+            "shrink-0 rounded-full border px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.15em]",
+            tone.pill,
+          )}
+        >
+          {vendor.wave}
+        </span>
+      </div>
+      <dl className="mt-1.5 space-y-0.5">
+        {rows.map(([label, body]) => (
+          <div key={label} className="grid grid-cols-[2.7rem_1fr] gap-2">
+            <dt className={cn("pt-[1px] text-[8px] font-black uppercase tracking-[0.18em]", tone.label)}>
+              {label}
+            </dt>
+            <dd className="text-[10px] leading-[1.3] text-white/78">{body}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+function CallVendorsSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-1 w-full max-w-6xl">
+        <SlideHeading
+          kicker="Each vendor · proposed"
+          title="How they extend."
+          highlight="How we show up."
+          lede="Who opens the door, and what the first job looks like. Everything starts once I have joined."
+        />
+        <div className="mt-3 grid grid-cols-3 gap-3">
+          {CALL_VENDORS.map((vendor, index) => (
+            <CallVendorCard key={vendor.vendor} vendor={vendor} delay={0.12 + index * 0.05} />
+          ))}
+        </div>
+        <div className="mt-3">
+          <CallAgnosticStrip delay={0.12 + CALL_VENDORS.length * 0.05} />
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+function CallPlatformsSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-5xl">
+        <p className="deck-rise text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
+          Where we build
+        </p>
+        <h2 className="deck-rise mt-3 text-[2.6rem] font-black leading-tight tracking-tight">
+          Nine platforms.{" "}
+          <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+            Three ways in.
+          </span>
+        </h2>
+        <div className="mt-10 grid grid-cols-3 gap-10">
+          {CALL_GROUPS.map((group, index) => (
+            <div
+              key={group.kicker}
+              className="deck-rise border-t border-white/15 pt-5"
+              style={{ animationDelay: `${0.15 + index * 0.1}s` }}
+            >
+              <p className={cn("text-[11px] font-black uppercase tracking-[0.18em]", group.tone)}>
+                {group.kicker}
+              </p>
+              <ul className="mt-4 space-y-1">
+                {group.names.map((name) => (
+                  <li key={name} className="text-[26px] font-black leading-tight tracking-tight">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[13px] leading-relaxed text-white/60">{group.line}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+const CALL_SEATS: { icon: LucideIcon; who: string; seat: string; line: string; tone: "filled" | "proposed" | "open" }[] = [
+  { icon: Wrench, who: "Graham", seat: "Build", line: "Scopes it, prices it, builds it.", tone: "filled" },
+  { icon: Handshake, who: "Doug", seat: "Vendors and accounts", line: "The person the account teams already call.", tone: "proposed" },
+  { icon: Radar, who: "Open", seat: "Third seat", line: "Where a seller goes, once the work shows it.", tone: "open" },
+];
+
+const CALL_CHANNELS: { icon: LucideIcon; title: string; when: string; line: string; bar: string }[] = [
+  { icon: Handshake, title: "The network", when: "Most of year one", line: "FXP gaps. People we already know.", bar: "from-teal-500 to-teal-400" },
+  { icon: Blocks, title: "The vendors", when: "Once we are a name they can refer", line: "An account team with a gap in a deal sends it to us.", bar: "from-emerald-500 to-emerald-400" },
+  { icon: Megaphone, title: "Direct", when: "Last", line: "One named offer per platform. Nothing goes out cold.", bar: "from-amber-500 to-amber-300" },
+];
+
+const CALL_YEAR: { when: string; title: string; lines: string[]; tone: "notice" | "year" }[] = [
+  {
+    when: "Oct → Jan",
+    title: "Before I join",
+    lines: ["Hand jalipi to QTC, cleanly. I keep a stake.", "Read how the vendors extend.", "Build the model and the hiring plan with Chris.", "I may be working my notice."],
+    tone: "notice",
+  },
+  {
+    when: "Mid January",
+    title: "Day one",
+    lines: ["The studio starts. Applications, conversations, first gaps."],
+    tone: "year",
+  },
+  {
+    when: "Then",
+    title: "The year",
+    lines: ["A handful of paid builds.", "A support line that starts to carry the studio.", "Skilled builders, UK or South Africa, against signed work."],
+    tone: "year",
+  },
+];
+
+function CallRunSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-6xl">
+        <p className="deck-rise text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
+          How it runs
+        </p>
+        <h2 className="deck-rise mt-2 text-[2.4rem] font-black leading-tight tracking-tight">
+          A small studio.{" "}
+          <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+            Warm work first.
+          </span>
+        </h2>
+        <div className="mt-6 grid grid-cols-[1fr_1.05fr_1.1fr] gap-8">
+          {/* Who */}
+          <div className="deck-rise" style={{ animationDelay: "0.15s" }}>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">Who</p>
+            <ul className="mt-3 space-y-2.5">
+              {CALL_SEATS.map((seat) => {
+                const Icon = seat.icon;
+                const open = seat.tone === "open";
+                return (
+                  <li
+                    key={seat.who}
+                    className={cn(
+                      "flex items-center gap-3 rounded-2xl border px-3 py-2.5",
+                      seat.tone === "filled" && "border-teal-400/25 bg-teal-500/10",
+                      seat.tone === "proposed" && "border-amber-400/25 bg-amber-500/10",
+                      open && "border-dashed border-white/20 bg-white/[0.03]",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
+                        seat.tone === "filled" && "bg-gradient-to-br from-teal-500 to-emerald-500 text-white",
+                        seat.tone === "proposed" && "bg-gradient-to-br from-amber-500 to-orange-400 text-white",
+                        open && "border-2 border-dashed border-white/30 text-white/50",
+                      )}
+                    >
+                      {open ? <span className="text-lg font-black leading-none">?</span> : <Icon className="h-4.5 w-4.5" />}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[9px] font-black uppercase tracking-[0.18em] text-white/45">{seat.seat}</p>
+                      <p className="text-[15px] font-black leading-tight tracking-tight">{seat.who}</p>
+                      <p className="text-[11px] leading-snug text-white/65">{seat.line}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-3 text-[11px] leading-snug text-white/55">
+              Then a few skilled builders, UK or South Africa, once a job is signed.
+            </p>
+          </div>
+
+          {/* Where the work comes from */}
+          <div className="deck-rise" style={{ animationDelay: "0.3s" }}>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">Where the work comes from</p>
+            <ol className="relative mt-3 space-y-4">
+              <span className="pointer-events-none absolute bottom-3 left-[15px] top-3 w-px bg-gradient-to-b from-teal-400/60 via-emerald-400/40 to-amber-400/40" />
+              {CALL_CHANNELS.map((channel, index) => {
+                const Icon = channel.icon;
+                return (
+                  <li key={channel.title} className="relative flex items-start gap-3.5">
+                    <span
+                      className={cn(
+                        "relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white ring-4 ring-neutral-950",
+                        channel.bar,
+                      )}
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                    </span>
+                    <div className="min-w-0 pt-0.5">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-[10px] font-black tabular-nums text-white/40">0{index + 1}</span>
+                        <p className="text-[15px] font-black leading-tight tracking-tight">{channel.title}</p>
+                      </div>
+                      <p className="text-[9.5px] font-bold uppercase tracking-[0.15em] text-amber-200/80">{channel.when}</p>
+                      <p className="mt-0.5 text-[11px] leading-snug text-white/65">{channel.line}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          {/* The year */}
+          <div className="deck-rise" style={{ animationDelay: "0.45s" }}>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">The year</p>
+            <ol className="relative mt-3 space-y-3.5">
+              <span className="pointer-events-none absolute bottom-3 left-[5px] top-3 w-px bg-gradient-to-b from-amber-400/60 via-teal-400/50 to-teal-400/20" />
+              {CALL_YEAR.map((phase) => {
+                const notice = phase.tone === "notice";
+                return (
+                  <li key={phase.title} className="relative pl-6">
+                    <span
+                      className={cn(
+                        "absolute left-0 top-[5px] h-[11px] w-[11px] rounded-full ring-4 ring-neutral-950",
+                        notice ? "bg-amber-300" : "bg-teal-300",
+                      )}
+                    />
+                    <p className={cn("text-[9.5px] font-semibold uppercase tracking-[0.15em]", notice ? "text-amber-200/80" : "text-teal-200/80")}>
+                      {phase.when}
+                    </p>
+                    <p className="text-[15px] font-black leading-tight tracking-tight">{phase.title}</p>
+                    <ul className="mt-1 space-y-0.5">
+                      {phase.lines.map((line) => (
+                        <li key={line} className="text-[11px] leading-snug text-white/65">
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+function buildCallSlides(): DeckSlide[] {
+  return [
+    {
+      id: "call-idea",
+      section: "The idea",
+      gradient: "from-teal-500 via-emerald-500 to-amber-500",
+      node: <CallIdeaSlide />,
+    },
+    {
+      id: "call-platforms",
+      section: "Where",
+      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+      node: <CallPlatformsSlide />,
+    },
+    {
+      id: "call-vendors",
+      section: "Vendors",
+      gradient: "from-cyan-500 via-teal-500 to-amber-500",
+      node: <CallVendorsSlide />,
+    },
+    {
+      id: "call-run",
+      section: "How",
+      gradient: "from-amber-500 via-teal-500 to-emerald-500",
+      node: <CallRunSlide />,
+    },
+  ];
+}
+
+export function StudioCallDeck() {
+  const slides = useMemo(() => buildCallSlides(), []);
+  return <StudioSetupDeck slides={slides} />;
+}
+
+export function StudioSetupDeck({ slides: slidesOverride }: { slides?: DeckSlide[] } = {}) {
+  const [current, setCurrent] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenMode, setFullscreenMode] = useState<FullscreenMode | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const fullscreenModeRef = useRef<FullscreenMode | null>(null);
+  useEffect(() => {
+    fullscreenModeRef.current = fullscreenMode;
+  }, [fullscreenMode]);
+
+  const slides = useMemo(() => slidesOverride ?? buildSlides(), [slidesOverride]);
+  const sections = useMemo(() => deriveSections(slides), [slides]);
+  const total = slides.length;
+  const slide = slides[current]!;
+  const { isCompactBrowse, stageMode } = useDeckBrowseLayout(isFullscreen);
+
+  const goNext = useCallback(
+    () => setCurrent((value) => Math.min(value + 1, slides.length - 1)),
+    [slides.length],
+  );
+  const goPrev = useCallback(() => setCurrent((value) => Math.max(value - 1, 0)), []);
+  const goTo = useCallback(
+    (index: number) => setCurrent(Math.max(0, Math.min(index, slides.length - 1))),
+    [slides.length],
+  );
+
+  const toggleFullscreen = useCallback(async () => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    if (isFullscreen) {
+      unlockOrientation();
+      if (fullscreenMode === "native") {
+        await leaveNativeFullscreen();
+      }
+      setIsFullscreen(false);
+      setFullscreenMode(null);
+      return;
+    }
+
+    const enteredNative = await enterNativeFullscreen(el);
+    if (enteredNative) {
+      setIsFullscreen(true);
+      setFullscreenMode("native");
+      return;
+    }
+
+    setIsFullscreen(true);
+    setFullscreenMode("fallback");
+  }, [fullscreenMode, isFullscreen]);
+
+  useEffect(() => {
+    if (fullscreenMode !== "fallback" && !isCompactBrowse) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [fullscreenMode, isCompactBrowse]);
+
+  useEffect(() => {
+    const onChange = () => {
+      if (getNativeFullscreenElement()) {
+        setIsFullscreen(true);
+        setFullscreenMode("native");
+        return;
+      }
+      if (fullscreenModeRef.current === "native") {
+        unlockOrientation();
+        setIsFullscreen(false);
+        setFullscreenMode(null);
+      }
+    };
+    document.addEventListener("fullscreenchange", onChange);
+    document.addEventListener("webkitfullscreenchange", onChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", onChange);
+      document.removeEventListener("webkitfullscreenchange", onChange);
+    };
+  }, []);
+
+  useDeckSwipeNavigation(containerRef, {
+    enabled: true,
+    onNext: goNext,
+    onPrev: goPrev,
+  });
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (["ArrowRight", "PageDown", " ", "Spacebar"].includes(event.key)) {
+        event.preventDefault();
+        goNext();
+      } else if (["ArrowLeft", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        goPrev();
+      } else if (event.key === "Home") {
+        goTo(0);
+      } else if (event.key === "End") {
+        goTo(slides.length - 1);
+      } else if (event.key === "f" || event.key === "F") {
+        void toggleFullscreen();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [goNext, goPrev, goTo, toggleFullscreen, slides.length]);
+
+  return (
+    <>
+      <div
+        ref={containerRef}
+        className={cn(
+          "relative h-[var(--workspace-content-min-height)] w-full select-none overflow-hidden bg-neutral-950 print:hidden",
+          (fullscreenMode === "fallback" || isCompactBrowse) &&
+            "fixed inset-0 z-50 h-dvh w-full max-h-dvh [--workspace-content-min-height:100dvh]",
+        )}
+      >
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-x-0 top-0 z-30 h-1 bg-white/10">
+            <div
+              className={cn("h-full bg-gradient-to-r transition-all duration-500", slide.gradient)}
+              style={{ width: `${((current + 1) / total) * 100}%` }}
+            />
+          </div>
+
+          <SlideStage mode={stageMode} presenting={isFullscreen} slideKey={current}>
+            <div key={current} className="deck-slide-enter absolute inset-0">
+              {slide.node}
+            </div>
+          </SlideStage>
+
+          <div
+            className={cn(
+              "absolute right-4 top-4 z-30 flex items-center gap-2",
+              DECK_CHROME_SAFE_TOP,
+            )}
+          >
+            <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur">
+              {current + 1} / {total}
+            </span>
+            {!isCompactBrowse ? (
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="rounded-full border border-white/20 bg-black/30 p-2 text-white/90 backdrop-blur transition hover:bg-black/50"
+                aria-label="Save slides as PDF"
+                title="Save as PDF"
+              >
+                <Download className="h-4 w-4" />
+              </button>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => void toggleFullscreen()}
+              className={cn(
+                "rounded-full border border-white/20 bg-black/30 text-white/90 backdrop-blur transition hover:bg-black/50",
+                isCompactBrowse && !isFullscreen
+                  ? "inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold"
+                  : "p-2",
+              )}
+              aria-label={isFullscreen ? "Exit present mode" : "Present fullscreen"}
+              title={isFullscreen ? "Exit present mode" : "Present fullscreen"}
+            >
+              {isFullscreen ? (
+                <Minimize2 className="h-4 w-4" />
+              ) : isCompactBrowse ? (
+                <>
+                  <Maximize2 className="h-3.5 w-3.5" />
+                  Present
+                </>
+              ) : (
+                <Maximize2 className="h-4 w-4" />
+              )}
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={goPrev}
+            disabled={current === 0}
+            aria-label="Previous slide"
+            className={cn(
+              "absolute left-4 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-2.5 text-white backdrop-blur transition hover:bg-black/50 disabled:pointer-events-none disabled:opacity-0",
+              isCompactBrowse && "left-[max(0.75rem,env(safe-area-inset-left))]",
+            )}
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            disabled={current === total - 1}
+            aria-label="Next slide"
+            className={cn(
+              "absolute right-4 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-2.5 text-white backdrop-blur transition hover:bg-black/50 disabled:pointer-events-none disabled:opacity-0",
+              isCompactBrowse && "right-[max(0.75rem,env(safe-area-inset-right))]",
+            )}
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          <div
+            className={cn(
+              "absolute inset-x-0 bottom-0 z-30 flex flex-col items-center gap-2 px-4",
+              DECK_CHROME_SAFE_BOTTOM,
+            )}
+          >
+            <div
+              className="flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-white/15 bg-black/40 px-2 py-1.5 text-white shadow-lg backdrop-blur"
+              data-deck-no-swipe
+            >
+              {sections.map((section) => {
+                const active = slide.section === section.label;
+                return (
+                  <button
+                    key={section.label}
+                    type="button"
+                    onClick={() => goTo(section.start)}
+                    className={cn(
+                      "shrink-0 rounded-full px-3 py-1 text-xs font-semibold transition",
+                      active
+                        ? "bg-white text-neutral-900"
+                        : "text-white/70 hover:bg-white/10 hover:text-white",
+                    )}
+                  >
+                    {section.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="hidden print:block">
+        {slides.map((printSlide) => (
+          <div key={printSlide.id} className="break-after-page">
+            <div style={{ width: STAGE_WIDTH, height: STAGE_HEIGHT }}>{printSlide.node}</div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}

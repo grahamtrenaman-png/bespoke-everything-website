@@ -84,7 +84,7 @@ const GRAHAM: SeatSpec = {
   owns: [
     "The scope and the price of every build.",
     "Whether a pattern is good enough to ship again.",
-    "The jalipi handover, and the stake in that solution.",
+    "The first job, lined up before we start.",
   ],
   job: [
     "Scope and price every engagement. Fixed price, invoiced to the customer.",

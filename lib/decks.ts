@@ -14,7 +14,7 @@ export const STUDIO_DECKS: DeckEntry[] = [
     href: "/studio/setup",
     kicker: "For TCN · the studio",
     title: "Setting up the studio.",
-    body: "How Bespoke Everything gets going: the platforms we build on, how it plugs into FrontlineXP, who runs it, how work arrives, and year one from January. Eleven slides.",
+    body: "How Bespoke Everything gets going: the platforms we build on, how it plugs into FrontlineXP, who runs it, how work arrives, and year one from January. Seven slides.",
   },
   {
     href: "/studio/call",

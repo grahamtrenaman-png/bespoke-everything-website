@@ -422,7 +422,7 @@ function HeadsOfTermsSlide() {
 
 function HandoverSlide() {
   const rows = [
-    { when: "Now → mid Jan", line: "The partnership shape is written down. jalipi is handed to QTC. Their developer hardens it. The stake and the kickback are agreed, or the kickback is written down as waiting." },
+    { when: "Now → mid Jan", line: "Studio prep: platforms, the first job, and how Bespoke Everything plugs into FrontlineXP. In the same window, jalipi is handed to QTC and the stake and the kickback are written down." },
     { when: "January", line: "Graham joins Bespoke Everything. Customer work is invoiced to the customer. Nothing on the side." },
     { when: "After that", line: "Doors and opportunities both ways. On jalipi, FXP implements and Bespoke Everything extends, each invoicing the customer the same way they would for any other vendor." },
   ];
@@ -432,9 +432,9 @@ function HandoverSlide() {
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-5xl">
         <SlideHeading
           kicker="Before Graham joins"
-          title="Write the partnership down."
-          highlight="Then hand jalipi over."
-          lede="The three months are for the heads of terms, the jalipi handover, and for Graham to read how the other vendors extend. Not for building jalipi on the side."
+          title="The studio gets ready."
+          highlight="The terms get written down."
+          lede="The months before January are studio prep: platforms, the first job, and how it plugs into FrontlineXP. The heads of terms are written in the same window."
         />
         <div className="mt-6 space-y-3">
           {rows.map((row, index) => (

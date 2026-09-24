@@ -122,9 +122,9 @@ const SHAPE: {
     title: "Line it up",
     tone: "notice",
     lines: [
-      "Hand jalipi to QTC. Agree the kickback in principle.",
       "One build scoped and priced, ready to sign in January. No more than that.",
-      "Heads of terms with QTC, and the company set up. No cash out before January.",
+      "Platforms, partner routes, and how the studio plugs into FrontlineXP.",
+      "The company set up. No cash out before January. jalipi terms written down in the same window.",
     ],
     end: "Two founders, one job, day one.",
   },
@@ -467,7 +467,7 @@ function MarketsSlide() {
 
 /** Cumulative cash, £k. Negative is drawn on the Chris and Thomas overdraft, limit £200k. */
 const CASH: { when: string; cumulative: number; note: string }[] = [
-  { when: "Pre Jan", cumulative: 0, note: "Heads of terms. One job lined up. No cash out." },
+  { when: "Pre Jan", cumulative: 0, note: "Studio prep. One job lined up. No cash out." },
   { when: "Y1 Q1", cumulative: -45, note: "The peak, in January. Two salaries, then the first invoice." },
   { when: "Y1", cumulative: 40, note: "One job was lined up. The rest sold after joining." },
   { when: "Y2", cumulative: 280, note: "Seller and the UK builder. Eight people." },

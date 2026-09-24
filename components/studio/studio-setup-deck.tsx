@@ -11,7 +11,6 @@ import {
 import Link from "next/link";
 import {
   ArrowLeft,
-  ArrowRight,
   Blocks,
   ChevronLeft,
   ChevronRight,
@@ -123,9 +122,9 @@ function TitleSlide() {
           className="deck-rise mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/65"
           style={{ animationDelay: "0.85s" }}
         >
-          Full time from January. The three months before that are a clean jalipi handover and a
-          look at how the vendors extend. Which platforms we build on first, how the studio plugs
-          into FrontlineXP, who runs it, and what the first year looks like once we have started.
+          Full time from January. The months before that are studio prep: the platforms, how it plugs
+          into FrontlineXP, who runs it, and one job ready to sign. jalipi is handed across in the same
+          window.
         </p>
         <p
           className="deck-rise mx-auto mt-4 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40"
@@ -170,67 +169,56 @@ function ThesisSlide() {
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
-      <div className="relative mx-auto flex w-full max-w-5xl flex-col">
-        <div className="grid grid-cols-[24rem_1fr] gap-12">
-          <div className="deck-rise flex flex-col justify-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
-              What the studio is
-            </p>
-            <h2 className="mt-3 text-[2.75rem] font-black leading-[1.02] tracking-tight">
-              Build the thing
-              <br />
-              the platform
-              <br />
-              <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-                will not do.
-              </span>
-            </h2>
-            <p className="mt-5 text-[13.5px] leading-relaxed text-white/75">
-              Not a consultancy with a bench. Not a product company. A studio that fixes the gap on
-              someone else’s platform, for a fixed price, and keeps the customer on their upgrade
-              path.
-            </p>
-            <p className="mt-3 border-l-2 border-amber-400/50 pl-3 text-[12px] leading-relaxed text-white/60">
-              On Dayforce the app lives in their product. On UKG, Logile and Legion there is no Studio, so
-              we host it, and the support line is what keeps it alive.
-            </p>
-          </div>
-
-          <ol className="flex flex-col justify-center divide-y divide-white/10">
-            {THESIS.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <li
-                  key={item.title}
-                  className="deck-rise grid grid-cols-[3.25rem_1fr] items-start gap-5 py-4 first:pt-0 last:pb-0"
-                  style={{ animationDelay: `${0.25 + index * 0.15}s` }}
-                >
-                  <div className="flex flex-col items-center gap-2">
-                    <span
-                      className={cn(
-                        "inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-lg",
-                        item.accent,
-                      )}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="text-[10px] font-black tabular-nums tracking-[0.2em] text-white/35">
-                      0{index + 1}
-                    </span>
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-[17px] font-black tracking-tight">{item.title}</h3>
-                    <p className="mt-1.5 text-[12.5px] leading-relaxed text-white/70">{item.body}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
+      <div className="relative mx-auto mb-auto mt-5 w-full max-w-6xl">
+        <div className="deck-rise text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
+            What the studio is
+          </p>
+          <h2 className="mt-2 text-[2.4rem] font-black leading-tight tracking-tight">
+            Build the thing the platform{" "}
+            <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+              will not do.
+            </span>
+          </h2>
+          <p className="mx-auto mt-2 max-w-3xl text-[13px] leading-relaxed text-white/70">
+            A studio that fixes the gap on someone else’s platform, for a fixed price, and keeps the
+            customer on their upgrade path. On Dayforce the app lives in their product. On UKG, Logile and
+            Legion there is no Studio, so we host it, and the support line is what keeps it alive.
+          </p>
         </div>
 
+        <ol className="mt-4 grid grid-cols-3 gap-3">
+          {THESIS.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <li
+                key={item.title}
+                className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5"
+                style={{ animationDelay: `${0.15 + index * 0.1}s` }}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className={cn(
+                      "inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br text-white shadow-lg",
+                      item.accent,
+                    )}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="text-[10px] font-black tabular-nums tracking-[0.2em] text-white/35">
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3 className="mt-3 text-[15px] font-black leading-tight tracking-tight">{item.title}</h3>
+                <p className="mt-1.5 text-[12px] leading-snug text-white/70">{item.body}</p>
+              </li>
+            );
+          })}
+        </ol>
+
         <div
-          className="deck-rise mt-7 grid grid-cols-3 gap-6 border-t border-white/10 pt-4"
-          style={{ animationDelay: "0.7s" }}
+          className="deck-rise mt-3 grid grid-cols-3 gap-6 border-t border-white/10 pt-3"
+          style={{ animationDelay: "0.5s" }}
         >
           {[
             ["Who buys", "Programme leads mid-implementation. Operators with a gap they now feel. Vendor account teams with a deal to close."],
@@ -240,499 +228,6 @@ function ThesisSlide() {
             <div key={label}>
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">{label}</p>
               <p className="mt-1.5 text-[11.5px] leading-snug text-white/65">{body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </BespokeBrandedSlide>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// 3. Platforms
-// ---------------------------------------------------------------------------
-
-type PlatformRow = {
-  vendor: string;
-  wave: "First" | "Second" | "With FXP" | "With QTC" | "When pulled";
-  mechanism: string;
-  partnerRoute: string;
-  doorOpener: string;
-  note: string;
-};
-
-const PLATFORMS: PlatformRow[] = [
-  {
-    vendor: "Dayforce",
-    wave: "First",
-    mechanism:
-      "Dayforce Studio: pages, workflows and logic inside the Dayforce UI, moved between tenants through the metadata API.",
-    partnerRoute: "Dayforce partner programme; extensibility access is licensed to the tenant.",
-    doorOpener: "Chris, from January.",
-    note: "Native apps inside the product. The cleanest fit for what we sell.",
-  },
-  {
-    vendor: "UKG Pro WFM",
-    wave: "First",
-    mechanism:
-      "Developer Hub: REST APIs, webhooks and events. No in-product builder, so extensions are side-by-side apps on the API.",
-    partnerRoute: "UKG Technology Marketplace listing and the partner network.",
-    doorOpener: "Chris and FrontlineXP’s live UKG projects.",
-    note: "The largest estate of known gaps. The sick-pay case is one of them.",
-  },
-  {
-    vendor: "Logile",
-    wave: "With FXP",
-    mechanism:
-      "REST API, sandboxes, an event framework. No in-product builder, so a side-by-side app we host for scheduling.",
-    partnerRoute: "LogileONE. FrontlineXP is already a named implementation partner.",
-    doorOpener: "FrontlineXP. The conversation is warm.",
-    note: "Same shape as UKG. The door is already open.",
-  },
-  {
-    vendor: "Legion",
-    wave: "With FXP",
-    mechanism:
-      "APIs and webhooks for HR, demand, payroll and schedules, plus the Integration Center. No page builder inside the product.",
-    partnerRoute: "Strategic partners. The build route is the API, not a marketplace.",
-    doorOpener: "FrontlineXP’s live Legion work.",
-    note: "Integration and side-by-side apps. FXP is already in the account.",
-  },
-  {
-    vendor: "RELEX",
-    wave: "Second",
-    mechanism:
-      "RELEX Open: plugins for data models, algorithms, workflows and screens, plus MCP and a Data API. Customers are in pilot.",
-    partnerRoute: "Solution extension partner tier. Register on the Developer Portal once we have started.",
-    doorOpener: "Val, through Chris. Inference Group first.",
-    note: "Same buyers as our WFM work. Inference Group may see AI here as theirs; we agree the line first.",
-  },
-  {
-    vendor: "Workday",
-    wave: "When pulled",
-    mechanism:
-      "Workday Extend on one tenant. Built on Workday lets a partner build once and license one app to many tenants through the Marketplace.",
-    partnerRoute: "Built on Workday producer status. We apply when a project justifies it.",
-    doorOpener: "A named project. We have no warm door today.",
-    note: "HR first, so outside our niche. The licensing upside is real, and it waits for a project.",
-  },
-  {
-    vendor: "SAP SF · Oracle HCM",
-    wave: "When pulled",
-    mechanism:
-      "Side-by-side apps on SAP BTP; Redwood extensions in Oracle Visual Builder Studio. Both mature, both with a crowded partner field.",
-    partnerRoute: "Follow a TCN client in. No cold entry.",
-    doorOpener: "A live project only.",
-    note: "Real money, and we would be one of fifty. Take it when it lands.",
-  },
-  {
-    vendor: "ADP",
-    wave: "When pulled",
-    mechanism: "API Central and Marketplace for integrations. No application surface inside the product.",
-    partnerRoute: "Marketplace partner, integrations only.",
-    doorOpener: "Payroll-adjacent gaps on FXP projects.",
-    note: "Integration work, and often what the customer needs first.",
-  },
-  {
-    vendor: "jalipi",
-    wave: "With QTC",
-    mechanism:
-      "A platform QuickThink Cloud develop and harden. We extend it for each engagement.",
-    partnerRoute: "Not a vendor programme. QTC own it; Graham keeps a stake.",
-    doorOpener: "QTC bring the customer. We build the extension and invoice the customer.",
-    note: "From January, extensions are invoiced to the customer. Any product time for QTC is a separate invoice, and none is anticipated. Nothing on the side.",
-  },
-];
-
-const WAVE_STYLE: Record<PlatformRow["wave"], string> = {
-  First: "border-teal-400/40 bg-teal-500/20 text-teal-100",
-  Second: "border-amber-400/40 bg-amber-500/20 text-amber-100",
-  "With FXP": "border-emerald-400/40 bg-emerald-500/15 text-emerald-100",
-  "With QTC": "border-sky-400/40 bg-sky-500/15 text-sky-100",
-  "When pulled": "border-white/20 bg-white/10 text-white/70",
-};
-
-function PlatformsSlide() {
-  return (
-    <BespokeBrandedSlide className="bg-neutral-950">
-      <Glows />
-      <div className="relative mx-auto mb-auto mt-6 w-full max-w-6xl">
-        <SlideHeading
-          kicker="Where we build"
-          title="Nine platforms."
-          highlight="Two first. Two with FXP. One next. jalipi with QTC. Three when pulled."
-        />
-        <div className="deck-rise mt-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur" style={{ animationDelay: "0.2s" }}>
-          <table className="w-full table-fixed border-collapse text-left">
-            <thead>
-              <tr className="text-[9px] font-black uppercase tracking-[0.16em] text-white/45">
-                <th className="w-[13%] px-3 py-1">Platform</th>
-                <th className="w-[32%] px-3 py-1">How you build on it</th>
-                <th className="w-[20%] px-3 py-1">Partner route</th>
-                <th className="w-[15%] px-3 py-1">Who opens the door</th>
-                <th className="w-[20%] px-3 py-1">Why this wave</th>
-              </tr>
-            </thead>
-            <tbody>
-              {PLATFORMS.map((row) => (
-                <tr key={row.vendor} className="border-t border-white/10 align-top">
-                  <td className="px-3 py-1">
-                    <p className="text-[11.5px] font-black leading-tight tracking-tight text-white">{row.vendor}</p>
-                    <span
-                      className={cn(
-                        "mt-0.5 block w-fit rounded-full border px-1.5 text-[8px] font-bold uppercase leading-[14px] tracking-[0.15em]",
-                        WAVE_STYLE[row.wave],
-                      )}
-                    >
-                      {row.wave}
-                    </span>
-                  </td>
-                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.mechanism}</td>
-                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.partnerRoute}</td>
-                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.doorOpener}</td>
-                  <td className="px-3 py-1 text-[10px] leading-snug text-white/75">{row.note}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="deck-rise mt-2 text-center text-[9.5px] text-white/40" style={{ animationDelay: "0.4s" }}>
-          Vendor detail from their own developer and partner pages, checked 23 Sep 2026. jalipi is QuickThink Cloud’s platform: they develop and harden it, and Graham keeps a stake. We extend it as we would any other platform.
-        </p>
-      </div>
-    </BespokeBrandedSlide>
-  );
-}
-
-type VendorDetail = {
-  name: string;
-  wave: PlatformRow["wave"];
-  thesis: string;
-  points: { label: string; body: string }[];
-  door: string;
-  first: string;
-};
-
-function VendorBand({ vendor, delay }: { vendor: VendorDetail; delay: number }) {
-  const first = vendor.wave === "First" || vendor.wave === "With FXP";
-  const waveLabel = vendor.wave === "First" || vendor.wave === "Second" ? `${vendor.wave} wave` : vendor.wave;
-  return (
-    <div
-      className={cn(
-        "deck-rise grid gap-5 rounded-2xl border p-4 backdrop-blur grid-cols-[17rem_1fr]",
-        first ? "border-teal-400/20 bg-teal-500/[0.07]" : "border-amber-400/20 bg-amber-500/[0.07]",
-      )}
-      style={{ animationDelay: `${delay}s` }}
-    >
-      <div className="flex flex-col border-white/10 border-r pr-5">
-        <span
-          className={cn(
-            "self-start rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.15em]",
-            WAVE_STYLE[vendor.wave],
-          )}
-        >
-          {waveLabel}
-        </span>
-        <h3 className="mt-1.5 text-[22px] font-black leading-none tracking-tight">{vendor.name}</h3>
-        <p className="mt-1.5 text-[11.5px] font-medium leading-snug text-white/85">{vendor.thesis}</p>
-        <div className="mt-2 space-y-1 text-[10.5px] leading-snug">
-          <p className="text-white/65">
-            <span className="font-black text-white/90">Door · </span>
-            {vendor.door}
-          </p>
-          <p className={first ? "text-teal-200/90" : "text-amber-100/90"}>
-            <span className="font-black">First build · </span>
-            {vendor.first}
-          </p>
-        </div>
-      </div>
-      <dl className="grid gap-4 grid-cols-3">
-        {vendor.points.map((point, index) => (
-          <div key={point.label} className="min-w-0">
-            <dt className="flex items-baseline gap-1.5 text-[9px] font-black uppercase tracking-[0.16em] text-white/40">
-              <span className={first ? "text-teal-300" : "text-amber-300"}>0{index + 1}</span>
-              {point.label}
-            </dt>
-            <dd className="mt-1.5 text-[11px] leading-relaxed text-white/75">{point.body}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-}
-
-function VendorPairSlide({
-  kicker,
-  title,
-  highlight,
-  vendors,
-  foot,
-}: {
-  kicker: string;
-  title: string;
-  highlight: string;
-  vendors: [VendorDetail, VendorDetail];
-  foot: string;
-}) {
-  return (
-    <BespokeBrandedSlide className="bg-neutral-950">
-      <Glows />
-      <div className="relative mx-auto mb-auto mt-8 flex w-full max-w-6xl flex-col">
-        <SlideHeading kicker={kicker} title={title} highlight={highlight} />
-        <div className="mt-4 space-y-3">
-          {vendors.map((vendor, index) => (
-            <VendorBand key={vendor.name} vendor={vendor} delay={0.15 + index * 0.15} />
-          ))}
-        </div>
-        <p
-          className="deck-rise mt-3 text-center text-[11.5px] font-medium leading-snug text-white/70"
-          style={{ animationDelay: "0.45s" }}
-        >
-          {foot}
-        </p>
-      </div>
-    </BespokeBrandedSlide>
-  );
-}
-
-const DAYFORCE: VendorDetail = {
-  name: "Dayforce",
-  wave: "First",
-  thesis: "The app is a page inside Dayforce. The customer never leaves the product they already pay for.",
-  points: [
-    {
-      label: "What we build",
-      body: "Dayforce Studio apps: pages, workflows and logic on Dayforce’s own data model and security. Integration Studio sits beside it when the gap is a system Dayforce has to talk to.",
-    },
-    {
-      label: "How a second customer gets it",
-      body: "An app is a package, moved between that customer’s own environments through the metadata API. A second customer is a second build on the same pattern. Dayforce does not give us a marketplace to license it.",
-    },
-    {
-      label: "The gate",
-      body: "Extensibility is a licence on the tenant. We cannot turn it on. The partner programme is how we get a development tenant and a name their account teams recognise.",
-    },
-  ],
-  door: "Chris, from January.",
-  first: "One gap off a live Dayforce project, opened in a real tenant.",
-};
-
-const WORKDAY: VendorDetail = {
-  name: "Workday",
-  wave: "When pulled",
-  thesis: "Two motions. A custom app on one tenant, or one app licensed to many. HR first, so it waits for a project.",
-  points: [
-    {
-      label: "What we build",
-      body: "Extend and Orchestrate for an app on that customer’s tenant. Built on Workday when the same app should be sold again: we build it once, Workday distributes it, and the customer does not need an Extend licence.",
-    },
-    {
-      label: "How a second customer gets it",
-      body: "They contract with us. Workday installs the released app. Non-breaking updates reach every tenant that has it. Breaking changes are not allowed after the first release, so it has to be right before it ships.",
-    },
-    {
-      label: "The gate",
-      body: "Producer approval, and a door. Workday is HR first; our niche is workforce management, and nobody in the network is inside a Workday account today. We apply when a named project makes it worth the wait.",
-    },
-  ],
-  door: "A named project. There is no warm door today, and we say so.",
-  first: "A proposal when a project asks. If the gap repeats, the producer application follows.",
-};
-
-function InsideProductSlide() {
-  return (
-    <VendorPairSlide
-      kicker="Inside the product · in detail"
-      title="Dayforce now."
-      highlight="Workday when a project asks."
-      vendors={[DAYFORCE, WORKDAY]}
-      foot="Both let the app live inside the product, and both could become a repeatable app. Dayforce has a door. Workday is HR first and waits for a named project."
-    />
-  );
-}
-
-const UKG: VendorDetail = {
-  name: "UKG Pro WFM",
-  wave: "First",
-  thesis: "There is no Studio. We build beside UKG and connect through the API.",
-  points: [
-    {
-      label: "What we build",
-      body: "A side-by-side application on the Developer Hub. REST for people, punches, shifts, scheduling, accruals and time. Webhooks, so we react when a record changes instead of polling for it.",
-    },
-    {
-      label: "What we own that they do not",
-      body: "Hosting, security, and the work when UKG changes an API. Nothing in their platform keeps our app on their upgrade path. That is what the support line is for.",
-    },
-    {
-      label: "How an account team finds us",
-      body: "A Technology Marketplace listing. A few APIs, benefits and background checks among them, are only open to partners, so the listing is also how we get the access a cold developer does not.",
-    },
-  ],
-  door: "Chris, and FrontlineXP’s live UKG projects. Sick pay is the shape of the work.",
-  first: "One named gap, fixed price, once we have started.",
-};
-
-const RELEX: VendorDetail = {
-  name: "RELEX",
-  wave: "Second",
-  thesis: "The platform is opening. The partner route is real. The app builder is still in pilot.",
-  points: [
-    {
-      label: "What we build",
-      body: "RELEX Open has three doors. Deploy what they already sell. Connect other systems and agents, including over MCP. Extend, with a plugin framework for data models, algorithms, workflows and screens.",
-    },
-    {
-      label: "Where it actually is",
-      body: "Customers are piloting extensibility. It is a product still being piloted, with partners yet to ship apps. We register on the Developer Portal once we have started, and a native app waits until we have built one inside a pilot.",
-    },
-    {
-      label: "Which list we join",
-      body: "Solution extension partners, the ones who add capability. Inference Group already build AI for RELEX customers and may see this as theirs, so we agree the line with them before we go to Val. WFM extensions on the platform is the line we propose.",
-    },
-  ],
-  door: "Val, through Chris, after Inference Group.",
-  first: "A pilot extension in Q3. Registration once we have started.",
-};
-
-function KnownEstatesSlide() {
-  return (
-    <VendorPairSlide
-      kicker="First and second · in detail"
-      title="UKG now."
-      highlight="RELEX as it opens."
-      vendors={[UKG, RELEX]}
-      foot="UKG is a job we can quote in January. RELEX is a seat we earn this year, and not before we have been inside a pilot."
-    />
-  );
-}
-
-const LOGILE: VendorDetail = {
-  name: "Logile",
-  wave: "With FXP",
-  thesis: "FrontlineXP is already a LogileONE partner. There is no Studio. We build beside it.",
-  points: [
-    {
-      label: "What we build",
-      body: "A side-by-side app on the published REST API. What is public covers scheduling, including whether someone can be scheduled, and employee messaging. Sandboxes and an event-driven framework, so a build is proven before it touches a live store.",
-    },
-    {
-      label: "What we own",
-      body: "Hosting, and the work when an API changes. Nothing in Logile keeps our app on their upgrade path. The support line is the product, the same shape as UKG.",
-    },
-    {
-      label: "The list FXP is already on",
-      body: "LogileONE, launched June 2026, names FrontlineXP as an implementation partner. A separate technology tier is for firms that build integrations and extend the platform. The first conversation does not start cold.",
-    },
-  ],
-  door: "FrontlineXP. Already inside LogileONE.",
-  first: "One gap off a live Logile project, fixed price, against the published API.",
-};
-
-const LEGION: VendorDetail = {
-  name: "Legion",
-  wave: "With FXP",
-  thesis: "The product is the API. Partners extend it from outside. There is no page inside Legion to ship.",
-  points: [
-    {
-      label: "What we build",
-      body: "APIs for HR, demand and payroll, in and out. Webhooks when a shift is swapped or a schedule is published. The Integration Center maps the flow and shows whether it is healthy. OAuth 2.0 on the API, files where a customer still moves data that way.",
-    },
-    {
-      label: "What a partner build looks like",
-      body: "Rebus, announced January 2026, keeps a warehouse labour system in step with Legion’s forecast and schedule. That is the shape: a gap FXP already sees, answered by a feed, a rule, or a screen Legion will not grow.",
-    },
-    {
-      label: "What we do not get",
-      body: "No marketplace, and no in-product page builder. Low-code orchestration through Workato or SAP BTP is Legion’s own route. Ours is a fixed-price build we host, with a support line behind it.",
-    },
-  ],
-  door: "FrontlineXP’s live Legion projects.",
-  first: "One integration or side-by-side app on a Legion estate FXP is already in.",
-};
-
-function FxpSystemsSlide() {
-  return (
-    <VendorPairSlide
-      kicker="Where FrontlineXP already is"
-      title="Logile and Legion."
-      highlight="The door is open. The app sits beside them."
-      vendors={[LOGILE, LEGION]}
-      foot="Both are the UKG shape, not the Dayforce shape. What they have that UKG does not is FrontlineXP already in the account."
-    />
-  );
-}
-
-const PULLED: {
-  name: string;
-  body: string;
-  take: string;
-}[] = [
-  {
-    name: "SAP SuccessFactors",
-    body: "Apps sit beside the suite on SAP BTP, so the customer’s SuccessFactors stays upgradeable. The route is mature. So is the partner field: established firms have been building these extensions for years.",
-    take: "A proposal when a TCN client already on SuccessFactors has a gap. No development tenant before January.",
-  },
-  {
-    name: "Oracle HCM",
-    body: "Redwood extensions in Visual Builder Studio: new pages and workflows inside Fusion, on their data. Same shape as SAP, and the same crowd of partners who have been doing it longer than we have.",
-    take: "A live project, or we do not staff it.",
-  },
-  {
-    name: "ADP",
-    body: "API Central and the Marketplace, against Workforce Now. Integrations, not screens inside ADP. Often the first thing a payroll gap needs, and often what a project needs before anyone will pay for an application.",
-    take: "Integration work attached to a job we already have. Not a platform we lead with.",
-  },
-];
-
-function WhenPulledSlide() {
-  return (
-    <BespokeBrandedSlide className="bg-neutral-950">
-      <Glows />
-      <div className="relative mx-auto w-full max-w-5xl">
-        <SlideHeading
-          kicker="When a client pulls us in"
-          title="SAP, Oracle, ADP."
-          highlight="Real money. Not a cold start."
-          lede="Year one capacity is Dayforce, UKG, Logile, Legion and RELEX. These three, and Workday, get a proposal when a named project asks."
-        />
-        <div
-          className="deck-rise mx-auto mt-4 flex items-center gap-2 text-[10.5px] font-semibold text-white/80"
-          style={{ animationDelay: "0.15s" }}
-        >
-          {["A named project asks", "Scoped in a week", "Fixed-price proposal", "Build"].map((step, index, all) => (
-            <div key={step} className="flex items-center gap-2">
-              <span
-                className={cn(
-                  "rounded-full border px-3 py-1",
-                  index === 0
-                    ? "border-amber-400/40 bg-amber-500/20 text-amber-100"
-                    : "border-white/15 bg-white/5",
-                )}
-              >
-                {step}
-              </span>
-              {index < all.length - 1 ? <ArrowRight className="h-3.5 w-3.5 text-white/40" /> : null}
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur">
-          {PULLED.map((item, index) => (
-            <div
-              key={item.name}
-              className="deck-rise grid gap-5 px-5 py-3.5 grid-cols-[11rem_1fr_16rem]"
-              style={{ animationDelay: `${0.3 + index * 0.1}s` }}
-            >
-              <div>
-                <h3 className="text-[15px] font-black leading-tight tracking-tight">{item.name}</h3>
-                <span className="mt-1.5 inline-block rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.15em] text-white/60">
-                  When pulled
-                </span>
-              </div>
-              <p className="text-[11.5px] leading-relaxed text-white/72">{item.body}</p>
-              <p className="border-white/10 text-[11.5px] font-medium leading-snug text-teal-200/90 border-l pl-4">
-                {item.take}
-              </p>
             </div>
           ))}
         </div>
@@ -971,9 +466,9 @@ function NewBusinessSlide() {
             <div>
               <p className="text-[13px] font-black tracking-tight">What goes out</p>
               <p className="mt-1 text-[11px] leading-relaxed text-white/75">
-                The studio spends nothing before January. Those months are the jalipi handover, and reading
-                how the vendors extend. From January, two people. Then a small number of skilled builders,
-                UK or South Africa, and only once a job is signed.
+                The studio spends nothing before January. Those months are the prep: the platforms, the
+                first job, and how the studio plugs into FrontlineXP. From January, two people. Then a small
+                number of skilled builders, UK or South Africa, and only once there is pipeline.
               </p>
             </div>
             <div>
@@ -1037,27 +532,17 @@ type Phase = {
 
 const NOTICE: Phase[] = [
   {
-    label: "jalipi",
+    label: "The studio",
     window: "Mid Oct → mid Jan",
     tone: "notice",
     items: [
-      "Hand jalipi to QuickThink Cloud. Their developer hardens it; Graham keeps a stake. From January it is one more platform we extend.",
-      "From January, any jalipi time is billed by Bespoke Everything to QTC, and none is anticipated. Nothing on the side.",
+      "Which platforms we build on, the partner routes, and what we host ourselves.",
+      "One job scoped and priced, ready to sign in January. The company set up.",
     ],
-    measure: "A clean handover, written down.",
+    measure: "Ready to start in January.",
   },
   {
-    label: "The vendors",
-    window: "Alongside the handover",
-    tone: "notice",
-    items: [
-      "How Dayforce, Workday, UKG, Logile, Legion and RELEX actually support this kind of extension.",
-      "Partner routes, sandboxes, what lives in the product, and what we would host.",
-    ],
-    measure: "Enough detail to start properly in January.",
-  },
-  {
-    label: "The plan, with Chris",
+    label: "With Chris",
     window: "From the 29th",
     tone: "notice",
     items: [
@@ -1065,6 +550,15 @@ const NOTICE: Phase[] = [
       "Graham may be working his notice. Applications, builds, proposals and customer meetings wait until we start.",
     ],
     measure: "Numbers Chris and Thomas can poke at before day one.",
+  },
+  {
+    label: "jalipi",
+    window: "In the same window",
+    tone: "notice",
+    items: [
+      "Handed to QuickThink Cloud. Their developer hardens it. Graham keeps a stake. From January it is one more platform we extend.",
+    ],
+    measure: "Written down. Not the work of these months.",
   },
 ];
 
@@ -1203,7 +697,7 @@ function TimelineSlide() {
         <SlideHeading
           kicker="The plan"
           title="Before we start,"
-          highlight="jalipi, and a look at the vendors."
+          highlight="the studio, lined up."
         />
         <div className="mt-4 space-y-4">
           <PhaseTrack
@@ -1275,31 +769,7 @@ function buildSlides(): DeckSlide[] {
       id: "platforms",
       section: "Platforms",
       gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-      node: <PlatformsSlide />,
-    },
-    {
-      id: "platforms-inside",
-      section: "Platforms",
-      gradient: "from-teal-500 via-emerald-500 to-cyan-500",
-      node: <InsideProductSlide />,
-    },
-    {
-      id: "platforms-estates",
-      section: "Platforms",
-      gradient: "from-cyan-500 via-teal-500 to-amber-500",
-      node: <KnownEstatesSlide />,
-    },
-    {
-      id: "platforms-fxp",
-      section: "Platforms",
-      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-      node: <FxpSystemsSlide />,
-    },
-    {
-      id: "platforms-pulled",
-      section: "Platforms",
-      gradient: "from-amber-500 via-teal-500 to-emerald-500",
-      node: <WhenPulledSlide />,
+      node: <CallVendorsSlide />,
     },
     {
       id: "team",
@@ -1395,7 +865,7 @@ const CALL_GROUPS: { kicker: string; names: string[]; line: string; tone: string
   },
 ];
 
-type CallWave = PlatformRow["wave"] | "With QTC" | "Any platform";
+type CallWave = "First" | "Second" | "With FXP" | "When pulled" | "With QTC" | "Any platform";
 
 const CALL_CARD_TONE: Record<CallWave, { card: string; pill: string; label: string; bar: string }> = {
   First: {
@@ -1693,7 +1163,7 @@ const CALL_YEAR: { when: string; title: string; lines: string[]; tone: "notice" 
   {
     when: "Oct → Jan",
     title: "Before we start",
-    lines: ["Hand jalipi to QTC, cleanly. Graham keeps a stake.", "Read how the vendors extend.", "Build the model and the hiring plan with Chris.", "Graham may be working his notice."],
+    lines: ["The platforms, the partner routes, and one job scoped and priced.", "The model and the hiring plan with Chris.", "The company set up. Graham may be working his notice.", "jalipi handed to QTC in the same window. Graham keeps a stake."],
     tone: "notice",
   },
   {

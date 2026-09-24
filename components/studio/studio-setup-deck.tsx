@@ -1969,9 +1969,9 @@ export function StudioSetupDeck({ slides: slidesOverride }: { slides?: DeckSlide
       <div
         ref={containerRef}
         className={cn(
-          "relative h-[var(--workspace-content-min-height)] w-full select-none overflow-hidden bg-neutral-950 print:hidden",
+          "relative h-dvh min-h-dvh w-full select-none overflow-hidden bg-neutral-950 print:hidden",
           (fullscreenMode === "fallback" || isCompactBrowse) &&
-            "fixed inset-0 z-50 h-dvh w-full max-h-dvh [--workspace-content-min-height:100dvh]",
+            "fixed inset-0 z-50 h-dvh w-full max-h-dvh",
         )}
       >
         <div className="absolute inset-0 overflow-hidden">

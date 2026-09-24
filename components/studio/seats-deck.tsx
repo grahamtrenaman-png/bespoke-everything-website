@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Compass, Handshake, Landmark, Megaphone, Wrench, type LucideIcon } from "lucide-react";
+import { ArrowRight, Compass, Handshake, Landmark, Megaphone, Wrench, type LucideIcon } from "lucide-react";
 
 import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
 import { BespokeBrandedSlide } from "@/components/studio/slide-chrome";
@@ -25,6 +25,8 @@ type SeatSpec = {
   lede: string;
   owns: string[];
   job: string[];
+  good: string[];
+  fits: string[];
   terms: string[];
   trigger: string;
   not: string;
@@ -90,6 +92,16 @@ const GRAHAM: SeatSpec = {
     "Hire and coach the builders. The first hire is against the one signed job.",
     "Hand jalipi to QTC. Keep a stake. No product work on the side.",
   ],
+  good: [
+    "The first job live inside the first quarter, on price.",
+    "A pattern on Dayforce and one on UKG that a builder ships again without Graham.",
+    "Fourteen builds in year one, none of them over scope without a change order.",
+  ],
+  fits: [
+    "Has built and shipped enterprise software, and priced it.",
+    "Has done this before on jalipi, from product to a paying customer.",
+    "Comfortable letting go of the build once the pattern is proven.",
+  ],
   terms: [
     "Co-founder from January. Salary £100k, the same figure proposed for Doug.",
     "A stake in Bespoke Everything. Size and vesting still to write down.",
@@ -121,6 +133,16 @@ const DOUG: SeatSpec = {
     "Send the overnight note on who moved where. Only to someone who knows him.",
     "Open South Africa accounts alongside the UK ones.",
   ],
+  good: [
+    "Listed on Dayforce and UKG by the end of Q1.",
+    "First vendor-referred job closed in Q2, and a South African account in the year.",
+    "Every first-year customer referenceable, and renewing support.",
+  ],
+  fits: [
+    "The account teams already trust him. That is the asset.",
+    "Knows the Dayforce and UKG world Chris does, and the people in it.",
+    "Available from January, and wants this.",
+  ],
   terms: [
     "Co-founder stake in Bespoke Everything. Vesting still to write down.",
     "Salary £100k, proposed against the cash model and agreed with Chris and Thomas.",
@@ -150,6 +172,16 @@ const SELLER: SeatSpec = {
     "Run the pipeline as a pipeline: qualified, priced, forecast.",
     "Quote fixed-scope builds with Graham, and close them.",
     "Build the repeatable sale: offer, proposal, price, case study. Every meeting starts with a working app.",
+  ],
+  good: [
+    "A forecast Chris and Thomas can rely on within two quarters of starting.",
+    "Direct at a third of new work by the end of year two.",
+    "Commission paid out of margin, never out of the overdraft.",
+  ],
+  fits: [
+    "Has sold enterprise software or services into workforce, HR or retail operations.",
+    "Can sell a £40 to 120k build rather than a £2m programme.",
+    "Can carry a demo alone. Comfortable in a room with Chris.",
   ],
   terms: [
     "Base plus commission on closed builds and first-year support. Commission out of margin, never out of the overdraft.",
@@ -181,6 +213,16 @@ const BUILDER: SeatSpec = {
     "Own support for what they built. On a hosted app, that line is what keeps it alive.",
     "Write the pattern down so the next builder does not start again.",
   ],
+  good: [
+    "First build live within a quarter of starting.",
+    "Eight or nine builds a year once settled, at one to two weeks each.",
+    "Support closed inside the SLA, and the customer renewing.",
+  ],
+  fits: [
+    "A senior full-stack engineer who has built inside or beside an enterprise SaaS product.",
+    "Uses AI tooling to ship faster, and still understands what shipped.",
+    "Has sat with a customer. Dayforce or UKG a bonus, not a requirement.",
+  ],
   terms: [
     "Permanent. About £90k in the UK, about £65k in South Africa.",
     "A small bonus on support renewals for what they built.",
@@ -210,6 +252,16 @@ const TCN: SeatSpec = {
     "FXP implements jalipi and the other vendors the way they implement anyone, and invoices the customer for the services.",
     "Introduce work from the network. Warm only. Every note to someone who already knows the sender.",
     "Hold the founders to the plan: cash, hires against signed work, and the choice at the end of year four.",
+  ],
+  good: [
+    "Chris in the room for the first Dayforce and UKG offers.",
+    "The overdraft cleared inside Q1 and barely touched after.",
+    "A quarterly review that fits on a page: cash, pipeline, hires, renewals.",
+  ],
+  fits: [
+    "Chris: the doors, the accounts, and the coaching.",
+    "Thomas: the cash model, the terms, and the discipline.",
+    "FXP: implementation, invoiced to the customer.",
   ],
   terms: [
     "How hands-on Chris and Thomas are, week to week.",
@@ -358,7 +410,7 @@ function SeatSpecSlide({ spec }: { spec: SeatSpec }) {
       <Glows />
       <div className="relative mx-auto mb-auto mt-4 w-full max-w-6xl">
         <SlideHeading kicker={spec.kicker} title={spec.title} highlight={spec.highlight} lede={spec.lede} />
-        <div className="mt-3 grid grid-cols-[1.45fr_1fr] gap-3">
+        <div className="mt-3 grid grid-cols-[1.5fr_1fr_1fr] gap-3">
           <div
             className={cn("deck-rise relative overflow-hidden rounded-2xl border px-4 py-3", tone.card)}
             style={{ animationDelay: "0.12s" }}
@@ -373,15 +425,23 @@ function SeatSpecSlide({ spec }: { spec: SeatSpec }) {
               </span>
             </div>
             <SpecList label="Responsibilities" items={spec.job} tone={spec.tone} numbered />
+            <div className="mt-3 border-t border-white/10 pt-2.5">
+              <SpecList label="What good looks like" items={spec.good} tone={spec.tone} />
+            </div>
           </div>
           <div className="flex flex-col gap-2.5">
             <div className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3" style={{ animationDelay: "0.22s" }}>
               <SpecList label="Accountable for" items={spec.owns} tone={spec.tone} />
             </div>
-            <div className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3" style={{ animationDelay: "0.32s" }}>
+            <div className="deck-rise flex-1 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3" style={{ animationDelay: "0.3s" }}>
+              <SpecList label={spec.tone === "discuss" ? "Who plays it" : "Who fits"} items={spec.fits} tone={spec.tone} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2.5">
+            <div className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3" style={{ animationDelay: "0.38s" }}>
               <SpecList label={termsLabel} items={spec.terms} tone={spec.tone} />
             </div>
-            <div className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3" style={{ animationDelay: "0.42s" }}>
+            <div className="deck-rise flex-1 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3" style={{ animationDelay: "0.46s" }}>
               <p className={cn("text-[9.5px] font-black uppercase tracking-[0.2em]", tone.label)}>When</p>
               <p className="mt-1 text-[11px] leading-snug text-white/80">{spec.trigger}</p>
               <p className="mt-2 text-[9.5px] font-black uppercase tracking-[0.2em] text-white/35">Outside the role</p>
@@ -389,6 +449,90 @@ function SeatSpecSlide({ spec }: { spec: SeatSpec }) {
             </div>
           </div>
         </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+const HANDOFFS: { from: string; to: string; what: string; tone: SeatTone }[] = [
+  { from: "TCN", to: "Doug", what: "A door. Chris names the account and the person, and Doug takes the first call.", tone: "discuss" },
+  { from: "Doug", to: "Graham", what: "A qualified gap. Who the buyer is, what is stuck, and roughly when. Graham scopes and prices it.", tone: "cofounder" },
+  { from: "Graham", to: "The builder", what: "A proven pattern and a signed scope. The builder ships it on the next customer without a rebuild.", tone: "hire" },
+  { from: "The builder", to: "Doug", what: "A live build and a support line. Doug stays on the account for the renewal.", tone: "cofounder" },
+  { from: "The seller", to: "Graham", what: "A priced offer to a buyer who did not know us. Graham holds the scope line while it closes.", tone: "potential" },
+  { from: "Graham and Doug", to: "TCN", what: "One page a quarter: cash, pipeline, hires against signed work, renewals.", tone: "discuss" },
+];
+
+function HandoffSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-5 w-full max-w-5xl">
+        <SlideHeading
+          kicker="How the roles fit"
+          title="Six handoffs."
+          highlight="Each one has an owner."
+          lede="A job moves from a door to a scope, to a build, to a renewal. Where it changes hands, one person passes it and one person takes it."
+        />
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {HANDOFFS.map((row, index) => {
+            const tone = TONE[row.tone];
+            return (
+              <div
+                key={`${row.from}-${row.to}`}
+                className={cn("deck-rise rounded-2xl border px-4 py-3", tone.card)}
+                style={{ animationDelay: `${0.12 + index * 0.06}s` }}
+              >
+                <div className="flex items-center gap-2 text-[12px] font-black">
+                  <span>{row.from}</span>
+                  <ArrowRight className="h-3.5 w-3.5 text-white/45" />
+                  <span>{row.to}</span>
+                </div>
+                <p className="mt-1.5 text-[11px] leading-snug text-white/75">{row.what}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+const GROWTH: { year: string; people: string; seats: string; changes: string }[] = [
+  { year: "Year one", people: "4", seats: "Graham · Doug · 2 SA builders", changes: "Two founders sell and build. The first builder against the signed job, the second once support carries them." },
+  { year: "Year two", people: "8", seats: "+ seller · UK builder · 2 SA builders", changes: "The direct channel opens. Graham stops building day to day and holds price and pattern." },
+  { year: "Year three", people: "14", seats: "+ 2 UK · 2 SA builders · support", changes: "A pair of builders per lead platform. A support role takes the live builds off the builders." },
+  { year: "Year four", people: "20", seats: "+ 3 UK · 3 SA builders · product lead", changes: "Workday and the licensed apps. A product lead owns what we sell to many tenants." },
+];
+
+function GrowthSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto mb-auto mt-5 w-full max-w-5xl">
+        <SlideHeading
+          kicker="How the seats grow"
+          title="Four to twenty."
+          highlight="Every seat follows the work."
+          lede="The same hire schedule as the plan. Roles change shape as the studio grows, and Graham’s most of all."
+        />
+        <div className="mt-4 grid grid-cols-4 gap-3">
+          {GROWTH.map((row, index) => (
+            <div
+              key={row.year}
+              className="deck-rise flex flex-col rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
+              style={{ animationDelay: `${0.12 + index * 0.08}s` }}
+            >
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">{row.year}</p>
+              <p className="mt-1 text-[30px] font-black leading-none tracking-tight">{row.people}</p>
+              <p className="mt-2 text-[10.5px] font-semibold leading-snug text-amber-100/90">{row.seats}</p>
+              <p className="mt-2 flex-1 text-[11px] leading-snug text-white/70">{row.changes}</p>
+            </div>
+          ))}
+        </div>
+        <p className="deck-rise mt-4 text-center text-[11px] leading-snug text-white/55" style={{ animationDelay: "0.5s" }}>
+          Doug stays on vendors and accounts throughout. The seller, if they join early and carry direct, becomes the third co-founder.
+        </p>
       </div>
     </BespokeBrandedSlide>
   );
@@ -421,6 +565,18 @@ function buildSeatsSlides(): DeckSlide[] {
               : "from-violet-500 via-fuchsia-400 to-violet-300",
       node: <SeatSpecSlide spec={spec} />,
     })),
+    {
+      id: "seats-handoffs",
+      section: "Handoffs",
+      gradient: "from-amber-500 via-teal-500 to-violet-500",
+      node: <HandoffSlide />,
+    },
+    {
+      id: "seats-growth",
+      section: "Growth",
+      gradient: "from-teal-500 via-sky-500 to-amber-400",
+      node: <GrowthSlide />,
+    },
   ];
 }
 

@@ -26,7 +26,7 @@ export const STUDIO_DECKS: DeckEntry[] = [
     href: "/studio/seats",
     kicker: "For TCN · the seats",
     title: "The roles.",
-    body: "Graham on product and delivery, Doug on vendors and accounts, the seller, the builder, and the part TCN plays. Responsibilities, what each is accountable for, and the terms still to discuss.",
+    body: "Graham on product and delivery, Doug on vendors and accounts, the seller, the builder, and the part TCN plays. Responsibilities, what good looks like, who fits, how the roles hand off, and how the seats grow to twenty.",
   },
   {
     href: "/studio/plan",

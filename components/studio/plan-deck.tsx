@@ -404,7 +404,7 @@ function RevenueSlide() {
             </table>
             <p className="mt-2 text-[9.5px] leading-snug text-white/50">
               A quarter of every year is vendor-agnostic: spreadsheets, small apps, consulting. jalipi is
-              extensions billed to QTC plus a small kickback on their deals, not yet agreed.
+              extensions billed to QTC. A kickback to the sales originator is proposed, and not yet agreed.
             </p>
           </div>
         </div>
@@ -648,7 +648,7 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
       "Builds a year: 14, 32, 63, 104. One job is lined up before I join. A settled builder ships eight or nine a year. Capacity at 1.5 weeks each is about twenty.",
       "Support at 20 to 25% of the build, from the quarter after go-live. 90% renew.",
       "Licences from year two on Dayforce, later Workday. £15 to 30k per tenant per year.",
-      "jalipi: extensions billed to QTC, plus a 5% kickback on QTC’s jalipi deals. Not yet agreed.",
+      "jalipi: extensions invoiced to the customer. A kickback to the sales originator, FXP, Bespoke Everything or another TCN company. Not yet agreed, and not in the revenue.",
     ],
   },
   {

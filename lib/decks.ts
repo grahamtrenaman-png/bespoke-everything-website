@@ -34,4 +34,10 @@ export const STUDIO_DECKS: DeckEntry[] = [
     title: "Four years to a choice.",
     body: "Now to January, then four years. One job lined up before I join, twenty people by year four, a £200k overdraft barely used, and a studio worth £10 to 15m at the end. Indicative.",
   },
+  {
+    href: "/studio/partnership",
+    kicker: "For QTC and TCN",
+    title: "The partnership.",
+    body: "QuickThink Cloud, Bespoke Everything and TCN on jalipi. Who does what, how a deal is invoiced, the stake and the kickback still to agree, and the handover before January.",
+  },
 ];

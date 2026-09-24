@@ -23,6 +23,7 @@ type SeatSpec = {
   title: string;
   highlight: string;
   lede: string;
+  summary: string;
   owns: string[];
   job: string[];
   good: string[];
@@ -78,6 +79,8 @@ const GRAHAM: SeatSpec = {
   title: "Graham.",
   highlight: "What we build, and what it costs.",
   lede: "Scopes, prices and builds. Proves the first pattern on a platform, then hands the repeat to a builder.",
+  summary:
+    "Graham runs product and delivery. He decides what the studio builds and on which platforms, scopes and prices every job, builds the first version of each pattern himself, then hires and coaches the builders who ship it again. He also hands jalipi to QTC and keeps a stake in it, with no product work on the side.",
   owns: [
     "The scope and the price of every build.",
     "Whether a pattern is good enough to ship again.",
@@ -119,6 +122,8 @@ const DOUG: SeatSpec = {
   title: "Doug.",
   highlight: "The person the account teams call.",
   lede: "Managing partners is the first sales job, and it is his. Warm only. Nothing goes out cold.",
+  summary:
+    "Doug runs vendors and accounts. He gets the studio listed and referred on Dayforce, UKG, Logile and RELEX, works the network with Chris, takes the first conversation on every warm lead, hands it to Graham to scope, and stays on the account through delivery and the support renewal. Based in South Africa, selling into UK and South African accounts.",
   owns: [
     "The vendor programmes we are listed on.",
     "The accounts the network already knows.",
@@ -160,6 +165,8 @@ const SELLER: SeatSpec = {
   title: "The seller.",
   highlight: "Creating the market.",
   lede: "Managing partners and creating a market are different jobs. This seat opens when the work says so.",
+  summary:
+    "The seller creates demand the network does not bring. They take one named offer per platform to buyers who have never heard of us, run a pipeline that can be forecast, quote fixed-scope builds with Graham and close them. Base plus commission, with a co-founder stake on the table if they join early and carry the direct channel.",
   owns: [
     "The direct pipeline, once it exists.",
     "One named offer per platform, and the case studies behind it.",
@@ -200,6 +207,8 @@ const BUILDER: SeatSpec = {
   title: "The builder.",
   highlight: "Ship the pattern again.",
   lede: "Hired once a job is signed to pay for them. UK or South Africa. The first against the one job lined up before we start.",
+  summary:
+    "The builder ships fixed-scope extensions on other people’s platforms, taking a pattern Graham has proven and delivering it on a new customer in one to two weeks. Senior, end to end and AI-assisted: data, integration, screens, tenant, handover. They own the support line for what they built and write it down so the next builder does not start again.",
   owns: [
     "The build they are handed, through to live.",
     "The support line for what they shipped.",
@@ -240,6 +249,8 @@ const TCN: SeatSpec = {
   title: "TCN.",
   highlight: "Capital, doors, and FXP.",
   lede: "Proposed so it can be argued. Chris and Thomas fund the studio and open the doors. FXP implements. None of this is agreed as a job description yet.",
+  summary:
+    "TCN provides the £200k facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. FXP implements the platforms we extend and invoices the customer for the services. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
   owns: [
     "The £200k facility, and whether it is used.",
     "The Dayforce and UKG doors.",
@@ -403,27 +414,26 @@ function SpecList({
 
 function SeatSpecSlide({ spec }: { spec: SeatSpec }) {
   const tone = TONE[spec.tone];
-  const Icon = spec.icon;
   const termsLabel = spec.tone === "discuss" ? "Still to argue" : "Terms, proposed";
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
       <div className="relative mx-auto mb-auto mt-4 w-full max-w-6xl">
         <SlideHeading kicker={spec.kicker} title={spec.title} highlight={spec.highlight} lede={spec.lede} />
+        <div
+          className={cn("deck-rise relative mt-3 overflow-hidden rounded-2xl border px-5 py-3", tone.card)}
+          style={{ animationDelay: "0.08s" }}
+        >
+          <span className={cn("absolute inset-y-0 left-0 w-1 bg-gradient-to-b", tone.bar)} />
+          <p className={cn("text-[9.5px] font-black uppercase tracking-[0.2em]", tone.label)}>The role in short</p>
+          <p className="mt-1 text-[12.5px] leading-relaxed text-white/85">{spec.summary}</p>
+        </div>
         <div className="mt-3 grid grid-cols-[1.5fr_1fr_1fr] gap-3">
           <div
             className={cn("deck-rise relative overflow-hidden rounded-2xl border px-4 py-3", tone.card)}
             style={{ animationDelay: "0.12s" }}
           >
             <span className={cn("absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r", tone.bar)} />
-            <div className="mb-2 flex items-center gap-2">
-              <span className={cn("flex h-7 w-7 items-center justify-center rounded-full", tone.ring)}>
-                <Icon className="h-3.5 w-3.5" />
-              </span>
-              <span className={cn("rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.14em]", tone.pill)}>
-                {tone.badge}
-              </span>
-            </div>
             <SpecList label="Responsibilities" items={spec.job} tone={spec.tone} numbered />
             <div className="mt-3 border-t border-white/10 pt-2.5">
               <SpecList label="What good looks like" items={spec.good} tone={spec.tone} />

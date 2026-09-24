@@ -6,7 +6,7 @@ import { PartnershipDeck } from "@/components/studio/partnership-deck";
 export const metadata: Metadata = {
   title: "The partnership · QTC, Bespoke Everything and TCN",
   description:
-    "How QuickThink Cloud, Bespoke Everything and TCN work together on jalipi: who does what, how a deal flows, and what is still to agree.",
+    "A working partnership between QuickThink Cloud and TCN, with jalipi as the first concrete piece: who does what, how a deal flows, and what is still to agree.",
   robots: { index: false, follow: false },
 };
 

@@ -28,4 +28,10 @@ export const STUDIO_DECKS: DeckEntry[] = [
     title: "Three seats. Three job specs.",
     body: "Doug as co-founder on vendors and accounts, the seller who may become a co-founder, and the skilled builder. The job, what good looks like, who fits, and the terms we propose.",
   },
+  {
+    href: "/studio/plan",
+    kicker: "For TCN · the plan",
+    title: "Three years to a choice.",
+    body: "Now to January, then three years. Investment in and when it comes back, who we hire and when, revenue by platform and market, ARR and valuation at each year end. Sell it, or double down. Indicative, first pass.",
+  },
 ];

@@ -593,24 +593,23 @@ function CallIdeaSlide() {
     ["03", "The project unblocks. The customer gets exactly what they asked for."],
   ];
   return (
-    <BespokeBrandedSlide className="bg-neutral-950">
+    <BespokeBrandedSlide className="bg-neutral-950" strapline="Bespoke is Back">
       <Glows />
-      <div className="relative mx-auto mb-auto grid w-full max-w-5xl grid-cols-[1.05fr_1fr] items-start gap-12">
+      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1.05fr_1fr] items-center gap-12">
         <div className="deck-rise min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
             For Chris
           </p>
-          <h2 className="mt-3 text-[3.4rem] font-black leading-[0.95] tracking-tight">
-            Bespoke is
+          <h2 className="mt-4 text-[3.2rem] font-black leading-[0.98] tracking-tight">
+            The customer
+            <br />
+            stops
             <br />
             <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-              Back
+              compromising.
             </span>
           </h2>
-          <p className="mt-4 max-w-sm text-[15px] font-semibold leading-snug tracking-tight text-white/90">
-            The customer stops compromising.
-          </p>
-          <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-white/65">
+          <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-white/65">
             We solve the problem the software would not. The project moves, and the customer gets what
             they actually wanted.
           </p>

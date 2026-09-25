@@ -13,7 +13,10 @@ import {
 } from "@/components/studio/studio-setup-deck";
 import { cn } from "@/lib/cn";
 
+type PartyId = "qtc" | "be" | "tcn";
+
 const PARTIES: {
+  id: PartyId;
   role: string;
   name: string;
   tone: string;
@@ -21,6 +24,7 @@ const PARTIES: {
   gets: string;
 }[] = [
   {
+    id: "qtc",
     role: "The product company",
     name: "QuickThink Cloud",
     tone: "border-sky-400/30 bg-sky-500/[0.07]",
@@ -32,6 +36,7 @@ const PARTIES: {
     gets: "Introductions into accounts they do not sit in, and a studio that can extend what they sell.",
   },
   {
+    id: "be",
     role: "The studio",
     name: "Bespoke Everything",
     tone: "border-teal-400/30 bg-teal-500/[0.07]",
@@ -43,6 +48,7 @@ const PARTIES: {
     gets: "A customer invoice for the extension, and a founder who keeps a stake in jalipi.",
   },
   {
+    id: "tcn",
     role: "The network",
     name: "TCN",
     tone: "border-amber-400/30 bg-amber-500/[0.07]",
@@ -55,6 +61,38 @@ const PARTIES: {
   },
 ];
 
+/** ~32px header marks. QTC/TCN from Atlas demo assets; BE uses the deck chrome logo mark. */
+function PartyCardLogo({ party }: { party: PartyId }) {
+  switch (party) {
+    case "qtc":
+      return (
+        // Official QuickThink Cloud mark (sourced from quickthinkcloud.com via Atlas).
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/logos/quickthink-cloud.png"
+          alt=""
+          className="h-8 w-auto"
+        />
+      );
+    case "be":
+      return (
+        <BespokeEverythingLogo
+          variant="dark"
+          layout="inline"
+          showWordmark={false}
+          showTagline={false}
+          className="text-[28px]"
+        />
+      );
+    case "tcn":
+      return (
+        // Official TCN wordmark (same asset as Atlas /demo/logos/tcn-white.svg).
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src="/logos/tcn-white.svg" alt="" className="h-8 w-auto" />
+      );
+  }
+}
+
 const FLOW: { step: string; who: string; line: string }[] = [
   { step: "01", who: "QTC", line: "Brings the customer and sells jalipi as the platform." },
   { step: "02", who: "FXP", line: "Implements it and invoices the customer for the services." },
@@ -64,13 +102,16 @@ const FLOW: { step: string; who: string; line: string }[] = [
 
 const PROPOSED: string[] = [
   "QTC and TCN work together both ways: doors for TCN companies, opportunities for QTC.",
-  "QTC develop and harden jalipi. Graham keeps a stake. The size of that stake is still to write down.",
+  "QTC develop and harden jalipi. Graham keeps a stake. Size and terms are still to write down between Graham and QTC.",
   "FXP invoices the customer for implementation. Bespoke Everything invoices the customer for extensions.",
   "The studio’s year does not depend on jalipi. Dayforce and UKG are the work.",
 ];
 
-const OPEN: string[] = [
-  "The stake: how much, in what, vesting, and what happens if QTC sells jalipi.",
+const OPEN_GRAHAM_QTC: string[] = [
+  "Graham’s stake in jalipi: how much, in what, vesting, and what happens if QTC sells it. Between Graham and QTC only. Not a TCN negotiation.",
+];
+
+const OPEN_PARTNERSHIP: string[] = [
   "The kickback: paid to the sales originator. That can be FXP, Bespoke Everything, or another TCN company. Rate not agreed.",
   "The heads of terms signed in principle before Graham starts. A draft is on the next slide.",
   "Who owns an extension built for one jalipi customer, and whether it can be licensed again.",
@@ -113,8 +154,8 @@ function TitleSlide() {
         >
           QuickThink Cloud and TCN can open doors for each other. QTC into public sector for FrontlineXP and
           the other TCN companies; TCN into accounts where jalipi, or another QTC product, fits. jalipi is the
-          first concrete piece to write down: QTC harden it, Graham keeps a stake, FXP implements, Bespoke
-          Everything extends. This is the shape to agree before January.
+          first concrete piece to write down: QTC harden it, Graham keeps a stake agreed with QTC, FXP
+          implements, Bespoke Everything extends. This is the shape to agree before January.
         </p>
       </div>
     </div>
@@ -132,16 +173,19 @@ function PartiesSlide() {
           highlight="One relationship."
           lede="QTC brings products and public-sector doors. TCN brings a network and a studio. jalipi is how the commercial model gets written down first."
         />
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className="mt-3 grid grid-cols-3 gap-4">
           {PARTIES.map((party, index) => (
             <div
               key={party.name}
               className={cn("deck-rise flex flex-col rounded-2xl border p-4", party.tone)}
               style={{ animationDelay: `${0.15 + index * 0.1}s` }}
             >
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/45">{party.role}</p>
+              <div className="flex h-8 items-center" aria-hidden="true">
+                <PartyCardLogo party={party.id} />
+              </div>
+              <p className="mt-2 text-[10px] font-black uppercase tracking-[0.18em] text-white/45">{party.role}</p>
               <h3 className="mt-1 text-[20px] font-black leading-tight tracking-tight">{party.name}</h3>
-              <ul className="mt-3 flex-1 space-y-1.5">
+              <ul className="mt-2.5 flex-1 space-y-1.5">
                 {party.does.map((line) => (
                   <li key={line} className="flex gap-2 text-[11px] leading-snug text-white/78">
                     <span className="mt-[6px] h-1 w-1 shrink-0 rounded-full bg-white/40" />
@@ -149,13 +193,13 @@ function PartiesSlide() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 border-t border-white/10 pt-2 text-[11px] font-semibold leading-snug text-white/90">
+              <p className="mt-2.5 border-t border-white/10 pt-2 text-[11px] font-semibold leading-snug text-white/90">
                 {party.gets}
               </p>
             </div>
           ))}
         </div>
-        <div className="deck-rise mt-3 grid grid-cols-4 gap-3" style={{ animationDelay: "0.5s" }}>
+        <div className="deck-rise mt-2.5 grid grid-cols-4 gap-3" style={{ animationDelay: "0.5s" }}>
           {PRINCIPLES.map((item) => {
             const Icon = item.icon;
             return (
@@ -304,14 +348,30 @@ function TermsSlide() {
           </div>
           <div className="deck-rise rounded-2xl border border-amber-400/25 bg-amber-500/[0.07] px-5 py-4" style={{ animationDelay: "0.28s" }}>
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-200/80">Still to agree, with QTC</p>
-            <ul className="mt-3 space-y-2.5">
-              {OPEN.map((line) => (
-                <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
-                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-300" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-3 space-y-3">
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-amber-100/55">Graham ↔ QTC</p>
+                <ul className="mt-1.5 space-y-2.5">
+                  {OPEN_GRAHAM_QTC.map((line) => (
+                    <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
+                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-300" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-amber-100/55">Partnership / TCN</p>
+                <ul className="mt-1.5 space-y-2.5">
+                  {OPEN_PARTNERSHIP.map((line) => (
+                    <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
+                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-300" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -330,7 +390,7 @@ const HEADS: { n: string; head: string; lines: string[] }[] = [
     head: "jalipi",
     lines: [
       "QTC own, develop, harden, host and sell jalipi. Handover complete by mid January.",
-      "Graham holds a stake of ___% in ___ (QTC, or a jalipi entity), vesting ___. On a sale of jalipi: ___.",
+      "Graham holds a stake of ___% in ___ (QTC, or a jalipi entity), vesting ___. On a sale of jalipi: ___. Agreed between Graham and QTC only; not a TCN term.",
     ],
   },
   {
@@ -370,7 +430,10 @@ const HEADS: { n: string; head: string; lines: string[] }[] = [
   {
     n: "08",
     head: "Term and exit",
-    lines: ["Reviewed annually. What happens to the stake and the kickback if QTC is sold, or if Graham leaves Bespoke Everything: ___."],
+    lines: [
+      "Reviewed annually.",
+      "Graham’s stake if QTC is sold: ___ (Graham and QTC). The kickback if QTC is sold, or if Graham leaves Bespoke Everything: ___.",
+    ],
   },
 ];
 
@@ -413,7 +476,7 @@ function HeadsOfTermsSlide() {
           ))}
         </div>
         <p className="deck-rise mt-2.5 text-center text-[10.5px] text-white/50" style={{ animationDelay: "0.55s" }}>
-          Signed in principle before Graham starts. The blanks are the stake, the kickback, the IP and the exit. Nothing else is open.
+          Signed in principle before Graham starts. The blanks are Graham’s stake (with QTC), the kickback, the IP and the exit. Nothing else is open.
         </p>
       </div>
     </BespokeBrandedSlide>
@@ -422,7 +485,7 @@ function HeadsOfTermsSlide() {
 
 function HandoverSlide() {
   const rows = [
-    { when: "Now → mid Jan", line: "Studio prep: platforms, the first job, and how Bespoke Everything plugs into FrontlineXP. In the same window, jalipi is handed to QTC and the stake and the kickback are written down." },
+    { when: "Now → mid Jan", line: "Studio prep: platforms, the first job, and how Bespoke Everything plugs into FrontlineXP. In the same window, jalipi is handed to QTC, Graham’s stake is written down with QTC, and the partnership kickback is agreed." },
     { when: "January", line: "Graham joins Bespoke Everything. Customer work is invoiced to the customer. Nothing on the side." },
     { when: "After that", line: "Doors and opportunities both ways. On jalipi, FXP implements and Bespoke Everything extends, each invoicing the customer the same way they would for any other vendor." },
   ];

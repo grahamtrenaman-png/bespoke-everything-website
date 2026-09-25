@@ -128,13 +128,14 @@ const DOUG: SeatSpec = {
   owns: [
     "The vendor programmes we are listed on.",
     "The accounts the network already knows.",
+    "Sales from the warm network. Introductions that close, not just conversations.",
     "The first conversation, through to the support renewal.",
   ],
   job: [
     "Own Dayforce, UKG, Logile through FXP, and RELEX once the Inference Group line is agreed. Get us listed, then get us referred.",
     "Be the referral. A stuck deal with a gap in it comes to Doug, from someone who already knows him.",
-    "Run the network with Chris: FXP project gaps, REPL alumni, the retailers and manufacturers we already know.",
-    "Qualify and shape the first conversation, then hand to Graham to scope and price.",
+    "Run the network with Chris: TCN project gaps, REPL alumni, the retailers and manufacturers we already know.",
+    "Qualify and shape the first conversation, then hand to Graham to scope and price. Close the sale.",
     "Stay on the account through delivery and the support renewal.",
     "Send the overnight note on who moved where. Only to someone who knows him.",
     "Open South Africa accounts alongside the UK ones.",
@@ -142,6 +143,7 @@ const DOUG: SeatSpec = {
   good: [
     "Listed on Dayforce and UKG by the end of Q1.",
     "First vendor-referred job closed in Q2, and a South African account in the year.",
+    "Sales in from the warm network in Q1, not only listings and conversations.",
     "Every first-year customer referenceable, and renewing support.",
   ],
   fits: [

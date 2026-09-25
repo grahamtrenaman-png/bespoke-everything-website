@@ -269,8 +269,8 @@ const CHANNELS: {
     share: "From Q2",
     bar: "from-amber-500 to-amber-300",
     body:
-      "Warm introductions. One offer, for the platform the first job sits on. Doug and Graham sell it with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
-    proof: "The demonstrator and the case studies follow, once that job is something we can show.",
+      "Warm introductions. Doug and Graham sell with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
+    proof: "What we sell takes shape from the first job, once there is something to show.",
   },
 ];
 

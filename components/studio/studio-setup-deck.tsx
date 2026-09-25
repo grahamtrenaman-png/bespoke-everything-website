@@ -600,7 +600,7 @@ function CallIdeaSlide() {
         <>
           <span className="text-white">The industry went vanilla… </span>
           <span className="bg-gradient-to-r from-amber-400 via-sky-300 to-violet-300 bg-clip-text text-transparent">
-            bespoke is back!
+            Bespoke is Back!
           </span>
         </>
       }

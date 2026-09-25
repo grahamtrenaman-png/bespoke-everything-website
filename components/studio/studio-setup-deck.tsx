@@ -404,15 +404,6 @@ const NOTICE: Phase[] = [
     ],
     measure: "Ready to start in January.",
   },
-  {
-    label: "jalipi",
-    window: "In the same window",
-    tone: "notice",
-    items: [
-      "Handed to QuickThink Cloud. Their developer hardens it. Graham keeps a stake. From January it is one more platform we extend.",
-    ],
-    measure: "Part of these months: work on jalipi, and hand it across.",
-  },
 ];
 
 const YEAR: Phase[] = [
@@ -606,12 +597,12 @@ function CallIdeaSlide() {
       }
     >
       <Glows />
-      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1fr_1.15fr] items-center gap-x-8 gap-y-3">
+      <div className="relative mx-auto grid w-full max-w-6xl grid-cols-[1fr_1.2fr] items-center gap-x-14 gap-y-6">
         <div className="deck-rise min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
             For Chris
           </p>
-          <h2 className="mt-2.5 text-[2.55rem] font-black leading-[0.98] tracking-tight">
+          <h2 className="mt-4 text-[3.4rem] font-black leading-[0.98] tracking-tight">
             The customer
             <br />
             stops
@@ -620,22 +611,22 @@ function CallIdeaSlide() {
               compromising.
             </span>
           </h2>
-          <p className="mt-3 max-w-sm text-[13.5px] leading-snug text-white/65">
+          <p className="mt-5 max-w-md text-[16px] leading-relaxed text-white/65">
             We solve the problem the software would not. The project moves, and the customer gets what
             they actually wanted.
           </p>
         </div>
         <div className="deck-rise min-w-0" style={{ animationDelay: "0.2s" }}>
-          <ul className="space-y-2">
+          <ul className="space-y-5">
             {beats.map(([n, line]) => (
-              <li key={n} className="flex items-baseline gap-2.5">
-                <span className="shrink-0 text-[11px] font-black tabular-nums text-teal-300/80">{n}</span>
-                <span className="text-[13px] font-semibold leading-snug tracking-tight text-white/90">{line}</span>
+              <li key={n} className="flex items-baseline gap-4">
+                <span className="shrink-0 text-[13px] font-black tabular-nums text-teal-300/80">{n}</span>
+                <span className="text-[16.5px] font-semibold leading-snug tracking-tight text-white/90">{line}</span>
               </li>
             ))}
           </ul>
         </div>
-        <p className="col-span-2 border-t border-white/10 pt-2.5 text-[12px] leading-snug text-white/60">
+        <p className="col-span-2 border-t border-white/10 pt-5 text-[14.5px] leading-relaxed text-white/60">
           Not a bench. Not a product company. A studio that solves the problem, unblocks the project,
           and gives the customer exactly what they wanted.
         </p>

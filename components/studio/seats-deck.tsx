@@ -101,9 +101,9 @@ const GRAHAM: SeatSpec = {
     "Fourteen builds in year one, none of them over scope without a change order.",
   ],
   fits: [
-    "Has built and shipped enterprise software, and priced it.",
-    "Has done this before on jalipi, from solution to a paying customer.",
-    "Comfortable letting go of the build once the pattern is proven.",
+    "Has shipped enterprise software and priced it.",
+    "Can scope fixed-price work and hold the line on scope.",
+    "Comfortable handing a proven pattern to a builder.",
   ],
   terms: [
     "Co-founder from January. Salary about £100k, the same figure proposed for Doug.",
@@ -144,9 +144,9 @@ const DOUG: SeatSpec = {
     "Every first-year customer referenceable, and renewing support.",
   ],
   fits: [
-    "The account teams already trust him. That is the asset.",
-    "Knows the Dayforce and UKG world Chris does, and the people in it.",
-    "Available from January, and wants this.",
+    "Has long-standing relationships with vendor account teams.",
+    "Trusted by account managers to take a stuck deal.",
+    "Sells from relationships, not from cold lists.",
   ],
   terms: [
     "Co-founder stake in Bespoke Everything, on the terms agreed when this was the ADP partnership. Vesting still to write down.",
@@ -186,9 +186,9 @@ const SELLER: SeatSpec = {
     "Commission paid out of margin, never out of the overdraft.",
   ],
   fits: [
-    "Has sold enterprise software or services into workforce, HR or retail operations.",
-    "Can sell a £40 to 120k build rather than a £2m programme.",
-    "Can carry a demo alone. Comfortable in a room with Chris.",
+    "Has sold services into HR, workforce or retail operations buyers.",
+    "Works a warm network rather than a cold list.",
+    "Comfortable selling fixed-price builds, not programmes.",
   ],
   terms: [
     "Base plus commission on closed builds and first-year support. Commission out of margin, never out of the overdraft.",
@@ -228,9 +228,9 @@ const BUILDER: SeatSpec = {
     "Support closed inside the SLA, and the customer renewing.",
   ],
   fits: [
-    "A senior full-stack engineer who has built inside or beside an enterprise SaaS platform.",
-    "Uses AI tooling to ship faster, and still understands what shipped.",
-    "Has sat with a customer. Dayforce or UKG a bonus, not a requirement.",
+    "Strong on the target platform's extension tooling and APIs.",
+    "Ships from a spec without hand-holding.",
+    "Happy repeating a proven pattern cleanly.",
   ],
   terms: [
     "Permanent. About £90k in the UK, about £65k in South Africa.",
@@ -269,14 +269,14 @@ const TCN: SeatSpec = {
     "A quarterly review that fits on a page: cash, pipeline, hires, renewals.",
   ],
   fits: [
-    "Chris: the doors, the accounts, and the coaching.",
-    "Thomas: the cash model, the terms, and the discipline.",
-    "The wider TCN companies: warm introductions from their own accounts.",
+    "Provides the capital, the doors and the coaching.",
+    "Runs a network that produces project gaps.",
+    "Patient with a studio that pays its way inside year one.",
   ],
   terms: [
     "How hands-on Chris and Thomas are, week to week.",
-    "What TCN holds if the overdraft is barely drawn.",
-    "Whether other TCN companies originate work, and on what terms. Reporting: what they see, and how often.",
+    "Whether other TCN companies originate work, and on what terms.",
+    "Reporting: what they see, and how often.",
   ],
   trigger: "In the room now. The facility and the doors are what make January possible.",
   not: "Not delivery. Not between Bespoke Everything and the customer invoice. Not the jalipi solution. That stake sits with Graham.",

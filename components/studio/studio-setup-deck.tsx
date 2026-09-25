@@ -639,13 +639,13 @@ const CALL_GROUPS: { kicker: string; names: string[]; line: string; tone: string
     tone: "text-teal-200",
   },
   {
-    kicker: "Beside it, where FXP is",
+    kicker: "Beside the product",
     names: ["UKG", "Logile", "Legion"],
     line: "No studio. We host the build. The support line is what keeps it alive.",
     tone: "text-emerald-200",
   },
   {
-    kicker: "Later",
+    kicker: "When it opens",
     names: ["RELEX", "Workday", "SAP · Oracle · ADP"],
     line: "RELEX as it opens, on a line agreed with Inference Group. Workday is HR first, outside our niche, and waits for a project. The others only when one asks.",
     tone: "text-amber-200",

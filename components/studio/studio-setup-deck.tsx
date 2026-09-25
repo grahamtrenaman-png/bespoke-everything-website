@@ -412,7 +412,7 @@ const NOTICE: Phase[] = [
     items: [
       "Handed to QuickThink Cloud. Their developer hardens it. Graham keeps a stake. From January it is one more platform we extend.",
     ],
-    measure: "Written down. Not the work of these months.",
+    measure: "Part of these months: work on jalipi, and hand it across.",
   },
 ];
 

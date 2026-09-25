@@ -265,8 +265,8 @@ const TCN: SeatSpec = {
     "Provide the facility. The plan draws about £45k at the January peak, and clears it inside the first quarter.",
     "Open Dayforce and UKG. Chris in the room for the first offers.",
     "Coach the founders on price, hiring, and which accounts are worth chasing.",
-    "Introduce work from the network. Warm only. Every note to someone who already knows the sender.",
-    "Hold the founders to the plan: cash, hires against signed work, and the choice at the end of year four.",
+    "Name the account, the person, and the stuck gap. Hand it to Doug warm. Every note goes to someone who already knows the sender.",
+    "Hold the founders to the one-page quarterly review: cash and overdraft draw, pipeline, hires only against signed work, renewals. And to the choice at the end of year four: sell or keep.",
   ],
   good: [
     "Chris in the room for the first Dayforce and UKG offers.",

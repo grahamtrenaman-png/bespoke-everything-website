@@ -251,7 +251,7 @@ const CHANNELS: {
     share: "Most of year one",
     bar: "from-teal-500 to-teal-400",
     body:
-      "FXP project gap lists. Chris’s Dayforce and UKG relationships. REPL alumni now running operations and HR technology at retailers and manufacturers. Every one of them has a list.",
+      "TCN network opportunities and project gaps across TCN companies. Chris’s Dayforce and UKG relationships. REPL alumni now running operations and HR technology at retailers and manufacturers. Every one of them has a list.",
     proof: "Warm. Priced per gap. Closes in weeks, not procurement cycles.",
   },
   {
@@ -590,7 +590,7 @@ function CallIdeaSlide() {
   const beats = [
     ["01", "Every project has a gap the product will not close. Until now the answer was a workaround, or a compromise the customer learned to live with."],
     ["02", "The platforms have opened up. We build the missing piece inside the system they already run, in weeks, for a fixed price."],
-    ["03", "The project unblocks. The customer gets exactly what they asked for. And they stay on the upgrade path."],
+    ["03", "The project unblocks. The customer gets exactly what they asked for."],
   ];
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
@@ -624,8 +624,8 @@ function CallIdeaSlide() {
             ))}
           </ul>
           <p className="mt-7 border-t border-white/10 pt-5 text-[14px] leading-relaxed text-white/60">
-            Not a bench. Not a product company. A studio that gives the customer the software they were
-            told they could not have.
+            Not a bench. Not a product company. A studio that solves the problem, unblocks the project,
+            and gives the customer exactly what they wanted.
           </p>
         </div>
       </div>
@@ -651,6 +651,12 @@ const CALL_GROUPS: { kicker: string; names: string[]; line: string; tone: string
     names: ["RELEX", "Workday", "SAP · Oracle · ADP"],
     line: "RELEX as it opens, on a line agreed with Inference Group. Workday is HR first, outside our niche, and waits for a project. The others only when one asks.",
     tone: "text-amber-200",
+  },
+  {
+    kicker: "From scratch",
+    names: ["Spreadsheet", "App", "New solution"],
+    line: "When nothing they already run will carry it. We build the thing itself: a working spreadsheet, a focused app, or a solution that stands alone.",
+    tone: "text-sky-200",
   },
 ];
 
@@ -900,17 +906,17 @@ function CallPlatformsSlide() {
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
-      <div className="relative mx-auto w-full max-w-5xl">
+      <div className="relative mx-auto mb-auto w-full max-w-6xl">
         <p className="deck-rise text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
           Where we build
         </p>
         <h2 className="deck-rise mt-3 text-[2.6rem] font-black leading-tight tracking-tight">
           Nine platforms.{" "}
           <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-            Three ways in.
+            Four ways in.
           </span>
         </h2>
-        <div className="mt-10 grid grid-cols-3 gap-10">
+        <div className="mt-8 grid grid-cols-4 gap-6">
           {CALL_GROUPS.map((group, index) => (
             <div
               key={group.kicker}
@@ -922,12 +928,12 @@ function CallPlatformsSlide() {
               </p>
               <ul className="mt-4 space-y-1">
                 {group.names.map((name) => (
-                  <li key={name} className="text-[26px] font-black leading-tight tracking-tight">
+                  <li key={name} className="text-[22px] font-black leading-tight tracking-tight">
                     {name}
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-[13px] leading-relaxed text-white/60">{group.line}</p>
+              <p className="mt-4 text-[12px] leading-relaxed text-white/60">{group.line}</p>
             </div>
           ))}
         </div>

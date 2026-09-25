@@ -327,7 +327,7 @@ function TermsSlide() {
         <SlideHeading
           kicker="Heads of terms"
           title="Four things are proposed."
-          highlight="Four are not."
+          highlight="Three are not."
           lede="Enough to start the partnership and hand jalipi over cleanly. Not enough to leave the economics in a conversation."
         />
         <div className="mt-5 grid grid-cols-2 gap-4">

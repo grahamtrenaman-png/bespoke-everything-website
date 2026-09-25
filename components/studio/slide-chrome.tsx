@@ -25,7 +25,7 @@ export function BespokeBrandedSlide({
 }: {
   className?: string;
   corner?: ReactNode;
-  /** Optional small line rendered directly beneath the wordmark. Opt-in per slide. */
+  /** Optional strapline beneath the wordmark. Opt-in per slide; not part of the logo. */
   strapline?: string;
   children: ReactNode;
 }) {
@@ -35,7 +35,7 @@ export function BespokeBrandedSlide({
       <div className="pointer-events-none z-20 flex shrink-0 flex-col items-center pt-6">
         <BespokeDeckLogo />
         {strapline ? (
-          <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-amber-300/80">
+          <p className="mt-3.5 text-[22px] font-semibold tracking-tight text-amber-300">
             {strapline}
           </p>
         ) : null}

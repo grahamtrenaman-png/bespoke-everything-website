@@ -191,6 +191,7 @@ const SELLER: SeatSpec = {
     "Has sold services into HR, workforce or retail operations buyers.",
     "Works a warm network rather than a cold list.",
     "Comfortable selling fixed-price builds, not programmes.",
+    "Can articulate the change in software that makes this possible: platforms that finally let customers get what they want without compromise.",
   ],
   terms: [
     "Base plus commission on closed builds and first-year support. Commission out of margin, never out of the overdraft.",

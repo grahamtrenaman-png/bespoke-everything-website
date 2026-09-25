@@ -80,7 +80,7 @@ const GRAHAM: SeatSpec = {
   highlight: "What we build, and what it costs.",
   lede: "Scopes, prices and builds. Proves the first pattern on a platform, then hands the repeat to a builder.",
   summary:
-    "Graham runs solutions and delivery. He decides what the studio builds and on which platforms, scopes and prices every job, builds the first version of each pattern himself, then hires and coaches the builders who ship it again. He also hands jalipi to QTC and keeps a stake in it, with no solutions work on the side.",
+    "Graham runs solutions and delivery. He decides what the studio builds and on which platforms, scopes and prices every job, builds the first version of each pattern himself, then hires and coaches the builders who ship it again.",
   owns: [
     "The scope and the price of every build.",
     "Whether a pattern is good enough to ship again.",

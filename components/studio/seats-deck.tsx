@@ -84,7 +84,6 @@ const GRAHAM: SeatSpec = {
   owns: [
     "The scope and the price of every build.",
     "Whether a pattern is good enough to ship again.",
-    "The first job, lined up before we start.",
     "Delivering the solutions, at least until there is a builder.",
   ],
   job: [
@@ -94,7 +93,6 @@ const GRAHAM: SeatSpec = {
     "Hold quality until a builder owns the line: tenant, handover, support renewal.",
     "Price with Doug, and later with the seller. Hold the scope line in the room.",
     "Build the first job himself. Hire and coach the builders once there is pipeline behind it.",
-    "No solutions work on the side.",
   ],
   good: [
     "The first job live inside the first quarter, on price.",

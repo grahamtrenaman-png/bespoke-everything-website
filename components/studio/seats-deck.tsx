@@ -463,16 +463,39 @@ function SeatSpecSlide({ spec }: { spec: SeatSpec }) {
   );
 }
 
-const HANDOFFS: { from: string; to: string; what: string; tone: SeatTone }[] = [
-  { from: "TCN", to: "Doug", what: "A door. Chris names the account and the person, and Doug takes the first call.", tone: "discuss" },
-  { from: "Doug", to: "Graham", what: "A qualified gap. Who the buyer is, what is stuck, and roughly when. Graham scopes and prices it.", tone: "cofounder" },
-  { from: "Graham", to: "The builder", what: "A proven pattern and a signed scope. The builder ships it on the next customer without a rebuild.", tone: "hire" },
-  { from: "The builder", to: "Doug", what: "A live build and a support line. Doug stays on the account for the renewal.", tone: "cofounder" },
-  { from: "The seller", to: "Graham", what: "A priced offer to a buyer who did not know us. Graham holds the scope line while it closes.", tone: "potential" },
-  { from: "Graham and Doug", to: "TCN", what: "One page a quarter: cash, pipeline, hires against signed work, renewals.", tone: "discuss" },
+type Handoff = {
+  from: string;
+  to: string;
+  what: string;
+  tone: SeatTone;
+  stage: string;
+  kind: "step" | "door" | "report";
+};
+
+const HANDOFFS: Handoff[] = [
+  { from: "TCN", to: "Doug", what: "A door. Chris names the account and the person, and Doug takes the first call.", tone: "discuss", stage: "Door", kind: "step" },
+  { from: "Doug", to: "Graham", what: "A qualified gap. Who the buyer is, what is stuck, and roughly when. Graham scopes and prices it.", tone: "cofounder", stage: "Scope", kind: "step" },
+  { from: "Graham", to: "The builder", what: "A proven pattern and a signed scope. The builder ships it on the next customer without a rebuild.", tone: "hire", stage: "Build", kind: "step" },
+  { from: "The builder", to: "Doug", what: "A live build and a support line. Doug stays on the account for the renewal.", tone: "cofounder", stage: "Renewal", kind: "step" },
+  { from: "The seller", to: "Graham", what: "A priced offer to a buyer who did not know us. Graham holds the scope line while it closes.", tone: "potential", stage: "Second door", kind: "door" },
+  { from: "Graham and Doug", to: "TCN", what: "One page a quarter: cash, pipeline, hires against signed work, renewals.", tone: "discuss", stage: "Reporting", kind: "report" },
 ];
 
+function HandoffPair({ from, to, className }: { from: string; to: string; className?: string }) {
+  return (
+    <div className={cn("flex items-center gap-1.5 text-[12px] font-black leading-tight", className)}>
+      <span>{from}</span>
+      <ArrowRight className="h-3.5 w-3.5 shrink-0 text-white/45" />
+      <span>{to}</span>
+    </div>
+  );
+}
+
 function HandoffSlide() {
+  const steps = HANDOFFS.filter((row) => row.kind === "step");
+  const secondDoor = HANDOFFS.find((row) => row.kind === "door");
+  const report = HANDOFFS.find((row) => row.kind === "report");
+  const chainColumns = "grid-cols-[1fr_1.25rem_1fr_1.25rem_1fr_1.25rem_1fr]";
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
@@ -483,25 +506,79 @@ function HandoffSlide() {
           highlight="Each one has an owner."
           lede="A job moves from a door to a scope, to a build, to a renewal. Where it changes hands, one person passes it and one person takes it."
         />
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          {HANDOFFS.map((row, index) => {
+
+        {secondDoor ? (
+          <div className={cn("mt-4 grid items-end gap-x-2", chainColumns)}>
+            <div className="deck-rise col-start-3 flex flex-col items-center" style={{ animationDelay: "0.36s" }}>
+              <div
+                className={cn(
+                  "relative w-full overflow-hidden rounded-2xl border px-3.5 py-2.5",
+                  TONE[secondDoor.tone].card,
+                )}
+              >
+                <span className={cn("absolute inset-y-0 left-0 w-1 bg-gradient-to-b", TONE[secondDoor.tone].bar)} />
+                <span className={cn("text-[9.5px] font-black uppercase tracking-[0.2em]", TONE[secondDoor.tone].label)}>
+                  {secondDoor.stage}
+                </span>
+                <HandoffPair from={secondDoor.from} to={secondDoor.to} className="mt-1" />
+                <p className="mt-1 text-[10.5px] leading-snug text-white/70">{secondDoor.what}</p>
+              </div>
+              <ArrowRight className="my-0.5 h-4 w-4 rotate-90 text-white/45" />
+            </div>
+          </div>
+        ) : null}
+
+        <div className={cn("grid items-stretch gap-x-2", chainColumns)}>
+          {steps.map((row, index) => {
             const tone = TONE[row.tone];
             return (
-              <div
-                key={`${row.from}-${row.to}`}
-                className={cn("deck-rise rounded-2xl border px-4 py-3", tone.card)}
-                style={{ animationDelay: `${0.12 + index * 0.06}s` }}
-              >
-                <div className="flex items-center gap-2 text-[12px] font-black">
-                  <span>{row.from}</span>
-                  <ArrowRight className="h-3.5 w-3.5 text-white/45" />
-                  <span>{row.to}</span>
+              <div key={`${row.from}-${row.to}`} className="contents">
+                {index > 0 ? (
+                  <div className="deck-rise flex items-center justify-center" style={{ animationDelay: `${0.12 + index * 0.08}s` }}>
+                    <ArrowRight className="h-5 w-5 text-white/45" />
+                  </div>
+                ) : null}
+                <div
+                  className={cn("deck-rise relative overflow-hidden rounded-2xl border px-4 py-3", tone.card)}
+                  style={{ animationDelay: `${0.12 + index * 0.08}s` }}
+                >
+                  <span className={cn("absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r", tone.bar)} />
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-[22px] font-black leading-none tabular-nums text-white/30">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className={cn("text-[9.5px] font-black uppercase tracking-[0.2em]", tone.label)}>{row.stage}</span>
+                  </div>
+                  <HandoffPair from={row.from} to={row.to} className="mt-2.5" />
+                  <p className="mt-1.5 text-[11px] leading-snug text-white/75">{row.what}</p>
                 </div>
-                <p className="mt-1.5 text-[11px] leading-snug text-white/75">{row.what}</p>
               </div>
             );
           })}
         </div>
+
+        {report ? (
+          <div
+            className={cn(
+              "deck-rise relative mt-3 flex items-center gap-4 overflow-hidden rounded-2xl border px-4 py-2.5",
+              TONE[report.tone].card,
+            )}
+            style={{ animationDelay: "0.52s" }}
+          >
+            <span className={cn("absolute inset-y-0 left-0 w-1 bg-gradient-to-b", TONE[report.tone].bar)} />
+            <span
+              className={cn(
+                "shrink-0 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.14em]",
+                TONE[report.tone].pill,
+              )}
+            >
+              {report.stage}
+            </span>
+            <HandoffPair from={report.from} to={report.to} className="shrink-0" />
+            <span className="h-5 w-px shrink-0 bg-white/15" />
+            <p className="text-[11px] leading-snug text-white/75">{report.what}</p>
+          </div>
+        ) : null}
       </div>
     </BespokeBrandedSlide>
   );

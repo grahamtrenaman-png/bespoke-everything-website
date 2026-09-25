@@ -324,8 +324,10 @@ function NewBusinessSlide() {
             <div>
               <p className="text-[13px] font-black tracking-tight">What comes in</p>
               <p className="mt-1 text-[11px] leading-relaxed text-white/75">
-                At £80k, the middle of the £40–120k range: two builds in the first half is about £160k
-                invoiced. Four across the year is about £320k of build fees, before support.
+                At £80k, the middle of the £40–120k range: two builds live by the end of Q1, four by the
+                end of Q2. The back half carries the volume once builders join. Fourteen across the year,
+                at an average nearer £40k as smaller jobs come through, is about £0.55m of build fees, and
+                about £0.7m of revenue with support and the jalipi work.
               </p>
             </div>
             <div>

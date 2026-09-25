@@ -102,9 +102,9 @@ const GRAHAM: SeatSpec = {
     "Fourteen builds in year one, none of them over scope without a change order.",
   ],
   fits: [
-    "Has scoped and priced bespoke solutions for customers, and delivered them.",
-    "Can scope fixed-price work and hold the line on scope.",
-    "Comfortable handing a proven pattern to a builder.",
+    "Creative problem solver who sits with a client, understands what is stuck, and turns it into options and a clear proposal.",
+    "Technical enough to choose the right approach: extend the platform, host beside it, or build from scratch.",
+    "Holds the scope line, prices it, and hands a proven pattern to a builder.",
   ],
   terms: [
     "Co-founder from January. Salary about £100k, the same figure proposed for Doug.",
@@ -229,9 +229,9 @@ const BUILDER: SeatSpec = {
     "Support closed inside the SLA, and the customer renewing.",
   ],
   fits: [
-    "Strong on the target platform's extension tooling and APIs.",
-    "Ships from a spec without hand-holding.",
-    "Happy repeating a proven pattern cleanly.",
+    "Creative problem solver who works a scoped brief with a client, and presents options when the build hits a real-world gap.",
+    "Technical enough to pick the right approach for the platform and the job.",
+    "Ships from a signed scope without hand-holding, and repeats a proven pattern cleanly.",
   ],
   terms: [
     "Permanent. About £90k in the UK, about £65k in South Africa.",

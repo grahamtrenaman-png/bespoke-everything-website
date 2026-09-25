@@ -424,7 +424,7 @@ const YEAR: Phase[] = [
     window: "Apr → Jun",
     tone: "year",
     items: [
-      "Direct channel opens with two case studies. The third seat is still open.",
+      "Direct channel opens once there is something to show. The third seat is still open.",
       "First vendor-referred job. First Logile or Legion build live through an FXP account.",
       "First skilled builder hired in South Africa, once there is pipeline behind the first job. Not on a forecast.",
     ],

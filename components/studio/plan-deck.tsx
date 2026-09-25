@@ -60,7 +60,7 @@ const BY_PLATFORM: { name: string; tone: string; y1: number; y2: number; y3: num
 const BY_MARKET: { name: string; y1: number; y2: number; y3: number; y4: number; line: string }[] = [
   { name: "UK · the network", y1: 70, y2: 50, y3: 40, y4: 30, line: "TCN, FXP and REPL alumni. Warm, and where the first build comes from." },
   { name: "UK · vendor referred", y1: 0, y2: 10, y3: 15, y4: 20, line: "Account teams send the gap once we are a name they can refer." },
-  { name: "UK · direct", y1: 5, y2: 10, y3: 15, y4: 20, line: "One named offer per platform. A seller behind it from year two." },
+  { name: "UK · direct", y1: 5, y2: 10, y3: 15, y4: 20, line: "The offer takes shape from the first jobs. A seller behind it from year two." },
   { name: "South Africa", y1: 25, y2: 30, y3: 30, y4: 30, line: "Doug’s accounts and retailers. Delivered from the SA seats, sold in rand and in sterling." },
 ];
 

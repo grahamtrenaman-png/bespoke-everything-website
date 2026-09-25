@@ -169,19 +169,19 @@ const SELLER: SeatSpec = {
   highlight: "Creating the market.",
   lede: "Managing partners and creating a market are different jobs. This seat opens when the work says so.",
   summary:
-    "The seller creates demand the network does not bring. They take one named offer per platform to buyers who have never heard of us, run a pipeline that can be forecast, quote fixed-scope builds with Graham and close them. Base plus commission, with a co-founder stake on the table if they join early and carry the direct channel.",
+    "The seller creates demand the network does not bring. They take what the first jobs have shown to buyers who have never heard of us, run a pipeline that can be forecast, quote fixed-scope builds with Graham and close them. Base plus commission, with a co-founder stake on the table if they join early and carry the direct channel.",
   owns: [
     "The direct pipeline, once it exists.",
-    "One named offer per platform, and the case studies behind it.",
+    "The offer. It takes shape from the work, once there is something to show.",
     "A forecast Chris and Thomas can rely on.",
   ],
   job: [
-    "Take one named offer per platform to buyers who do not know us yet.",
+    "Take that offer to buyers who do not know us yet.",
     "Sell to programme leads mid-implementation, and to operators who now feel the gap.",
     "Reach the account teams Doug has not. Leave the partner programmes with him.",
     "Run the pipeline as a pipeline: qualified, priced, forecast.",
     "Quote fixed-scope builds with Graham, and close them.",
-    "Build the repeatable sale: offer, proposal, price, case study. Every meeting starts with a working app.",
+    "Build the repeatable sale: offer, proposal and price, once the first jobs have shown what we sell.",
   ],
   good: [
     "A forecast Chris and Thomas can rely on within two quarters of starting.",

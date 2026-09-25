@@ -423,6 +423,7 @@ const YEAR: Phase[] = [
     tone: "year",
     items: [
       "The one job lined up before we start, built by Graham. A second sold in January off the network.",
+      "Doug opens the vendor and account relationships, and a South Africa route.",
       "Partner applications filed on Dayforce, UKG and RELEX.",
       "Contract, support and pricing templates settled with TCN shared ops.",
     ],

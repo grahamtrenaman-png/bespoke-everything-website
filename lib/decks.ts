@@ -32,6 +32,6 @@ export const STUDIO_DECKS: DeckEntry[] = [
     href: "/studio/partnership",
     kicker: "For QTC and TCN",
     title: "The partnership.",
-    body: "A working partnership between QuickThink Cloud and TCN. Doors both ways, jalipi as the first concrete piece, who does what, a draft heads of terms with the blanks marked, and the handover before January.",
+    body: "A working partnership between QuickThink Cloud and TCN. Doors both ways, jalipi as the first concrete piece, who does what, what is proposed and what is still to agree, and the handover before January.",
   },
 ];

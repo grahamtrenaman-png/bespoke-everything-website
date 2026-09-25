@@ -255,17 +255,17 @@ const TCN: SeatSpec = {
   highlight: "Capital, doors, and coaching.",
   lede: "Proposed so it can be argued. Chris and Thomas fund the studio and open the doors. None of this is agreed as a job description yet.",
   summary:
-    "TCN provides the £200k facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
+    "TCN provides the facility, opens the Dayforce and UKG doors, and coaches the founders on price, hiring and accounts. Other TCN companies can bring work from their own accounts. TCN holds the founders to the plan and to the choice at the end of year four.",
   owns: [
-    "The £200k facility, and whether it is used.",
+    "The facility, and whether it is used.",
     "The Dayforce and UKG doors.",
     "Introductions from the network, warm only.",
   ],
   job: [
-    "Provide the facility. The plan draws about £45k at the January peak, and clears it inside the first quarter.",
+    "Provide the facility. The plan draws on it at the January peak, and clears it inside the first quarter.",
     "Open Dayforce and UKG. Chris in the room for the first offers.",
     "Coach the founders on price, hiring, and which accounts are worth chasing.",
-    "Name the account, the person, and the stuck gap. Hand it to Doug warm. Every note goes to someone who already knows the sender.",
+    "Help Doug work out which accounts, which people, and which gaps are worth an introduction. Warm only. Every note goes to someone who already knows the sender.",
     "Hold the founders to the one-page quarterly review: cash and overdraft draw, pipeline, hires only against signed work, renewals. And to the choice at the end of year four: sell or keep.",
   ],
   good: [

@@ -385,16 +385,6 @@ type Phase = {
 
 const NOTICE: Phase[] = [
   {
-    label: "The studio",
-    window: "Mid Oct → mid Jan",
-    tone: "notice",
-    items: [
-      "Which platforms we build on, the partner routes, and what we host ourselves.",
-      "One job scoped and priced, ready to sign in January. The company set up.",
-    ],
-    measure: "Ready to start in January.",
-  },
-  {
     label: "With Chris",
     window: "From the 29th",
     tone: "notice",
@@ -403,6 +393,16 @@ const NOTICE: Phase[] = [
       "Graham may be working his notice. Applications, builds, proposals and customer meetings wait until we start.",
     ],
     measure: "Numbers Chris and Thomas can poke at before day one.",
+  },
+  {
+    label: "The studio",
+    window: "Mid Oct → mid Jan",
+    tone: "notice",
+    items: [
+      "Which platforms we build on, the partner routes, and what we host ourselves.",
+      "One job scoped and priced, ready to sign in January. The company set up.",
+    ],
+    measure: "Ready to start in January.",
   },
   {
     label: "jalipi",
@@ -556,7 +556,7 @@ function TimelineSlide() {
         <div className="mt-4 space-y-4">
           <PhaseTrack
             phases={NOTICE}
-            heading="Before we start · mid October to mid January"
+            heading="Before we start · from the 29th to mid January"
             tone="notice"
             delay={0.15}
           />
@@ -594,7 +594,17 @@ function CallIdeaSlide() {
     ["04", "The project unblocks. The customer gets exactly what they asked for."],
   ];
   return (
-    <BespokeBrandedSlide className="bg-neutral-950" strapline="The industry went vanilla… bespoke is back!">
+    <BespokeBrandedSlide
+      className="bg-neutral-950"
+      strapline={
+        <>
+          <span className="text-white">The industry went vanilla… </span>
+          <span className="bg-gradient-to-r from-amber-400 via-sky-300 to-violet-300 bg-clip-text text-transparent">
+            bespoke is back!
+          </span>
+        </>
+      }
+    >
       <Glows />
       <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1fr_1.15fr] items-center gap-x-8 gap-y-3">
         <div className="deck-rise min-w-0">
@@ -725,7 +735,7 @@ const CALL_VENDORS: CallVendor[] = [
     wave: "First",
     shape: "Beside the product",
     extend: "Developer Hub APIs and webhooks. No studio, so we host the app.",
-    door: "Chris, and FrontlineXP’s live UKG projects.",
+    door: "Chris. FrontlineXP starts working with UKG over the coming months.",
     first: "A named gap, fixed price. Sick pay is the shape of it.",
   },
   {
@@ -907,14 +917,14 @@ function CallPlatformsSlide() {
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
-      <div className="relative mx-auto mb-auto w-full max-w-6xl">
+      <div className="relative mx-auto w-full max-w-6xl">
         <SlideHeading
           kicker="Where we build"
           title="Ten platforms."
           highlight="Four ways in."
           lede="Inside what they already run. Beside it, where we host the build. When a later platform opens. Or from scratch."
         />
-        <div className="mt-5 grid grid-cols-4 gap-4">
+        <div className="mt-8 grid grid-cols-4 gap-4">
           {CALL_GROUPS.map((group, index) => (
             <div
               key={group.kicker}

@@ -26,7 +26,7 @@ export function BespokeBrandedSlide({
   className?: string;
   corner?: ReactNode;
   /** Optional strapline beneath the wordmark. Opt-in per slide; not part of the logo. */
-  strapline?: string;
+  strapline?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -36,7 +36,7 @@ export function BespokeBrandedSlide({
         <BespokeDeckLogo />
         {strapline ? (
           <p
-            className="deck-rise mt-10 max-w-4xl text-center text-[1.65rem] font-black leading-tight tracking-tight bg-gradient-to-r from-amber-400 via-sky-300 to-violet-300 bg-clip-text text-transparent"
+            className="deck-rise mt-10 max-w-4xl text-center text-[1.65rem] font-black leading-tight tracking-tight"
             style={{ animationDelay: "0.12s" }}
           >
             {strapline}

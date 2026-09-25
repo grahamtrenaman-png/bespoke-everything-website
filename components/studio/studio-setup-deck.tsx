@@ -595,7 +595,6 @@ function CallIdeaSlide() {
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
-      {/* Top-align so a tall right column cannot centre-clip the left hero off-stage. */}
       <div className="relative mx-auto mb-auto grid w-full max-w-5xl grid-cols-[1.05fr_1fr] items-start gap-12">
         <div className="deck-rise min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">

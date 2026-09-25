@@ -102,9 +102,9 @@ const GRAHAM: SeatSpec = {
     "Fourteen builds in year one, none of them over scope without a change order.",
   ],
   fits: [
-    "Has scoped and priced bespoke solutions for customers, and delivered them.",
-    "Can scope fixed-price work and hold the line on scope.",
-    "Comfortable handing a proven pattern to a builder.",
+    "Creative problem solver who sits with a client, understands what is stuck, and turns it into options and a clear proposal.",
+    "Technical enough to choose the right approach: extend the platform, host beside it, or build from scratch.",
+    "Holds the scope line, prices it, and hands a proven pattern to a builder.",
   ],
   terms: [
     "Co-founder from January. Salary about £100k, the same figure proposed for Doug.",

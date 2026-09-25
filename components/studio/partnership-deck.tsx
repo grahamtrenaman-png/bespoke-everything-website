@@ -343,7 +343,7 @@ function TermsSlide() {
             </ul>
           </div>
           <div className="deck-rise rounded-2xl border border-amber-400/25 bg-amber-500/[0.07] px-5 py-4" style={{ animationDelay: "0.28s" }}>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-200/80">Still to agree, with QTC</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-200/80">Still to agree</p>
             <ul className="mt-3 space-y-2.5">
               {OPEN_PARTNERSHIP.map((line) => (
                 <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">

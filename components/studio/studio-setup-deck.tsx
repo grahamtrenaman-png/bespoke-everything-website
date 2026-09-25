@@ -909,7 +909,7 @@ function CallPlatformsSlide() {
           Where we build
         </p>
         <h2 className="deck-rise mt-3 text-[2.6rem] font-black leading-tight tracking-tight">
-          Nine platforms.{" "}
+          Ten platforms.{" "}
           <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
             Four ways in.
           </span>

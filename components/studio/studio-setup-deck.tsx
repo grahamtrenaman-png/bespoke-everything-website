@@ -121,7 +121,7 @@ const SEATS: Seat[] = [
     status: "Proposed · available January",
     tone: "proposed",
     body:
-      "The vendor and account seat. Account managers refer a stuck deal to a person they trust, and Doug is that person. Available from January. The FXP timing missed, so he is free, and he wants this.",
+      "The vendor and account seat. Account managers refer a stuck deal to a person they trust, and Doug is that person. Available from January.",
     measure: "The person the account teams already call.",
   },
   {

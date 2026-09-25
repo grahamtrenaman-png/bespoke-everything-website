@@ -594,7 +594,7 @@ function CallIdeaSlide() {
     ["04", "The project unblocks. The customer gets exactly what they asked for."],
   ];
   return (
-    <BespokeBrandedSlide className="bg-neutral-950" strapline="Bespoke is Back">
+    <BespokeBrandedSlide className="bg-neutral-950" strapline="Bespoke is Back!">
       <Glows />
       <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1fr_1.15fr] items-center gap-x-8 gap-y-3">
         <div className="deck-rise min-w-0">

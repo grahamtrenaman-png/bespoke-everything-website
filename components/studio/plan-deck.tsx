@@ -124,7 +124,7 @@ const SHAPE: {
     tone: "notice",
     lines: [
       "One build scoped and priced, ready to sign in January. No more than that.",
-      "Platforms, partner routes, and how the studio plugs into FrontlineXP.",
+      "Platforms, partner routes, and how the studio plugs into TCN.",
       "The company set up. No cash out before January. jalipi terms written down in the same window.",
     ],
     end: "Two founders, one job, day one.",

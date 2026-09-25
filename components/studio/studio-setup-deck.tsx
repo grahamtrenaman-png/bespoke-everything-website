@@ -320,7 +320,7 @@ function NewBusinessSlide() {
               <p className="text-[13px] font-black tracking-tight">What goes out</p>
               <p className="mt-1 text-[11px] leading-relaxed text-white/75">
                 The studio spends nothing before January. Those months are the prep: the platforms, the
-                first job, and how the studio plugs into FrontlineXP. From January, two people. Then a small
+                first job, and how the studio plugs into TCN. From January, two people. Then a small
                 number of skilled builders, UK or South Africa, and only once there is pipeline.
               </p>
             </div>

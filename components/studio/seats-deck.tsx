@@ -523,7 +523,7 @@ function GrowthSlide() {
           kicker="How the seats grow"
           title="Four to twenty."
           highlight="Every seat follows the work."
-          lede="The same hire schedule as the plan. Roles change shape as the studio grows, and Graham’s most of all."
+          lede="The same hire schedule as the plan. Roles change shape as the studio grows."
         />
         <div className="mt-4 grid grid-cols-4 gap-3">
           {GROWTH.map((row, index) => (

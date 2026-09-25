@@ -588,39 +588,44 @@ function deriveSections(slides: DeckSlide[]) {
 
 function CallIdeaSlide() {
   const beats = [
-    ["01", "The gap is on every project."],
-    ["02", "The vendors now let you build inside."],
-    ["03", "We sell a fixed-price build, and a support line."],
+    ["01", "Every project has a gap the product will not close. Until now the answer was a workaround, or a compromise the customer learned to live with."],
+    ["02", "The platforms have opened up. We build the missing piece inside the system they already run, in weeks, for a fixed price."],
+    ["03", "The project unblocks. The customer gets exactly what they asked for. And they stay on the upgrade path."],
   ];
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
-      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1.15fr_1fr] items-center gap-16">
+      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1.05fr_1fr] items-center gap-14">
         <div className="deck-rise">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
             For Chris
           </p>
-          <h2 className="mt-4 text-[3.4rem] font-black leading-[0.98] tracking-tight">
-            Build the thing
+          <h2 className="mt-4 text-[3.2rem] font-black leading-[0.98] tracking-tight">
+            The customer
             <br />
-            the platform
+            stops
             <br />
             <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-              will not do.
+              compromising.
             </span>
           </h2>
+          <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-white/65">
+            We solve the problem the software would not. The project moves, and the customer gets what
+            they actually wanted.
+          </p>
         </div>
         <div className="deck-rise" style={{ animationDelay: "0.2s" }}>
-          <ul className="space-y-6">
+          <ul className="space-y-5">
             {beats.map(([n, line]) => (
               <li key={n} className="flex items-baseline gap-4">
                 <span className="text-[13px] font-black tabular-nums text-teal-300/80">{n}</span>
-                <span className="text-[22px] font-black leading-snug tracking-tight">{line}</span>
+                <span className="text-[17px] font-semibold leading-snug tracking-tight text-white/90">{line}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-8 border-t border-white/10 pt-5 text-[15px] leading-relaxed text-white/60">
-            Not a bench. Not a product company. The customer stays on their upgrade path.
+          <p className="mt-7 border-t border-white/10 pt-5 text-[14px] leading-relaxed text-white/60">
+            Not a bench. Not a product company. A studio that gives the customer the software they were
+            told they could not have.
           </p>
         </div>
       </div>

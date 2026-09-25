@@ -62,7 +62,7 @@ const FLOW: { step: string; who: string; line: string }[] = [
   { step: "04", who: "QTC", line: "Hosts and supports the core. A kickback, not yet agreed, goes to whoever brought the deal." },
 ];
 
-const AGREED: string[] = [
+const PROPOSED: string[] = [
   "QTC and TCN work together both ways: doors for TCN companies, opportunities for QTC.",
   "QTC develop and harden jalipi. Graham keeps a stake. The size of that stake is still to write down.",
   "FXP invoices the customer for implementation. Bespoke Everything invoices the customer for extensions.",
@@ -286,15 +286,15 @@ function TermsSlide() {
       <div className="relative mx-auto mb-auto mt-6 w-full max-w-5xl">
         <SlideHeading
           kicker="Heads of terms"
-          title="Four things are settled."
+          title="Four things are proposed."
           highlight="Four are not."
           lede="Enough to start the partnership and hand jalipi over cleanly. Not enough to leave the economics in a conversation."
         />
         <div className="mt-5 grid grid-cols-2 gap-4">
           <div className="deck-rise rounded-2xl border border-teal-400/25 bg-teal-500/[0.07] px-5 py-4" style={{ animationDelay: "0.15s" }}>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">Settled in this plan</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-200/80">Proposed in this plan</p>
             <ul className="mt-3 space-y-2.5">
-              {AGREED.map((line) => (
+              {PROPOSED.map((line) => (
                 <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
                   <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-teal-300" />
                   <span>{line}</span>
@@ -383,7 +383,7 @@ function HeadsOfTermsSlide() {
           kicker="Heads of terms"
           title="A draft."
           highlight="The blanks are the conversation."
-          lede="One page, not a contract. Everything that is settled is written in. Everything that is not has a blank, so the QTC conversation is about filling them, not about whether to write them."
+          lede="One page, not a contract. Everything that is proposed is written in. Everything that is not has a blank, so the QTC conversation is about filling them, not about whether to write them."
         />
         <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2">
           {HEADS.map((clause, index) => (

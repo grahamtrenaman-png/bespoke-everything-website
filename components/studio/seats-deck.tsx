@@ -102,7 +102,7 @@ const GRAHAM: SeatSpec = {
     "Fourteen builds in year one, none of them over scope without a change order.",
   ],
   fits: [
-    "Has scoped and priced bespoke solutions for customers, and delivered them.",
+    "Has shipped enterprise software and priced it.",
     "Can scope fixed-price work and hold the line on scope.",
     "Comfortable handing a proven pattern to a builder.",
   ],

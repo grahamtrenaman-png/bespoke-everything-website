@@ -94,7 +94,7 @@ const GRAHAM: SeatSpec = {
     "Hold quality until a builder owns the line: tenant, handover, support renewal.",
     "Price with Doug, and later with the seller. Hold the scope line in the room.",
     "Build the first job himself. Hire and coach the builders once there is pipeline behind it.",
-    "Hand jalipi to QTC. Keep a stake. No solutions work on the side.",
+    "No solutions work on the side.",
   ],
   good: [
     "The first job live inside the first quarter, on price.",
@@ -109,7 +109,6 @@ const GRAHAM: SeatSpec = {
   terms: [
     "Co-founder from January. Salary about £100k, the same figure proposed for Doug.",
     "A stake in Bespoke Everything. Size and vesting still to write down.",
-    "The jalipi stake sits with Graham, not in the studio’s P&L. Size still to write down with QTC.",
   ],
   trigger: "Starts when we start, mid January. Notice may still be being worked until then.",
   not: "Not the vendor relationships. That is Doug. Not creating a market from cold. That is the seller, when the seat opens. Not implementation that belongs to FXP.",
@@ -211,7 +210,7 @@ const BUILDER: SeatSpec = {
   kicker: "Skilled builder · hire · against signed work",
   title: "The builder.",
   highlight: "Ship the pattern again.",
-  lede: "Graham builds the first job. The builder is hired once there is pipeline behind it, not on a forecast. UK or South Africa.",
+  lede: "Graham builds the first job. The builder is hired once there is pipeline behind it, not on a forecast. South Africa first.",
   summary:
     "The builder ships fixed-scope extensions on other people’s platforms, taking a pattern Graham has proven and delivering it on a new customer in one to two weeks. Senior, end to end and AI-assisted: data, integration, screens, tenant, handover. They own the support line for what they built and write it down so the next builder does not start again.",
   owns: [
@@ -478,7 +477,7 @@ type Handoff = {
 };
 
 const HANDOFFS: Handoff[] = [
-  { from: "TCN", to: "Doug", what: "A door. Chris names the account and the person, and Doug takes the first call.", tone: "discuss", stage: "Door", kind: "step" },
+  { from: "TCN", to: "Doug", what: "A door. Chris helps Doug identify the account and makes the introduction. Doug takes the first call.", tone: "discuss", stage: "Door", kind: "step" },
   { from: "Doug", to: "Graham", what: "A qualified gap. Who the buyer is, what is stuck, and roughly when. Graham scopes and prices it.", tone: "cofounder", stage: "Scope", kind: "step" },
   { from: "Graham", to: "The builder", what: "A proven pattern and a signed scope. The builder ships it on the next customer without a rebuild.", tone: "hire", stage: "Build", kind: "step" },
   { from: "The builder", to: "Doug", what: "A live build and a support line. Doug stays on the account for the renewal.", tone: "cofounder", stage: "Renewal", kind: "step" },

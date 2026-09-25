@@ -128,7 +128,7 @@ const SEATS: Seat[] = [
     status: "Held open",
     tone: "open",
     body:
-      "Held for a seller, or a production engineer, whichever the work shows we need first. A seller at the level we would want joins when the margin pays commission, or sooner if the network runs short.",
+      "Held for a seller, or a builder, whichever the work shows we need first. A seller at the level we would want joins when the margin pays commission, or sooner if the network runs short.",
     measure: "Decided on the numbers by mid-year.",
   },
 ];
@@ -318,7 +318,7 @@ function NewBusinessSlide() {
               <p className="mt-1 text-[11px] leading-relaxed text-white/75">
                 The studio spends nothing before January. Those months are the prep: the platforms, the
                 first job, and how the studio plugs into TCN. From January, two people. Then a small
-                number of skilled builders, UK or South Africa, and only once there is pipeline.
+                number of skilled builders, South Africa first, and only once there is pipeline.
               </p>
             </div>
             <div>
@@ -426,7 +426,7 @@ const YEAR: Phase[] = [
     items: [
       "Direct channel opens with two case studies. The third seat is still open.",
       "First vendor-referred job. First Logile or Legion build live through an FXP account.",
-      "First skilled builder hired, UK or South Africa, once there is pipeline behind the first job. Not on a forecast.",
+      "First skilled builder hired in South Africa, once there is pipeline behind the first job. Not on a forecast.",
     ],
     measure: "Four builds live. One vendor referral closed.",
   },
@@ -435,8 +435,8 @@ const YEAR: Phase[] = [
     window: "Jul → Sep",
     tone: "year",
     items: [
-      "Four jobs running at once. A second skilled builder, once the support line can carry them.",
-      "RELEX pilot with a Val-introduced customer.",
+      "Four jobs running at once. Pipeline building for a second builder.",
+      "RELEX pilot with a Val-introduced customer. Unpaid in year one; RELEX revenue starts in year two.",
       "First pattern reused on a second customer without a rebuild.",
     ],
     measure: "Support base covers a builder’s salary.",
@@ -446,7 +446,7 @@ const YEAR: Phase[] = [
     window: "Oct → Dec",
     tone: "year",
     items: [
-      "Studio at four or five people. Recurring support and licensed apps on the books.",
+      "Second skilled builder hired in South Africa, once support and a signed job can carry them. Studio at four people. Recurring support and licensed apps on the books.",
       "Year two takes shape: the next platform, whether the margin pays for a senior seller, where the overdraft sits.",
       "Every first-year customer referenceable.",
     ],
@@ -742,7 +742,7 @@ const CALL_VENDORS: CallVendor[] = [
     wave: "With FXP",
     shape: "Beside the product",
     extend: "APIs, webhooks and the Integration Center. Extended from outside.",
-    door: "FrontlineXP’s live Legion work.",
+    door: "FrontlineXP’s Legion work.",
     first: "A feed, a rule, or a screen Legion will not grow.",
   },
   {

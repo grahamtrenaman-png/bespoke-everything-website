@@ -661,7 +661,7 @@ const ASSUMPTIONS: { group: string; items: string[] }[] = [
       "Builders fully loaded: £90k UK, £65k South Africa. Support and ops seats £45 to 60k, in SA.",
       "Cost base £0.55m, £1.2m, £2.2m, £3.9m. People are about half of it; the rest is contractors for peaks, commission, marketplace fees, tenants, travel and TCN shared ops.",
       "EBITDA 20%, 25%, 31%, 35%. Debtors at 45 days.",
-      "Overdraft limit £200k. Peak draw about £45k in January: two salaries plus the setup already spent. Cleared inside Q1.",
+      "Overdraft limit £200k. Peak draw about £45k in January: two salaries before the first invoice lands. Cleared inside Q1.",
     ],
   },
   {

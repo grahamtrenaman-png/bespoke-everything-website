@@ -905,28 +905,25 @@ function CallPlatformsSlide() {
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
       <div className="relative mx-auto mb-auto w-full max-w-6xl">
-        <p className="deck-rise text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
-          Where we build
-        </p>
-        <h2 className="deck-rise mt-3 text-[2.6rem] font-black leading-tight tracking-tight">
-          Ten platforms.{" "}
-          <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-            Four ways in.
-          </span>
-        </h2>
-        <div className="mt-8 grid grid-cols-4 gap-6">
+        <SlideHeading
+          kicker="Where we build"
+          title="Ten platforms."
+          highlight="Four ways in."
+          lede="Inside what they already run. Beside it, where we host the build. When a later platform opens. Or from scratch."
+        />
+        <div className="mt-5 grid grid-cols-4 gap-4">
           {CALL_GROUPS.map((group, index) => (
             <div
               key={group.kicker}
-              className="deck-rise border-t border-white/15 pt-5"
+              className="deck-rise min-w-0 border-t border-white/15 pt-5"
               style={{ animationDelay: `${0.15 + index * 0.1}s` }}
             >
-              <p className={cn("text-[11px] font-black uppercase tracking-[0.18em]", group.tone)}>
+              <p className={cn("text-[10px] font-black uppercase tracking-[0.12em]", group.tone)}>
                 {group.kicker}
               </p>
               <ul className="mt-4 space-y-1">
                 {group.names.map((name) => (
-                  <li key={name} className="text-[22px] font-black leading-tight tracking-tight">
+                  <li key={name} className="text-[20px] font-black leading-tight tracking-tight">
                     {name}
                   </li>
                 ))}

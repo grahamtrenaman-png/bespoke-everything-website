@@ -269,8 +269,8 @@ const CHANNELS: {
     share: "From Q2",
     bar: "from-amber-500 to-amber-300",
     body:
-      "One named offer per platform, backed by two case studies and a demonstrator app. Doug and Graham sell it with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
-    proof: "Demonstrators beat slideware. Every meeting starts with a working app.",
+      "Warm introductions. One offer, for the platform the first job sits on. Doug and Graham sell it with Chris in the room. No cold outbound: every note goes to someone who already knows the sender.",
+    proof: "The demonstrator and the case studies follow, once that job is something we can show.",
   },
 ];
 

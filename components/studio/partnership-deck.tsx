@@ -107,10 +107,6 @@ const PROPOSED: string[] = [
   "The studio’s year does not depend on jalipi. Dayforce and UKG are the work.",
 ];
 
-const OPEN_GRAHAM_QTC: string[] = [
-  "Graham’s stake in jalipi: how much, in what, vesting, and what happens if QTC sells it. Between Graham and QTC only. Not a TCN negotiation.",
-];
-
 const OPEN_PARTNERSHIP: string[] = [
   "The kickback: paid to the sales originator. That can be FXP, Bespoke Everything, or another TCN company. Rate not agreed.",
   "The heads of terms signed in principle before Graham starts. A draft is on the next slide.",
@@ -348,30 +344,14 @@ function TermsSlide() {
           </div>
           <div className="deck-rise rounded-2xl border border-amber-400/25 bg-amber-500/[0.07] px-5 py-4" style={{ animationDelay: "0.28s" }}>
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-200/80">Still to agree, with QTC</p>
-            <div className="mt-3 space-y-3">
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-amber-100/55">Graham ↔ QTC</p>
-                <ul className="mt-1.5 space-y-2.5">
-                  {OPEN_GRAHAM_QTC.map((line) => (
-                    <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
-                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-300" />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.16em] text-amber-100/55">Partnership / TCN</p>
-                <ul className="mt-1.5 space-y-2.5">
-                  {OPEN_PARTNERSHIP.map((line) => (
-                    <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
-                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-300" />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <ul className="mt-3 space-y-2.5">
+              {OPEN_PARTNERSHIP.map((line) => (
+                <li key={line} className="flex gap-2 text-[12px] leading-snug text-white/80">
+                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-amber-300" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -148,6 +148,7 @@ const DOUG: SeatSpec = {
     "Has long-standing relationships with vendor account teams.",
     "Trusted by account managers to take a stuck deal.",
     "Sells from relationships, not from cold lists.",
+    "Knows the industry, the projects, and the kinds of problems customers hit.",
   ],
   terms: [
     "Co-founder stake in Bespoke Everything, on the terms agreed when this was the ADP partnership. Vesting still to write down.",

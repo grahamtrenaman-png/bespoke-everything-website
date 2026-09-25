@@ -595,35 +595,37 @@ function CallIdeaSlide() {
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
-      <div className="relative mx-auto grid w-full max-w-5xl grid-cols-[1.05fr_1fr] items-center gap-14">
-        <div className="deck-rise">
+      {/* Top-align so a tall right column cannot centre-clip the left hero off-stage. */}
+      <div className="relative mx-auto mb-auto grid w-full max-w-5xl grid-cols-[1.05fr_1fr] items-start gap-12">
+        <div className="deck-rise min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
             For Chris
           </p>
-          <h2 className="mt-4 text-[3.2rem] font-black leading-[0.98] tracking-tight">
-            The customer
-            <br />
-            stops
+          <h2 className="mt-3 text-[3.4rem] font-black leading-[0.95] tracking-tight">
+            Bespoke is
             <br />
             <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-              compromising.
+              Back
             </span>
           </h2>
-          <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-white/65">
+          <p className="mt-4 max-w-sm text-[15px] font-semibold leading-snug tracking-tight text-white/90">
+            The customer stops compromising.
+          </p>
+          <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-white/65">
             We solve the problem the software would not. The project moves, and the customer gets what
             they actually wanted.
           </p>
         </div>
-        <div className="deck-rise" style={{ animationDelay: "0.2s" }}>
-          <ul className="space-y-5">
+        <div className="deck-rise min-w-0" style={{ animationDelay: "0.2s" }}>
+          <ul className="space-y-4">
             {beats.map(([n, line]) => (
-              <li key={n} className="flex items-baseline gap-4">
-                <span className="text-[13px] font-black tabular-nums text-teal-300/80">{n}</span>
-                <span className="text-[17px] font-semibold leading-snug tracking-tight text-white/90">{line}</span>
+              <li key={n} className="flex items-baseline gap-3">
+                <span className="shrink-0 text-[12px] font-black tabular-nums text-teal-300/80">{n}</span>
+                <span className="text-[15px] font-semibold leading-snug tracking-tight text-white/90">{line}</span>
               </li>
             ))}
           </ul>
-          <p className="mt-7 border-t border-white/10 pt-5 text-[14px] leading-relaxed text-white/60">
+          <p className="mt-5 border-t border-white/10 pt-4 text-[13px] leading-relaxed text-white/60">
             Not a bench. Not a product company. A studio that solves the problem, unblocks the project,
             and gives the customer exactly what they wanted.
           </p>
@@ -654,8 +656,8 @@ const CALL_GROUPS: { kicker: string; names: string[]; line: string; tone: string
   },
   {
     kicker: "From scratch",
-    names: ["Spreadsheet", "App", "New solution"],
-    line: "When nothing they already run will carry it. We build the thing itself: a working spreadsheet, a focused app, or a solution that stands alone.",
+    names: ["App", "New solution", "Spreadsheet"],
+    line: "When nothing they already run will carry it. We build the thing itself: a focused app, a solution that stands alone, or a working spreadsheet.",
     tone: "text-sky-200",
   },
 ];

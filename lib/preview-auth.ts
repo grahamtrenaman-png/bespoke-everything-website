@@ -2,12 +2,35 @@ export const PREVIEW_COOKIE = "be_preview";
 
 const SESSION_PREFIX = "bespoke-preview-v1";
 
-export function previewUsername() {
-  return process.env.PREVIEW_USERNAME ?? "graham";
-}
+type PreviewUser = { username: string; password: string };
 
-export function previewPassword() {
-  return process.env.PREVIEW_PASSWORD ?? "preview";
+/**
+ * Users allowed through the preview gate.
+ *
+ * PREVIEW_USERS: comma-separated "username:password" pairs. If unset, falls back
+ * to the single PREVIEW_USERNAME / PREVIEW_PASSWORD pair (defaults graham/preview).
+ */
+function previewUsers(): PreviewUser[] {
+  const list = process.env.PREVIEW_USERS;
+  if (list) {
+    const users = list
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean)
+      .map((entry) => {
+        const idx = entry.indexOf(":");
+        if (idx <= 0) return null;
+        return { username: entry.slice(0, idx), password: entry.slice(idx + 1) };
+      })
+      .filter((u): u is PreviewUser => u !== null && u.password.length > 0);
+    if (users.length > 0) return users;
+  }
+  return [
+    {
+      username: process.env.PREVIEW_USERNAME ?? "graham",
+      password: process.env.PREVIEW_PASSWORD ?? "preview",
+    },
+  ];
 }
 
 function timingSafeEqual(left: string, right: string) {
@@ -30,8 +53,8 @@ function toHex(buffer: ArrayBuffer) {
     .join("");
 }
 
-export async function previewSessionToken() {
-  const material = `${SESSION_PREFIX}:${previewUsername()}:${previewPassword()}`;
+async function sessionTokenFor(user: PreviewUser) {
+  const material = `${SESSION_PREFIX}:${user.username}:${user.password}`;
   const digest = await crypto.subtle.digest(
     "SHA-256",
     new TextEncoder().encode(material),
@@ -39,17 +62,32 @@ export async function previewSessionToken() {
   return toHex(digest);
 }
 
+/** Session token for a named user. Returns undefined if the user is not configured. */
+export async function previewSessionToken(username: string) {
+  const user = previewUsers().find((u) => u.username === username);
+  return user ? sessionTokenFor(user) : undefined;
+}
+
 export async function isValidPreviewSession(token: string | undefined) {
   if (!token) {
     return false;
   }
 
-  return timingSafeEqual(token, await previewSessionToken());
+  const tokens = await Promise.all(previewUsers().map(sessionTokenFor));
+  // Check every token so timing does not reveal which user matched.
+  let valid = false;
+  for (const candidate of tokens) {
+    if (timingSafeEqual(token, candidate)) valid = true;
+  }
+  return valid;
 }
 
 export function previewCredentialsMatch(username: string, password: string) {
-  return (
-    timingSafeEqual(username, previewUsername()) &&
-    timingSafeEqual(password, previewPassword())
-  );
+  let matched = false;
+  for (const user of previewUsers()) {
+    const u = timingSafeEqual(username, user.username);
+    const p = timingSafeEqual(password, user.password);
+    if (u && p) matched = true;
+  }
+  return matched;
 }

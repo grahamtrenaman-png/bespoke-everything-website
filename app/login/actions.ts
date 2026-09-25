@@ -25,8 +25,13 @@ export async function loginAction(
     return { error: "Invalid username or password." };
   }
 
+  const token = await previewSessionToken(username);
+  if (!token) {
+    return { error: "Invalid username or password." };
+  }
+
   const cookieStore = await cookies();
-  cookieStore.set(PREVIEW_COOKIE, await previewSessionToken(), {
+  cookieStore.set(PREVIEW_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

@@ -14,7 +14,6 @@ import {
   Blocks,
   ChevronLeft,
   ChevronRight,
-  Download,
   Handshake,
   Maximize2,
   Megaphone,
@@ -33,8 +32,6 @@ import {
   getNativeFullscreenElement,
   leaveNativeFullscreen,
   SlideStage,
-  STAGE_HEIGHT,
-  STAGE_WIDTH,
   unlockOrientation,
   useDeckBrowseLayout,
   useDeckSwipeNavigation,
@@ -1096,15 +1093,14 @@ export function StudioSetupDeck({ slides }: { slides: DeckSlide[] }) {
   }, [goNext, goPrev, goTo, toggleFullscreen, slides.length]);
 
   return (
-    <>
-      <div
-        ref={containerRef}
-        className={cn(
-          "relative h-dvh min-h-dvh w-full select-none overflow-hidden bg-neutral-950 print:hidden",
-          (fullscreenMode === "fallback" || isCompactBrowse) &&
-            "fixed inset-0 z-50 h-dvh w-full max-h-dvh",
-        )}
-      >
+    <div
+      ref={containerRef}
+      className={cn(
+        "relative h-dvh min-h-dvh w-full select-none overflow-hidden bg-neutral-950",
+        (fullscreenMode === "fallback" || isCompactBrowse) &&
+          "fixed inset-0 z-50 h-dvh w-full max-h-dvh",
+      )}
+    >
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-x-0 top-0 z-30 h-1 bg-white/10">
             <div
@@ -1138,17 +1134,6 @@ export function StudioSetupDeck({ slides }: { slides: DeckSlide[] }) {
             <span className="rounded-full border border-white/20 bg-black/30 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur">
               {current + 1} / {total}
             </span>
-            {!isCompactBrowse ? (
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="rounded-full border border-white/20 bg-black/30 p-2 text-white/90 backdrop-blur transition hover:bg-black/50"
-                aria-label="Save slides as PDF"
-                title="Save as PDF"
-              >
-                <Download className="h-4 w-4" />
-              </button>
-            ) : null}
             <button
               type="button"
               onClick={() => void toggleFullscreen()}
@@ -1230,15 +1215,6 @@ export function StudioSetupDeck({ slides }: { slides: DeckSlide[] }) {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="hidden print:block">
-        {slides.map((printSlide) => (
-          <div key={printSlide.id} className="break-after-page">
-            <div style={{ width: STAGE_WIDTH, height: STAGE_HEIGHT }}>{printSlide.node}</div>
-          </div>
-        ))}
-      </div>
-    </>
+    </div>
   );
 }

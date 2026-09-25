@@ -36,7 +36,7 @@ export function BespokeBrandedSlide({
         <BespokeDeckLogo />
         {strapline ? (
           <p
-            className="deck-rise mt-10 text-[2rem] font-black leading-tight tracking-tight text-amber-300"
+            className="deck-rise mt-10 text-[2rem] font-black leading-tight tracking-tight bg-gradient-to-r from-amber-400 via-sky-300 to-violet-300 bg-clip-text text-transparent"
             style={{ animationDelay: "0.12s" }}
           >
             {strapline}

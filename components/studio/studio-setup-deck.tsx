@@ -634,51 +634,67 @@ function CallIdeaSlide() {
 }
 
 function CallSummarySlide() {
-  const points: { label: string; title: string; body: string; tone: string }[] = [
+  const points: { n: string; label: string; title: string; body: string; tone: string; accent: string }[] = [
     {
-      label: "What",
-      title: "A studio.",
+      n: "01",
+      label: "The problem",
+      title: "We have seen every gap.",
       tone: "border-teal-400/25 bg-teal-500/[0.07]",
-      body: "We build the piece the customer’s software will not. Inside the platform they already run, beside it, or from scratch: an app, a new solution, or a spreadsheet. Fixed price, invoiced to the customer. Not a bench. Not a product company.",
+      accent: "text-teal-200",
+      body: "Twenty years inside workforce and retail systems. Every project has a piece the software will not do. We have scoped it, worked around it, and watched the customer learn to live with the compromise. We know exactly where it hurts, and what it costs.",
     },
     {
-      label: "How",
-      title: "Sit with the problem.",
+      n: "02",
+      label: "The change",
+      title: "AI changed what is possible.",
       tone: "border-emerald-400/25 bg-emerald-500/[0.07]",
-      body: "Understand what is stuck, turn it into options, and price a fixed-scope build. Graham builds the first jobs. A builder joins once there is pipeline. Support keeps the build alive after it ships.",
+      accent: "text-emerald-200",
+      body: "Not the software. The technology underneath it. What took a team months now takes an expert weeks. Building the exact thing, on the platform the customer already runs, is now cheaper than the workaround. The limit is no longer what the tool can do. It is knowing what to build.",
     },
     {
-      label: "Why",
-      title: "The software changed.",
+      n: "03",
+      label: "The studio",
+      title: "Experts, with a new tool.",
       tone: "border-amber-400/25 bg-amber-500/[0.07]",
-      body: "The old answer was a workaround, or a compromise the customer learned to live with. The platforms have opened up. If they need it, we can build it, and the project unblocks.",
+      accent: "text-amber-200",
+      body: "The people who understand the problem, now able to build exactly what it needs. Inside the platform, beside it, or from scratch. Fixed price, invoiced to the customer. No compromise. Not a bench. Not a product company.",
     },
   ];
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows />
       <div className="relative mx-auto w-full max-w-6xl">
-        <SlideHeading
-          kicker="Bespoke Everything"
-          title="What it is."
-          highlight="How, and why."
-          lede="The studio, before the platforms. What we build, how the work gets done, and why it is possible now."
-        />
-        <div className="mt-8 grid grid-cols-3 gap-4">
+        <div className="deck-rise text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">Bespoke Everything</p>
+          <h2 className="mt-2 text-[2.6rem] font-black leading-[1.05] tracking-tight">
+            Twenty years of knowing the problem.{" "}
+            <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
+              A new way to solve it.
+            </span>
+          </h2>
+          <p className="mx-auto mt-3 max-w-3xl text-[14px] leading-relaxed text-white/65">
+            The problems have not changed. The technology has, completely. Experts who know the first can
+            now use the second to give the customer exactly what they need.
+          </p>
+        </div>
+        <div className="mt-7 grid grid-cols-3 gap-4">
           {points.map((point, index) => (
             <div
-              key={point.label}
+              key={point.n}
               className={cn("deck-rise rounded-2xl border px-5 py-5", point.tone)}
               style={{ animationDelay: `${0.15 + index * 0.1}s` }}
             >
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">{point.label}</p>
-              <h3 className="mt-2 text-[22px] font-black leading-tight tracking-tight">{point.title}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-white/75">{point.body}</p>
+              <div className="flex items-baseline gap-2.5">
+                <span className={cn("text-[13px] font-black tabular-nums", point.accent)}>{point.n}</span>
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">{point.label}</p>
+              </div>
+              <h3 className="mt-2 text-[21px] font-black leading-tight tracking-tight">{point.title}</h3>
+              <p className="mt-3 text-[13.5px] leading-relaxed text-white/75">{point.body}</p>
             </div>
           ))}
         </div>
-        <p className="deck-rise mt-6 text-center text-[13px] leading-relaxed text-white/55" style={{ animationDelay: "0.5s" }}>
-          Where that work sits comes next: inside a platform, beside it, when a later one opens, or from scratch.
+        <p className="deck-rise mt-5 text-center text-[14px] font-semibold leading-relaxed text-white/70" style={{ animationDelay: "0.5s" }}>
+          Bespoke used to cost too much. That is what changed.
         </p>
       </div>
     </BespokeBrandedSlide>

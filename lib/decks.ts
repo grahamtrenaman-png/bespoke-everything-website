@@ -14,7 +14,7 @@ export const STUDIO_DECKS: DeckEntry[] = [
     href: "/studio/call",
     kicker: "For TCN · the studio",
     title: "The studio.",
-    body: "The idea, where we build, each vendor and how we show up, who runs it, how work arrives, and the year from January.",
+    body: "The idea, what the studio is, where we build, each vendor and how we show up, who runs it, how work arrives, and the year from January.",
   },
   {
     href: "/studio/seats",

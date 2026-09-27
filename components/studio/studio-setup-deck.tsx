@@ -633,6 +633,58 @@ function CallIdeaSlide() {
   );
 }
 
+function CallSummarySlide() {
+  const points: { label: string; title: string; body: string; tone: string }[] = [
+    {
+      label: "What",
+      title: "A studio.",
+      tone: "border-teal-400/25 bg-teal-500/[0.07]",
+      body: "We build the piece the customer’s software will not. Inside the platform they already run, beside it, or from scratch: an app, a new solution, or a spreadsheet. Fixed price, invoiced to the customer. Not a bench. Not a product company.",
+    },
+    {
+      label: "How",
+      title: "Sit with the problem.",
+      tone: "border-emerald-400/25 bg-emerald-500/[0.07]",
+      body: "Understand what is stuck, turn it into options, and price a fixed-scope build. Graham builds the first jobs. A builder joins once there is pipeline. Support keeps the build alive after it ships.",
+    },
+    {
+      label: "Why",
+      title: "The software changed.",
+      tone: "border-amber-400/25 bg-amber-500/[0.07]",
+      body: "The old answer was a workaround, or a compromise the customer learned to live with. The platforms have opened up. If they need it, we can build it, and the project unblocks.",
+    },
+  ];
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-6xl">
+        <SlideHeading
+          kicker="Bespoke Everything"
+          title="What it is."
+          highlight="How, and why."
+          lede="The studio, before the platforms. What we build, how the work gets done, and why it is possible now."
+        />
+        <div className="mt-8 grid grid-cols-3 gap-4">
+          {points.map((point, index) => (
+            <div
+              key={point.label}
+              className={cn("deck-rise rounded-2xl border px-5 py-5", point.tone)}
+              style={{ animationDelay: `${0.15 + index * 0.1}s` }}
+            >
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/45">{point.label}</p>
+              <h3 className="mt-2 text-[22px] font-black leading-tight tracking-tight">{point.title}</h3>
+              <p className="mt-3 text-[14px] leading-relaxed text-white/75">{point.body}</p>
+            </div>
+          ))}
+        </div>
+        <p className="deck-rise mt-6 text-center text-[13px] leading-relaxed text-white/55" style={{ animationDelay: "0.5s" }}>
+          Where that work sits comes next: inside a platform, beside it, when a later one opens, or from scratch.
+        </p>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
 const CALL_GROUPS: { kicker: string; names: string[]; line: string; tone: string }[] = [
   {
     kicker: "Inside the product",
@@ -946,6 +998,12 @@ function buildCallSlides(): DeckSlide[] {
       section: "The idea",
       gradient: "from-teal-500 via-emerald-500 to-amber-500",
       node: <CallIdeaSlide />,
+    },
+    {
+      id: "call-summary",
+      section: "The studio",
+      gradient: "from-teal-400 via-emerald-400 to-amber-400",
+      node: <CallSummarySlide />,
     },
     {
       id: "call-platforms",

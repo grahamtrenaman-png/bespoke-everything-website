@@ -603,12 +603,10 @@ function CallIdeaSlide() {
             For Chris
           </p>
           <h2 className="mt-4 text-[3.4rem] font-black leading-[0.98] tracking-tight">
-            The customer
-            <br />
-            stops
+            If they need it,
             <br />
             <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent">
-              compromising.
+              we can build it.
             </span>
           </h2>
           <p className="mt-5 max-w-md text-[16px] leading-relaxed text-white/65">

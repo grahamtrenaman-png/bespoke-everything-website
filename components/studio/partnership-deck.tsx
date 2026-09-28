@@ -153,6 +153,12 @@ function TitleSlide() {
           first concrete piece to write down: QTC harden it, Graham keeps a stake agreed with QTC, FXP
           implements, Bespoke Everything extends. This is the shape to agree before January.
         </p>
+        <p
+          className="deck-rise mx-auto mt-6 inline-block rounded-full border border-amber-300/30 bg-amber-500/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200/90"
+          style={{ animationDelay: "1.05s" }}
+        >
+          Draft · Graham’s thinking, not yet discussed with QTC
+        </p>
       </div>
     </div>
   );

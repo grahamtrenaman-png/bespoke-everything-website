@@ -7,7 +7,8 @@ export type DeckEntry = {
 
 /**
  * Decks shared with Chris, Doug and the wider TCN circle.
- * Add new decks here; each needs a matching route under /studio/*.
+ * Add new decks here. Studio decks have a route under /studio/*. The jalipi
+ * customer deck is served by the jalipi app under /jalipi/* (lib/jalipi-zone.ts).
  */
 export const STUDIO_DECKS: DeckEntry[] = [
   {
@@ -33,5 +34,11 @@ export const STUDIO_DECKS: DeckEntry[] = [
     kicker: "For QTC and TCN",
     title: "The partnership.",
     body: "Draft: Graham’s thinking, not yet discussed with QTC. A working partnership between QuickThink Cloud and TCN. Doors both ways, jalipi as the first concrete piece, who does what, what is proposed and what is still to agree, and the handover before January.",
+  },
+  {
+    href: "/jalipi/why-choose",
+    kicker: "For customers · jalipi",
+    title: "Why choose jalipi.",
+    body: "Where software is going, the four things that set jalipi apart with a slide on each, and who builds and delivers it. Nine slides.",
   },
 ];

@@ -1,0 +1,1118 @@
+"use client";
+
+import { useMemo, type ReactNode } from "react";
+import {
+  ArrowRight,
+  Blocks,
+  CalendarClock,
+  CheckCircle2,
+  ClipboardList,
+  Clock,
+  Copy,
+  Cpu,
+  Database,
+  FileText,
+  FlaskConical,
+  Gauge,
+  GitBranch,
+  Globe,
+  History,
+  Layers,
+  Lock,
+  Plug,
+  Puzzle,
+  Route,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  Wand2,
+  Wrench,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+import BespokeEverythingLogo from "@/app/components/BespokeEverythingLogo";
+import { JalipiWordmark } from "@/components/studio/jalipi-wordmark";
+import { PartyLogo } from "@/components/studio/party-logo";
+import { BespokeBrandedSlide, JalipiBrandedSlide } from "@/components/studio/slide-chrome";
+import { StudioSetupDeck, type DeckSlide } from "@/components/studio/studio-setup-deck";
+import { cn } from "@/lib/cn";
+
+const GRADIENT_TEXT =
+  "bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300 bg-clip-text text-transparent";
+
+// ---------------------------------------------------------------------------
+// Shared pieces
+// ---------------------------------------------------------------------------
+
+function Glows({ flip = false }: { flip?: boolean }) {
+  return (
+    <>
+      <div
+        className={cn(
+          "deck-drift pointer-events-none absolute top-1/4 h-[32rem] w-[32rem] rounded-full blur-3xl",
+          flip ? "-right-40 bg-amber-500/12" : "-left-40 bg-teal-600/15",
+        )}
+      />
+      <div
+        className={cn(
+          "deck-drift pointer-events-none absolute bottom-1/5 h-[32rem] w-[32rem] rounded-full blur-3xl",
+          flip ? "-left-40 bg-teal-600/15" : "-right-40 bg-amber-500/12",
+        )}
+        style={{ animationDelay: "-7s" }}
+      />
+    </>
+  );
+}
+
+function SlideHeading({
+  kicker,
+  title,
+  highlight,
+  lede,
+}: {
+  kicker: string;
+  title: string;
+  highlight: string;
+  lede?: string;
+}) {
+  return (
+    <div className="deck-rise text-center">
+      <p className="text-caption font-semibold uppercase tracking-[0.35em] text-white/50">{kicker}</p>
+      <h2 className="mt-1.5 text-[2rem] font-black leading-tight tracking-tight">
+        {title} <span className={GRADIENT_TEXT}>{highlight}</span>
+      </h2>
+      {lede ? (
+        <p className="mx-auto mt-1.5 max-w-3xl text-body leading-relaxed text-white/65">{lede}</p>
+      ) : null}
+    </div>
+  );
+}
+
+function Strip({ children, delay, warm = false }: { children: ReactNode; delay: string; warm?: boolean }) {
+  return (
+    <div
+      className={cn(
+        "deck-rise rounded-2xl border px-5 py-2.5 text-center",
+        warm
+          ? "border-amber-400/30 bg-gradient-to-r from-amber-500/15 via-teal-500/10 to-emerald-500/15"
+          : "border-white/10 bg-gradient-to-r from-teal-500/10 via-emerald-500/10 to-amber-500/10",
+      )}
+      style={{ animationDelay: delay }}
+    >
+      <p className="mx-auto max-w-4xl text-body leading-relaxed text-white/85">{children}</p>
+    </div>
+  );
+}
+
+function IconChip({ icon: Icon, tone = "teal" }: { icon: LucideIcon; tone?: "teal" | "amber" }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-white",
+        tone === "teal"
+          ? "bg-gradient-to-br from-teal-500 to-emerald-500"
+          : "bg-gradient-to-br from-amber-400 to-orange-500 text-neutral-950",
+      )}
+    >
+      <Icon className="h-4 w-4" />
+    </span>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 1. Cover
+// ---------------------------------------------------------------------------
+
+const COVER_PROMISES: { icon: LucideIcon; title: string; body: string }[] = [
+  { icon: Puzzle, title: "Fits how you work", body: "Configured and extended to your operation." },
+  { icon: GitBranch, title: "Changes safely", body: "Branched, tested and promoted with evidence." },
+  { icon: Clock, title: "Live in months", body: "Configuration and tests generated for you." },
+];
+
+function CoverSlide() {
+  return (
+    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-neutral-950 px-8 text-white">
+      <div className="deck-drift pointer-events-none absolute -left-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-teal-600/20 blur-3xl" />
+      <div
+        className="deck-drift pointer-events-none absolute -right-40 bottom-1/5 h-[34rem] w-[34rem] rounded-full bg-amber-600/15 blur-3xl"
+        style={{ animationDelay: "-7s" }}
+      />
+      <div className="relative flex max-w-5xl flex-col items-center text-center">
+        <div className="deck-rise" style={{ animationDelay: "0.15s" }}>
+          <JalipiWordmark className="text-6xl text-white" />
+        </div>
+        <p
+          className="deck-rise mt-6 text-xs font-semibold uppercase tracking-[0.35em] text-white/50"
+          style={{ animationDelay: "0.35s" }}
+        >
+          Why choose jalipi
+        </p>
+        <h1
+          className="deck-rise mt-4 text-[3.1rem] font-black leading-tight tracking-tight"
+          style={{ animationDelay: "0.5s" }}
+        >
+          Workforce management that fits you.
+          <br />
+          <span className={GRADIENT_TEXT}>Not the other way round.</span>
+        </h1>
+        <p
+          className="deck-rise mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/70"
+          style={{ animationDelay: "0.7s" }}
+        >
+          The core every frontline operation needs, a studio that builds whatever makes yours
+          different, and a platform that manages change the way modern software teams do.
+        </p>
+
+        <div className="mt-8 grid w-full max-w-3xl grid-cols-3 gap-3">
+          {COVER_PROMISES.map((item, index) => (
+            <div
+              key={item.title}
+              className="deck-rise flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left backdrop-blur"
+              style={{ animationDelay: `${0.9 + index * 0.1}s` }}
+            >
+              <IconChip icon={item.icon} />
+              <div>
+                <p className="text-body font-black tracking-tight">{item.title}</p>
+                <p className="mt-0.5 text-caption leading-snug text-white/65">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 3. The future of software
+// ---------------------------------------------------------------------------
+
+const SHIFTS: { icon: LucideIcon; was: string; now: string; jalipi: string }[] = [
+  {
+    icon: Layers,
+    was: "One product, the same for everyone.",
+    now: "A shared core, with what is yours on top.",
+    jalipi: "Five layers for bespoke, from configuration to your own screens. None of them a fork.",
+  },
+  {
+    icon: Sparkles,
+    was: "Bespoke cost too much to be worth it.",
+    now: "AI has collapsed the cost of building.",
+    jalipi: "Extensions in days, not release cycles. Priced up front, not discovered later.",
+  },
+  {
+    icon: Route,
+    was: "The vendor's roadmap decided what you got.",
+    now: "Your backlog decides.",
+    jalipi: "What you need next is built for you first, and graduates into the core once others need it.",
+  },
+  {
+    icon: Cpu,
+    was: "AI bolted on as a black box.",
+    now: "AI builds the software. The software stays predictable.",
+    jalipi: "Rule-based engines you can inspect and test. No model in your pay run, no model bill.",
+  },
+];
+
+function FutureSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="Where software is going"
+          title="Rigid software is over."
+          highlight="So is compromising."
+          lede="For twenty years, SaaS meant accepting the same product as everyone else and bending your operation around it. That was the price of software when building was expensive. It is not any more."
+        />
+
+        <div className="mt-4 grid grid-cols-4 gap-3">
+          {SHIFTS.map((shift, index) => {
+            const Icon = shift.icon;
+            return (
+              <div
+                key={shift.was}
+                className="deck-rise flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur"
+                style={{ animationDelay: `${0.25 + index * 0.1}s` }}
+              >
+                <div className="flex-1 px-4 pt-3.5">
+                  <IconChip icon={Icon} />
+                  <p className="mt-3 text-caption font-bold uppercase tracking-[0.18em] text-white/35">Was</p>
+                  <p className="mt-0.5 text-body leading-snug text-white/50 line-through decoration-white/25">
+                    {shift.was}
+                  </p>
+                  <p className="mt-2.5 text-caption font-bold uppercase tracking-[0.18em] text-amber-300/80">Now</p>
+                  <p className="mt-0.5 text-sm font-bold leading-snug text-white">{shift.now}</p>
+                </div>
+                <div className="mt-3 min-h-[72px] border-t border-teal-400/25 bg-teal-500/[0.07] px-4 py-3">
+                  <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">In jalipi</p>
+                  <p className="mt-1 text-caption leading-snug text-white/80">{shift.jalipi}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4">
+          <Strip delay="0.75s">
+            <span className="font-bold text-white">The next generation will not be the biggest suites.</span>{" "}
+            It will be the platforms that give every customer exactly what they need, and stay safe to
+            change while they do it.
+          </Strip>
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 4. Completely yours, with Bespoke Everything
+// ---------------------------------------------------------------------------
+
+const ROUTE: { icon: LucideIcon; who: string; step: string; body: string }[] = [
+  {
+    icon: Users,
+    who: "You",
+    step: "Describe it",
+    body: "A premium your agreement pays, an approval your regions need, a report your board wants.",
+  },
+  {
+    icon: Wrench,
+    who: "Bespoke Everything",
+    step: "The studio builds it",
+    body: "As a pack for your tenant: rules, screens, workflows or integrations. Days, not a release cycle. Priced before you sign.",
+  },
+  {
+    icon: FlaskConical,
+    who: "Your tenant",
+    step: "Test it on your data",
+    body: "Installed on a branch, proved against your data, switched on per site, role or business unit.",
+  },
+  {
+    icon: ShieldCheck,
+    who: "Every release",
+    step: "It moves with the core",
+    body: "No fork, no frozen version. The core upgrades underneath; your specifics stay yours through every release.",
+  },
+];
+
+const LAYERS: { level: string; name: string; body: string }[] = [
+  { level: "4", name: "Your screens and logic", body: "Custom UI and calculations at declared points in the product." },
+  { level: "3", name: "Integrations and products", body: "APIs, webhooks, importers, or a separate product that plugs in." },
+  { level: "2", name: "Capability packs", body: "Versioned packs. Even your own alternate engine, behind a stable contract." },
+  { level: "1", name: "Configuration", body: "Branchable policies, catalogues and organisation structure." },
+  { level: "0", name: "The jalipi core", body: "Shared by every customer. Never forked." },
+];
+
+function CustomisationSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl">
+        <SlideHeading
+          kicker="Extensions without a fork"
+          title="Your way of working is a requirement,"
+          highlight="not a change request."
+          lede="jalipi was designed from the first line to be extended. Bespoke plugs into fixed points in the shared product, the way an app survives a phone update, so it upgrades with every release. Bespoke Everything is the studio built alongside the platform to do exactly this work."
+        />
+
+        <div className="mt-4 grid grid-cols-[1.35fr_1fr] gap-4">
+          <div className="grid grid-cols-2 gap-2.5">
+            {ROUTE.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={step.step}
+                  className="deck-rise relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 backdrop-blur"
+                  style={{ animationDelay: `${0.25 + index * 0.1}s` }}
+                >
+                  <span className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400" />
+                  <div className="flex items-center gap-2.5">
+                    <IconChip icon={Icon} tone="amber" />
+                    <div>
+                      <p className="text-caption font-bold uppercase tracking-[0.16em] text-amber-300">
+                        0{index + 1} · {step.who}
+                      </p>
+                      <p className="text-sm font-black tracking-tight text-white">{step.step}</p>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-caption leading-snug text-white/70">{step.body}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div
+            className="deck-rise rounded-2xl border border-teal-400/25 bg-teal-500/[0.05] p-3.5"
+            style={{ animationDelay: "0.55s" }}
+          >
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">
+              Where bespoke plugs in
+            </p>
+            <div className="mt-2 space-y-1.5">
+              {LAYERS.map((layer) => (
+                <div
+                  key={layer.level}
+                  className={cn(
+                    "flex items-start gap-2.5 rounded-lg border px-2.5 py-1.5",
+                    layer.level === "0"
+                      ? "border-teal-400/40 bg-teal-500/15"
+                      : "border-white/10 bg-white/[0.04]",
+                  )}
+                >
+                  <span className="mt-px w-4 shrink-0 text-body font-black text-teal-300">{layer.level}</span>
+                  <div>
+                    <p className="text-body font-bold leading-tight text-white">{layer.name}</p>
+                    <p className="text-caption leading-snug text-white/60">{layer.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-3.5">
+          <Strip delay="0.8s" warm>
+            <span className="font-bold text-white">Bespoke never gets a no.</span> It is placed in the
+            layer where it cannot become a fork. And when enough customers need the same thing, it
+            moves into the core for everyone.
+          </Strip>
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 5. What sets it apart
+// ---------------------------------------------------------------------------
+
+const USPS: { icon: LucideIcon; kicker: string; title: string; body: string; means: string }[] = [
+  {
+    icon: Wand2,
+    kicker: "Implementation tools",
+    title: "Months of consultancy, done by the platform.",
+    body: "Guided discovery captures your requirements in your own words. The moment discovery is complete, the platform builds the whole solution from those answers: configuration, documents, decks and tests. Instantly, automatically, with no one keying anything in.",
+    means: "A programme measured in weeks, and a working solution on the day discovery ends.",
+  },
+  {
+    icon: GitBranch,
+    kicker: "Branching",
+    title: "One tenant. Every market, stage and team at once.",
+    body: "Markets build in parallel on their own branches, each with its own access, rules and reporting. Proof of concept, build, test and live are branches too, so what you tested is exactly what goes live. Every change is instant, auditable and reversible.",
+    means: "No cutovers, no migrating configuration between environments, and no re-testing what you already signed off.",
+  },
+  {
+    icon: Database,
+    kicker: "Data sets",
+    title: "Test the whole system in one place, on real data.",
+    body: "Copy live into a data set in a click: people, schedules, punches and demand. Run a forecast or a pay run against it, as many times as you like, with as many copies as you need. No sandbox estate, no database copies, no refresh requests, no run limits.",
+    means: "Test as much as you want. One environment to pay for, always in step with live.",
+  },
+  {
+    icon: Puzzle,
+    kicker: "Extensions without a fork",
+    title: "Bespoke is encouraged, not tolerated.",
+    body: "jalipi was designed from the first line to be extended. Bespoke plugs into fixed points in the shared product, the way an app survives a phone update, so it upgrades with every release. Bespoke Everything, the studio behind the platform, builds whatever makes your operation different in days, priced before you sign.",
+    means: "Ask for anything. It is built for you, it stays yours, and it never holds you back.",
+  },
+];
+
+function UspSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="What sets it apart"
+          title="Four things no other WFM platform"
+          highlight="does like this."
+        />
+
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {USPS.map((usp, index) => {
+            const Icon = usp.icon;
+            return (
+              <div
+                key={usp.kicker}
+                className="deck-rise flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur"
+                style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <IconChip icon={Icon} />
+                  <div>
+                    <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">{usp.kicker}</p>
+                    <p className="text-sm font-black leading-tight tracking-tight text-white">{usp.title}</p>
+                  </div>
+                </div>
+                <p className="mt-2 flex-1 text-body leading-snug text-white/70">{usp.body}</p>
+                <p className="mt-2 border-t border-white/10 pt-2 text-body leading-snug text-white/90">
+                  <span className="font-bold text-amber-300">For you: </span>
+                  {usp.means}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-3">
+          <Strip delay="0.7s">
+            <span className="font-bold text-white">Also worth knowing.</span> Configuration you can read and
+            change yourselves, with a field-level history of who changed what and why. The reason behind every
+            calculated value, on screen. No AI model in your pay run, and no per-run credit meter.
+          </Strip>
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 6. Branching
+// ---------------------------------------------------------------------------
+
+const BRANCH_POINTS: { icon: LucideIcon; title: string; body: string }[] = [
+  {
+    icon: Globe,
+    title: "Markets build in parallel",
+    body: "Each market works on its own branch, with its own access, rules and reporting. One team's work never disturbs another's.",
+  },
+  {
+    icon: Route,
+    title: "Stages are branches, not environments",
+    body: "Proof of concept, build, test and live are branches in one tenant. Promotion moves the configuration instantly. Nothing to re-key, no cutover to plan.",
+  },
+  {
+    icon: History,
+    title: "Every change is on the record",
+    body: "Field-level history in plain language: who changed what, when and why. Checkpoint and roll back at any point.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Promote with guards",
+    body: "Blocked if live has moved since the branch was taken, or if tests are not signed off. No silent overwrites.",
+  },
+];
+
+function PointList({ points, delay = 0.4 }: { points: typeof BRANCH_POINTS; delay?: number }) {
+  return (
+    <div className="grid grid-cols-1 gap-2">
+      {points.map((point, index) => {
+        const Icon = point.icon;
+        return (
+          <div
+            key={point.title}
+            className="deck-rise flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5"
+            style={{ animationDelay: `${delay + index * 0.1}s` }}
+          >
+            <IconChip icon={Icon} />
+            <div>
+              <p className="text-body font-bold leading-tight text-white">{point.title}</p>
+              <p className="mt-0.5 text-caption leading-snug text-white/60">{point.body}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function BranchingSlide() {
+  const nodeLabel = { fill: "rgba(255,255,255,0.65)", fontSize: 11.5, textAnchor: "middle" as const };
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="Branching"
+          title="One tenant. Every market, stage and team"
+          highlight="building at once."
+          lede="Branches manage change the way modern software teams do. Each market or project stage gets its own branch of the configuration, with its own access, rules and reporting. Every change is instant, fully auditable and reversible."
+        />
+
+        <div className="mt-3 grid grid-cols-[1.25fr_1fr] items-center gap-5">
+          <div className="deck-rise" style={{ animationDelay: "0.25s" }}>
+            <svg
+              viewBox="0 0 640 200"
+              className="w-full"
+              role="img"
+              aria-label="Two market branches leave live at the same time, are built and tested in parallel, and each promotes back to live when its tests are signed off"
+            >
+              <defs>
+                <linearGradient id="whyBranchTeal" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#2dd4bf" />
+                  <stop offset="100%" stopColor="#fbbf24" />
+                </linearGradient>
+                <linearGradient id="whyBranchSky" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#fbbf24" />
+                </linearGradient>
+              </defs>
+              <line x1="20" y1="100" x2="620" y2="100" stroke="rgba(255,255,255,0.28)" strokeWidth="3" strokeLinecap="round" />
+              <text x="20" y="90" fill="rgba(255,255,255,0.7)" fontSize="12" fontWeight="700" letterSpacing="2">
+                LIVE
+              </text>
+              <circle cx="80" cy="100" r="7" fill="#0a0a0a" stroke="rgba(255,255,255,0.6)" strokeWidth="2.5" />
+
+              <path d="M 80 100 C 110 100 110 40 140 40 L 300 40 C 330 40 330 100 360 100" fill="none" stroke="url(#whyBranchTeal)" strokeWidth="3.5" strokeLinecap="round" />
+              <text x="145" y="60" fill="#5eead4" fontSize="12" fontWeight="600">UK · pay and leave rules</text>
+              <circle cx="210" cy="40" r="7" fill="#2dd4bf" />
+              <text x="210" y="22" {...nodeLabel}>Build</text>
+              <circle cx="285" cy="40" r="7" fill="#34d399" />
+              <text x="285" y="22" {...nodeLabel}>Tests signed off</text>
+              <circle cx="360" cy="100" r="9" fill="#fbbf24">
+                <animate attributeName="r" values="9;11;9" dur="2.5s" repeatCount="indefinite" />
+              </circle>
+              <text x="374" y="122" fill="#fcd34d" fontSize="12" fontWeight="700">Promote</text>
+
+              <path d="M 80 100 C 110 100 110 160 140 160 L 440 160 C 470 160 470 100 500 100" fill="none" stroke="url(#whyBranchSky)" strokeWidth="3.5" strokeLinecap="round" />
+              <text x="145" y="148" fill="#7dd3fc" fontSize="12" fontWeight="600">France · pay and leave rules</text>
+              <circle cx="240" cy="160" r="7" fill="#38bdf8" />
+              <text x="240" y="186" {...nodeLabel}>Build</text>
+              <circle cx="370" cy="160" r="7" fill="#34d399" />
+              <text x="370" y="186" {...nodeLabel}>Tests signed off</text>
+              <circle cx="500" cy="100" r="9" fill="#fbbf24">
+                <animate attributeName="r" values="9;11;9" dur="2.5s" repeatCount="indefinite" begin="1.2s" />
+              </circle>
+              <text x="514" y="122" fill="#fcd34d" fontSize="12" fontWeight="700">Promote</text>
+            </svg>
+            <p className="mt-1 text-center text-caption text-white/60">
+              Two markets configured at the same time, in one tenant. Each goes live when its own tests are
+              signed off.{" "}
+              <span className="font-semibold text-white/85">No environments, no re-keying, no cutover weekend.</span>
+            </p>
+          </div>
+
+          <PointList points={BRANCH_POINTS} />
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 7. Data sets
+// ---------------------------------------------------------------------------
+
+const DATASET_POINTS: { icon: LucideIcon; title: string; body: string }[] = [
+  {
+    icon: Server,
+    title: "One environment, not an estate",
+    body: "Live, a Sandbox and a dedicated set for every test branch all sit in your one tenant. Nothing to provision, refresh or keep in step.",
+  },
+  {
+    icon: Copy,
+    title: "Real data without database copies",
+    body: "Clone from Live in a click and run a forecast, a schedule or a pay run against the copy. No DBA, no refresh request, no masking project.",
+  },
+  {
+    icon: Lock,
+    title: "Live is protected",
+    body: "A test never writes to Live. Promotion moves rules, never operational data. The experiment stays in its own world.",
+  },
+  {
+    icon: Gauge,
+    title: "Answers before anyone is affected",
+    body: "Change a pay rule on a branch, run it against last January and see the cost. Then promote it, or throw it away.",
+  },
+];
+
+const DATASET_FLOW: { kicker: string; title: string; body: string; tone: "live" | "copy" | "run" | "result" }[] = [
+  {
+    kicker: "Live data set",
+    title: "Your operation as it is",
+    body: "People, schedules, punches, demand and pay. Protected: never written by a test.",
+    tone: "live",
+  },
+  {
+    kicker: "Clone in a click",
+    title: "Copy of last January",
+    body: "Your busiest real month, in its own data set. Seconds, not a change ticket.",
+    tone: "copy",
+  },
+  {
+    kicker: "Run against it",
+    title: "Forecast · Schedule · Pay run",
+    body: "The real engines, on the real month, with the rules from your branch.",
+    tone: "run",
+  },
+  {
+    kicker: "Result",
+    title: "The cost is known before go-live",
+    body: "Overtime after 38 hours instead of 40: what it would have cost, line by line.",
+    tone: "result",
+  },
+];
+
+const FLOW_TONES: Record<(typeof DATASET_FLOW)[number]["tone"], string> = {
+  live: "border-white/20 bg-white/[0.06]",
+  copy: "border-sky-400/40 bg-sky-500/10",
+  run: "border-teal-400/40 bg-teal-500/10",
+  result: "border-amber-400/50 bg-amber-500/10",
+};
+
+function DataSetsSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="Data sets"
+          title="Test the whole system in one place,"
+          highlight="on real data."
+          lede="Branches version your rules. Data sets version your operational world. Together they replace the sandbox, UAT and pre-production estate that most programmes pay for and struggle to keep in step."
+        />
+
+        <div className="mt-3 grid grid-cols-[1.25fr_1fr] items-center gap-4">
+          <div className="deck-rise grid grid-cols-2 gap-2" style={{ animationDelay: "0.25s" }}>
+            {DATASET_FLOW.map((step, index) => (
+              <div key={step.kicker} className={cn("flex flex-col rounded-2xl border p-3.5", FLOW_TONES[step.tone])}>
+                <p
+                  className={cn(
+                    "text-caption font-bold uppercase tracking-[0.16em]",
+                    step.tone === "result" ? "text-amber-300" : step.tone === "live" ? "text-white/50" : "text-teal-300",
+                  )}
+                >
+                  0{index + 1} · {step.kicker}
+                </p>
+                <p className="mt-1.5 text-sm font-black leading-tight text-white">{step.title}</p>
+                <p className="mt-1.5 text-caption leading-snug text-white/65">{step.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <PointList points={DATASET_POINTS} />
+        </div>
+
+        <div className="mt-3">
+          <Strip delay="0.8s">
+            <span className="font-bold text-white">One environment to pay for,</span> and it is always in
+            step with live, because it is live, copied when you need it.
+          </Strip>
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 5. Implementation tools
+// ---------------------------------------------------------------------------
+
+const PIPELINE: { icon: LucideIcon; title: string; body: string }[] = [
+  {
+    icon: ClipboardList,
+    title: "Guided discovery",
+    body: "Business users answer guided question sets in their own words. Every answer becomes a structured, numbered requirement.",
+  },
+  {
+    icon: Wand2,
+    title: "Solution built instantly",
+    body: "The platform turns the requirements into a working configuration branch automatically, the moment discovery is complete. Reviewed with you on screen, not keyed in from a document.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Tests created and run",
+    body: "Test scripts and data are generated from the same requirements and run against the real pay and scheduling engines.",
+  },
+  {
+    icon: Users,
+    title: "UAT in the product",
+    body: "Testers get logins and a guided runner. Evidence, defects, retests and sign-off are captured in the product.",
+  },
+];
+
+const DOCS: string[] = [
+  "Solution and requirements summaries generated from the configuration itself",
+  "Executive decks for stakeholders, on demand",
+  "Regenerated when the configuration changes, so they are never out of date",
+];
+
+function ImplementationSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="Implementation tools"
+          title="From discovery to live,"
+          highlight="the heavy lifting is automated."
+          lede="Requirements, configuration and tests are the same thing in jalipi. What is said in discovery becomes the configuration, the configuration writes its own documents and tests, and nothing is re-keyed along the way."
+        />
+
+        <div className="mt-4 flex items-stretch gap-2">
+          {PIPELINE.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <div key={step.title} className="flex flex-1 items-center gap-2">
+                <div
+                  className="deck-rise h-full flex-1 rounded-2xl border border-white/10 bg-white/[0.04] p-3.5"
+                  style={{ animationDelay: `${0.25 + index * 0.1}s` }}
+                >
+                  <Icon className="h-4 w-4 text-teal-300" />
+                  <p className="mt-2 text-sm font-bold leading-snug text-white">{step.title}</p>
+                  <p className="mt-1 text-caption leading-snug text-white/60">{step.body}</p>
+                </div>
+                <ArrowRight className="h-4 w-4 shrink-0 text-white/30" />
+              </div>
+            );
+          })}
+          <div
+            className="deck-rise w-44 shrink-0 rounded-2xl border-2 border-amber-400/60 bg-amber-500/10 p-3.5 text-center"
+            style={{ animationDelay: "0.7s" }}
+          >
+            <ShieldCheck className="mx-auto h-5 w-5 text-amber-300" />
+            <p className="mt-2 text-sm font-bold text-amber-200">Go-live on proof</p>
+            <p className="mt-1 text-caption leading-snug text-white/65">
+              Promote to live warns, or blocks, without signed UAT.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-3.5 grid grid-cols-[1.4fr_1fr] gap-3">
+          <div
+            className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3"
+            style={{ animationDelay: "0.85s" }}
+          >
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-white/45">
+              A typical programme against jalipi
+            </p>
+            <div className="mt-2 space-y-1.5">
+              <div className="flex items-center gap-3">
+                <span className="w-14 shrink-0 text-caption text-white/55">Typical</span>
+                <div className="h-4 rounded bg-white/25" style={{ width: "100%" }} />
+                <span className="w-14 shrink-0 text-right text-body font-bold text-white/60">38 wks</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-14 shrink-0 text-caption text-teal-300">jalipi</span>
+                <div className="flex w-full items-center">
+                  <div
+                    className="h-4 rounded bg-gradient-to-r from-teal-400 to-emerald-400"
+                    style={{ width: `${(17 / 38) * 100}%` }}
+                  />
+                </div>
+                <span className="w-14 shrink-0 text-right text-body font-bold text-teal-300">17 wks</span>
+              </div>
+            </div>
+            <p className="mt-1.5 text-caption text-white/50">
+              A programme measured in weeks, including three weeks to build your extensions, which a typical
+              programme hides inside its build.
+            </p>
+          </div>
+          <div
+            className="deck-rise space-y-1.5 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3"
+            style={{ animationDelay: "0.95s" }}
+          >
+            <div className="flex items-center gap-2">
+              <FileText className="h-4 w-4 text-teal-300" />
+              <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">
+                Documents and decks write themselves
+              </p>
+            </div>
+            {DOCS.map((doc) => (
+              <div key={doc} className="flex items-start gap-2 text-caption leading-snug text-white/80">
+                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                <span>{doc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 7. The people: built by practitioners, delivered by FrontlineXP
+// ---------------------------------------------------------------------------
+
+const LESSONS: { limit: string; answer: string }[] = [
+  { limit: "Configuration built by hand", answer: "Generated from discovery" },
+  { limit: "Bespoke that froze the version", answer: "Native extensions that upgrade" },
+  { limit: "Whatever one system offered", answer: "The best of the leading WFM systems" },
+  { limit: "Testing in spreadsheets", answer: "Test packs and UAT in the product" },
+];
+
+const DELIVERY: { icon: LucideIcon; title: string; body: string }[] = [
+  {
+    icon: ClipboardList,
+    title: "Operator-led discovery",
+    body: "How your floor really runs, not just what the policy says.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Configuration review and testing",
+    body: "Checked by WFM specialists and proved against your data.",
+  },
+  {
+    icon: Users,
+    title: "Go-live on the floor",
+    body: "Alongside your managers and colleagues, not from a war room.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "A managed service afterwards",
+    body: "Accountable for the outcome, not just the cutover.",
+  },
+];
+
+const ROLES: { who: ReactNode; does: string }[] = [
+  {
+    who: (
+      <span className="inline-flex items-center gap-2.5">
+        <JalipiWordmark className="text-sm text-white" />
+        <span className="h-3.5 w-px bg-white/20" />
+        <PartyLogo party="qtc" size="sm" />
+      </span>
+    ),
+    does: "The platform",
+  },
+  {
+    who: (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src="/logos/frontlinexp-white.svg" alt="FrontlineXP" className="h-5 w-auto" />
+    ),
+    does: "Implementation and managed service",
+  },
+  {
+    who: (
+      <BespokeEverythingLogo variant="dark" layout="inline" showTagline={false} className="text-caption" />
+    ),
+    does: "Your extensions",
+  },
+];
+
+function ExpertsSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="Who is behind it"
+          title="Built by WFM experts."
+          highlight="Delivered by WFM experts."
+          lede="jalipi was not designed from a feature list. It was designed by people who have spent their careers implementing workforce management, and it is delivered by a partner that does nothing else."
+        />
+
+        <div className="mt-4 grid grid-cols-2 gap-4">
+          <div
+            className="deck-rise rounded-2xl border border-teal-400/30 bg-teal-500/[0.06] p-4"
+            style={{ animationDelay: "0.25s" }}
+          >
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">
+              The product · built by genuine experts
+            </p>
+            <p className="mt-1.5 text-body leading-snug text-white/75">
+              Twenty years implementing, architecting and product-managing enterprise WFM across retail,
+              hospitality, manufacturing and the public sector. Every design decision answers a limit hit
+              on a real programme.
+            </p>
+            <div className="mt-3 space-y-1.5">
+              {LESSONS.map((lesson) => (
+                <div
+                  key={lesson.limit}
+                  className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-caption leading-snug"
+                >
+                  <span className="text-white/50 line-through decoration-white/25">{lesson.limit}</span>
+                  <ArrowRight className="h-3.5 w-3.5 text-teal-300/70" />
+                  <span className="font-semibold text-white">{lesson.answer}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className="deck-rise rounded-2xl border border-emerald-400/30 bg-emerald-500/[0.05] p-4"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-caption font-bold uppercase tracking-[0.18em] text-emerald-300">
+                Delivery partner · the WFM expertise
+              </p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logos/frontlinexp-white.svg" alt="FrontlineXP" className="h-6 w-auto" />
+            </div>
+            <p className="mt-1.5 text-body leading-snug text-white/75">
+              FrontlineXP leads the programme with you. Its founders have led workforce programmes for
+              some of the largest retailers and operators in the world.
+            </p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {DELIVERY.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.title} className="rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2">
+                    <div className="flex items-center gap-1.5">
+                      <Icon className="h-3.5 w-3.5 shrink-0 text-emerald-300" />
+                      <p className="text-body font-bold leading-tight text-white">{item.title}</p>
+                    </div>
+                    <p className="mt-1 text-caption leading-snug text-white/60">{item.body}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="deck-rise mt-3.5 grid grid-cols-3 gap-3"
+          style={{ animationDelay: "0.6s" }}
+        >
+          {ROLES.map((role) => (
+            <div
+              key={role.does}
+              className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2"
+            >
+              <span className="flex h-6 items-center">{role.who}</span>
+              <span className="text-right text-caption font-semibold text-white/65">{role.does}</span>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="deck-rise relative mt-3 rounded-2xl border border-amber-400/30 bg-gradient-to-r from-amber-500/15 via-teal-500/10 to-emerald-500/15 px-5 py-2.5"
+          style={{ animationDelay: "0.75s" }}
+        >
+          <div className="absolute top-1/2 left-5 -translate-y-1/2">
+            <PartyLogo party="tcn" size="sm" className="h-7" />
+          </div>
+          <p className="mx-auto max-w-4xl px-16 text-center text-body leading-relaxed text-white/85">
+            <span className="font-bold text-white">Behind all three:</span> the team who built REPL from
+            two people into a 600-strong global workforce management consultancy. A young platform,
+            arriving with people who have done this at scale.
+          </p>
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 8. Why jalipi
+// ---------------------------------------------------------------------------
+
+const CORE: { icon: LucideIcon; label: string }[] = [
+  { icon: CalendarClock, label: "Forecasting, labour demand and scheduling" },
+  { icon: Clock, label: "Time and attendance, on any tablet or phone" },
+  { icon: Layers, label: "Leave, pay rules and contracts" },
+  { icon: Gauge, label: "Labour cost control and reporting" },
+  { icon: Plug, label: "APIs for payroll and HR, CSV where there is none" },
+];
+
+const REASONS: { icon: LucideIcon; title: string; body: string }[] = [
+  {
+    icon: Puzzle,
+    title: "It fits",
+    body: "Your specifics are built in, not worked around. By a studio, as native extensions.",
+  },
+  {
+    icon: GitBranch,
+    title: "It stays safe to change",
+    body: "Branches, data sets and tests mean year three is as easy to change as go-live.",
+  },
+  {
+    icon: Blocks,
+    title: "It is where software is going",
+    body: "A shared core, yours on top, built with AI and predictable to run.",
+  },
+];
+
+const NEXT: { step: string; body: string }[] = [
+  { step: "A discovery conversation", body: "How you run today and what should change. If Workforce Central or eTIME is being retired under you, you are moving anyway: move to the model, not just the next version." },
+  { step: "Your data in a working tenant", body: "Your sites, roles and rules in jalipi, within two weeks." },
+  { step: "A fixed proposal", body: "Licence, implementation and first extensions. Fixed before you commit." },
+];
+
+function CloseSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading kicker="Why jalipi" title="The core you would expect." highlight="The rest is yours." />
+
+        <div className="mt-4 grid grid-cols-3 gap-3">
+          {REASONS.map((reason, index) => {
+            const Icon = reason.icon;
+            return (
+              <div
+                key={reason.title}
+                className="deck-rise flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur"
+                style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+              >
+                <IconChip icon={Icon} />
+                <div>
+                  <p className="text-sm font-black tracking-tight">{reason.title}</p>
+                  <p className="mt-0.5 text-caption leading-snug text-white/70">{reason.body}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-3 grid grid-cols-[1fr_1.1fr] gap-3">
+          <div
+            className="deck-rise rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+            style={{ animationDelay: "0.55s" }}
+          >
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-white/45">
+              Everything a frontline operation expects
+            </p>
+            <ul className="mt-2.5 space-y-2">
+              {CORE.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <li key={item.label} className="flex items-center gap-2.5 text-body text-white/85">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                    <Icon className="h-3.5 w-3.5 shrink-0 text-white/40" />
+                    <span>{item.label}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div
+            className="deck-rise rounded-2xl border border-teal-400/40 bg-gradient-to-b from-teal-500/15 to-white/5 p-4"
+            style={{ animationDelay: "0.7s" }}
+          >
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">What happens next</p>
+            <ol className="mt-2.5 space-y-2.5">
+              {NEXT.map((item, index) => (
+                <li key={item.step} className="flex items-start gap-3">
+                  <span className="mt-px text-body font-black text-teal-300">0{index + 1}</span>
+                  <div>
+                    <p className="text-sm font-bold tracking-tight text-white">{item.step}</p>
+                    <p className="text-caption leading-snug text-white/65">{item.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Deck
+// ---------------------------------------------------------------------------
+
+function buildSlides(): DeckSlide[] {
+  return [
+    { id: "cover", section: "jalipi", gradient: "from-teal-500 via-emerald-500 to-amber-500", node: <CoverSlide /> },
+    { id: "future", section: "Where software is going", gradient: "from-teal-500 via-emerald-500 to-cyan-500", node: <FutureSlide /> },
+    { id: "usps", section: "What sets it apart", gradient: "from-teal-500 via-emerald-500 to-amber-500", node: <UspSlide /> },
+    { id: "implementation", section: "Implementation tools", gradient: "from-emerald-500 via-teal-500 to-amber-500", node: <ImplementationSlide /> },
+    { id: "branching", section: "Branching", gradient: "from-teal-500 via-sky-500 to-emerald-500", node: <BranchingSlide /> },
+    { id: "data-sets", section: "Data sets", gradient: "from-sky-500 via-teal-500 to-amber-400", node: <DataSetsSlide /> },
+    { id: "extensions", section: "Extensions", gradient: "from-amber-500 via-orange-500 to-amber-300", node: <CustomisationSlide /> },
+    { id: "people", section: "Who is behind it", gradient: "from-teal-500 via-emerald-500 to-amber-400", node: <ExpertsSlide /> },
+    { id: "close", section: "Why jalipi", gradient: "from-rose-500 via-amber-500 to-teal-500", node: <CloseSlide /> },
+  ];
+}
+
+export function WhyChooseJalipiDeck() {
+  const slides = useMemo(() => buildSlides(), []);
+  return <StudioSetupDeck slides={slides} />;
+}

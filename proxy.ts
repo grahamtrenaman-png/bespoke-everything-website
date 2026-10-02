@@ -8,6 +8,8 @@ const PUBLIC_PATHS = new Set([
   "/robots.txt",
   "/icon.svg",
   "/apple-icon.svg",
+  // Unlisted: shared by URL only, nothing on the site links to it.
+  "/studio/video.mp4",
 ]);
 
 function isPublicPath(pathname: string) {

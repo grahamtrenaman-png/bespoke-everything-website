@@ -534,10 +534,10 @@ function BranchingSlide() {
         <div className="mt-3 grid grid-cols-[1.25fr_1fr] items-center gap-5">
           <div className="deck-rise" style={{ animationDelay: "0.25s" }}>
             <svg
-              viewBox="0 0 640 200"
+              viewBox="0 0 640 258"
               className="w-full"
               role="img"
-              aria-label="Two market branches leave live at the same time, are built and tested in parallel, and each promotes back to live when its tests are signed off"
+              aria-label="Two market branches leave live at the same time, are built and tested in parallel, and each promotes back to live when its tests are signed off. A third scenario branch is modelled, costed on real data and discarded without touching live"
             >
               <defs>
                 <linearGradient id="whyBranchTeal" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -576,10 +576,20 @@ function BranchingSlide() {
                 <animate attributeName="r" values="9;11;9" dur="2.5s" repeatCount="indefinite" begin="1.2s" />
               </circle>
               <text x="514" y="122" fill="#fcd34d" fontSize="12" fontWeight="700">Promote</text>
+
+              <path d="M 80 100 C 110 100 110 226 140 226 L 470 226" fill="none" stroke="#fb7185" strokeOpacity="0.8" strokeWidth="3.5" strokeLinecap="round" strokeDasharray="7 7" />
+              <text x="145" y="214" fill="#fda4af" fontSize="12" fontWeight="600">Scenario · what if overtime starts at 38 hours</text>
+              <circle cx="260" cy="226" r="7" fill="#fb7185" />
+              <text x="260" y="252" {...nodeLabel}>Model</text>
+              <circle cx="385" cy="226" r="7" fill="#fb7185" />
+              <text x="385" y="252" {...nodeLabel}>Costed on last January</text>
+              <circle cx="470" cy="226" r="9" fill="#0a0a0a" stroke="#fb7185" strokeWidth="2.5" />
+              <path d="M 466 222 L 474 230 M 474 222 L 466 230" stroke="#fb7185" strokeWidth="2.5" strokeLinecap="round" />
+              <text x="484" y="230" fill="#fda4af" fontSize="12" fontWeight="700">Discarded</text>
             </svg>
             <p className="mt-1 text-center text-caption text-white/60">
-              Two markets configured at the same time, in one tenant. Each goes live when its own tests are
-              signed off.{" "}
+              Two markets configured at the same time, in one tenant, and a scenario costed on real data then
+              thrown away. Each market goes live when its own tests are signed off.{" "}
               <span className="font-semibold text-white/85">No environments, no re-keying, no cutover weekend.</span>
             </p>
           </div>

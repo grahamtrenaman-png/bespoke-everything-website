@@ -222,8 +222,8 @@ function FutureSlide() {
       <div className="relative mx-auto w-full max-w-6xl px-10">
         <SlideHeading
           kicker="Where software is going"
-          title="Rigid software is over."
-          highlight="So is compromising."
+          title="Vanilla software is over."
+          highlight="Bespoke is back."
           lede="For twenty years, SaaS meant accepting the same product as everyone else and bending your operation around it. That was the price of software when building was expensive. It is not any more."
         />
 

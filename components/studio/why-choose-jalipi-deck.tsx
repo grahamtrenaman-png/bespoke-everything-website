@@ -138,6 +138,21 @@ function CoverSlide() {
         className="deck-drift pointer-events-none absolute -right-40 bottom-1/5 h-[34rem] w-[34rem] rounded-full bg-amber-600/15 blur-3xl"
         style={{ animationDelay: "-7s" }}
       />
+      <div
+        className="deck-rise absolute inset-x-0 top-7 z-20 flex flex-col items-center gap-3"
+        style={{ animationDelay: "0.1s" }}
+      >
+        <p className="text-caption font-semibold uppercase tracking-[0.3em] text-white/40">
+          Brought to you by
+        </p>
+        <div className="flex items-center gap-6">
+          <PartyLogo party="be" size="lg" />
+          <span className="h-6 w-px bg-white/20" />
+          <PartyLogo party="qtc" size="lg" />
+          <span className="h-6 w-px bg-white/20" />
+          <PartyLogo party="fxp" size="lg" />
+        </div>
+      </div>
       <div className="relative flex max-w-5xl flex-col items-center text-center">
         <div className="deck-rise" style={{ animationDelay: "0.15s" }}>
           <JalipiWordmark className="text-6xl text-white" />

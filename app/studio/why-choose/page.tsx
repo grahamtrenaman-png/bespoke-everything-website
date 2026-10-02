@@ -6,7 +6,7 @@ import { WhyChooseJalipiDeck } from "@/components/studio/why-choose-jalipi-deck"
 export const metadata: Metadata = {
   title: "Why choose jalipi",
   description:
-    "Nine slides for customers: where software is going, the four things that set jalipi apart with a slide on each, and who builds and delivers it.",
+    "Ten slides for customers: where software is going, the four things that set jalipi apart with a slide on each, what it means for your time and return, and who builds and delivers it.",
   robots: { index: false, follow: false },
 };
 

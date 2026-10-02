@@ -4,6 +4,7 @@ import { useMemo, type ReactNode } from "react";
 import {
   ArrowRight,
   Blocks,
+  BotMessageSquare,
   CalendarClock,
   CheckCircle2,
   ClipboardList,
@@ -25,6 +26,7 @@ import {
   Server,
   ShieldCheck,
   Sparkles,
+  TrendingUp,
   Users,
   Wand2,
   Wrench,
@@ -849,6 +851,94 @@ function ImplementationSlide() {
 }
 
 // ---------------------------------------------------------------------------
+// 7a. What it means for you: your time, your return, your year three
+// ---------------------------------------------------------------------------
+
+const IMPACT: { icon: LucideIcon; kicker: string; title: string; usually: string; jalipi: string }[] = [
+  {
+    icon: Clock,
+    kicker: "Your people's time",
+    title: "Weeks of workshops and UAT, not months.",
+    usually:
+      "Design workshops, requirement documents to review, test scripts to write, UAT to staff. All from people who already have a day job.",
+    jalipi:
+      "Discovery is a guided conversation, not a workshop series. Documents, configuration and test packs are generated from it. UAT is a guided runner your testers follow in the product. You bring knowledge; the platform does the paperwork.",
+  },
+  {
+    icon: TrendingUp,
+    kicker: "Return on investment",
+    title: "Paying back from the first quarter.",
+    usually:
+      "A twelve to eighteen month programme means a year of cost before a day of benefit. The business case ages before it starts.",
+    jalipi:
+      "Live in weeks, with the first market and the most valuable rules first. Savings in scheduling, overtime and compliance start while a typical programme would still be in design.",
+  },
+  {
+    icon: Wrench,
+    kicker: "Maintenance",
+    title: "Change is a conversation, not a project.",
+    usually:
+      "Every rule change after go-live is a change request, a consultant, an environment and a regression cycle. So changes pile up until they are a project.",
+    jalipi:
+      "Configuration still comes through guided design, so a new site, policy or market is captured the same way and generated the same way. Roll out in phases, each on its own branch, each tested on your data before it goes live.",
+  },
+  {
+    icon: BotMessageSquare,
+    kicker: "Day-to-day support",
+    title: "An assistant that knows your configuration.",
+    usually:
+      "After the consultants leave, the knowledge leaves with them. BAU teams work from a stale document and a ticket queue.",
+    jalipi:
+      "The AI that built your configuration understands it. Managers and administrators can ask why a schedule or a pay result came out the way it did and how to do something in the system, in plain language. The engines stay deterministic; the AI explains.",
+  },
+];
+
+function ImpactSlide() {
+  return (
+    <JalipiBrandedSlide className="bg-neutral-950 text-white">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="What it means for you"
+          title="Less of your time."
+          highlight="A faster return."
+          lede="Most programmes ask the most of the people with the least time to give, then take a year to pay anything back. jalipi is built to take that load off your side, from the first workshop to year three."
+        />
+
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          {IMPACT.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.kicker}
+                className="deck-rise flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur"
+                style={{ animationDelay: `${0.2 + index * 0.1}s` }}
+              >
+                <div className="flex items-center gap-2.5">
+                  <IconChip icon={Icon} />
+                  <div>
+                    <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">{item.kicker}</p>
+                    <p className="text-sm font-black leading-tight tracking-tight text-white">{item.title}</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-body leading-snug text-white/55">
+                  <span className="font-bold text-white/70">Usually: </span>
+                  {item.usually}
+                </p>
+                <p className="mt-2 flex-1 border-t border-white/10 pt-2 text-body leading-snug text-white/90">
+                  <span className="font-bold text-amber-300">With jalipi: </span>
+                  {item.jalipi}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </JalipiBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // 7. The people: built by practitioners, delivered by FrontlineXP
 // ---------------------------------------------------------------------------
 
@@ -1132,6 +1222,7 @@ function buildSlides(): DeckSlide[] {
     { id: "branching", section: "Branching", gradient: "from-teal-500 via-sky-500 to-emerald-500", node: <BranchingSlide /> },
     { id: "data-sets", section: "Data sets", gradient: "from-sky-500 via-teal-500 to-amber-400", node: <DataSetsSlide /> },
     { id: "extensions", section: "Extensions", gradient: "from-amber-500 via-orange-500 to-amber-300", node: <CustomisationSlide /> },
+    { id: "impact", section: "What it means for you", gradient: "from-emerald-500 via-teal-500 to-sky-500", node: <ImpactSlide /> },
     { id: "people", section: "Who is behind it", gradient: "from-teal-500 via-emerald-500 to-amber-400", node: <ExpertsSlide /> },
     { id: "close", section: "Why jalipi", gradient: "from-rose-500 via-amber-500 to-teal-500", node: <CloseSlide /> },
   ];

@@ -402,6 +402,158 @@ function CustomisationSlide() {
 }
 
 // ---------------------------------------------------------------------------
+// 4b. Extensions without a fork, the visual version
+// ---------------------------------------------------------------------------
+
+const PLUGS: { icon: LucideIcon; name: string }[] = [
+  { icon: Wrench, name: "Premium rule" },
+  { icon: ShieldCheck, name: "Approval flow" },
+  { icon: FileText, name: "Board report" },
+];
+
+const RELEASES: { label: string; when: string; core: string[]; added?: string }[] = [
+  { label: "Release 1", when: "Go-live", core: ["Scheduling", "Pay rules", "Time and attendance"] },
+  { label: "Release 2", when: "Three months on", core: ["Scheduling", "Pay rules", "Time and attendance"], added: "Leave forecasting" },
+  { label: "Release 3", when: "A year on", core: ["Scheduling", "Pay rules", "Time and attendance", "Leave forecasting"], added: "Fatigue rules" },
+];
+
+function PlugPiece({ icon: Icon, name, muted = false }: { icon: LucideIcon; name: string; muted?: boolean }) {
+  return (
+    <div
+      className={cn(
+        "relative flex items-center justify-center gap-1 whitespace-nowrap rounded-lg border px-1.5 py-1.5",
+        muted
+          ? "border-white/15 bg-white/[0.04] text-white/40"
+          : "border-amber-400/50 bg-gradient-to-br from-amber-400/25 to-orange-500/20 text-amber-50",
+      )}
+    >
+      <Icon className={cn("h-3 w-3 shrink-0", muted ? "text-white/40" : "text-amber-300")} />
+      <span className="text-caption font-bold leading-none">{name}</span>
+      {/* the plug tab that sits in the core's socket */}
+      <span
+        className={cn(
+          "absolute -bottom-[7px] left-1/2 h-2 w-4 -translate-x-1/2 rounded-b-sm border-x border-b",
+          muted ? "border-white/15 bg-neutral-800" : "border-amber-400/50 bg-amber-400/40",
+        )}
+      />
+    </div>
+  );
+}
+
+function CustomisationVisualSlide() {
+  return (
+    <BespokeBrandedSlide className="bg-neutral-950 text-white">
+      <Glows flip />
+      <div className="relative mx-auto w-full max-w-6xl px-10">
+        <SlideHeading
+          kicker="Extensions without a fork"
+          title="Your pieces plug in."
+          highlight="The core keeps upgrading."
+          lede="Bespoke Everything builds what makes your operation different as pieces that plug into fixed points in the shared product. Every release of the core arrives underneath them, and they keep working."
+        />
+
+        <div className="mt-4 grid grid-cols-[1fr_1fr_1fr] items-stretch gap-0">
+          {RELEASES.map((release, index) => (
+            <div key={release.label} className="relative flex">
+              {index > 0 ? (
+                <div
+                  className="deck-rise absolute top-1/2 -left-3 z-10 flex -translate-y-1/2 flex-col items-center"
+                  style={{ animationDelay: `${0.35 + index * 0.25}s` }}
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full border border-teal-400/40 bg-neutral-950 text-teal-300">
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              ) : null}
+              <div
+                className={cn(
+                  "deck-rise flex flex-1 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-3",
+                  index > 0 && "ml-3",
+                )}
+                style={{ animationDelay: `${0.2 + index * 0.25}s` }}
+              >
+                <div className="flex items-baseline justify-between">
+                  <p className="text-caption font-bold uppercase tracking-[0.18em] text-white/60">{release.label}</p>
+                  <p className="text-caption text-white/40">{release.when}</p>
+                </div>
+
+                <p className="mt-2 text-caption font-semibold uppercase tracking-[0.14em] text-amber-300/80">
+                  Yours
+                </p>
+                <div className="mt-1.5 grid grid-cols-3 gap-1">
+                  {PLUGS.map((plug, plugIndex) => (
+                    <div
+                      key={plug.name}
+                      className="deck-rise"
+                      style={{ animationDelay: `${0.5 + index * 0.25 + plugIndex * 0.08}s` }}
+                    >
+                      <PlugPiece icon={plug.icon} name={plug.name} />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative mt-2 flex-1 rounded-xl border border-teal-400/40 bg-gradient-to-b from-teal-500/25 to-teal-600/10 p-3">
+                  {/* sockets */}
+                  <div className="absolute inset-x-3 -top-px grid grid-cols-3 gap-1">
+                    {PLUGS.map((plug) => (
+                      <span key={plug.name} className="mx-auto h-1 w-4 rounded-b bg-neutral-950" />
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <JalipiWordmark className="text-base text-white" />
+                    <span className="text-caption font-semibold uppercase tracking-[0.14em] text-teal-200/80">
+                      Shared core
+                    </span>
+                  </div>
+                  <ul className="mt-2 space-y-1">
+                    {release.core.map((item) => (
+                      <li key={item} className="flex items-center gap-1.5 text-caption text-white/75">
+                        <CheckCircle2 className="h-3 w-3 shrink-0 text-teal-300" />
+                        {item}
+                      </li>
+                    ))}
+                    {release.added ? (
+                      <li
+                        className="deck-rise flex items-center gap-1.5 text-caption font-bold text-white"
+                        style={{ animationDelay: `${0.9 + index * 0.25}s` }}
+                      >
+                        <Sparkles className="h-3 w-3 shrink-0 text-emerald-300" />
+                        New: {release.added}
+                      </li>
+                    ) : null}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-3 grid grid-cols-[1fr_auto] items-stretch gap-3">
+          <Strip delay="1.1s" warm>
+            <span className="font-bold text-white">Same three pieces on every release.</span> Nothing re-built,
+            nothing re-tested because the core moved. And when enough customers need the same thing, it
+            moves into the core for everyone.
+          </Strip>
+          <div
+            className="deck-rise flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-2.5"
+            style={{ animationDelay: "1.2s" }}
+          >
+            <div className="relative">
+              <PlugPiece icon={Wrench} name="Welded in" muted />
+              <span className="pointer-events-none absolute -inset-1 rounded-lg border border-dashed border-rose-400/50" />
+            </div>
+            <p className="max-w-[12rem] text-caption leading-snug text-white/55">
+              <span className="font-bold text-rose-300">A fork, for contrast.</span> Bespoke welded into
+              release 1. Releases 2 and 3 never arrive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </BespokeBrandedSlide>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // 5. What sets it apart
 // ---------------------------------------------------------------------------
 
@@ -1222,6 +1374,7 @@ function buildSlides(): DeckSlide[] {
     { id: "branching", section: "Branching", gradient: "from-teal-500 via-sky-500 to-emerald-500", node: <BranchingSlide /> },
     { id: "data-sets", section: "Data sets", gradient: "from-sky-500 via-teal-500 to-amber-400", node: <DataSetsSlide /> },
     { id: "extensions", section: "Extensions", gradient: "from-amber-500 via-orange-500 to-amber-300", node: <CustomisationSlide /> },
+    { id: "extensions-visual", section: "Extensions", gradient: "from-amber-500 via-orange-500 to-amber-300", node: <CustomisationVisualSlide /> },
     { id: "impact", section: "What it means for you", gradient: "from-emerald-500 via-teal-500 to-sky-500", node: <ImpactSlide /> },
     { id: "people", section: "Who is behind it", gradient: "from-teal-500 via-emerald-500 to-amber-400", node: <ExpertsSlide /> },
     { id: "close", section: "Why jalipi", gradient: "from-rose-500 via-amber-500 to-teal-500", node: <CloseSlide /> },

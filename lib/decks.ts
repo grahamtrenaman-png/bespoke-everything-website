@@ -38,6 +38,6 @@ export const STUDIO_DECKS: DeckEntry[] = [
     href: "/studio/why-choose",
     kicker: "For customers · jalipi",
     title: "Why choose jalipi.",
-    body: "Where software is going, the four things that set jalipi apart with a slide on each, what it means for your time and return, and who builds and delivers it. Ten slides.",
+    body: "Where software is going, the four things that set jalipi apart with a slide on each, what it means for your time and return, and who builds and delivers it. Eleven slides.",
   },
 ];

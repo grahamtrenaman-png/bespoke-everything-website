@@ -826,7 +826,7 @@ const USPS: { icon: LucideIcon; kicker: string; title: string; body: string; mea
     icon: Wand2,
     kicker: "Implementation tools",
     title: "Months of consultancy, done by the platform.",
-    body: "Guided discovery captures your requirements in your own words. The moment discovery is complete, the platform builds the whole solution from those answers: configuration, documents, decks and tests. Instantly, automatically, with no one keying anything in.",
+    body: "Guided discovery asks a thorough question set for each area you are implementing. The moment discovery is complete, the platform builds the whole solution from those answers: configuration, documents, decks and tests. Instantly, automatically, with no one keying anything in.",
     means: "A programme measured in weeks, and a working solution on the day discovery ends.",
   },
   {
@@ -1246,14 +1246,14 @@ const PIPELINE: {
   {
     icon: ClipboardList,
     title: "Guided discovery",
-    body: "Business users answer guided question sets in their own words. Every answer becomes a structured, numbered requirement.",
+    body: "A clear, thorough question set for each area you are implementing, such as time and attendance, scheduling and leave. Every answer becomes a numbered requirement.",
     plain:
-      "Discovery is where you describe how the operation actually runs. Instead of workshops that end in a document someone else interprets, the people who know the work answer a guided set of questions in their own words. Each answer is kept as a numbered requirement, so what was said is what gets built.",
+      "Discovery is a set of questions, scoped to the parts of jalipi you have said you are implementing. If that is time and attendance, scheduling and leave, those are the question sets you get. Within each area the questions are deliberately thorough: every piece of information is asked for, and each question carries the context the answer needs. Each answer is kept as a numbered requirement, and that requirement is what gets built.",
     example:
-      "A store manager says overtime starts after 38 hours, and Sunday is paid at time and a half. Those two sentences become requirement 14 and requirement 15, in the words they were spoken.",
-    who: "The people who know the operation: managers, payroll, HR. They answer questions. They do not write a requirements document.",
+      "You are implementing time and attendance, scheduling and leave. Discovery opens the question set for each of those areas. Every question is specific, and it asks for the context the answer depends on, so the requirement that comes out is complete enough to build from.",
+    who: "The people who know the operation: managers, payroll, HR. They work through the question sets for the areas in scope.",
     different:
-      "This is the only step where a person describes the operation. Every step after it is generated from these answers. If an answer is wrong, the configuration, the tests and the documents are wrong in the same way, which is why the answer stays attached to what was built.",
+      "This is the only step where a person supplies the detail, and they do it by answering the questions for the areas being implemented. Every step after it is generated from those answers. The thoroughness is what makes the later steps complete: a missing answer is missing context, and the configuration, the tests and the documents all miss it in the same way.",
   },
   {
     icon: Wand2,
@@ -1265,7 +1265,7 @@ const PIPELINE: {
       "Discovery finishes on a Thursday. The same day you are looking at your sites, pay rules and approval policies running in a branch, and a wrong Sunday rate is fixed by changing the requirement rather than raising a defect.",
     who: "The platform builds it. Your team reviews it on screen and changes the requirement if the result is not what was meant.",
     different:
-      "Guided discovery captures what was said. This step turns those words into configuration, with nothing re-typed in between. The tests and the documents are generated from the same configuration, so they describe the system you are looking at.",
+      "Guided discovery captures the answers, area by area. This step turns those answers into configuration, with nothing re-typed in between. The tests and the documents are generated from the same configuration, so they describe the system you are looking at.",
   },
   {
     icon: FlaskConical,
@@ -1333,7 +1333,7 @@ function ImplementationSlide() {
           kicker="Implementation tools"
           title="From discovery to live,"
           highlight="the heavy lifting is automated."
-          lede="Requirements, configuration and tests are the same thing in jalipi. What is said in discovery becomes the configuration, the configuration writes its own documents and tests, and nothing is re-keyed along the way."
+          lede="Requirements, configuration and tests are the same thing in jalipi. What is answered in discovery becomes the configuration, the configuration writes its own documents and tests, and nothing is re-keyed along the way."
         />
 
         <p className="mt-3 text-right text-caption text-white/40">Click a step to explore</p>
@@ -1440,7 +1440,7 @@ const IMPACT: { icon: LucideIcon; kicker: string; title: string; usually: string
     usually:
       "Design workshops, requirement documents to review, test scripts to write, UAT to staff. All from people who already have a day job.",
     jalipi:
-      "Discovery is a guided conversation, not a workshop series. Documents, configuration and test packs are generated from it. UAT is a guided runner your testers follow in the product. You bring knowledge; the platform does the paperwork.",
+      "Discovery is a thorough question set for the areas you are implementing. Documents, configuration and test packs are generated from the answers. UAT is a guided runner your testers follow in the product. You bring knowledge; the platform does the paperwork.",
   },
   {
     icon: TrendingUp,

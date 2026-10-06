@@ -1127,26 +1127,62 @@ function BranchingSlide() {
 // 7. Data sets
 // ---------------------------------------------------------------------------
 
-const DATASET_POINTS: { icon: LucideIcon; title: string; body: string }[] = [
+const DATASET_POINTS: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  plain: string;
+  example: string;
+  who: string;
+  different: string;
+}[] = [
   {
     icon: Server,
     title: "One environment, not an estate",
     body: "Live, a Sandbox and a dedicated set for every test branch all sit in your one tenant. Nothing to provision, refresh or keep in step.",
+    plain:
+      "A typical programme pays for several copies of the system: a sandbox, a test system, a pre-production system. Each one is provisioned, refreshed and kept in step by someone. In jalipi those are data sets inside the one tenant you already have. Live is one. A Sandbox is another. Every test branch can have its own. They arrive with the tenant, and they stay in step because they are the same system.",
+    example:
+      "The UK test branch has its own data set from the moment the branch exists. France's branch has another. Both sit beside Live in the same tenant. Nobody raises a ticket to stand a system up.",
+    who: "The platform provides them with the tenant. Your team uses them.",
+    different:
+      "This box is about where the data lives: one tenant, as many data sets as the work needs. The next box is how a data set is filled, by cloning Live. The third is the rule that keeps Live safe. The fourth is the answer you get once a copy exists.",
   },
   {
     icon: Copy,
     title: "Real data without database copies",
     body: "Clone from Live in a click and run a forecast, a schedule or a pay run against the copy. No DBA, no refresh request, no masking project.",
+    plain:
+      "A data set is filled by cloning Live. People, schedules, punches and demand come across in a click, and you can take as many copies as you need, including a copy of one particular month. You then run a real forecast, a real schedule or a real pay run against that copy. It is the operational data itself, so there is no database administrator, no refresh ticket and no project to mask personal data before anyone can look at it.",
+    example:
+      "Last January was the busiest month. Clone it into its own data set and run the pay engine against it. The result is what that month would have cost, on the real data, with the rules from your branch.",
+    who: "Anyone with access clones it. The platform does the copy.",
+    different:
+      "The first box is that every data set lives in the one tenant. This one is how a data set gets its contents: a clone of Live, ready for the real engines. The protection of Live, and the decision you make after the run, are the two boxes after this.",
   },
   {
     icon: Lock,
     title: "Live is protected",
     body: "A test never writes to Live. Promotion moves rules, never operational data. The experiment stays in its own world.",
+    plain:
+      "A test writes only to its own data set. Live is never the place a trial forecast, schedule or pay run lands. When you promote, what moves is the configuration: the rules. People, punches and schedules stay where they are. The experiment finishes in its own world.",
+    example:
+      "A pay run against the copy of last January can be repeated all afternoon. Live's January is the same at the end of it. Promoting the new overtime rule afterwards changes the rule on Live and leaves January's figures where they were.",
+    who: "The platform enforces the boundary. A person chooses to run a test or to promote. Test results stay in the data set they were run in.",
+    different:
+      "Cloning gives you a copy to work on. This box is the guarantee around that copy: a test can only write to it, and promotion carries rules rather than operational data. The last box is what you learn from the run. This one is why that learning stays out of the live operation.",
   },
   {
     icon: Gauge,
     title: "Answers before anyone is affected",
     body: "Change a pay rule on a branch, run it against last January and see the cost. Then promote it, or throw it away.",
+    plain:
+      "The rules live on a branch and the operational world lives in a data set, so you can ask a question of the real operation and read the answer before anyone is affected by it. Change a rule on a branch, run it against a copy of a real period, and see the cost. Then promote the rule, or throw the branch away. The people on Live finish the day on the schedules they started with.",
+    example:
+      "Overtime after 38 hours instead of 40. Run it against last January and read the cost line by line. If the number is acceptable, promote the rule. If it is not, discard the branch. Last January on Live is unchanged either way.",
+    who: "Your own team runs it, as often as you want. The platform does the calculation on the real engines. Promoting or discarding stays your decision.",
+    different:
+      "The other three boxes are the machinery: one tenant, a clone of Live, and a Live that a test cannot write to. This box is the reason for them. It is the answer, a cost or a schedule or a pay result, while the live operation carries on as it was.",
   },
 ];
 
@@ -1185,6 +1221,18 @@ const FLOW_TONES: Record<(typeof DATASET_FLOW)[number]["tone"], string> = {
 };
 
 function DataSetsSlide() {
+  const [openPoint, setOpenPoint] = useState<number | null>(null);
+  const explain: ExplainItem[] = DATASET_POINTS.map((point, index) => ({
+    badge: String(index + 1),
+    kicker: `${index + 1} of ${DATASET_POINTS.length} · Data sets`,
+    name: point.title,
+    plain: point.plain,
+    example: point.example,
+    who: point.who,
+    differentLabel: "How it differs from the other three",
+    different: point.different,
+    nav: point.title,
+  }));
   return (
     <JalipiBrandedSlide className="bg-neutral-950 text-white">
       <Glows flip />
@@ -1214,7 +1262,10 @@ function DataSetsSlide() {
             ))}
           </div>
 
-          <PointList points={DATASET_POINTS} />
+          <div>
+            <p className="mb-1.5 text-right text-caption text-white/40">Click a box to explore</p>
+            <PointList points={DATASET_POINTS} onOpen={setOpenPoint} />
+          </div>
         </div>
 
         <div className="mt-3">
@@ -1224,6 +1275,14 @@ function DataSetsSlide() {
           </Strip>
         </div>
       </div>
+      {openPoint !== null ? (
+        <ExplainDialog
+          items={explain}
+          index={openPoint}
+          onClose={() => setOpenPoint(null)}
+          onChange={setOpenPoint}
+        />
+      ) : null}
     </JalipiBrandedSlide>
   );
 }

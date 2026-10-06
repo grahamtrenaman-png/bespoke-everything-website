@@ -331,40 +331,16 @@ type Layer = {
 
 const LAYERS: Layer[] = [
   {
-    level: "4",
-    name: "Your screens and logic",
-    body: "Custom UI and calculations at declared points in the product.",
+    level: "0",
+    name: "The jalipi core",
+    body: "Shared by every customer. Never forked.",
     plain:
-      "Sometimes the standard screens or calculations do not fit how you work, and no setting will change that. This layer lets Bespoke Everything add a screen, a panel or a calculation of your own at specific places jalipi has set aside for exactly that purpose. Think of the slots on a phone's home screen: the phone decides where widgets can go, you decide what goes there.",
+      "The core is the product itself: scheduling, time and attendance, leave, forecasting, pay evaluation and everything that holds them together. Every customer runs the same core, and it is the one part that is never changed for an individual customer. That is what lets it improve every release without breaking anyone.",
     example:
-      "A manager's dashboard laid out the way your regional directors read it, or a holiday accrual that follows your own agreement rather than the standard one.",
+      "The engine that builds a schedule, the clock-in app on a tablet, the pay run that works out what each person is owed.",
     different:
-      "This is the only layer that changes what people see and how figures are worked out inside jalipi. Layers 1 to 3 change the rules, the data coming in, or add whole features. This one changes the product's own screens and sums, but only at the points jalipi has declared safe, so it still upgrades with every release.",
-    who: "Bespoke Everything builds it. You describe the screen or the calculation in your own words.",
-  },
-  {
-    level: "3",
-    name: "Integrations and products",
-    body: "APIs, webhooks, importers, or a separate product that plugs in.",
-    plain:
-      "This is how jalipi talks to the other systems you already run, and how other software can plug into it. Payroll, HR, your till system, a time clock, a reporting tool. It can also be a completely separate product that sits alongside jalipi and exchanges information with it.",
-    example:
-      "Approved hours going to your payroll provider every Monday, new starters arriving from your HR system automatically, or a specialist forecasting tool feeding demand into the schedule.",
-    different:
-      "This layer is about moving information in and out. Nothing here changes how jalipi itself behaves. Layer 2 adds capability inside jalipi; this one connects jalipi to things outside it. If the question is \"how does X get into or out of the system\", it is this layer.",
-    who: "Bespoke Everything builds the connection. Standard connectors for common systems come with the product.",
-  },
-  {
-    level: "2",
-    name: "Capability packs",
-    body: "Versioned packs. Even your own alternate engine, behind a stable contract.",
-    plain:
-      "A capability pack is a ready-made bundle of extra functionality that is installed into your tenant, like an app from an app store. It might be a new type of rule, a new workflow, or a new piece of the engine that does the heavy lifting. Each pack has a version number, so you always know what you have and can update it on your own timetable.",
-    example:
-      "A fatigue-management pack that enforces rest rules for drivers, a pack that handles a country's specific statutory leave, or in the extreme case your own scheduling engine, dropped in behind the same interface the standard one uses.",
-    different:
-      "Configuration (layer 1) adjusts what is already there. A pack adds something that was not there before. It is bigger than a setting and smaller than a fork: it plugs into fixed, published points in the core, so it keeps working when the core upgrades. And when enough customers want the same pack, it moves into the core for everyone.",
-    who: "Bespoke Everything builds and maintains the pack. Installing and updating it is a click in your tenant.",
+      "The other four layers exist so that the core never has to be altered for you. In older systems, a customer's special needs were coded directly into the product, creating a private version that could not be upgraded. Here the core stays shared, and the four layers above it carry everything that is yours. That is the whole idea in one picture.",
+    who: "jalipi. Shaped by what customers need, released to everyone at once.",
   },
   {
     level: "1",
@@ -379,16 +355,40 @@ const LAYERS: Layer[] = [
     who: "Your own team, with Bespoke Everything or FrontlineXP alongside when you want them. Guided discovery generates most of it for you.",
   },
   {
-    level: "0",
-    name: "The jalipi core",
-    body: "Shared by every customer. Never forked.",
+    level: "2",
+    name: "Capability packs",
+    body: "Versioned packs. Even your own alternate engine, behind a stable contract.",
     plain:
-      "The core is the product itself: scheduling, time and attendance, leave, forecasting, pay evaluation and everything that holds them together. Every customer runs the same core, and it is the one part that is never changed for an individual customer. That is what lets it improve every release without breaking anyone.",
+      "A capability pack is a ready-made bundle of extra functionality that is installed into your tenant, like an app from an app store. It might be a new type of rule, a new workflow, or a new piece of the engine that does the heavy lifting. Each pack has a version number, so you always know what you have and can update it on your own timetable.",
     example:
-      "The engine that builds a schedule, the clock-in app on a tablet, the pay run that works out what each person is owed.",
+      "A fatigue-management pack that enforces rest rules for drivers, a pack that handles a country's specific statutory leave, or in the extreme case your own scheduling engine, dropped in behind the same interface the standard one uses.",
     different:
-      "The other four layers exist so that the core never has to be altered for you. In older systems, a customer's special needs were coded directly into the product, creating a private version that could not be upgraded. Here the core stays shared, and the four layers above it carry everything that is yours. That is the whole idea in one picture.",
-    who: "jalipi. Shaped by what customers need, released to everyone at once.",
+      "Configuration (layer 1) adjusts what is already there. A pack adds something that was not there before. It is bigger than a setting and smaller than a fork: it plugs into fixed, published points in the core, so it keeps working when the core upgrades. And when enough customers want the same pack, it moves into the core for everyone.",
+    who: "Bespoke Everything builds and maintains the pack. Installing and updating it is a click in your tenant.",
+  },
+  {
+    level: "3",
+    name: "Integrations and products",
+    body: "APIs, webhooks, importers, or a separate product that plugs in.",
+    plain:
+      "This is how jalipi talks to the other systems you already run, and how other software can plug into it. Payroll, HR, your till system, a time clock, a reporting tool. It can also be a completely separate product that sits alongside jalipi and exchanges information with it.",
+    example:
+      "Approved hours going to your payroll provider every Monday, new starters arriving from your HR system automatically, or a specialist forecasting tool feeding demand into the schedule.",
+    different:
+      "This layer is about moving information in and out. Nothing here changes how jalipi itself behaves. Layer 2 adds capability inside jalipi; this one connects jalipi to things outside it. If the question is \"how does X get into or out of the system\", it is this layer.",
+    who: "Bespoke Everything builds the connection. Standard connectors for common systems come with the product.",
+  },
+  {
+    level: "4",
+    name: "Your screens and logic",
+    body: "Custom UI and calculations at declared points in the product.",
+    plain:
+      "Sometimes the standard screens or calculations do not fit how you work, and no setting will change that. This layer lets Bespoke Everything add a screen, a panel or a calculation of your own at specific places jalipi has set aside for exactly that purpose. Think of the slots on a phone's home screen: the phone decides where widgets can go, you decide what goes there.",
+    example:
+      "A manager's dashboard laid out the way your regional directors read it, or a holiday accrual that follows your own agreement rather than the standard one.",
+    different:
+      "This is the only layer that changes what people see and how figures are worked out inside jalipi. Layers 1 to 3 change the rules, the data coming in, or add whole features. This one changes the product's own screens and sums, but only at the points jalipi has declared safe, so it still upgrades with every release.",
+    who: "Bespoke Everything builds it. You describe the screen or the calculation in your own words.",
   },
 ];
 

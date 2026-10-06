@@ -392,20 +392,33 @@ const LAYERS: Layer[] = [
   },
 ];
 
-function LayerDialog({
-  layers,
+type ExplainItem = {
+  badge: string;
+  kicker: string;
+  name: string;
+  plain: string;
+  example: string;
+  who: string;
+  differentLabel: string;
+  different: string;
+  /** Short label for the previous and next buttons. */
+  nav: string;
+};
+
+function ExplainDialog({
+  items,
   index,
   onClose,
   onChange,
 }: {
-  layers: Layer[];
+  items: ExplainItem[];
   index: number;
   onClose: () => void;
   onChange: (next: number) => void;
 }) {
-  const layer = layers[index];
+  const item = items[index];
   const prev = index > 0 ? index - 1 : null;
-  const next = index < layers.length - 1 ? index + 1 : null;
+  const next = index < items.length - 1 ? index + 1 : null;
 
   useEffect(() => {
     // Capture phase so the deck's own arrow-key handler does not also move the slide.
@@ -433,7 +446,7 @@ function LayerDialog({
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby="layer-dialog-title"
+      aria-labelledby="explain-dialog-title"
       className="deck-fade absolute inset-0 z-50 flex items-center justify-center bg-neutral-950/80 p-10 backdrop-blur-sm"
       style={{ animationDuration: "0.2s" }}
       onClick={onClose}
@@ -448,14 +461,12 @@ function LayerDialog({
         <div className="flex items-start justify-between gap-6">
           <div className="flex items-start gap-4">
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-teal-400/40 bg-teal-500/15 text-2xl font-black text-teal-300">
-              {layer.level}
+              {item.badge}
             </span>
             <div>
-              <p className="text-caption font-bold uppercase tracking-[0.2em] text-teal-300">
-                {layer.level === "0" ? "The foundation" : `Layer ${layer.level} of 4`} · Where bespoke plugs in
-              </p>
-              <h3 id="layer-dialog-title" className="mt-1 text-2xl font-black tracking-tight text-white">
-                {layer.name}
+              <p className="text-caption font-bold uppercase tracking-[0.2em] text-teal-300">{item.kicker}</p>
+              <h3 id="explain-dialog-title" className="mt-1 text-2xl font-black tracking-tight text-white">
+                {item.name}
               </h3>
             </div>
           </div>
@@ -469,54 +480,79 @@ function LayerDialog({
           </button>
         </div>
 
-        <p className="mt-5 text-base leading-relaxed text-white/85">{layer.plain}</p>
+        <p className="mt-5 text-base leading-relaxed text-white/85">{item.plain}</p>
 
         <div className="mt-5 grid grid-cols-2 gap-3">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
             <p className="text-caption font-bold uppercase tracking-[0.18em] text-amber-300">For example</p>
-            <p className="mt-1.5 text-sm leading-snug text-white/75">{layer.example}</p>
+            <p className="mt-1.5 text-sm leading-snug text-white/75">{item.example}</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
             <p className="text-caption font-bold uppercase tracking-[0.18em] text-amber-300">Who does it</p>
-            <p className="mt-1.5 text-sm leading-snug text-white/75">{layer.who}</p>
+            <p className="mt-1.5 text-sm leading-snug text-white/75">{item.who}</p>
           </div>
         </div>
 
         <div className="mt-3 rounded-2xl border border-teal-400/25 bg-teal-500/[0.07] p-4">
-          <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">How it differs from the other layers</p>
-          <p className="mt-1.5 text-sm leading-snug text-white/80">{layer.different}</p>
+          <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">{item.differentLabel}</p>
+          <p className="mt-1.5 text-sm leading-snug text-white/80">{item.different}</p>
         </div>
 
-        <div className="mt-5 flex items-center justify-between">
+        <div className="mt-5 flex items-center justify-between gap-3">
           <button
             type="button"
             disabled={prev === null}
             onClick={() => prev !== null && onChange(prev)}
             className={cn(
-              "flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white",
+              "flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-left text-sm font-semibold leading-tight text-white/80 transition hover:border-white/40 hover:text-white",
               prev === null && "invisible",
             )}
           >
-            <ArrowRight className="h-4 w-4 rotate-180" />
-            {prev !== null ? `${layers[prev].level} · ${layers[prev].name}` : ""}
+            <ArrowRight className="h-4 w-4 shrink-0 rotate-180" />
+            {prev !== null ? items[prev].nav : ""}
           </button>
-          <p className="text-caption text-white/40">Esc to close · arrow keys to move</p>
+          <p className="shrink-0 text-caption text-white/40">Esc to close · arrow keys to move</p>
           <button
             type="button"
             disabled={next === null}
             onClick={() => next !== null && onChange(next)}
             className={cn(
-              "flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white",
+              "flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-left text-sm font-semibold leading-tight text-white/80 transition hover:border-white/40 hover:text-white",
               next === null && "invisible",
             )}
           >
-            {next !== null ? `${layers[next].level} · ${layers[next].name}` : ""}
-            <ArrowRight className="h-4 w-4" />
+            {next !== null ? items[next].nav : ""}
+            <ArrowRight className="h-4 w-4 shrink-0" />
           </button>
         </div>
       </div>
     </div>
   );
+}
+
+function LayerDialog({
+  layers,
+  index,
+  onClose,
+  onChange,
+}: {
+  layers: Layer[];
+  index: number;
+  onClose: () => void;
+  onChange: (next: number) => void;
+}) {
+  const items: ExplainItem[] = layers.map((layer) => ({
+    badge: layer.level,
+    kicker: `${layer.level === "0" ? "The foundation" : `Layer ${layer.level} of 4`} · Where bespoke plugs in`,
+    name: layer.name,
+    plain: layer.plain,
+    example: layer.example,
+    who: layer.who,
+    differentLabel: "How it differs from the other layers",
+    different: layer.different,
+    nav: `${layer.level} · ${layer.name}`,
+  }));
+  return <ExplainDialog items={items} index={index} onClose={onClose} onChange={onChange} />;
 }
 
 function CustomisationSlide() {
@@ -869,45 +905,111 @@ function UspSlide() {
 // 6. Branching
 // ---------------------------------------------------------------------------
 
-const BRANCH_POINTS: { icon: LucideIcon; title: string; body: string }[] = [
+const BRANCH_POINTS: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  plain: string;
+  example: string;
+  who: string;
+  different: string;
+}[] = [
   {
     icon: Globe,
     title: "Markets build in parallel",
     body: "Each market works on its own branch, with its own access, rules and reporting. One team's work never disturbs another's.",
+    plain:
+      "A branch is a private copy of your configuration that a team can change without anyone else seeing it, and several can exist at the same time. The UK can rebuild its pay rules while France builds its own, in the same system, on the same day. Each branch has its own access and its own reporting, so one team's half-finished work never appears in the other's.",
+    example:
+      "The UK goes live in June. France is still building in July. Neither team waits, and neither sees the other's unfinished rules. When France is ready, its branch goes live on its own.",
+    who: "Each market's own team, with access limited to its own branch. Other markets cannot see or change it until it is promoted.",
+    different:
+      "This is about different teams working at the same time. The next box is about the stages a single piece of work passes through. Both use branches. This one is what stops two teams overwriting each other.",
   },
   {
     icon: Route,
     title: "Stages are branches, not environments",
     body: "Proof of concept, build, test and live are branches in one tenant. Promotion moves the configuration instantly. Nothing to re-key, no cutover to plan.",
+    plain:
+      "A typical programme buys several copies of the system: a sandbox, a test system, a pre-production system, then live. Each copy drifts away from the others, and moving configuration between them means typing it in again and testing it again. In jalipi those stages are branches of the one tenant. Promoting a branch moves the configuration itself, straight away, so the thing you signed off is the thing that goes live.",
+    example:
+      "A proof of concept is a branch. It becomes the build, then the test, then live, by promotion. There is no second system to refresh, and no cutover weekend to plan.",
+    who: "Your programme team moves a branch forward. Promotion is a click once the guards in the last box are satisfied, rather than a migration between systems.",
+    different:
+      "Parallel markets are branches that sit side by side for different teams. These are branches that mark how far one piece of work has got. The history box records what changed inside a branch. The guards decide whether a branch is allowed to become live.",
   },
   {
     icon: History,
     title: "Every change is on the record",
     body: "Field-level history in plain language: who changed what, when and why. Checkpoint and roll back at any point.",
+    plain:
+      "Every edit is stored as a sentence a person can read: who changed which field, when, and the reason they gave. You can mark a checkpoint, a named moment you trust, and roll the branch back to it if a later change turns out to be wrong. None of this touches live until you promote.",
+    example:
+      "On Tuesday the overtime threshold moves from 40 hours to 38, recorded against the person who changed it and the note \"new agreement\". On Thursday that branch is rolled back to Monday's checkpoint. Live is unchanged.",
+    who: "The platform records every change itself. Anyone with access to the branch can read the history. Rolling back is a deliberate step, and it only affects that branch.",
+    different:
+      "The other three boxes describe where work happens and how it reaches live. This one is the record of what happened inside a branch, and the way back if it was wrong. It is the audit trail, separate from the workflow.",
   },
   {
     icon: ShieldCheck,
     title: "Promote with guards",
     body: "Blocked if live has moved since the branch was taken, or if tests are not signed off. No silent overwrites.",
+    plain:
+      "Promotion is the moment a branch becomes live, and jalipi refuses it in two cases. If live has changed since the branch was taken, promoting would overwrite that newer work without anyone noticing. And if the tests for the branch have not been signed off, it is not ready. The promotion stops, and someone has to deal with the reason before it can go ahead.",
+    example:
+      "France finishes its rules, but yesterday the UK promoted a shared holiday policy. France's promotion is blocked until that policy is brought into the France branch and checked. A branch whose tests are unsigned is blocked in the same way, however finished it looks.",
+    who: "The platform enforces the guards. A person still chooses when to promote. The guards decide whether that choice is allowed.",
+    different:
+      "Parallel work, stages and history all happen on branches, away from live. This is the gate between a branch and live. It is what makes the other three safe: two teams cannot overwrite each other, and configuration that has not been signed off cannot go live.",
   },
 ];
 
-function PointList({ points, delay = 0.4 }: { points: typeof BRANCH_POINTS; delay?: number }) {
+function PointList({
+  points,
+  delay = 0.4,
+  onOpen,
+}: {
+  points: { icon: LucideIcon; title: string; body: string }[];
+  delay?: number;
+  onOpen?: (index: number) => void;
+}) {
   return (
     <div className="grid grid-cols-1 gap-2">
       {points.map((point, index) => {
         const Icon = point.icon;
-        return (
-          <div
-            key={point.title}
-            className="deck-rise flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5"
-            style={{ animationDelay: `${delay + index * 0.1}s` }}
-          >
+        const className = cn(
+          "deck-rise flex w-full items-start gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-left",
+          onOpen && "group transition hover:border-teal-400/40 hover:bg-white/[0.08]",
+        );
+        const inner = (
+          <>
             <IconChip icon={Icon} />
-            <div>
+            <div className="min-w-0 flex-1">
               <p className="text-body font-bold leading-tight text-white">{point.title}</p>
               <p className="mt-0.5 text-caption leading-snug text-white/60">{point.body}</p>
             </div>
+            {onOpen ? (
+              <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/25 transition group-hover:translate-x-0.5 group-hover:text-teal-300" />
+            ) : null}
+          </>
+        );
+        return onOpen ? (
+          <button
+            key={point.title}
+            type="button"
+            onClick={() => onOpen(index)}
+            className={className}
+            style={{ animationDelay: `${delay + index * 0.1}s` }}
+          >
+            {inner}
+          </button>
+        ) : (
+          <div
+            key={point.title}
+            className={className}
+            style={{ animationDelay: `${delay + index * 0.1}s` }}
+          >
+            {inner}
           </div>
         );
       })}
@@ -916,7 +1018,19 @@ function PointList({ points, delay = 0.4 }: { points: typeof BRANCH_POINTS; dela
 }
 
 function BranchingSlide() {
+  const [openPoint, setOpenPoint] = useState<number | null>(null);
   const nodeLabel = { fill: "rgba(255,255,255,0.65)", fontSize: 11.5, textAnchor: "middle" as const };
+  const explain: ExplainItem[] = BRANCH_POINTS.map((point, index) => ({
+    badge: String(index + 1),
+    kicker: `${index + 1} of ${BRANCH_POINTS.length} · Branching`,
+    name: point.title,
+    plain: point.plain,
+    example: point.example,
+    who: point.who,
+    differentLabel: "How it differs from the other three",
+    different: point.different,
+    nav: point.title,
+  }));
   return (
     <JalipiBrandedSlide className="bg-neutral-950 text-white">
       <Glows />
@@ -991,9 +1105,20 @@ function BranchingSlide() {
             </p>
           </div>
 
-          <PointList points={BRANCH_POINTS} />
+          <div>
+            <p className="mb-1.5 text-right text-caption text-white/40">Click a box to explore</p>
+            <PointList points={BRANCH_POINTS} onOpen={setOpenPoint} />
+          </div>
         </div>
       </div>
+      {openPoint !== null ? (
+        <ExplainDialog
+          items={explain}
+          index={openPoint}
+          onClose={() => setOpenPoint(null)}
+          onChange={setOpenPoint}
+        />
+      ) : null}
     </JalipiBrandedSlide>
   );
 }

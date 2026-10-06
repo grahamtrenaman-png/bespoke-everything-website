@@ -1232,26 +1232,77 @@ function DataSetsSlide() {
 // 5. Implementation tools
 // ---------------------------------------------------------------------------
 
-const PIPELINE: { icon: LucideIcon; title: string; body: string }[] = [
+const PIPELINE: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  plain: string;
+  example: string;
+  who: string;
+  different: string;
+  /** The amber end card. The others are the teal steps with an arrow after them. */
+  end?: boolean;
+}[] = [
   {
     icon: ClipboardList,
     title: "Guided discovery",
     body: "Business users answer guided question sets in their own words. Every answer becomes a structured, numbered requirement.",
+    plain:
+      "Discovery is where you describe how the operation actually runs. Instead of workshops that end in a document someone else interprets, the people who know the work answer a guided set of questions in their own words. Each answer is kept as a numbered requirement, so what was said is what gets built.",
+    example:
+      "A store manager says overtime starts after 38 hours, and Sunday is paid at time and a half. Those two sentences become requirement 14 and requirement 15, in the words they were spoken.",
+    who: "The people who know the operation: managers, payroll, HR. They answer questions. They do not write a requirements document.",
+    different:
+      "This is the only step where a person describes the operation. Every step after it is generated from these answers. If an answer is wrong, the configuration, the tests and the documents are wrong in the same way, which is why the answer stays attached to what was built.",
   },
   {
     icon: Wand2,
     title: "Solution built instantly",
     body: "The platform turns the requirements into a working configuration branch automatically, the moment discovery is complete. Reviewed with you on screen, not keyed in from a document.",
+    plain:
+      "The moment the last discovery question is answered, jalipi turns those requirements into a working configuration, on its own branch. Nobody re-types the rules from a document into a separate system, so there is no gap between what was agreed and what was built. You review the result on screen and correct the answer if it came out wrong.",
+    example:
+      "Discovery finishes on a Thursday. The same day you are looking at your sites, pay rules and approval policies running in a branch, and a wrong Sunday rate is fixed by changing the requirement rather than raising a defect.",
+    who: "The platform builds it. Your team reviews it on screen and changes the requirement if the result is not what was meant.",
+    different:
+      "Guided discovery captures what was said. This step turns those words into configuration, with nothing re-typed in between. The tests and the documents are generated from the same configuration, so they describe the system you are looking at.",
   },
   {
     icon: FlaskConical,
     title: "Tests created and run",
     body: "Test scripts and data are generated from the same requirements and run against the real pay and scheduling engines.",
+    plain:
+      "The same requirements that built the configuration also write the tests, and those tests run against the real scheduling and pay engines. A test asks an engine to do the thing a requirement described and checks the result. If a rule pays the wrong amount, the test fails before anyone spends time checking it by hand.",
+    example:
+      "Requirement 14 says overtime starts after 38 hours. The generated test puts a 40-hour week through the real pay engine and checks that the two extra hours are paid as overtime. It runs as soon as the configuration exists.",
+    who: "The platform writes and runs them. Your team does not write test scripts. A failure comes back attached to the requirement it came from.",
+    different:
+      "UAT, the next step, is people checking the system the way they will use it. This step is the automatic check that the engines do what the requirements said, and it runs first. It uses the real engines, so a pass here is a pass of the product itself.",
   },
   {
     icon: Users,
     title: "UAT in the product",
     body: "Testers get logins and a guided runner. Evidence, defects, retests and sign-off are captured in the product.",
+    plain:
+      "User acceptance testing happens inside jalipi, not in a spreadsheet beside it. Testers get their own logins and a guided runner that walks them through the scenarios. Evidence, defects, retests and the final sign-off are captured in the product, so the record of what was accepted is the same system that will go live.",
+    example:
+      "A payroll lead works through last January's busiest week, accepts three scenarios, raises one defect against a Sunday rate, and signs the pack off when the retest passes. That sign-off is what go-live looks for.",
+    who: "Your own testers, usually the people who will live with the result. The platform gives them the runner and keeps the evidence. Nobody collects screenshots into a folder.",
+    different:
+      "The automatic tests check the engines against the requirements. This step is people confirming the result is what the operation needs, with a sign-off the platform can see. Go-live is blocked without it, which is why the evidence lives in the product rather than in an email.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Go-live on proof",
+    body: "Promote to live warns, or blocks, without signed UAT.",
+    plain:
+      "Promotion to live checks for a signed UAT before it proceeds. Without that sign-off it warns, or it blocks. Going live is a promotion of the branch that was tested, not a separate exercise where configuration is copied into another system on the night.",
+    example:
+      "The branch is ready on a Friday and UAT is signed, so promotion takes that configuration live immediately. If the sign-off is missing, the promotion stops and names the reason.",
+    who: "Your programme team chooses when to promote. The platform enforces the check. A date arriving is not enough on its own.",
+    different:
+      "The four steps before this one produce a branch, the tests and a sign-off. This is the gate that uses them. What was tested is what goes live, and it cannot go live without the proof.",
+    end: true,
   },
 ];
 
@@ -1262,6 +1313,18 @@ const DOCS: string[] = [
 ];
 
 function ImplementationSlide() {
+  const [openStep, setOpenStep] = useState<number | null>(null);
+  const explain: ExplainItem[] = PIPELINE.map((step, index) => ({
+    badge: String(index + 1),
+    kicker: `${index + 1} of ${PIPELINE.length} · Implementation`,
+    name: step.title,
+    plain: step.plain,
+    example: step.example,
+    who: step.who,
+    differentLabel: "How it differs from the other steps",
+    different: step.different,
+    nav: step.title,
+  }));
   return (
     <JalipiBrandedSlide className="bg-neutral-950 text-white">
       <Glows flip />
@@ -1273,33 +1336,35 @@ function ImplementationSlide() {
           lede="Requirements, configuration and tests are the same thing in jalipi. What is said in discovery becomes the configuration, the configuration writes its own documents and tests, and nothing is re-keyed along the way."
         />
 
-        <div className="mt-4 flex items-stretch gap-2">
+        <p className="mt-3 text-right text-caption text-white/40">Click a step to explore</p>
+        <div className="mt-1.5 flex items-stretch gap-2">
           {PIPELINE.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={step.title} className="flex flex-1 items-center gap-2">
-                <div
-                  className="deck-rise h-full flex-1 rounded-2xl border border-white/10 bg-white/[0.04] p-3.5"
+              <div key={step.title} className={cn("flex items-center gap-2", step.end ? "w-44 shrink-0" : "flex-1")}>
+                <button
+                  type="button"
+                  onClick={() => setOpenStep(index)}
+                  className={cn(
+                    "deck-rise group h-full flex-1 transition",
+                    step.end
+                      ? "rounded-2xl border-2 border-amber-400/60 bg-amber-500/10 p-3.5 text-center hover:bg-amber-500/20"
+                      : "rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 text-left hover:border-teal-400/40 hover:bg-white/[0.08]",
+                  )}
                   style={{ animationDelay: `${0.25 + index * 0.1}s` }}
                 >
-                  <Icon className="h-4 w-4 text-teal-300" />
-                  <p className="mt-2 text-sm font-bold leading-snug text-white">{step.title}</p>
-                  <p className="mt-1 text-caption leading-snug text-white/60">{step.body}</p>
-                </div>
-                <ArrowRight className="h-4 w-4 shrink-0 text-white/30" />
+                  <Icon className={cn(step.end ? "mx-auto h-5 w-5 text-amber-300" : "h-4 w-4 text-teal-300")} />
+                  <p className={cn("mt-2 text-sm font-bold leading-snug", step.end ? "text-amber-200" : "text-white")}>
+                    {step.title}
+                  </p>
+                  <p className={cn("mt-1 text-caption leading-snug", step.end ? "text-white/65" : "text-white/60")}>
+                    {step.body}
+                  </p>
+                </button>
+                {step.end ? null : <ArrowRight className="h-4 w-4 shrink-0 text-white/30" />}
               </div>
             );
           })}
-          <div
-            className="deck-rise w-44 shrink-0 rounded-2xl border-2 border-amber-400/60 bg-amber-500/10 p-3.5 text-center"
-            style={{ animationDelay: "0.7s" }}
-          >
-            <ShieldCheck className="mx-auto h-5 w-5 text-amber-300" />
-            <p className="mt-2 text-sm font-bold text-amber-200">Go-live on proof</p>
-            <p className="mt-1 text-caption leading-snug text-white/65">
-              Promote to live warns, or blocks, without signed UAT.
-            </p>
-          </div>
         </div>
 
         <div className="mt-3.5 grid grid-cols-[1.4fr_1fr] gap-3">
@@ -1351,6 +1416,14 @@ function ImplementationSlide() {
           </div>
         </div>
       </div>
+      {openStep !== null ? (
+        <ExplainDialog
+          items={explain}
+          index={openStep}
+          onClose={() => setOpenStep(null)}
+          onChange={setOpenStep}
+        />
+      ) : null}
     </JalipiBrandedSlide>
   );
 }

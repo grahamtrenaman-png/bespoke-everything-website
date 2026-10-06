@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   Blocks,
@@ -30,6 +30,7 @@ import {
   Users,
   Wand2,
   Wrench,
+  X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -314,15 +315,213 @@ const ROUTE: { icon: LucideIcon; who: string; step: string; body: string }[] = [
   },
 ];
 
-const LAYERS: { level: string; name: string; body: string }[] = [
-  { level: "4", name: "Your screens and logic", body: "Custom UI and calculations at declared points in the product." },
-  { level: "3", name: "Integrations and products", body: "APIs, webhooks, importers, or a separate product that plugs in." },
-  { level: "2", name: "Capability packs", body: "Versioned packs. Even your own alternate engine, behind a stable contract." },
-  { level: "1", name: "Configuration", body: "Branchable policies, catalogues and organisation structure." },
-  { level: "0", name: "The jalipi core", body: "Shared by every customer. Never forked." },
+type Layer = {
+  level: string;
+  name: string;
+  body: string;
+  /** Plain-language explanation for the pop-up. */
+  plain: string;
+  /** A concrete example a customer would recognise. */
+  example: string;
+  /** Why this layer is distinct from the ones around it. */
+  different: string;
+  /** Who normally does the work. */
+  who: string;
+};
+
+const LAYERS: Layer[] = [
+  {
+    level: "4",
+    name: "Your screens and logic",
+    body: "Custom UI and calculations at declared points in the product.",
+    plain:
+      "Sometimes the standard screens or calculations do not fit how you work, and no setting will change that. This layer lets Bespoke Everything add a screen, a panel or a calculation of your own at specific places jalipi has set aside for exactly that purpose. Think of the slots on a phone's home screen: the phone decides where widgets can go, you decide what goes there.",
+    example:
+      "A manager's dashboard laid out the way your regional directors read it, or a holiday accrual that follows your own agreement rather than the standard one.",
+    different:
+      "This is the only layer that changes what people see and how figures are worked out inside jalipi. Layers 1 to 3 change the rules, the data coming in, or add whole features. This one changes the product's own screens and sums, but only at the points jalipi has declared safe, so it still upgrades with every release.",
+    who: "Bespoke Everything builds it. You describe the screen or the calculation in your own words.",
+  },
+  {
+    level: "3",
+    name: "Integrations and products",
+    body: "APIs, webhooks, importers, or a separate product that plugs in.",
+    plain:
+      "This is how jalipi talks to the other systems you already run, and how other software can plug into it. Payroll, HR, your till system, a time clock, a reporting tool. It can also be a completely separate product that sits alongside jalipi and exchanges information with it.",
+    example:
+      "Approved hours going to your payroll provider every Monday, new starters arriving from your HR system automatically, or a specialist forecasting tool feeding demand into the schedule.",
+    different:
+      "This layer is about moving information in and out. Nothing here changes how jalipi itself behaves. Layer 2 adds capability inside jalipi; this one connects jalipi to things outside it. If the question is \"how does X get into or out of the system\", it is this layer.",
+    who: "Bespoke Everything builds the connection. Standard connectors for common systems come with the product.",
+  },
+  {
+    level: "2",
+    name: "Capability packs",
+    body: "Versioned packs. Even your own alternate engine, behind a stable contract.",
+    plain:
+      "A capability pack is a ready-made bundle of extra functionality that is installed into your tenant, like an app from an app store. It might be a new type of rule, a new workflow, or a new piece of the engine that does the heavy lifting. Each pack has a version number, so you always know what you have and can update it on your own timetable.",
+    example:
+      "A fatigue-management pack that enforces rest rules for drivers, a pack that handles a country's specific statutory leave, or in the extreme case your own scheduling engine, dropped in behind the same interface the standard one uses.",
+    different:
+      "Configuration (layer 1) adjusts what is already there. A pack adds something that was not there before. It is bigger than a setting and smaller than a fork: it plugs into fixed, published points in the core, so it keeps working when the core upgrades. And when enough customers want the same pack, it moves into the core for everyone.",
+    who: "Bespoke Everything builds and maintains the pack. Installing and updating it is a click in your tenant.",
+  },
+  {
+    level: "1",
+    name: "Configuration",
+    body: "Branchable policies, catalogues and organisation structure.",
+    plain:
+      "Configuration is the set of choices that make jalipi yours without changing the product itself: your sites and departments, your pay rules, your shift patterns, your approval policies, your lists of roles and skills. It is the layer most of your operation lives in, and it is written in plain language you can read and change.",
+    example:
+      "Overtime after 38 hours instead of 40. Sunday paid at time and a half. A new store added to the North region. A rule that shift swaps need a manager's approval within 48 hours.",
+    different:
+      "Every WFM system has configuration. What is different here is that it is branchable, like a document with tracked versions: you can try a change on a branch, test it against real data, see what it costs, and promote it or throw it away. It never requires a developer and it is the first place any request is answered. Only when a setting cannot express what you need do you go up a layer.",
+    who: "Your own team, with Bespoke Everything or FrontlineXP alongside when you want them. Guided discovery generates most of it for you.",
+  },
+  {
+    level: "0",
+    name: "The jalipi core",
+    body: "Shared by every customer. Never forked.",
+    plain:
+      "The core is the product itself: scheduling, time and attendance, leave, forecasting, pay evaluation and everything that holds them together. Every customer runs the same core, and it is the one part that is never changed for an individual customer. That is what lets it improve every release without breaking anyone.",
+    example:
+      "The engine that builds a schedule, the clock-in app on a tablet, the pay run that works out what each person is owed.",
+    different:
+      "The other four layers exist so that the core never has to be altered for you. In older systems, a customer's special needs were coded directly into the product, creating a private version that could not be upgraded. Here the core stays shared, and the four layers above it carry everything that is yours. That is the whole idea in one picture.",
+    who: "jalipi. Shaped by what customers need, released to everyone at once.",
+  },
 ];
 
+function LayerDialog({
+  layers,
+  index,
+  onClose,
+  onChange,
+}: {
+  layers: Layer[];
+  index: number;
+  onClose: () => void;
+  onChange: (next: number) => void;
+}) {
+  const layer = layers[index];
+  const prev = index > 0 ? index - 1 : null;
+  const next = index < layers.length - 1 ? index + 1 : null;
+
+  useEffect(() => {
+    // Capture phase so the deck's own arrow-key handler does not also move the slide.
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.stopImmediatePropagation();
+        onClose();
+      } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (next !== null) onChange(next);
+      } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (prev !== null) onChange(prev);
+      } else if ([" ", "Spacebar", "PageDown", "PageUp", "Home", "End"].includes(event.key)) {
+        event.stopImmediatePropagation();
+      }
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [next, prev, onChange, onClose]);
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="layer-dialog-title"
+      className="deck-fade absolute inset-0 z-50 flex items-center justify-center bg-neutral-950/80 p-10 backdrop-blur-sm"
+      style={{ animationDuration: "0.2s" }}
+      onClick={onClose}
+    >
+      <div
+        className="deck-pop relative w-full max-w-3xl rounded-3xl border border-teal-400/30 bg-neutral-900 p-7 shadow-2xl shadow-black/60"
+        style={{ animationDuration: "0.25s" }}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-gradient-to-r from-teal-400 via-emerald-400 to-amber-300" />
+
+        <div className="flex items-start justify-between gap-6">
+          <div className="flex items-start gap-4">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-teal-400/40 bg-teal-500/15 text-2xl font-black text-teal-300">
+              {layer.level}
+            </span>
+            <div>
+              <p className="text-caption font-bold uppercase tracking-[0.2em] text-teal-300">
+                {layer.level === "0" ? "The foundation" : `Layer ${layer.level} of 4`} · Where bespoke plugs in
+              </p>
+              <h3 id="layer-dialog-title" className="mt-1 text-2xl font-black tracking-tight text-white">
+                {layer.name}
+              </h3>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/60 transition hover:border-white/40 hover:text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        <p className="mt-5 text-base leading-relaxed text-white/85">{layer.plain}</p>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-amber-300">For example</p>
+            <p className="mt-1.5 text-sm leading-snug text-white/75">{layer.example}</p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-caption font-bold uppercase tracking-[0.18em] text-amber-300">Who does it</p>
+            <p className="mt-1.5 text-sm leading-snug text-white/75">{layer.who}</p>
+          </div>
+        </div>
+
+        <div className="mt-3 rounded-2xl border border-teal-400/25 bg-teal-500/[0.07] p-4">
+          <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">How it differs from the other layers</p>
+          <p className="mt-1.5 text-sm leading-snug text-white/80">{layer.different}</p>
+        </div>
+
+        <div className="mt-5 flex items-center justify-between">
+          <button
+            type="button"
+            disabled={prev === null}
+            onClick={() => prev !== null && onChange(prev)}
+            className={cn(
+              "flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white",
+              prev === null && "invisible",
+            )}
+          >
+            <ArrowRight className="h-4 w-4 rotate-180" />
+            {prev !== null ? `${layers[prev].level} · ${layers[prev].name}` : ""}
+          </button>
+          <p className="text-caption text-white/40">Esc to close · arrow keys to move</p>
+          <button
+            type="button"
+            disabled={next === null}
+            onClick={() => next !== null && onChange(next)}
+            className={cn(
+              "flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white",
+              next === null && "invisible",
+            )}
+          >
+            {next !== null ? `${layers[next].level} · ${layers[next].name}` : ""}
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CustomisationSlide() {
+  const [openLayer, setOpenLayer] = useState<number | null>(null);
+
   return (
     <BespokeBrandedSlide className="bg-neutral-950">
       <Glows flip />
@@ -364,26 +563,32 @@ function CustomisationSlide() {
             className="deck-rise rounded-2xl border border-teal-400/25 bg-teal-500/[0.05] p-3.5"
             style={{ animationDelay: "0.55s" }}
           >
-            <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">
-              Where bespoke plugs in
-            </p>
+            <div className="flex items-baseline justify-between">
+              <p className="text-caption font-bold uppercase tracking-[0.18em] text-teal-300">
+                Where bespoke plugs in
+              </p>
+              <p className="text-caption text-white/40">Click a layer to explore</p>
+            </div>
             <div className="mt-2 space-y-1.5">
-              {LAYERS.map((layer) => (
-                <div
+              {LAYERS.map((layer, index) => (
+                <button
                   key={layer.level}
+                  type="button"
+                  onClick={() => setOpenLayer(index)}
                   className={cn(
-                    "flex items-start gap-2.5 rounded-lg border px-2.5 py-1.5",
+                    "group flex w-full items-start gap-2.5 rounded-lg border px-2.5 py-1.5 text-left transition",
                     layer.level === "0"
-                      ? "border-teal-400/40 bg-teal-500/15"
-                      : "border-white/10 bg-white/[0.04]",
+                      ? "border-teal-400/40 bg-teal-500/15 hover:bg-teal-500/25"
+                      : "border-white/10 bg-white/[0.04] hover:border-teal-400/40 hover:bg-white/[0.08]",
                   )}
                 >
                   <span className="mt-px w-4 shrink-0 text-body font-black text-teal-300">{layer.level}</span>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-body font-bold leading-tight text-white">{layer.name}</p>
                     <p className="text-caption leading-snug text-white/60">{layer.body}</p>
                   </div>
-                </div>
+                  <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/25 transition group-hover:translate-x-0.5 group-hover:text-teal-300" />
+                </button>
               ))}
             </div>
           </div>
@@ -397,6 +602,15 @@ function CustomisationSlide() {
           </Strip>
         </div>
       </div>
+
+      {openLayer !== null ? (
+        <LayerDialog
+          layers={LAYERS}
+          index={openLayer}
+          onClose={() => setOpenLayer(null)}
+          onChange={setOpenLayer}
+        />
+      ) : null}
     </BespokeBrandedSlide>
   );
 }
@@ -417,7 +631,17 @@ const RELEASES: { label: string; when: string; core: string[]; added?: string }[
   { label: "Release 3", when: "A year on", core: ["Scheduling", "Pay rules", "Time and attendance", "Leave forecasting"], added: "Fatigue rules" },
 ];
 
-function PlugPiece({ icon: Icon, name, muted = false }: { icon: LucideIcon; name: string; muted?: boolean }) {
+function PlugPiece({
+  icon: Icon,
+  name,
+  muted = false,
+  plug = true,
+}: {
+  icon: LucideIcon;
+  name: string;
+  muted?: boolean;
+  plug?: boolean;
+}) {
   return (
     <div
       className={cn(
@@ -429,13 +653,14 @@ function PlugPiece({ icon: Icon, name, muted = false }: { icon: LucideIcon; name
     >
       <Icon className={cn("h-3 w-3 shrink-0", muted ? "text-white/40" : "text-amber-300")} />
       <span className="text-caption font-bold leading-none">{name}</span>
-      {/* the plug tab that sits in the core's socket */}
-      <span
-        className={cn(
-          "absolute -bottom-[7px] left-1/2 h-2 w-4 -translate-x-1/2 rounded-b-sm border-x border-b",
-          muted ? "border-white/15 bg-neutral-800" : "border-amber-400/50 bg-amber-400/40",
-        )}
-      />
+      {plug ? (
+        <span
+          className={cn(
+            "absolute left-1/2 top-[calc(100%-2px)] z-10 h-2.5 w-[18px] -translate-x-1/2 rounded-b-[5px] border-x border-b",
+            muted ? "border-white/20 bg-neutral-700" : "border-amber-200/90 bg-amber-400",
+          )}
+        />
+      ) : null}
     </div>
   );
 }
@@ -480,7 +705,7 @@ function CustomisationVisualSlide() {
                 <p className="mt-2 text-caption font-semibold uppercase tracking-[0.14em] text-amber-300/80">
                   Yours
                 </p>
-                <div className="mt-1.5 grid grid-cols-3 gap-1">
+                <div className="relative z-10 mt-1.5 grid grid-cols-3 gap-1">
                   {PLUGS.map((plug, plugIndex) => (
                     <div
                       key={plug.name}
@@ -492,11 +717,14 @@ function CustomisationVisualSlide() {
                   ))}
                 </div>
 
-                <div className="relative mt-2 flex-1 rounded-xl border border-teal-400/40 bg-gradient-to-b from-teal-500/25 to-teal-600/10 p-3">
-                  {/* sockets */}
-                  <div className="absolute inset-x-3 -top-px grid grid-cols-3 gap-1">
+                <div className="relative flex-1 rounded-xl border border-teal-400/40 bg-gradient-to-b from-teal-500/25 to-teal-600/10 px-3 pt-5 pb-3">
+                  {/* sockets, same three columns as the pieces so each tab lands in its hole */}
+                  <div className="pointer-events-none absolute inset-x-0 top-0 grid grid-cols-3 gap-1">
                     {PLUGS.map((plug) => (
-                      <span key={plug.name} className="mx-auto h-1 w-4 rounded-b bg-neutral-950" />
+                      <span
+                        key={plug.name}
+                        className="mx-auto -mt-px h-3.5 w-7 rounded-b-md border-x border-b border-teal-300/55 bg-neutral-950 shadow-[inset_0_3px_4px_rgba(0,0,0,0.6)]"
+                      />
                     ))}
                   </div>
                   <div className="flex items-center justify-between">
@@ -539,7 +767,7 @@ function CustomisationVisualSlide() {
             style={{ animationDelay: "1.2s" }}
           >
             <div className="relative">
-              <PlugPiece icon={Wrench} name="Welded in" muted />
+              <PlugPiece icon={Wrench} name="Welded in" muted plug={false} />
               <span className="pointer-events-none absolute -inset-1 rounded-lg border border-dashed border-rose-400/50" />
             </div>
             <p className="max-w-[12rem] text-caption leading-snug text-white/55">

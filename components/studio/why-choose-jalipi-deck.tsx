@@ -1720,20 +1720,6 @@ function ExpertsSlide() {
             </div>
           ))}
         </div>
-
-        <div
-          className="deck-rise relative mt-3 rounded-2xl border border-amber-400/30 bg-gradient-to-r from-amber-500/15 via-teal-500/10 to-emerald-500/15 px-5 py-2.5"
-          style={{ animationDelay: "0.75s" }}
-        >
-          <div className="absolute top-1/2 left-5 -translate-y-1/2">
-            <PartyLogo party="tcn" size="sm" className="h-7" />
-          </div>
-          <p className="mx-auto max-w-4xl px-16 text-center text-body leading-relaxed text-white/85">
-            <span className="font-bold text-white">Behind all three:</span> the team who built REPL from
-            two people into a 600-strong global workforce management consultancy. A young platform,
-            arriving with people who have done this at scale.
-          </p>
-        </div>
       </div>
     </JalipiBrandedSlide>
   );

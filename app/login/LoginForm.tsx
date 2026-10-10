@@ -11,7 +11,7 @@ const initialState: LoginState = {};
 export default function LoginForm() {
   const [state, formAction, pending] = useActionState(loginAction, initialState);
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") ?? "/studio";
+  const next = searchParams.get("next") ?? "/";
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink text-white">

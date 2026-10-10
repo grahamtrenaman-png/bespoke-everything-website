@@ -10,6 +10,11 @@ const PUBLIC_PATHS = new Set([
   "/apple-icon.svg",
 ]);
 
+/** Studio decks are offline until Graham puts them back. */
+function isStudioPath(pathname: string) {
+  return pathname === "/studio" || pathname.startsWith("/studio/");
+}
+
 function isPublicPath(pathname: string) {
   if (PUBLIC_PATHS.has(pathname) || pathname === "/oldbs" || pathname.startsWith("/oldbs/") || pathname.startsWith("/api/oldbs")) {
     return true;
@@ -39,6 +44,17 @@ function rewriteToJalipiZone(request: NextRequest) {
 
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+
+  if (isStudioPath(pathname)) {
+    return new NextResponse(null, {
+      status: 404,
+      headers: {
+        "X-Robots-Tag": "noindex, nofollow, noarchive",
+        "Cache-Control": "no-store",
+      },
+    });
+  }
+
   const hasSession = await isValidPreviewSession(
     request.cookies.get(PREVIEW_COOKIE)?.value,
   );
